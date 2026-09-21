@@ -1,0 +1,646 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "ASCENT \u2014 TNNLS \u8bc1\u636e\u5c31\u7eea\u5ea6\u5ba1\u8ba1",
+    "description": "\u622a\u81f3 2026-08-14 \u7684\u51bb\u7ed3\u5b9e\u9a8c\u7ed3\u679c\u3001\u56e0\u679c\u63a7\u5236\u3001\u5269\u4f59\u786c\u95e8\u69db\u4e0e\u4e0b\u4e00\u6b65\u3002",
+    "generatedAt": "2026-08-14T15:36:25+00:00",
+    "cards": [
+      {
+        "id": "core_metrics",
+        "description": "\u4e94\u4e2a\u672a\u89e6\u78b0\u786e\u8ba4\u9762\u677f\u4e0a\u7684\u6838\u5fc3\u7edf\u8ba1\u91cf\u3002",
+        "dataset": "headline_metrics",
+        "sourceId": "headline_metrics_sql",
+        "metrics": [
+          {
+            "label": "1.7B absolute gain",
+            "field": "largest_scale_gain",
+            "format": "percent"
+          },
+          {
+            "label": "1.7B gain 95% LCB",
+            "field": "largest_scale_gain_lcb",
+            "format": "percent"
+          },
+          {
+            "label": "RWE slope 95% LCB",
+            "field": "remaining_error_slope_lcb",
+            "format": "number"
+          },
+          {
+            "label": "Adjacent gain LCB (low\u2192mid)",
+            "field": "first_adjacent_gain_lcb",
+            "format": "percent"
+          },
+          {
+            "label": "Adjacent gain LCB (mid\u2192high)",
+            "field": "second_adjacent_gain_lcb",
+            "format": "percent"
+          },
+          {
+            "label": "Generative interaction (low\u2192mid)",
+            "field": "generative_first_interaction",
+            "format": "percent"
+          },
+          {
+            "label": "Generative interaction LCB (low\u2192mid)",
+            "field": "generative_first_interaction_lcb",
+            "format": "percent"
+          },
+          {
+            "label": "Generative interaction (mid\u2192high)",
+            "field": "generative_second_interaction",
+            "format": "percent"
+          },
+          {
+            "label": "Generative interaction LCB (mid\u2192high)",
+            "field": "generative_second_interaction_lcb",
+            "format": "percent"
+          },
+          {
+            "label": "High-scale co-scale excess LCB",
+            "field": "high_scale_coscale_excess_lcb",
+            "format": "percent"
+          },
+          {
+            "label": "Focused first co-scale LCB",
+            "field": "focused_first_coscale_excess_lcb",
+            "format": "percent"
+          },
+          {
+            "label": "Focused second interaction",
+            "field": "focused_second_interaction",
+            "format": "percent"
+          },
+          {
+            "label": "Focused second interaction LCB",
+            "field": "focused_second_interaction_lcb",
+            "format": "percent"
+          },
+          {
+            "label": "Focused upper diagonal LCB",
+            "field": "focused_upper_diagonal_lcb",
+            "format": "percent"
+          },
+          {
+            "label": "Focused upper co-scale LCB",
+            "field": "focused_upper_coscale_lcb",
+            "format": "percent"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "condition_accuracy",
+        "title": "Certified co-scale accuracy rises while fixed and irrelevant controls do not",
+        "subtitle": "Five-panel means; accuracy axis begins at zero. Raw FIFO is intentionally retained as a strong boundary.",
+        "headerMarkdown": "The chart compares the registered **certified ASCENT path** with four frozen controls.",
+        "type": "bar",
+        "dataset": "accuracy_by_condition",
+        "sourceId": "condition_accuracy_sql",
+        "valueFormat": "percent",
+        "encodings": {
+          "x": {
+            "field": "endpoint",
+            "type": "nominal",
+            "label": "SmolLM2 model scale"
+          },
+          "y": {
+            "field": "accuracy",
+            "type": "quantitative",
+            "label": "Exact accuracy",
+            "scale": {
+              "zero": true
+            }
+          },
+          "color": {
+            "field": "method",
+            "type": "nominal",
+            "label": "Condition"
+          },
+          "tooltip": [
+            {
+              "field": "method",
+              "type": "nominal",
+              "label": "Condition"
+            },
+            {
+              "field": "accuracy",
+              "type": "quantitative",
+              "label": "Accuracy",
+              "format": "percent"
+            },
+            {
+              "field": "ci95_low",
+              "type": "quantitative",
+              "label": "95% LCB",
+              "format": "percent"
+            },
+            {
+              "field": "ci95_high",
+              "type": "quantitative",
+              "label": "95% UCB",
+              "format": "percent"
+            }
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "readiness_table",
+        "title": "Promotion-gate status",
+        "subtitle": "Passed means the frozen artifact directly proves the stated gate; partial/missing cells are not promoted.",
+        "dataset": "readiness_gates",
+        "sourceId": "readiness_gates_sql",
+        "defaultSort": {
+          "field": "priority",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "priority",
+            "label": "Order",
+            "format": "number"
+          },
+          {
+            "field": "gate",
+            "label": "Gate",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Status",
+            "type": "text"
+          },
+          {
+            "field": "evidence",
+            "label": "Evidence",
+            "type": "text"
+          },
+          {
+            "field": "next_action",
+            "label": "Next action",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "portfolio_table",
+        "title": "Validated positive-evidence portfolio",
+        "subtitle": "Only frozen or independently confirmed results are included; failed boundaries remain in the readiness audit.",
+        "dataset": "positive_evidence_portfolio",
+        "sourceId": "positive_portfolio_sql",
+        "columns": [
+          {
+            "field": "family",
+            "label": "Task / mechanism",
+            "type": "text"
+          },
+          {
+            "field": "models",
+            "label": "Models",
+            "type": "text"
+          },
+          {
+            "field": "result",
+            "label": "Positive result",
+            "type": "text"
+          },
+          {
+            "field": "strength",
+            "label": "Why it matters",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "headline_metrics_sql",
+        "label": "Frozen confirmation headline metrics",
+        "path": "reports/ascent_tnnls_readiness_2026-08-14/report_data.json"
+      },
+      {
+        "id": "condition_accuracy_sql",
+        "label": "Frozen QA7/QA8 condition accuracy synthesis",
+        "path": "reports/ascent_tnnls_readiness_2026-08-14/report_data.json"
+      },
+      {
+        "id": "readiness_gates_sql",
+        "label": "ASCENT promotion-gate synthesis",
+        "path": "reports/ascent_tnnls_readiness_2026-08-14/report_data.json"
+      },
+      {
+        "id": "positive_portfolio_sql",
+        "label": "ASCENT validated positive-evidence portfolio",
+        "path": "reports/ascent_tnnls_readiness_2026-08-14/report_data.json"
+      },
+      {
+        "id": "readiness_audit",
+        "label": "ASCENT TNNLS readiness audit",
+        "path": "docs/TNNLS_READINESS_AUDIT.md"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "body": "## Technical summary\n\nThe core certified scale-complementarity result is now statistically strong, reproducible, and control-backed: across five disjoint public QA7/QA8 panels, ASCENT absolute gain increases from **47.5% to 69.4% to 90.6%**, with both adjacent panel-clustered 95% lower bounds above zero. Fixed one-slot, irrelevant-state, and BM25 controls rule out several simple explanations.\n\nThe internal high-readiness gate is now **reached**. A five-panel official QA1\u2013QA3 factorial first produced a strong co-scaled gain curve but left two fresh-only lower bounds below zero; that near miss remains unchanged. A separately frozen ten-panel, 1,200-row confirmation then passed all four focused df=9 contrasts, including the formerly marginal second model\u00d7state interaction (**+4.33 points [95% CI +2.31,+6.36]**). Together with cross-family official RULER replication, controls, systems evidence, and provenance, this authorizes formal manuscript writing. It does not guarantee TNNLS acceptance."
+      },
+      {
+        "id": "metrics",
+        "type": "metric-strip",
+        "cardIds": [
+          "core_metrics"
+        ]
+      },
+      {
+        "id": "key_finding",
+        "type": "markdown",
+        "body": "## Co-scaled state produces a large monotone curve\n\nAt 135M/360M/1.7B, certified ASCENT accuracy is 50%/75%/100%. The one-slot state remains at 50% for every model, while irrelevant state remains near 34%. BM25 improves with scale but stays below ASCENT. Byte-matched raw FIFO is much stronger and nearly saturates at 1.7B; its honest inclusion limits any claim of universal storage superiority."
+      },
+      {
+        "id": "chart",
+        "type": "chart",
+        "chartId": "condition_accuracy"
+      },
+      {
+        "id": "portfolio_intro",
+        "type": "markdown",
+        "body": "## The broader positive portfolio is already substantial\n\nASCENT is not resting on one certified panel: official RULER and BABILong tasks provide repeated generative scale curves, two autoregressive Transformer families reproduce the long-context pattern, causal interaction tests pass on RULER-VT and composition, and the primary artifacts have clean provenance plus exact cross-node prediction replication."
+      },
+      {
+        "id": "portfolio",
+        "type": "table",
+        "tableId": "portfolio_table"
+      },
+      {
+        "id": "scope",
+        "type": "markdown",
+        "body": "## Scope, data, and metrics\n\nThe evaluated mechanism is public BABILong-style QA7/QA8 aggregation at an 8,192-token context using three frozen SmolLM2 endpoints and five 32-row panels. State sizes on the co-scaled diagonal are 1/2/8 retained query-relevant events. **Absolute gain** is exact ASCENT accuracy minus unchanged Foundation accuracy. **Remaining-error elimination (RWE)** is `(ASCENT \u2212 Foundation) / (1 \u2212 Foundation)` and was frozen before confirmation to handle the 100% ceiling without pretending that accuracy can exceed 100%."
+      },
+      {
+        "id": "design",
+        "type": "markdown",
+        "body": "## Experimental design and validation\n\nPublic source questions and noise backgrounds are disjoint across registered confirmation panels. Configuration, data, model revisions, git commit, parser accuracy, and clean-worktree state are recorded in every artifact. Foundation generation is unchanged across state sizes. Student-t intervals cluster by panels, not rows. After the 27-cell historical audit, a five-panel 45-cell full factorial and a disjoint ten-panel 50-cell focused confirmation were frozen before scoring. The latter uses all remaining official hash-ordered 40-row/task panels, with 1,200/1,200 target-blind parser reconstruction and no panel/task/outlier deletion."
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## What the current result does not establish\n\nThe certified 3\u00d73 factorial directly confirms that its +25-point state increments are model-independent, so it is not used alone as model-complementarity proof. The original five-panel generative primary gate remains a near miss even though its combined eight-panel support gate passed. The ten-panel follow-up is an independent confirmation of the marginal estimands, not a retroactive relabeling. Raw FIFO is close to ceiling at 1.7B, while HotpotQA 7B, multivalue, and overwrite remain transparent negative boundaries."
+      },
+      {
+        "id": "table",
+        "type": "table",
+        "tableId": "readiness_table"
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## Highest-value next steps\n\n1. Begin the formal double-anonymous TNNLS manuscript around the scoped scale-complementarity claim.\n2. Generate the primary tables/figures directly from immutable analysis JSON and archive hashes.\n3. Add same-task Qwen generative replication if it remains non-saturated and feasible; preserve any failure.\n4. Keep raw exact storage, HotpotQA 7B, multivalue, overwrite, and profiler-wall boundaries in limitations.\n5. Run a final leakage, citation, anonymization, and reproducibility audit before submission."
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## Further questions\n\nCan a non-saturated aggregation task separate ASCENT from raw FIFO at the large endpoint? Does the same co-scaled law reproduce on Qwen under identical frozen state sizes? Can a learned generative decoder recover the certified posterior without reintroducing the QA8 person-name failure mode?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-14T15:36:25+00:00",
+    "status": "ready",
+    "datasets": {
+      "accuracy_by_condition": [
+        {
+          "endpoint": "135M",
+          "endpoint_id": "smollm2-135m",
+          "method": "ASCENT certified co-scale",
+          "accuracy": 0.5,
+          "ci95_low": 0.5,
+          "ci95_high": 0.5
+        },
+        {
+          "endpoint": "135M",
+          "endpoint_id": "smollm2-135m",
+          "method": "Fixed one-slot state",
+          "accuracy": 0.5,
+          "ci95_low": 0.5,
+          "ci95_high": 0.5
+        },
+        {
+          "endpoint": "135M",
+          "endpoint_id": "smollm2-135m",
+          "method": "Irrelevant structured state",
+          "accuracy": 0.34375,
+          "ci95_low": 0.2711581051442127,
+          "ci95_high": 0.4163418948557873
+        },
+        {
+          "endpoint": "135M",
+          "endpoint_id": "smollm2-135m",
+          "method": "Byte-matched raw FIFO",
+          "accuracy": 0.475,
+          "ci95_low": 0.4425359176973884,
+          "ci95_high": 0.5074640823026115
+        },
+        {
+          "endpoint": "135M",
+          "endpoint_id": "smollm2-135m",
+          "method": "Generic BM25",
+          "accuracy": 0.3875,
+          "ci95_low": 0.3225718353947769,
+          "ci95_high": 0.4524281646052231
+        },
+        {
+          "endpoint": "360M",
+          "endpoint_id": "smollm2-360m-node2",
+          "method": "ASCENT certified co-scale",
+          "accuracy": 0.75,
+          "ci95_low": 0.75,
+          "ci95_high": 0.75
+        },
+        {
+          "endpoint": "360M",
+          "endpoint_id": "smollm2-360m-node2",
+          "method": "Fixed one-slot state",
+          "accuracy": 0.5,
+          "ci95_low": 0.5,
+          "ci95_high": 0.5
+        },
+        {
+          "endpoint": "360M",
+          "endpoint_id": "smollm2-360m-node2",
+          "method": "Irrelevant structured state",
+          "accuracy": 0.34375,
+          "ci95_low": 0.2711581051442127,
+          "ci95_high": 0.4163418948557873
+        },
+        {
+          "endpoint": "360M",
+          "endpoint_id": "smollm2-360m-node2",
+          "method": "Byte-matched raw FIFO",
+          "accuracy": 0.6125,
+          "ci95_low": 0.568258913219304,
+          "ci95_high": 0.6567410867806961
+        },
+        {
+          "endpoint": "360M",
+          "endpoint_id": "smollm2-360m-node2",
+          "method": "Generic BM25",
+          "accuracy": 0.43125,
+          "ci95_low": 0.3674918080632884,
+          "ci95_high": 0.49500819193671164
+        },
+        {
+          "endpoint": "1.7B",
+          "endpoint_id": "smollm2-1p7b",
+          "method": "ASCENT certified co-scale",
+          "accuracy": 1.0,
+          "ci95_low": 1.0,
+          "ci95_high": 1.0
+        },
+        {
+          "endpoint": "1.7B",
+          "endpoint_id": "smollm2-1p7b",
+          "method": "Fixed one-slot state",
+          "accuracy": 0.5,
+          "ci95_low": 0.5,
+          "ci95_high": 0.5
+        },
+        {
+          "endpoint": "1.7B",
+          "endpoint_id": "smollm2-1p7b",
+          "method": "Irrelevant structured state",
+          "accuracy": 0.34375,
+          "ci95_low": 0.2711581051442127,
+          "ci95_high": 0.4163418948557873
+        },
+        {
+          "endpoint": "1.7B",
+          "endpoint_id": "smollm2-1p7b",
+          "method": "Byte-matched raw FIFO",
+          "accuracy": 0.95625,
+          "ci95_low": 0.912008913219304,
+          "ci95_high": 1.0004910867806962
+        },
+        {
+          "endpoint": "1.7B",
+          "endpoint_id": "smollm2-1p7b",
+          "method": "Generic BM25",
+          "accuracy": 0.60625,
+          "ci95_low": 0.4701661252917154,
+          "ci95_high": 0.7423338747082845
+        }
+      ],
+      "headline_metrics": [
+        {
+          "largest_scale_gain": 0.90625,
+          "largest_scale_gain_lcb": 0.8513756854321822,
+          "remaining_error_slope_lcb": 0.1891716162331361,
+          "first_adjacent_gain_lcb": 0.14615810514421268,
+          "second_adjacent_gain_lcb": 0.15494733334400046,
+          "generative_first_interaction": 0.04166666666666665,
+          "generative_first_interaction_lcb": -0.06183907132682303,
+          "generative_second_interaction": 0.03333333333333329,
+          "generative_second_interaction_lcb": -0.00806896186406244,
+          "high_scale_coscale_excess_lcb": 0.07010588600232599,
+          "focused_first_coscale_excess_lcb": 0.03380482333090648,
+          "focused_second_interaction": 0.04333333333333332,
+          "focused_second_interaction_lcb": 0.023107792148921637,
+          "focused_upper_diagonal_lcb": 0.12210523134000563,
+          "focused_upper_coscale_lcb": 0.12974330568888082
+        }
+      ],
+      "readiness_gates": [
+        {
+          "priority": 1,
+          "gate": "Five-panel certified QA7/QA8 scale confirmation",
+          "status": "Passed",
+          "evidence": "Gain 47.5% \u2192 69.4% \u2192 90.6%; both adjacent 95% LCBs > 0",
+          "next_action": "Preserve immutable artifacts"
+        },
+        {
+          "priority": 2,
+          "gate": "Fixed-state causal contrast",
+          "status": "Passed",
+          "evidence": "Co-scale minus one-slot rises 0% \u2192 25% \u2192 50%; both interaction LCBs = 25%",
+          "next_action": "Complete the full 3\u00d73 matrix"
+        },
+        {
+          "priority": 3,
+          "gate": "Irrelevant-state and BM25 controls",
+          "status": "Passed",
+          "evidence": "Primary-minus-control LCB is positive at every endpoint",
+          "next_action": "Retain as preregistered controls"
+        },
+        {
+          "priority": 4,
+          "gate": "Byte-matched raw FIFO separation",
+          "status": "Partial",
+          "evidence": "Primary is noninferior on every panel; medium LCB > 0, small/large LCBs cross 0 near ceiling",
+          "next_action": "Report the strong raw boundary; add a non-saturated task"
+        },
+        {
+          "priority": 5,
+          "gate": "Certified model-scale \u00d7 state-scale factorial",
+          "status": "Boundary established",
+          "evidence": "State effects are +25 points per step, but fixed-state model effects and model\u00d7state interactions are exactly 0",
+          "next_action": "Do not use the certified path alone as model-complementarity proof"
+        },
+        {
+          "priority": 6,
+          "gate": "Generative QA1\u2013QA3 factorial and focused confirmation",
+          "status": "Passed with retained near miss",
+          "evidence": "Fresh diagonal gains rise 29.2%\u219253.0%\u219265.3%; the original five-panel gate missed two LCBs, then a frozen ten-panel confirmation passed all four focused LCBs (+3.38%, +2.31%, +12.21%, +12.97%)",
+          "next_action": "Preserve both the five-panel near miss and ten-panel confirmation"
+        },
+        {
+          "priority": 7,
+          "gate": "Independent task and model-family replication",
+          "status": "Passed for the scoped claim",
+          "evidence": "Official RULER multiquery and CWE curves reproduce across Qwen2.5 and SmolLM2; RULER-VT and composition add independent positive interactions",
+          "next_action": "Add same-task Qwen generative evidence if feasible, without making it a post-hoc blocker"
+        },
+        {
+          "priority": 8,
+          "gate": "Internal high-readiness promotion threshold",
+          "status": "Reached",
+          "evidence": "Prospective scale curves, interaction contrasts, controls, cross-family tasks, systems accounting, and provenance now jointly pass the scoped internal gate",
+          "next_action": "Begin the double-anonymous TNNLS manuscript; do not imply an acceptance guarantee"
+        }
+      ],
+      "positive_evidence_portfolio": [
+        {
+          "family": "Official RULER multiquery",
+          "models": "Qwen2.5 + SmolLM2",
+          "result": "Qwen gain 4.4%\u219212.1%\u219231.9%; Smol gain 10.4%\u219221.7%\u219252.3%",
+          "strength": "Both untouched three-seed curves pass; 194/0 and 255/0 wins/regressions"
+        },
+        {
+          "family": "Official RULER CWE aggregation",
+          "models": "SmolLM2 + Qwen2.5",
+          "result": "Smol 26.3%\u219243.8%\u219295.6%; Qwen RWE 25.8%\u219269.2%\u2192100%",
+          "strength": "Strong cross-architecture aggregation replication with ceiling-aware gate"
+        },
+        {
+          "family": "Official BABILong QA1\u2013QA3",
+          "models": "SmolLM2 135M/360M/1.7B",
+          "result": "Latest three gain curves: 20.8%\u219251.7%\u219270.8%, 27.5%\u219250.0%\u219270.0%, 24.2%\u219248.3%\u219260.0%",
+          "strength": "Repeated 4K/8K generative confirmations; BGE and exact-byte FIFO controls pass"
+        },
+        {
+          "family": "RULER-VT causal interaction",
+          "models": "Pythia 410M/2.8B",
+          "result": "Foundation\u00d7state interaction +0.0203, bootstrap 95% CI [0.0110, 0.0295]",
+          "strength": "Direct evidence that a larger Foundation extracts more value on one interface"
+        },
+        {
+          "family": "Composition mechanism",
+          "models": "Pythia 410M/2.8B",
+          "result": "Cross-model interaction +0.1252 nats [0.1190, 0.1313]",
+          "strength": "Independent constructive composition result; raw exact storage remains stronger"
+        },
+        {
+          "family": "Systems and reproducibility",
+          "models": "Two RTX PRO 6000 nodes",
+          "result": "State 589\u2013641 bytes; supported-op FLOPs 78\u201384\u00d7 below Foundation; cross-node predictions exact",
+          "strength": "State/FLOP/provenance gates pass; strict profiler-wall gate remains partial"
+        }
+      ]
+    },
+    "accessIssues": []
+  },
+  "sources": [
+    {
+      "id": "headline_metrics_sql",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT item.* FROM read_json_auto('reports/ascent_tnnls_readiness_2026-08-14/report_data.json') AS r, UNNEST(r.headline_metrics) AS t(item)",
+        "description": "Loads the reviewed headline metrics produced by the reproducible Python synthesis.",
+        "tables_used": [
+          "reports/ascent_tnnls_readiness_2026-08-14/report_data.json"
+        ],
+        "metric_definitions": {
+          "absolute_gain": "Exact ASCENT accuracy minus exact Foundation accuracy.",
+          "remaining_error_elimination": "(ASCENT accuracy - Foundation accuracy) / (1 - Foundation accuracy).",
+          "confidence_interval": "Two-sided 95% Student-t interval clustered over five panels (df=4)."
+        },
+        "executed_at": "2026-08-14T15:36:25+00:00"
+      }
+    },
+    {
+      "id": "condition_accuracy_sql",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT item.* FROM read_json_auto('reports/ascent_tnnls_readiness_2026-08-14/report_data.json') AS r, UNNEST(r.accuracy_by_condition) AS t(item)",
+        "description": "Loads all five registered methods at all three endpoints; no condition is filtered.",
+        "tables_used": [
+          "reports/ascent_tnnls_readiness_2026-08-14/report_data.json"
+        ],
+        "filters": [
+          "All five frozen panels",
+          "All three endpoints",
+          "All primary/control conditions"
+        ],
+        "metric_definitions": {
+          "accuracy": "Mean exact accuracy over five frozen 32-row panels."
+        },
+        "executed_at": "2026-08-14T15:36:25+00:00"
+      }
+    },
+    {
+      "id": "readiness_gates_sql",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT item.* FROM read_json_auto('reports/ascent_tnnls_readiness_2026-08-14/report_data.json') AS r, UNNEST(r.readiness_gates) AS t(item) ORDER BY item.priority",
+        "description": "Loads the complete promotion-gate audit in its prespecified priority order.",
+        "tables_used": [
+          "reports/ascent_tnnls_readiness_2026-08-14/report_data.json"
+        ],
+        "filters": [
+          "No readiness gate omitted"
+        ],
+        "executed_at": "2026-08-14T15:36:25+00:00"
+      }
+    },
+    {
+      "id": "positive_portfolio_sql",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT item.* FROM read_json_auto('reports/ascent_tnnls_readiness_2026-08-14/report_data.json') AS r, UNNEST(r.positive_evidence_portfolio) AS t(item)",
+        "description": "Loads the validated positive-evidence portfolio summarized from the current readiness audit.",
+        "tables_used": [
+          "reports/ascent_tnnls_readiness_2026-08-14/report_data.json",
+          "docs/TNNLS_READINESS_AUDIT.md"
+        ],
+        "filters": [
+          "Frozen or independently confirmed positive results only"
+        ],
+        "executed_at": "2026-08-14T15:36:25+00:00"
+      }
+    },
+    {
+      "id": "readiness_audit",
+      "query": {
+        "engine": "local-markdown",
+        "description": "Current evidence matrix and non-negotiable promotion gates.",
+        "executed_at": "2026-08-14T15:36:25+00:00"
+      }
+    }
+  ],
+  "package_info": {
+    "originUrl": "artifact://ascent-tnnls-readiness-2026-08-14",
+    "controls": {
+      "edit": false,
+      "refresh": false
+    }
+  }
+}

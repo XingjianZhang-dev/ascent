@@ -1,0 +1,3586 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_qwen2p5_generic_writer_16k_ablation",
+  "status": "revision_generic_writer_ablation_preregistered_before_any_score",
+  "started_utc": "2026-09-20T23:36:03.827714+00:00",
+  "completed_utc": "2026-09-20T23:37:00.712513+00:00",
+  "wall_seconds": 56.88479245599592,
+  "end_to_end_seconds": 60.08859969198238,
+  "endpoint": {
+    "name": "qwen2p5-0p5b-instruct",
+    "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "model_parameters": 494032768,
+    "hidden_size": 896,
+    "state_fact_slots": 1,
+    "batch_size": 2,
+    "model_artifact": {
+      "path": "model.safetensors",
+      "bytes": 988097824,
+      "sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe"
+    }
+  },
+  "condition": {
+    "name": "generic_bm25_coscale",
+    "memory_source": "generic_bm25",
+    "memory_representation": "event_facts",
+    "neutral_answer_format": false,
+    "readout_path": "foundation_generation",
+    "fact_slots": 1,
+    "frozen_batch_size": 2,
+    "effective_batch_size": 2,
+    "diagnostic_no_promotion": false
+  },
+  "config": {
+    "path": "/workspace/ascent_revision/out/schema_blind_2026-09/babilong_qwen2p5_generic_writer_16k_ablation.run.json",
+    "sha256": "17bb49cb6d9025ebe728b11cd34f5f62c513bbfc1f10f595ca7b558c67450234"
+  },
+  "data": {
+    "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_10.jsonl",
+    "sha256": "43f56066225ad0a2d3c631096b3730d287470dc8f82b6d8a7afa8c51614e1d0e",
+    "rows": 80,
+    "task_counts": {
+      "qa2": 40,
+      "qa3": 40
+    }
+  },
+  "model_files": [
+    {
+      "path": "model.safetensors",
+      "bytes": 988097824,
+      "sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe"
+    }
+  ],
+  "model_identity": {
+    "model_type": "qwen2",
+    "architectures": [
+      "Qwen2ForCausalLM"
+    ],
+    "native_context_tokens": 32768,
+    "loaded_parameters": 494032768
+  },
+  "parser_accuracy": 1.0,
+  "foundation": {
+    "samples": 80,
+    "mean": 0.05,
+    "standard_error": 0.02452072231368419,
+    "ci95_low": 0.0019393842651789853,
+    "ci95_high": 0.09806061573482103
+  },
+  "ascent": {
+    "samples": 80,
+    "mean": 0.025,
+    "standard_error": 0.017565429223263186,
+    "ci95_low": -0.009428241277595846,
+    "ci95_high": 0.05942824127759585
+  },
+  "gain": {
+    "samples": 80,
+    "mean": -0.025,
+    "standard_error": 0.030683150037154452,
+    "ci95_low": -0.08513897407282273,
+    "ci95_high": 0.03513897407282272
+  },
+  "remaining_error_elimination": -0.026315789473684213,
+  "wins": 2,
+  "regressions": 4,
+  "by_task": {
+    "qa2": {
+      "foundation": {
+        "samples": 40,
+        "mean": 0.1,
+        "standard_error": 0.048038446141526144,
+        "ci95_low": 0.005844645562608761,
+        "ci95_high": 0.19415535443739124
+      },
+      "ascent": {
+        "samples": 40,
+        "mean": 0.025,
+        "standard_error": 0.024999999999999998,
+        "ci95_low": -0.023999999999999994,
+        "ci95_high": 0.074
+      },
+      "gain": {
+        "samples": 40,
+        "mean": -0.075,
+        "standard_error": 0.05532537786493135,
+        "ci95_low": -0.18343774061526544,
+        "ci95_high": 0.03343774061526544
+      },
+      "remaining_error_elimination": -0.08333333333333334
+    },
+    "qa3": {
+      "foundation": {
+        "samples": 40,
+        "mean": 0.0,
+        "standard_error": 0.0,
+        "ci95_low": 0.0,
+        "ci95_high": 0.0
+      },
+      "ascent": {
+        "samples": 40,
+        "mean": 0.025,
+        "standard_error": 0.024999999999999998,
+        "ci95_low": -0.023999999999999994,
+        "ci95_high": 0.074
+      },
+      "gain": {
+        "samples": 40,
+        "mean": 0.025,
+        "standard_error": 0.024999999999999998,
+        "ci95_low": -0.023999999999999994,
+        "ci95_high": 0.074
+      },
+      "remaining_error_elimination": 0.025
+    }
+  },
+  "state": {
+    "fact_slots": 1,
+    "write_state_payload_bytes": {
+      "mean": 62405.7875,
+      "maximum": 70071,
+      "scale_policy": "full-corpus UTF-8 lower bound for generic lexical index"
+    },
+    "read_state_payload_bytes": {
+      "mean": 87.5875,
+      "maximum": 634,
+      "scale_policy": "query-conditioned fact slots grow with endpoint"
+    },
+    "mean_total_external_state_bytes": 62493.375,
+    "state_slots_per_model_parameter": 2.0241572316110013e-09
+  },
+  "systems": {
+    "decode_order": "foundation_first",
+    "warmup_samples_per_arm": 0,
+    "artifact_verification_seconds": 0.9113566590240225,
+    "model_load_seconds": 1.0878979960107245,
+    "retrieval_total_seconds": 1.1688722179969773,
+    "retrieval_microseconds_per_sample": 14610.902724962216,
+    "foundation_decode": {
+      "seconds": 54.23383932898287,
+      "samples": 80,
+      "samples_per_second": 1.4750937973378468,
+      "prompt_tokens": 1226117,
+      "prompt_token_cap": 16376,
+      "prompt_truncation_side": "left",
+      "maximum_prompt_tokens": 16201,
+      "samples_at_prompt_token_cap": 0,
+      "generated_tokens": 640,
+      "prompt_tokens_per_second": 22607.96976888111,
+      "allocated_before_bytes": 996321792,
+      "peak_allocated_bytes": 4388011520,
+      "incremental_peak_bytes": 3391689728
+    },
+    "ascent_decode": {
+      "seconds": 2.639667632000055,
+      "samples": 80,
+      "samples_per_second": 30.306845843082385,
+      "prompt_tokens": 6855,
+      "prompt_token_cap": 16376,
+      "prompt_truncation_side": "left",
+      "maximum_prompt_tokens": 220,
+      "samples_at_prompt_token_cap": 0,
+      "generated_tokens": 209,
+      "prompt_tokens_per_second": 2596.917853179122,
+      "allocated_before_bytes": 1004841472,
+      "peak_allocated_bytes": 1026472960,
+      "incremental_peak_bytes": 21631488
+    },
+    "ascent_to_foundation_decode_time_ratio": 0.04867196688745954,
+    "ascent_to_foundation_prompt_token_ratio": 0.005590820451881835
+  },
+  "environment": {
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128",
+    "transformers": "4.57.6",
+    "tokenizers": "0.22.2",
+    "sentencepiece": "0.2.2",
+    "safetensors": "0.8.0",
+    "cuda_device": "NVIDIA A100-SXM4-80GB",
+    "peak_cuda_bytes": 1026472960,
+    "git_commit": "c84f587c0053da8a5fe127748a22cdba719d5f11",
+    "git_dirty": false
+  },
+  "retrieval_cache": null,
+  "preflight": {
+    "target_blindness": {
+      "rows": 80,
+      "blinded_keys": [
+        "target"
+      ],
+      "rows_with_blocked_target_access_attempts": 0,
+      "rows_with_target_read_before_reveal": 0,
+      "keys_read_before_reveal_union": [
+        "input",
+        "question",
+        "task"
+      ],
+      "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+      "rows_with_state_derived_from_input_only": 0,
+      "rows_with_provenance_not_applicable": 80
+    },
+    "target_values_not_rendered_by_prompt_builder": true
+  },
+  "predictions": [
+    {
+      "row_id": "5924678cd4c1c38461253d96a7d33e8302e09935e1efc741fd9538074c56dd31",
+      "task": "qa2",
+      "target": "hallway",
+      "foundation_output": "The apple is located in the King of",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "bottom",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Mary put down the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 48,
+      "persistent_payload_bytes": 62177,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15525,
+      "ascent_prompt_tokens": 75,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "594def92cdaf5c666864b885d524b195b675a95e840063680b8e11697b3f85ec",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "According to the passage, the article states",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "bottom",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Sandra dropped the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 49,
+      "persistent_payload_bytes": 61280,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15506,
+      "ascent_prompt_tokens": 74,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "59a2d99e37c4ff56da721645d4ddb8ff0cf94e9936fd55ccfb3559778090e844",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "According to the text, the milk is",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "office door",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "So follow me a mile or more\n    And soon we'll reach the office door.\" John got the milk there."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 119,
+      "persistent_payload_bytes": 56837,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14235,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "59d5650908207239ccc056dfed96dadefdfdc8a588105bcf308728c685613969",
+      "task": "qa2",
+      "target": "kitchen",
+      "foundation_output": "The football is located in the kitchen.",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 1.0,
+      "ascent_output": "east",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "John left the football."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 47,
+      "persistent_payload_bytes": 61366,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15585,
+      "ascent_prompt_tokens": 74,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5a32e392f91a1422882e5a9d4ea335cb36755fddcf0853dc2b74dd25be0e6f32",
+      "task": "qa2",
+      "target": "kitchen",
+      "foundation_output": "The milk is located in Sandra's kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 1.0,
+      "ascent_output": "frontage",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Sandra grabbed the milk there."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 54,
+      "persistent_payload_bytes": 60688,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15257,
+      "ascent_prompt_tokens": 75,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5aeefae5146f2ebb51d74cacc4afbffd3827e97bf6f269af2a43318dd88beffd",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "The football is located in the sitting room",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "southwest",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Sandra grabbed the football there."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 58,
+      "persistent_payload_bytes": 56072,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 13658,
+      "ascent_prompt_tokens": 75,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5b0bd28c83470ee36f8de96fa7014b9c17d451e4ac83501350f28c6fc1b1da42",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "The milk is located in the kitchen.",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "front-end",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Sandra dropped the milk there."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 54,
+      "persistent_payload_bytes": 64103,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15728,
+      "ascent_prompt_tokens": 75,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5b61b88e8fc78cb469397c0c8f1fe1f15e0e8423d4476391a2e2278d983d0989",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "The apple is described as being in the",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "bottom",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "(Elaine strained her ears to catch his answer.) \"She didn't let me have the chance to recognize her,\" said he--\"she\nwouldn't let me see her face.\" (Elaine gave a little sigh of relief.) \"She couldn't have covered it completely--she saw you.\" \"She can't--I'm on the pinnacle of expectation, now.\" John picked up the apple there."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 351,
+      "persistent_payload_bytes": 61864,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15395,
+      "ascent_prompt_tokens": 153,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5b7a375a440eab3b32eff21108953720e34d61acc18146ab336ab89c06242918",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "According to the text, the milk was",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "front-end",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Daniel left the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 45,
+      "persistent_payload_bytes": 60145,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15202,
+      "ascent_prompt_tokens": 74,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5bee999b691fa8fc471f926fb089feec0a3f5f13c15256f6b41d6c48bc19e5b1",
+      "task": "qa2",
+      "target": "bathroom",
+      "foundation_output": "The apple is located in the hallway.",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "Middle\u5730\u5e26",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Mary took the apple there."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 50,
+      "persistent_payload_bytes": 65804,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15501,
+      "ascent_prompt_tokens": 75,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5c0af9b70ef25555911366d94e179bc03357ea9a07494d2d52e52272a65bfcae",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "The passage states that the football is located",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "ground",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Daniel dropped the football."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 52,
+      "persistent_payload_bytes": 62553,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15688,
+      "ascent_prompt_tokens": 74,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5c20728903959ddb048fdca2733a0a640fcce76a03e26168b138cdb8f87e0be1",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "The apple is located in the kitchen.",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "east",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "John picked up the apple there."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 55,
+      "persistent_payload_bytes": 69184,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15536,
+      "ascent_prompt_tokens": 76,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5c5c3b2b637031dfd0443e581826f9b7a8433928cc216ca632abe64d7a704ad3",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "The apple is located in the kitchen.",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "east",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Mary left the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 44,
+      "persistent_payload_bytes": 59159,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14701,
+      "ascent_prompt_tokens": 74,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5caa246081c257c02d76bf231fed1581f0abdce41991ba5e198335915b4e9753",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "The answer is that the apple is in",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "bottom",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Daniel discarded the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 51,
+      "persistent_payload_bytes": 62287,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15811,
+      "ascent_prompt_tokens": 74,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5cfaa3020328919c36fb189e2998f5f042371e5f3d3d49353bf132cb96532f5b",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "The answer indicates that the football is located",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "home",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Mary left the football."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 47,
+      "persistent_payload_bytes": 56183,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14768,
+      "ascent_prompt_tokens": 74,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5d1299244df5b4210fbcb6aa1e2506b638a0abf7c4a4c06612cdacde088cf814",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "The milk was found in the kitchen.",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "frontage",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "28.] Mary put down the milk there."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 58,
+      "persistent_payload_bytes": 56446,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14861,
+      "ascent_prompt_tokens": 80,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5d333ae7a6bc87c7ad7f9e366cbb4c3fbea5702df917ebcf6ea7d7f5fec84d35",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "The apple is located in Manaar.",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "bottom",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Daniel put down the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 50,
+      "persistent_payload_bytes": 57905,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14270,
+      "ascent_prompt_tokens": 75,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5d66aab579ec6c4ea6008e6ee98a7c9b0b29a106b6636541d7a0896bf7c25919",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "The football is located in the bathroom.",
+      "foundation_answer": "bathroom",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "field",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Sandra put down the football."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 53,
+      "persistent_payload_bytes": 65941,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15490,
+      "ascent_prompt_tokens": 75,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5d9b461260c396186c11cdc2c39ed0eab286d870f6029d395c5b5517f875809c",
+      "task": "qa2",
+      "target": "kitchen",
+      "foundation_output": "The apple is in the kitchen.",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 1.0,
+      "ascent_output": "bottom",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Mary dropped the apple there."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 53,
+      "persistent_payload_bytes": 63065,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15654,
+      "ascent_prompt_tokens": 75,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5daddfef0df517bd3df672fa453a051adc7f4f6db22cdb363a609327d9a83f3f",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "The apple is located in Dudzeele",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "bottom",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Mary dropped the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 47,
+      "persistent_payload_bytes": 59505,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14145,
+      "ascent_prompt_tokens": 74,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5dd969c67437b003a59c39f6b3186b06a5f1e0b00396ac53c56062fd330a064d",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "The apple is located on the fourth floor",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "east",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Sandra left the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 46,
+      "persistent_payload_bytes": 64908,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15451,
+      "ascent_prompt_tokens": 74,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5e6d3d02c9eea8980543aad6c61a69d0a8a6bd26a9be06b335dd23869a6b8e9a",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "The football is in the corner of Anna",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "field",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Daniel discarded the football."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 54,
+      "persistent_payload_bytes": 61388,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15424,
+      "ascent_prompt_tokens": 74,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5f2666e5da28a5f164436577e5b1b05b9b5fa968d65d20a394913ce21622f476",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "The apple is found in the kitchen.",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "bottom",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "I am going down to fetch some charcoal--do you want\nanything while I'm out?\" Mary discarded the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 126,
+      "persistent_payload_bytes": 63167,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15512,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5f6e1d792d973a13b334053d4aaec87b31ec39e5e8303aae0197506a87624f48",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "The football is located in the yard of",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "east",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "John left the football."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 47,
+      "persistent_payload_bytes": 65088,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15669,
+      "ascent_prompt_tokens": 74,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5fcad81d06b0b8969ae4e1c11628de77c744abd9ff0d4461e6206ba1afbaa60f",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "Based on the dialogue, the apple is",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "east",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Mary left the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 44,
+      "persistent_payload_bytes": 59410,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15583,
+      "ascent_prompt_tokens": 74,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5fe329a85cfcc0a9616792f7e3483ea072f34c6798f9a95e2ed6b93cc28f30b5",
+      "task": "qa2",
+      "target": "kitchen",
+      "foundation_output": "The football was found in the Rock Creek",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "east",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Mary picked up the football there."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 58,
+      "persistent_payload_bytes": 58775,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 13644,
+      "ascent_prompt_tokens": 76,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5ffa3a7d7e277cdee267d8d4df96e97a5d0ca07439676a7e8374ce3900c206f6",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "The apple is found in the kitchen.",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "bottom",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Daniel put down the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 50,
+      "persistent_payload_bytes": 60496,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14928,
+      "ascent_prompt_tokens": 75,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "6022b21936860a5c68e4ff60d09f4572b3a621d17014da8ecab32f1f48f1a610",
+      "task": "qa2",
+      "target": "hallway",
+      "foundation_output": "The football is located in the village of",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "field",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "'I at once supposed,'\nhe said, 'that, followed in the rear by our friends from above, they\nwere seeking a free passage to Sorel, and determined to send a message,\nthat _if they would lay down their arms, they should pass unmolested_.' Daniel put down the football there."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 294,
+      "persistent_payload_bytes": 63608,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15463,
+      "ascent_prompt_tokens": 136,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "603902aeac87233a02aa34d234e1747e6e6dea788fc65a19a681674767f2a08b",
+      "task": "qa2",
+      "target": "hallway",
+      "foundation_output": "Based on the text provided, the milk",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "morning",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "During breakfast, Philpot, addressing Crass and referring to Hunter,\ninquired anxiously:\n\n''Ow's 'is temper this mornin', Bob?' 'As mild as milk,' replied Crass."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 185,
+      "persistent_payload_bytes": 63509,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15599,
+      "ascent_prompt_tokens": 112,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "60671dd3e29115f83a9f80fe6593db1cbd85c1acb81023829be8bb2fd7eb23b5",
+      "task": "qa2",
+      "target": "hallway",
+      "foundation_output": "The text mentions that the narrator picks up",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "front\u5ead",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Sandra grabbed the milk there."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 54,
+      "persistent_payload_bytes": 64936,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15560,
+      "ascent_prompt_tokens": 75,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "60a6ba1d67c64528073871a32565646f2dfeae5ecb1edf1b918d081a6135ed94",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "According to the text, the milk was",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "front-end",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Mary discarded the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 48,
+      "persistent_payload_bytes": 63157,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15660,
+      "ascent_prompt_tokens": 74,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "60f064928f15a005bddd31f3aa47a4927ca7818e73532d1e232c3fa3babe6461",
+      "task": "qa2",
+      "target": "kitchen",
+      "foundation_output": "The football is located on the front ver",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "field",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Sandra put down the football."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 53,
+      "persistent_payload_bytes": 62050,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15572,
+      "ascent_prompt_tokens": 75,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "6102a4288dd09f41b3d4f54d347bf96fbe6f16efc4d596c335a1d72576362598",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "The answer states that the milk is located",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "front\u5ead",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Daniel put down the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 49,
+      "persistent_payload_bytes": 63420,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15580,
+      "ascent_prompt_tokens": 75,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "610cf8263162859a08f327a6ce1527d286bbeb036077ebd266f0d7a17850734a",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "According to the text, the football is",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "east",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "John took the football there."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 53,
+      "persistent_payload_bytes": 58859,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 13491,
+      "ascent_prompt_tokens": 75,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "612c490aeeaa8bf4b6dea166a2f06458595a985eb772ecd4ba3d363e5368f9b2",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "The football is located in the bathroom.",
+      "foundation_answer": "bathroom",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "prentiss and wallace have surrendered",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "\"Prentiss and Wallace have\nsurrendered.\" Daniel left the football."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 90,
+      "persistent_payload_bytes": 62540,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15706,
+      "ascent_prompt_tokens": 87,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "61360d11b76bae2c931c87507da8f571e533fed175f519cd5554e7c5e64f0640",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "Based on the passage, the football mentioned",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "memory",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Mary took the football there."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 53,
+      "persistent_payload_bytes": 66676,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15550,
+      "ascent_prompt_tokens": 75,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "6176f3ec42416b495c93f050ac176b78ba736d3fcdab2dc9ba1baaf21dea9908",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "The football is located in the hallway.",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "field",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "John put down the football."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 51,
+      "persistent_payload_bytes": 66808,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15546,
+      "ascent_prompt_tokens": 75,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "619351dbf1b6047d6653a80b817311225071655bc26600b26d4e6c07aa548774",
+      "task": "qa2",
+      "target": "bathroom",
+      "foundation_output": "The milk is mentioned in the passage as",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "front-end",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "'They cling,' wrote Durham, 'to ancient\nprejudices, ancient customs, and ancient laws, not from any strong\nsense of their beneficial effects, but with the unreasoning tenacity of\nan uneducated and unprogressive people.' Mary grabbed the milk there."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 272,
+      "persistent_payload_bytes": 61515,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 16114,
+      "ascent_prompt_tokens": 127,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "61ba1bcecf2cdb044e498ad2171fba7f2807ec7229508961e885d0edfa71ab3f",
+      "task": "qa2",
+      "target": "bathroom",
+      "foundation_output": "The milk is located in the bathroom.",
+      "foundation_answer": "bathroom",
+      "foundation_location": "bathroom",
+      "foundation_score": 1.0,
+      "ascent_output": "front\u5ead",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Mary dropped the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 46,
+      "persistent_payload_bytes": 64511,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15666,
+      "ascent_prompt_tokens": 74,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "61bac445a39508ce95d0130ba54609a192c960a36dfa526e8bdb98362e088914",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "The answer states that the apple is located",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "bottom",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Mary put down the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 48,
+      "persistent_payload_bytes": 66690,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15610,
+      "ascent_prompt_tokens": 75,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5d929434afe20cf04e49436d02c1c3e92fdb03a4c4f9b7dc5f3cebb4418103cc",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "Based on the passage, the milk was",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Mary put down the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 47,
+      "persistent_payload_bytes": 63979,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15630,
+      "ascent_prompt_tokens": 78,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5e066b000385b79d82b03ea82241fc2c505d886d6580ee337cf5923ecac74c1a",
+      "task": "qa3",
+      "target": "bedroom",
+      "foundation_output": "Based on the information provided in the text",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "bathroom",
+      "ascent_answer": "bathroom",
+      "ascent_location": "bathroom",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Mary went back to the bathroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 55,
+      "persistent_payload_bytes": 67993,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15690,
+      "ascent_prompt_tokens": 79,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5e3df3b9833fecc0f37564ae3c7e101e7d8ec0034ca68b97ce3d1a68f9584c32",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "Before the hallway, the apple was in",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "prairie",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "There is no home\nthere, only a black spot on the prairie.\" Sandra discarded the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 110,
+      "persistent_payload_bytes": 61449,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15705,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5e51345e0e521ad8980e10e10255f267daa177c5f0172b3dae3f9f7cc73fffef",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "Based on the information provided in the text",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "History, perhaps, was in some\ndegree an exception, for Hume, Robertson and more especially Gibbon,\nexhibited a spirit of original investigation which found no parallel\namong their contemporaries.\" Mary journeyed to the office."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 250,
+      "persistent_payload_bytes": 61493,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15515,
+      "ascent_prompt_tokens": 119,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5e518e295ae506eec6a356c87bfee58bad1824e52ac285afdbc03520f347ea42",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "Before the bathroom, the football was in",
+      "foundation_answer": "bathroom",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "basement",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Daniel took the football."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 49,
+      "persistent_payload_bytes": 67159,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15561,
+      "ascent_prompt_tokens": 77,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5e56c9a0955cb13cf3bbb7dc721d8dd92971717431d06bcb70cced7355301014",
+      "task": "qa3",
+      "target": "office",
+      "foundation_output": "Before the garden, the milk was in",
+      "foundation_answer": "garden",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "forest",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "John journeyed to the garden."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 53,
+      "persistent_payload_bytes": 62831,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15560,
+      "ascent_prompt_tokens": 79,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5e5729ef065c42048b794db4b2348a92dc8210ae6793ea5219faaaf9503ba9cb",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "Before the office, the milk was in",
+      "foundation_answer": "office",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "kitchen",
+      "ascent_answer": "kitchen",
+      "ascent_location": "kitchen",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "After waiting till the cows were milked, and\nshe had finished her own breakfast, she filled a large earthen pan\nwith bread and milk, gave each of us a spoon, and we ate as much as\nwe wished."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 214,
+      "persistent_payload_bytes": 64256,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15667,
+      "ascent_prompt_tokens": 120,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5e676f8f5882769eefc80ab49c371731eaf957da79e2f3702b744b29f17be97d",
+      "task": "qa3",
+      "target": "bedroom",
+      "foundation_output": "Before the office, the milk was in",
+      "foundation_answer": "office",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "milkroom",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "\"Nay, fair saint, forgive a jest,\" said the knight; \"and thou, Simon,\ntell us how this tale ended--with Conachar's escape to the Highlands, I\nsuppose?\" Daniel left the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 197,
+      "persistent_payload_bytes": 64421,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15640,
+      "ascent_prompt_tokens": 120,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5e7687066c72455ab39467436552eae6740ae797e83c3648f1013d33cb111631",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "The milk was initially stored in the wire",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "southwest",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Sandra dropped the milk there."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 54,
+      "persistent_payload_bytes": 65162,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15597,
+      "ascent_prompt_tokens": 78,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5eb262517de9278fe5973c416cf40810296ba91d38326abd4f0fa54b1e36a158",
+      "task": "qa3",
+      "target": "bedroom",
+      "foundation_output": "Before the garden, the milk was in",
+      "foundation_answer": "garden",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "forest",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "John left the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 43,
+      "persistent_payload_bytes": 56988,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 16201,
+      "ascent_prompt_tokens": 77,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5ef59e9b65b5bf94cbec1a9c55d6878f33898a7cf311ab13b8e426b59f0a7510",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "Before the office, the apple was in",
+      "foundation_answer": "office",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Captain Villaire, have you had them\nsearched?\" \"Yees, Baxter, but za had not mooch monish wid zem.\" Sandra picked up the apple there."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 157,
+      "persistent_payload_bytes": 57129,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15455,
+      "ascent_prompt_tokens": 109,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5f118347b3bb65f2727c743d6e92cbe3d44586b31e7afd6c8178e4f22a67046c",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "Before moving to the hallway, the football",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "hallway",
+      "ascent_answer": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Daniel left the football there."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 55,
+      "persistent_payload_bytes": 70071,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15643,
+      "ascent_prompt_tokens": 78,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "6057a3bc11dab9b7af7b1d70f95ac30ceb994d74d3e3a69ed7ea717fa1867924",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "Before the garden, the apple was in",
+      "foundation_answer": "garden",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "garden",
+      "ascent_answer": "garden",
+      "ascent_location": "garden",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Mary went back to the garden."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 53,
+      "persistent_payload_bytes": 64325,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15718,
+      "ascent_prompt_tokens": 79,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "605cb0577462b8762726ec73d01c0d23aba572ea15053bdd1c789e77a1da79e0",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "Based on the text, the answer is",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "dining room",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "See that you have every available piece of artillery in\nposition.\" Daniel moved to the bedroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 119,
+      "persistent_payload_bytes": 64147,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15610,
+      "ascent_prompt_tokens": 91,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "6080ca548a2ec59a231794e47968c9a17aa7ecd0dab3da50f1f792597351f816",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "Before the office, the milk was in",
+      "foundation_answer": "office",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "islands",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Venice may well call upon us to note with\nreverence, that of all the towers which are still seen rising like a\nbranchless forest from her islands, there is but one whose office was\nother than that of summoning to prayer, and that one was a watch-tower\nonly: from first to last, while the palaces of the other cities of\nItaly were lifted into sullen fortitudes of rampart, and fringed with\nforked battlements for the javelin and the bow, the sands of Venice\nnever sank under the weight of a war tower, and her roof terraces were\nwreathed with Arabian imagery, of golden globes suspended on the leaves\nof lilies."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 634,
+      "persistent_payload_bytes": 57977,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15767,
+      "ascent_prompt_tokens": 220,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "60db54ba1462b1ff3b4fcaf8e0b2dfe4b342738a963cf643d2df8a9fa274746f",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "Before the kitchen, the football was in",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "kitchen",
+      "ascent_answer": "kitchen",
+      "ascent_location": "kitchen",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Sandra put down the football there."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 59,
+      "persistent_payload_bytes": 63392,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15616,
+      "ascent_prompt_tokens": 79,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "615a92473766de5ce3d5440fc580103a64e7f4f9d9d2daa40544996bb57815d8",
+      "task": "qa3",
+      "target": "bedroom",
+      "foundation_output": "Before the garden, the apple was in",
+      "foundation_answer": "garden",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "forest",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "John went to the garden."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 48,
+      "persistent_payload_bytes": 63255,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15557,
+      "ascent_prompt_tokens": 78,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "616672224ed690d68813edce55c0d6ea05800c9745d790786c56d031e5a55ee8",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "Based on the text, the apple was",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "forest",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Sandra put down the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 50,
+      "persistent_payload_bytes": 61218,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15558,
+      "ascent_prompt_tokens": 78,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "61793df4b6d552028291450cd3bbfd8946d471b66feffe95291fff4119e5fce2",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "Before the hallway, the milk was in",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "southwest",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "John travelled to the hallway."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 54,
+      "persistent_payload_bytes": 62407,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15155,
+      "ascent_prompt_tokens": 78,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "61a9d611aea3c3d5038be32aafdeb3a67714ae660f2355eb4eee35a5dd18a659",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "Based on the passage, the apple was",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Daniel put down the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 50,
+      "persistent_payload_bytes": 61428,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14510,
+      "ascent_prompt_tokens": 78,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "61ac10f94473c924a5788c9225678525162b00af7aa867516c5b2fadd453be2a",
+      "task": "qa3",
+      "target": "bedroom",
+      "foundation_output": "Before the office, the football was in",
+      "foundation_answer": "office",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Mary picked up the football."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 52,
+      "persistent_payload_bytes": 67053,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15647,
+      "ascent_prompt_tokens": 78,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "61ae40e97edc5b64b8f1e401be541a9476ac479b235a6aee182537971f2ca31c",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "Before the office, the apple was on",
+      "foundation_answer": "office",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Mary put down the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 48,
+      "persistent_payload_bytes": 58997,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15102,
+      "ascent_prompt_tokens": 78,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "61b01ebe635897ac1891ef58fca45bf9deaa3ed7653b456f319d0df3338312ee",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "The milk was before the office when Daniel",
+      "foundation_answer": "office",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Mary moved to the office."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 49,
+      "persistent_payload_bytes": 68897,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15547,
+      "ascent_prompt_tokens": 78,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "61b2fed87e3b2655ec362c13dc8dfeac3a2775f0f5965093fb4fe3a0c9f623f7",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "Based on the passage, the football was",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "hallway",
+      "ascent_answer": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "The little band of\nEuropeans returned from the pursuit, drenched with sweat, panting, like\na squad of triumphant football players; but no one smiled."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 173,
+      "persistent_payload_bytes": 60195,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15606,
+      "ascent_prompt_tokens": 107,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "6211ba29640502a5a52c3f5b4fc7f7e6ccf4d6a8325189f4721b404c022d733e",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "Before the kitchen, the football was picked",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "kitchen",
+      "ascent_answer": "kitchen",
+      "ascent_location": "kitchen",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Sandra discarded the football there."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 60,
+      "persistent_payload_bytes": 59280,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14188,
+      "ascent_prompt_tokens": 78,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "623a8c09fcce7a325a7d7d791d948f86e98f8dd577c9453a726d92cb96ab64e4",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "Before the bathroom, the milk was in",
+      "foundation_answer": "bathroom",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "garage",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Daniel left the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 45,
+      "persistent_payload_bytes": 62140,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15411,
+      "ascent_prompt_tokens": 77,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "6250c3fcec2a3f2f4a670d2d329b835abba321da95ba46f0a180385f15ab4dc8",
+      "task": "qa3",
+      "target": "hallway",
+      "foundation_output": "Based on the passage, the milk was",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "garbage bin",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Sandra journeyed to the bathroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 57,
+      "persistent_payload_bytes": 63692,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15591,
+      "ascent_prompt_tokens": 79,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "6277f996e66a2f5b531ef0e5a063f9568abccac56f8079dcea7dbb6468b0b921",
+      "task": "qa3",
+      "target": "office",
+      "foundation_output": "According to the passage, the apple was",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "garage",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "I often think of you this bleak, cold weather, and envy\n    Mary dropped the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 107,
+      "persistent_payload_bytes": 56816,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 13930,
+      "ascent_prompt_tokens": 92,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "629abe5da74afbdad39b6a60057b132ea3adb319b2ff8659e57509b907939bd6",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "The apple was not found in the office",
+      "foundation_answer": "office",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Sandra picked up the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 51,
+      "persistent_payload_bytes": 64987,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15382,
+      "ascent_prompt_tokens": 78,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "62a7662ba85d3e5f629f304273632e4e74d68b670c86197f6b7734c51d53ae45",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "Before moving to the hallway, the football",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "hallway",
+      "ascent_answer": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Sandra dropped the football."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 52,
+      "persistent_payload_bytes": 51328,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14763,
+      "ascent_prompt_tokens": 77,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "63772193f0dd0c149b6f472638edb4f49bfe18556d7461137b57e122bc36d92d",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "The milk was taken before the hallway.",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "hallway",
+      "ascent_answer": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "A very\nactive extract of pancreas is now prepared, and is easily obtainable,\nwith directions for making peptonized milk, milk gruel, milk punch,\nsoups, jellies, blanc-manges, beef-tea, enemata, etc."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 222,
+      "persistent_payload_bytes": 67679,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15532,
+      "ascent_prompt_tokens": 128,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "640521e666381bff38136272f5f469a05d3e3223b1841362f4d22b3628d189c6",
+      "task": "qa3",
+      "target": "hallway",
+      "foundation_output": "The milk was before the garden. It",
+      "foundation_answer": "garden",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "Heaven",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Clement of Alexandria writes: \"As soon as we are born again, we\nbecome entitled to the hope of rest, the promise of Jerusalem which is\nabove, where it is said to rain milk and honey\"."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 207,
+      "persistent_payload_bytes": 62613,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15530,
+      "ascent_prompt_tokens": 116,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "643d3f6ef213e044c75081e304fc296d72cf48aa07bae5b7bf2272b3d509b37a",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "Before the garden, the football was in",
+      "foundation_answer": "garden",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "garden",
+      "ascent_answer": "garden",
+      "ascent_location": "garden",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Sandra dropped the football."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 52,
+      "persistent_payload_bytes": 63012,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15541,
+      "ascent_prompt_tokens": 77,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "644840c1bbc2c7effc8bafe1b04d5bcdae5c8dd83f9f683236f9592243963e84",
+      "task": "qa3",
+      "target": "office",
+      "foundation_output": "Before the bathroom, the football was in",
+      "foundation_answer": "bathroom",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "garden",
+      "ascent_answer": "garden",
+      "ascent_location": "garden",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Sandra got the football."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 48,
+      "persistent_payload_bytes": 62357,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15708,
+      "ascent_prompt_tokens": 77,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "64ccd37be9b278595d29af207b24e5f3cff7cafcc7b0c03a3a64092e30cd1751",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "Before the bathroom, the milk was being",
+      "foundation_answer": "bathroom",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "garbage bin",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "John went to the bathroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 50,
+      "persistent_payload_bytes": 65170,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15501,
+      "ascent_prompt_tokens": 78,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "64f692776995ca137c12e4975fb489a8b5d7c9c8f0664a50586a267ba1807f37",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "The milk was before the bedroom before the",
+      "foundation_answer": "bedroom",
+      "foundation_location": "bedroom",
+      "foundation_score": 0.0,
+      "ascent_output": "kitchen",
+      "ascent_answer": "kitchen",
+      "ascent_location": "kitchen",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "John left the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 43,
+      "persistent_payload_bytes": 66413,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15390,
+      "ascent_prompt_tokens": 77,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "6516d931fac6380218fe60051b473f99debc3838d727a9150edc9a1934878b4c",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "Based on the passage, the apple was",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "hallway",
+      "ascent_answer": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "\"What did _I_ do with her?\" Daniel journeyed to the hallway."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 84,
+      "persistent_payload_bytes": 63014,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15684,
+      "ascent_prompt_tokens": 89,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "65493e4bcb211d7e1c0b6a89a5d6e43157cfecab3bfd6b8d2ab9cf50f9afc343",
+      "task": "qa3",
+      "target": "hallway",
+      "foundation_output": "Based on the information provided in the text",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Mary picked up the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 48,
+      "persistent_payload_bytes": 63130,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15151,
+      "ascent_prompt_tokens": 78,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "655ae97b0d0a8e9779e35aebcb70fcf53661d90d9598b6ae94e895135fa5cf0c",
+      "task": "qa3",
+      "target": "office",
+      "foundation_output": "Before the bedroom, the apple was in",
+      "foundation_answer": "bedroom",
+      "foundation_location": "bedroom",
+      "foundation_score": 0.0,
+      "ascent_output": "kitchen",
+      "ascent_answer": "kitchen",
+      "ascent_location": "kitchen",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "John picked up the apple there."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 55,
+      "persistent_payload_bytes": 62376,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15412,
+      "ascent_prompt_tokens": 79,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "65a1d81c7190bbb3027eff6b892f102244b84abba6adc95c860b6290e618435b",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "The apple was in the drawing room before",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Mary dropped the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 47,
+      "persistent_payload_bytes": 58159,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14302,
+      "ascent_prompt_tokens": 77,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "generic_bm25/event_facts"
+        }
+      }
+    }
+  ]
+}

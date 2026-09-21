@@ -1,0 +1,1873 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_array_revision1_target_blindness_instrumented_rerun",
+  "phase": "2B",
+  "preregistered_utc": "2026-09-20T21:45:00Z",
+  "purpose": "Give every BABILong row a machine-checkable target-blindness record (C-08) by re-running the ASCENT write path through a blinded row view, and verify that the instrumentation changed no output.",
+  "instrumentation": {
+    "module": "ascent/target_blindness.py",
+    "mechanism": "the writer, readout and prompt builder receive a TargetBlindRow view on which reading 'target' (or iterating the row) raises TargetAccessError until reveal(); reveal() is called only after the ASCENT prompt is rendered; each result row records the keys read before reveal, the number of blocked attempts, the reveal phase, and a three-link provenance check that every retained fact is the verbatim input substring at its recorded position, that every parsed field occurs in that sentence, and that the rendered state string is the raw sentence or the canonical template of the fact's own fields; the runner aborts on any violation",
+    "writer_module_unchanged": "ascent/babilong_memory.py is byte-identical to the retained runs' version; the static test that it never names the target field still passes",
+    "computation_path": "unchanged: identical prompts, decoding, scoring; only the object through which the row is read and the position of the parser-accuracy audit (now after prompt construction) differ",
+    "tests": "tests/test_target_blindness.py"
+  },
+  "hardware": {
+    "rerun": "NVIDIA A100-SXM4-80GB, UUID GPU-5b892f6f-ac8e-8c99-71ed-7efad31c6765, same instance and environment (/venv/py3123: Python 3.12.3, torch 2.8.0+cu128, transformers 4.57.6, tokenizers 0.22.2, safetensors 0.8.0, sentencepiece 0.2.2, numpy 2.3.2) as Phase 2A run 2"
+  },
+  "cells": [
+    {
+      "id": "official16k_panel_1_0p5b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_1.jsonl",
+        "sha256": "f9aa249c3a149e62d782e15c748056e9f30ff8a5ddf6d9783f24e4f2d021f327"
+      },
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/0p5b/canonical_16k_confirmation_panel_1.json",
+        "sha256": "ea6e3bcc52f50d16d9b01017c03a05b7676b72271ea91c232d761a477f04fe28"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/0p5b/canonical_16k_confirmation_panel_1.json"
+    },
+    {
+      "id": "official16k_panel_1_1p5b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_1.jsonl",
+        "sha256": "f9aa249c3a149e62d782e15c748056e9f30ff8a5ddf6d9783f24e4f2d021f327"
+      },
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/1p5b/canonical_16k_confirmation_panel_1.json",
+        "sha256": "30f56570f1fbdc65d5a26836d341b001a36e0979ffab7f4f66cb67fee0740d31"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/1p5b/canonical_16k_confirmation_panel_1.json"
+    },
+    {
+      "id": "official16k_panel_1_3b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_1.jsonl",
+        "sha256": "f9aa249c3a149e62d782e15c748056e9f30ff8a5ddf6d9783f24e4f2d021f327"
+      },
+      "endpoint": "qwen2p5-3b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+        "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/3b/canonical_16k_confirmation_panel_1.json",
+        "sha256": "f09d939e3f595a07351e33c15a58f1a540697b45ed535e42d3c4f498de10c3b8"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/3b/canonical_16k_confirmation_panel_1.json"
+    },
+    {
+      "id": "official16k_panel_2_0p5b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_2.jsonl",
+        "sha256": "f2d091141b5ac6a66ea33b55b3a2b91de5f3ed40b22ded3c0b411dc337a9bd06"
+      },
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/0p5b/canonical_16k_confirmation_panel_2.json",
+        "sha256": "e9812325fe9b23d0b9c65e5f0f5efebed2a5f6ca2ebeefbdba3442ad94200265"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/0p5b/canonical_16k_confirmation_panel_2.json"
+    },
+    {
+      "id": "official16k_panel_2_1p5b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_2.jsonl",
+        "sha256": "f2d091141b5ac6a66ea33b55b3a2b91de5f3ed40b22ded3c0b411dc337a9bd06"
+      },
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/1p5b/canonical_16k_confirmation_panel_2.json",
+        "sha256": "0e8aaf84e6442e9d9b976354b94af04d9f5ae4c48c036fef18be10b6674d57ae"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/1p5b/canonical_16k_confirmation_panel_2.json"
+    },
+    {
+      "id": "official16k_panel_2_3b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_2.jsonl",
+        "sha256": "f2d091141b5ac6a66ea33b55b3a2b91de5f3ed40b22ded3c0b411dc337a9bd06"
+      },
+      "endpoint": "qwen2p5-3b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+        "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/3b/canonical_16k_confirmation_panel_2.json",
+        "sha256": "698be333256f7501422865b5bc8c08a75c623ffc661eb8be5be3e0a87aaf91a0"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/3b/canonical_16k_confirmation_panel_2.json"
+    },
+    {
+      "id": "official16k_panel_3_0p5b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_3.jsonl",
+        "sha256": "5807b9c03736341c8a57eda24f6e85a6eb0bef11887da4fee66bb652663487ed"
+      },
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/0p5b/canonical_16k_confirmation_panel_3.json",
+        "sha256": "58a3ed1d51d1c7babb1160d0980b5dc4540ac3cd6ef419fc8f1ee907414ef665"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/0p5b/canonical_16k_confirmation_panel_3.json"
+    },
+    {
+      "id": "official16k_panel_3_1p5b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_3.jsonl",
+        "sha256": "5807b9c03736341c8a57eda24f6e85a6eb0bef11887da4fee66bb652663487ed"
+      },
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/1p5b/canonical_16k_confirmation_panel_3.json",
+        "sha256": "dafb596bc60cafb993f195ac4129b2bfc5be672ec405527da23e44200e59156d"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/1p5b/canonical_16k_confirmation_panel_3.json"
+    },
+    {
+      "id": "official16k_panel_3_3b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_3.jsonl",
+        "sha256": "5807b9c03736341c8a57eda24f6e85a6eb0bef11887da4fee66bb652663487ed"
+      },
+      "endpoint": "qwen2p5-3b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+        "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/3b/canonical_16k_confirmation_panel_3.json",
+        "sha256": "39917e9d2347d3099f2019ce0a60ed3afdf256688a6240e8d6abbb7c988ade8a"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/3b/canonical_16k_confirmation_panel_3.json"
+    },
+    {
+      "id": "official16k_panel_4_0p5b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_4.jsonl",
+        "sha256": "90c22f819099ae8e5fc89883383da38aefd7e805f039a19c7b00ea513182beab"
+      },
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/0p5b/canonical_16k_confirmation_panel_4.json",
+        "sha256": "f92b3d6c76cfc3b67998eef2ef013167ab97af6daeb4c212747c882baf986bfd"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/0p5b/canonical_16k_confirmation_panel_4.json"
+    },
+    {
+      "id": "official16k_panel_4_1p5b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_4.jsonl",
+        "sha256": "90c22f819099ae8e5fc89883383da38aefd7e805f039a19c7b00ea513182beab"
+      },
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/1p5b/canonical_16k_confirmation_panel_4.json",
+        "sha256": "2d65c49856cb05c4a2bc7a01e8c8326d50121b28b741204acf48327a158f1a8a"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/1p5b/canonical_16k_confirmation_panel_4.json"
+    },
+    {
+      "id": "official16k_panel_4_3b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_4.jsonl",
+        "sha256": "90c22f819099ae8e5fc89883383da38aefd7e805f039a19c7b00ea513182beab"
+      },
+      "endpoint": "qwen2p5-3b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+        "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/3b/canonical_16k_confirmation_panel_4.json",
+        "sha256": "16bb9a61c34865e229f175fb9cd6df36e6f5c39a58f0308536447cb401dfde7c"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/3b/canonical_16k_confirmation_panel_4.json"
+    },
+    {
+      "id": "official16k_panel_5_0p5b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_5.jsonl",
+        "sha256": "620e519cb57e5dc25a4e29c2960c7e8832892629895bef094a6656a9619f4051"
+      },
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/0p5b/canonical_16k_confirmation_panel_5.json",
+        "sha256": "7e9fc7d3c0cc60d3d0b93a25593bef8f260fd4aa9f34a1aea6642339930843c5"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/0p5b/canonical_16k_confirmation_panel_5.json"
+    },
+    {
+      "id": "official16k_panel_5_1p5b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_5.jsonl",
+        "sha256": "620e519cb57e5dc25a4e29c2960c7e8832892629895bef094a6656a9619f4051"
+      },
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/1p5b/canonical_16k_confirmation_panel_5.json",
+        "sha256": "fa757e78b2777f33218f8b2f60c9ac54c102e26e963fa512ed82e9ef699a827e"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/1p5b/canonical_16k_confirmation_panel_5.json"
+    },
+    {
+      "id": "official16k_panel_5_3b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_5.jsonl",
+        "sha256": "620e519cb57e5dc25a4e29c2960c7e8832892629895bef094a6656a9619f4051"
+      },
+      "endpoint": "qwen2p5-3b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+        "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/3b/canonical_16k_confirmation_panel_5.json",
+        "sha256": "4083be35201fe481e0485a97790b60466d3387146353fc9ee400518822cfbac6"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/3b/canonical_16k_confirmation_panel_5.json"
+    },
+    {
+      "id": "official16k_panel_6_0p5b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_6.jsonl",
+        "sha256": "6fa9ab3e920d3b9d1db71850f6f844d6e622269e1bb608216677077cbf096444"
+      },
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/0p5b/canonical_16k_confirmation_panel_6.json",
+        "sha256": "61aafddd90d1abfee676d24137331e3122efb5ba58578dc234847abf59c22aa1"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/0p5b/canonical_16k_confirmation_panel_6.json"
+    },
+    {
+      "id": "official16k_panel_6_1p5b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_6.jsonl",
+        "sha256": "6fa9ab3e920d3b9d1db71850f6f844d6e622269e1bb608216677077cbf096444"
+      },
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/1p5b/canonical_16k_confirmation_panel_6.json",
+        "sha256": "bd3fe92bea580832c8a08885bcd84d60b0d8042919320fb21e74c57fd3585e0f"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/1p5b/canonical_16k_confirmation_panel_6.json"
+    },
+    {
+      "id": "official16k_panel_6_3b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_6.jsonl",
+        "sha256": "6fa9ab3e920d3b9d1db71850f6f844d6e622269e1bb608216677077cbf096444"
+      },
+      "endpoint": "qwen2p5-3b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+        "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/3b/canonical_16k_confirmation_panel_6.json",
+        "sha256": "16073efcff82cf14e5eda438cb9133da41f7070f916ef0c6bd08e700dfd1727c"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/3b/canonical_16k_confirmation_panel_6.json"
+    },
+    {
+      "id": "official16k_panel_7_0p5b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_7.jsonl",
+        "sha256": "e5ffd3995f587fa6640acf26fb27418388cd456b515db3c8743725a541252ab2"
+      },
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/0p5b/canonical_16k_confirmation_panel_7.json",
+        "sha256": "89cf9afa68b981e7074dcc450e3f2534ffe9cccda7fd93324dd1b3b568398a35"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/0p5b/canonical_16k_confirmation_panel_7.json"
+    },
+    {
+      "id": "official16k_panel_7_1p5b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_7.jsonl",
+        "sha256": "e5ffd3995f587fa6640acf26fb27418388cd456b515db3c8743725a541252ab2"
+      },
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/1p5b/canonical_16k_confirmation_panel_7.json",
+        "sha256": "ed8b02875924a3723ce41376519f4a24baf0d71f92fb6131bd913562d4b2d80d"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/1p5b/canonical_16k_confirmation_panel_7.json"
+    },
+    {
+      "id": "official16k_panel_7_3b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_7.jsonl",
+        "sha256": "e5ffd3995f587fa6640acf26fb27418388cd456b515db3c8743725a541252ab2"
+      },
+      "endpoint": "qwen2p5-3b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+        "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/3b/canonical_16k_confirmation_panel_7.json",
+        "sha256": "8056c444f19b1cf1f3b8beb88ef125889db57a318201bd43fed2655be6e6d7ac"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/3b/canonical_16k_confirmation_panel_7.json"
+    },
+    {
+      "id": "official16k_panel_8_0p5b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_8.jsonl",
+        "sha256": "4ee234a77cb5afefbf2293cc907b8f09a5fa2f838e852e89a4d41e4cd92b226a"
+      },
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/0p5b/canonical_16k_confirmation_panel_8.json",
+        "sha256": "30b170ad535520b886ea8a5b3740229b1eeffac2e313511fd4d6d682d7703b0c"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/0p5b/canonical_16k_confirmation_panel_8.json"
+    },
+    {
+      "id": "official16k_panel_8_1p5b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_8.jsonl",
+        "sha256": "4ee234a77cb5afefbf2293cc907b8f09a5fa2f838e852e89a4d41e4cd92b226a"
+      },
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/1p5b/canonical_16k_confirmation_panel_8.json",
+        "sha256": "12a0561b770cdc4e9f476f52ff197c09329553bd5fc53eb62822b2a2f8b14ad1"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/1p5b/canonical_16k_confirmation_panel_8.json"
+    },
+    {
+      "id": "official16k_panel_8_3b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_8.jsonl",
+        "sha256": "4ee234a77cb5afefbf2293cc907b8f09a5fa2f838e852e89a4d41e4cd92b226a"
+      },
+      "endpoint": "qwen2p5-3b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+        "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/3b/canonical_16k_confirmation_panel_8.json",
+        "sha256": "8e272a97033b439359747ca1b8352ba1d438496d19582086b385c7d1850244c7"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/3b/canonical_16k_confirmation_panel_8.json"
+    },
+    {
+      "id": "official16k_panel_9_0p5b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_9.jsonl",
+        "sha256": "0a2aa219a2a6cf8cc1f9578f2d682b8def4912fa9e72116830915e64677f7c5f"
+      },
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/0p5b/canonical_16k_confirmation_panel_9.json",
+        "sha256": "3b1a2aefff48a8536be750b759abfec062cd2bc5950339983a85569deecc34f3"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/0p5b/canonical_16k_confirmation_panel_9.json"
+    },
+    {
+      "id": "official16k_panel_9_1p5b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_9.jsonl",
+        "sha256": "0a2aa219a2a6cf8cc1f9578f2d682b8def4912fa9e72116830915e64677f7c5f"
+      },
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/1p5b/canonical_16k_confirmation_panel_9.json",
+        "sha256": "a325bf1364a2575f6418926f73416679c2097468f7aa8138e15092b352599ef2"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/1p5b/canonical_16k_confirmation_panel_9.json"
+    },
+    {
+      "id": "official16k_panel_9_3b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_9.jsonl",
+        "sha256": "0a2aa219a2a6cf8cc1f9578f2d682b8def4912fa9e72116830915e64677f7c5f"
+      },
+      "endpoint": "qwen2p5-3b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+        "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/3b/canonical_16k_confirmation_panel_9.json",
+        "sha256": "34fa6fe007f1ed3823cb6229580f909e121c350840d964c8d534e59956e511a8"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/3b/canonical_16k_confirmation_panel_9.json"
+    },
+    {
+      "id": "official16k_panel_10_0p5b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_10.jsonl",
+        "sha256": "43f56066225ad0a2d3c631096b3730d287470dc8f82b6d8a7afa8c51614e1d0e"
+      },
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/0p5b/canonical_16k_confirmation_panel_10.json",
+        "sha256": "a0bea5916389f650b963e7c697f8734f44f4bbc97e2cb6c10fc9f24c58908894"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/0p5b/canonical_16k_confirmation_panel_10.json"
+    },
+    {
+      "id": "official16k_panel_10_1p5b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_10.jsonl",
+        "sha256": "43f56066225ad0a2d3c631096b3730d287470dc8f82b6d8a7afa8c51614e1d0e"
+      },
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/1p5b/canonical_16k_confirmation_panel_10.json",
+        "sha256": "1e38be6d2b2caa5efb0971a0c43cc1783f37dd79725a4b8100d75e90e5113a1e"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/1p5b/canonical_16k_confirmation_panel_10.json"
+    },
+    {
+      "id": "official16k_panel_10_3b",
+      "study": "official16k",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+        "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+      },
+      "panel_data": {
+        "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_10.jsonl",
+        "sha256": "43f56066225ad0a2d3c631096b3730d287470dc8f82b6d8a7afa8c51614e1d0e"
+      },
+      "endpoint": "qwen2p5-3b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+        "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/3b/canonical_16k_confirmation_panel_10.json",
+        "sha256": "477545a6c683c3fb506a73c4273b771a993214da98926410b1659a2059d56647"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/official16k/3b/canonical_16k_confirmation_panel_10.json"
+    },
+    {
+      "id": "semantic_holdout_panel_1_0p5b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_1.jsonl",
+        "sha256": "093c7d54888de367ae403ba1f2023b83ccc63d7f4b9d34d0172821a938f78ae2"
+      },
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/0p5b/canonical_train_8k_semantic_panel_1.json",
+        "sha256": "7482fcd279db3959aea5a5cf0ac1bd418a468a056e95773e3c98dfff2edef63b"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/0p5b/canonical_train_8k_semantic_panel_1.json"
+    },
+    {
+      "id": "semantic_holdout_panel_1_1p5b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_1.jsonl",
+        "sha256": "093c7d54888de367ae403ba1f2023b83ccc63d7f4b9d34d0172821a938f78ae2"
+      },
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/1p5b/canonical_train_8k_semantic_panel_1.json",
+        "sha256": "b44fa30b31484e94e3ebd61b9b19990a21da77bbfec70d6062984d107dedca56"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/1p5b/canonical_train_8k_semantic_panel_1.json"
+    },
+    {
+      "id": "semantic_holdout_panel_1_3b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_1.jsonl",
+        "sha256": "093c7d54888de367ae403ba1f2023b83ccc63d7f4b9d34d0172821a938f78ae2"
+      },
+      "endpoint": "qwen2p5-3b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+        "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/3b/canonical_train_8k_semantic_panel_1.json",
+        "sha256": "c8d97db1618a408ad09aed3fef6bfec92b27658d1e518ed1a6e42adfc1d8110e"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/3b/canonical_train_8k_semantic_panel_1.json"
+    },
+    {
+      "id": "semantic_holdout_panel_2_0p5b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_2.jsonl",
+        "sha256": "078c9c1bd34b31a08ef5c4e44bf74e3889c8905d5691208c2491a2a61cd92a75"
+      },
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/0p5b/canonical_train_8k_semantic_panel_2.json",
+        "sha256": "332824999fdca3c1d53790abc3660743aff58de9ee79fd70c2bcef4eabb55bb2"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/0p5b/canonical_train_8k_semantic_panel_2.json"
+    },
+    {
+      "id": "semantic_holdout_panel_2_1p5b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_2.jsonl",
+        "sha256": "078c9c1bd34b31a08ef5c4e44bf74e3889c8905d5691208c2491a2a61cd92a75"
+      },
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/1p5b/canonical_train_8k_semantic_panel_2.json",
+        "sha256": "f9d147dd97a392cfa693d0c674686571f6c0623e72bddf10c10ecb2056b96af6"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/1p5b/canonical_train_8k_semantic_panel_2.json"
+    },
+    {
+      "id": "semantic_holdout_panel_2_3b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_2.jsonl",
+        "sha256": "078c9c1bd34b31a08ef5c4e44bf74e3889c8905d5691208c2491a2a61cd92a75"
+      },
+      "endpoint": "qwen2p5-3b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+        "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/3b/canonical_train_8k_semantic_panel_2.json",
+        "sha256": "74fc61a44872a59444d8c9e01da8517e0955ff7f06c4d5beea64fcddb01002a2"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/3b/canonical_train_8k_semantic_panel_2.json"
+    },
+    {
+      "id": "semantic_holdout_panel_3_0p5b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_3.jsonl",
+        "sha256": "4801c92b4d42d6b99ac75c5e698931dd4f04bb5960334f247a8ba172dada34cc"
+      },
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/0p5b/canonical_train_8k_semantic_panel_3.json",
+        "sha256": "6c3aaaeb17a080296e924edf348758685500a12c2f4c8bd0713aec52e9958080"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/0p5b/canonical_train_8k_semantic_panel_3.json"
+    },
+    {
+      "id": "semantic_holdout_panel_3_1p5b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_3.jsonl",
+        "sha256": "4801c92b4d42d6b99ac75c5e698931dd4f04bb5960334f247a8ba172dada34cc"
+      },
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/1p5b/canonical_train_8k_semantic_panel_3.json",
+        "sha256": "2577412c827702ddf8bfa59251aab47d8fdb2cec94e72344298f6a75fb83316a"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/1p5b/canonical_train_8k_semantic_panel_3.json"
+    },
+    {
+      "id": "semantic_holdout_panel_3_3b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_3.jsonl",
+        "sha256": "4801c92b4d42d6b99ac75c5e698931dd4f04bb5960334f247a8ba172dada34cc"
+      },
+      "endpoint": "qwen2p5-3b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+        "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/3b/canonical_train_8k_semantic_panel_3.json",
+        "sha256": "50b1bbadaee5339424fd77373423062f2c37fcff6894e59d57c753c05524383f"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/3b/canonical_train_8k_semantic_panel_3.json"
+    },
+    {
+      "id": "semantic_holdout_panel_4_0p5b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_4.jsonl",
+        "sha256": "62eed79533908991209dbe31d50d4ee1fb1be18935c2e0cd82bdd1348bf68ec3"
+      },
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/0p5b/canonical_train_8k_semantic_panel_4.json",
+        "sha256": "f7889a5ac7cc8920249f4fdf7290c2ee1cda7c29b17007efbd485e703e5c8636"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/0p5b/canonical_train_8k_semantic_panel_4.json"
+    },
+    {
+      "id": "semantic_holdout_panel_4_1p5b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_4.jsonl",
+        "sha256": "62eed79533908991209dbe31d50d4ee1fb1be18935c2e0cd82bdd1348bf68ec3"
+      },
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/1p5b/canonical_train_8k_semantic_panel_4.json",
+        "sha256": "4b21b23a28a70c70cf3986cf90db6c2851977e6c9de67c906c541fc0ed27bab2"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/1p5b/canonical_train_8k_semantic_panel_4.json"
+    },
+    {
+      "id": "semantic_holdout_panel_4_3b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_4.jsonl",
+        "sha256": "62eed79533908991209dbe31d50d4ee1fb1be18935c2e0cd82bdd1348bf68ec3"
+      },
+      "endpoint": "qwen2p5-3b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+        "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/3b/canonical_train_8k_semantic_panel_4.json",
+        "sha256": "1daa60420628106a4f0777234cf1b437a08c50f695147d9ced4ca741ad53cb0b"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/3b/canonical_train_8k_semantic_panel_4.json"
+    },
+    {
+      "id": "semantic_holdout_panel_5_0p5b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_5.jsonl",
+        "sha256": "a6a95925fdd8ae71d67f06540d91035994272afc4a0a54d2f9a5a58e1e0a6b8b"
+      },
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/0p5b/canonical_train_8k_semantic_panel_5.json",
+        "sha256": "158de01a989e7d27c07f4e9a767dfed2c45ffc4ecade256e7f0f2267cc4bf56a"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/0p5b/canonical_train_8k_semantic_panel_5.json"
+    },
+    {
+      "id": "semantic_holdout_panel_5_1p5b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_5.jsonl",
+        "sha256": "a6a95925fdd8ae71d67f06540d91035994272afc4a0a54d2f9a5a58e1e0a6b8b"
+      },
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/1p5b/canonical_train_8k_semantic_panel_5.json",
+        "sha256": "74a20947150865fe0f47915ef427ec6d2e770d98cd3bd44ddbad322ea3e38baf"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/1p5b/canonical_train_8k_semantic_panel_5.json"
+    },
+    {
+      "id": "semantic_holdout_panel_5_3b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_5.jsonl",
+        "sha256": "a6a95925fdd8ae71d67f06540d91035994272afc4a0a54d2f9a5a58e1e0a6b8b"
+      },
+      "endpoint": "qwen2p5-3b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+        "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/3b/canonical_train_8k_semantic_panel_5.json",
+        "sha256": "34b99eca65cba07d00eaf78a1a03246221a0f30f73a51bca8268f12ea5bb6a6e"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/3b/canonical_train_8k_semantic_panel_5.json"
+    },
+    {
+      "id": "semantic_holdout_panel_6_0p5b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_6.jsonl",
+        "sha256": "55126f096365fbbc41f1d443d0696ceaf24ce53c376232b980156b75a05d31e9"
+      },
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/0p5b/canonical_train_8k_semantic_panel_6.json",
+        "sha256": "2a3592a78699040a619c0a96def4480644e6ee0294e9fe71e00d865d6cfcbdfc"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/0p5b/canonical_train_8k_semantic_panel_6.json"
+    },
+    {
+      "id": "semantic_holdout_panel_6_1p5b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_6.jsonl",
+        "sha256": "55126f096365fbbc41f1d443d0696ceaf24ce53c376232b980156b75a05d31e9"
+      },
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/1p5b/canonical_train_8k_semantic_panel_6.json",
+        "sha256": "dda9c966a01f93e9625bdecddc0f713cf2abd3c34a708480b4c815a140311982"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/1p5b/canonical_train_8k_semantic_panel_6.json"
+    },
+    {
+      "id": "semantic_holdout_panel_6_3b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_6.jsonl",
+        "sha256": "55126f096365fbbc41f1d443d0696ceaf24ce53c376232b980156b75a05d31e9"
+      },
+      "endpoint": "qwen2p5-3b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+        "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/3b/canonical_train_8k_semantic_panel_6.json",
+        "sha256": "caa96bf33ad5cf3e296af39dea20e7c398af451ce6760cccc0dba0fdbdff1b24"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/3b/canonical_train_8k_semantic_panel_6.json"
+    },
+    {
+      "id": "semantic_holdout_panel_7_0p5b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_7.jsonl",
+        "sha256": "e80b942d44285e736a5851960678cb1e6da67dc92de7b0b8984117bace13c7ab"
+      },
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/0p5b/canonical_train_8k_semantic_panel_7.json",
+        "sha256": "b14cfcd7ac7604bd29b6a72069985a1f875c12b67e6ac662c13248a2f4a0779c"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/0p5b/canonical_train_8k_semantic_panel_7.json"
+    },
+    {
+      "id": "semantic_holdout_panel_7_1p5b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_7.jsonl",
+        "sha256": "e80b942d44285e736a5851960678cb1e6da67dc92de7b0b8984117bace13c7ab"
+      },
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/1p5b/canonical_train_8k_semantic_panel_7.json",
+        "sha256": "877d64feac3a17357dde4f789922daaceed0bb80b2af4b091221a62ef478392a"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/1p5b/canonical_train_8k_semantic_panel_7.json"
+    },
+    {
+      "id": "semantic_holdout_panel_7_3b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_7.jsonl",
+        "sha256": "e80b942d44285e736a5851960678cb1e6da67dc92de7b0b8984117bace13c7ab"
+      },
+      "endpoint": "qwen2p5-3b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+        "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/3b/canonical_train_8k_semantic_panel_7.json",
+        "sha256": "13a4286e03ba0e8baae7e592c90111cae3e7d732d7aa98503baff64edbe8cd63"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/3b/canonical_train_8k_semantic_panel_7.json"
+    },
+    {
+      "id": "semantic_holdout_panel_8_0p5b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_8.jsonl",
+        "sha256": "36bb4d4911432e4779450f4b6b8c033c6db52fe27427ae07ec039b7e6a81014d"
+      },
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/0p5b/canonical_train_8k_semantic_panel_8.json",
+        "sha256": "9ac9e44e38ab87d36da82a3f0b63d1f988a571327ee11239221ec9435906eadb"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/0p5b/canonical_train_8k_semantic_panel_8.json"
+    },
+    {
+      "id": "semantic_holdout_panel_8_1p5b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_8.jsonl",
+        "sha256": "36bb4d4911432e4779450f4b6b8c033c6db52fe27427ae07ec039b7e6a81014d"
+      },
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/1p5b/canonical_train_8k_semantic_panel_8.json",
+        "sha256": "8c53b6c74c4e41da7514da043755bbaaff84b2be8d5ff608b25b86eed348ea21"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/1p5b/canonical_train_8k_semantic_panel_8.json"
+    },
+    {
+      "id": "semantic_holdout_panel_8_3b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_8.jsonl",
+        "sha256": "36bb4d4911432e4779450f4b6b8c033c6db52fe27427ae07ec039b7e6a81014d"
+      },
+      "endpoint": "qwen2p5-3b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+        "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/3b/canonical_train_8k_semantic_panel_8.json",
+        "sha256": "c0bb6b8b43c2a3385672c1f45be007fbb9ba5185bf27c7757681a79a0d18c53b"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/3b/canonical_train_8k_semantic_panel_8.json"
+    },
+    {
+      "id": "semantic_holdout_panel_9_0p5b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_9.jsonl",
+        "sha256": "3f843f05a1730e37f84884f87bfe7c7ef004c516e0d62a014d8fe30b04547b7f"
+      },
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/0p5b/canonical_train_8k_semantic_panel_9.json",
+        "sha256": "2a77b4e94cdbe541b03d491bf7c269f8f5965446e0e98a383bfbb5d696d05747"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/0p5b/canonical_train_8k_semantic_panel_9.json"
+    },
+    {
+      "id": "semantic_holdout_panel_9_1p5b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_9.jsonl",
+        "sha256": "3f843f05a1730e37f84884f87bfe7c7ef004c516e0d62a014d8fe30b04547b7f"
+      },
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/1p5b/canonical_train_8k_semantic_panel_9.json",
+        "sha256": "0a355d2beacf7dab986ae3491bb684a000826409873caf4db09d88536f3ebadf"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/1p5b/canonical_train_8k_semantic_panel_9.json"
+    },
+    {
+      "id": "semantic_holdout_panel_9_3b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_9.jsonl",
+        "sha256": "3f843f05a1730e37f84884f87bfe7c7ef004c516e0d62a014d8fe30b04547b7f"
+      },
+      "endpoint": "qwen2p5-3b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+        "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/3b/canonical_train_8k_semantic_panel_9.json",
+        "sha256": "ba3f27e9479e8b01276f2433dd147f26256cbf411b4938d73c920f0d7b402c4a"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/3b/canonical_train_8k_semantic_panel_9.json"
+    },
+    {
+      "id": "semantic_holdout_panel_10_0p5b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_10.jsonl",
+        "sha256": "e2c994db0a14b87d520f4075a59b72c881c43e27060e0f67bd99771446ea354d"
+      },
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/0p5b/canonical_train_8k_semantic_panel_10.json",
+        "sha256": "487f052fc0b3a2d84dbb6cb1003a918121b86feec013f9914613198e503a3cd3"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/0p5b/canonical_train_8k_semantic_panel_10.json"
+    },
+    {
+      "id": "semantic_holdout_panel_10_1p5b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_10.jsonl",
+        "sha256": "e2c994db0a14b87d520f4075a59b72c881c43e27060e0f67bd99771446ea354d"
+      },
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/1p5b/canonical_train_8k_semantic_panel_10.json",
+        "sha256": "3a7464dacda6ddb59069ffa6b2467c4b7f4cdb0b3657abb1f86f2f745db125bb"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/1p5b/canonical_train_8k_semantic_panel_10.json"
+    },
+    {
+      "id": "semantic_holdout_panel_10_3b",
+      "study": "semantic_holdout",
+      "runner": "experiments/run_babilong_prompt.py (instrumented)",
+      "config": {
+        "path": "configs/babilong_qwen2p5_canonical_semantic_holdout_8k_confirmatory.json",
+        "sha256": "49aeaeca049e43cabcfbc4cfdf93e77eac09a50872c76d7b1d8a9a09c3406230"
+      },
+      "panel_data": {
+        "path": "data/babilong_train_8k_semantic_holdout_confirmation/canonical_train_8k_semantic_panel_10.jsonl",
+        "sha256": "e2c994db0a14b87d520f4075a59b72c881c43e27060e0f67bd99771446ea354d"
+      },
+      "endpoint": "qwen2p5-3b-instruct",
+      "condition": "canonical_coscale",
+      "arms": [
+        "foundation",
+        "ascent"
+      ],
+      "model": {
+        "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+        "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1"
+      },
+      "rows": 80,
+      "audit_label": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/3b/canonical_train_8k_semantic_panel_10.json",
+        "sha256": "e06a2aa1e558291d64d86a649a7947de49416f175b22733856742985dbd6be58"
+      },
+      "output": "artifacts_revision/target_blindness_2026-09/semantic_holdout/3b/canonical_train_8k_semantic_panel_10.json"
+    }
+  ],
+  "controls": [
+    {
+      "id": "control_uninstrumented_semantic_holdout_panel_1_0p5b",
+      "runner": "experiments/run_babilong_prompt.py at commit 9c15400 (uninstrumented)",
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "output": "artifacts_revision/target_blindness_2026-09/control_uninstrumented/semantic_holdout/0p5b/canonical_train_8k_semantic_panel_1.json",
+      "compared_with": "artifacts_revision/target_blindness_2026-09/semantic_holdout/0p5b/canonical_train_8k_semantic_panel_1.json"
+    },
+    {
+      "id": "control_uninstrumented_semantic_holdout_panel_1_1p5b",
+      "runner": "experiments/run_babilong_prompt.py at commit 9c15400 (uninstrumented)",
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "output": "artifacts_revision/target_blindness_2026-09/control_uninstrumented/semantic_holdout/1p5b/canonical_train_8k_semantic_panel_1.json",
+      "compared_with": "artifacts_revision/target_blindness_2026-09/semantic_holdout/1p5b/canonical_train_8k_semantic_panel_1.json"
+    },
+    {
+      "id": "control_uninstrumented_semantic_holdout_panel_1_3b",
+      "runner": "experiments/run_babilong_prompt.py at commit 9c15400 (uninstrumented)",
+      "endpoint": "qwen2p5-3b-instruct",
+      "output": "artifacts_revision/target_blindness_2026-09/control_uninstrumented/semantic_holdout/3b/canonical_train_8k_semantic_panel_1.json",
+      "compared_with": "artifacts_revision/target_blindness_2026-09/semantic_holdout/3b/canonical_train_8k_semantic_panel_1.json"
+    },
+    {
+      "id": "control_uninstrumented_official16k_panel_1_0p5b",
+      "runner": "Phase 2A run 2 (commit 9c15400, uninstrumented, same GPU)",
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "output": "artifacts_revision/crossnode_2026-09/official16k/canonical/0p5b/canonical_16k_confirmation_panel_1.json",
+      "compared_with": "artifacts_revision/target_blindness_2026-09/official16k/0p5b/canonical_16k_confirmation_panel_1.json"
+    },
+    {
+      "id": "control_uninstrumented_official16k_panel_1_1p5b",
+      "runner": "Phase 2A run 2 (commit 9c15400, uninstrumented, same GPU)",
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "output": "artifacts_revision/crossnode_2026-09/official16k/canonical/1p5b/canonical_16k_confirmation_panel_1.json",
+      "compared_with": "artifacts_revision/target_blindness_2026-09/official16k/1p5b/canonical_16k_confirmation_panel_1.json"
+    },
+    {
+      "id": "control_uninstrumented_official16k_panel_1_3b",
+      "runner": "Phase 2A run 2 (commit 9c15400, uninstrumented, same GPU)",
+      "endpoint": "qwen2p5-3b-instruct",
+      "output": "artifacts_revision/crossnode_2026-09/official16k/canonical/3b/canonical_16k_confirmation_panel_1.json",
+      "compared_with": "artifacts_revision/target_blindness_2026-09/official16k/3b/canonical_16k_confirmation_panel_1.json"
+    }
+  ],
+  "comparison_rules": {
+    "exactness_of_instrumentation": "for the six control pairs (same GPU, same environment, instrumented vs uninstrumented), every scientific field, every prediction row and every stored float must be identical (ladder levels 1-4 all true, ignoring only the new target_blindness row field and the new top-level preflight block). Any difference means the instrumentation changed behaviour: stop, investigate, disclose; do not proceed to interpretation.",
+    "cross_architecture_sensitivity": "the 60 instrumented cells are also compared to their retained Blackwell references with experiments/compare_crossarch_reproduction.py; the result extends the Phase 2A sensitivity analysis to all ten panels of both studies and is reported with the same ladder; no exactness is expected or claimed there",
+    "target_blindness_acceptance": "every one of the 4,800 rows must record blocked_target_access_attempts=0, target_read_before_reveal=false, keys_read_before_reveal \u2286 {input, question, task, row_id}, and state_derived_from_input_only=true; a single failing row is reported as such"
+  },
+  "run_hygiene": {
+    "git_dirty_required": false,
+    "outputs_written_outside_repository_then_moved": true,
+    "existing_artifact_paths_written": "none"
+  }
+}

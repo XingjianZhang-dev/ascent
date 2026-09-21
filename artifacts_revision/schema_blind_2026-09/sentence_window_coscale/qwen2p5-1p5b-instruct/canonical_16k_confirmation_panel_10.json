@@ -1,0 +1,3666 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_qwen2p5_generic_writer_16k_ablation",
+  "status": "revision_generic_writer_ablation_preregistered_before_any_score",
+  "started_utc": "2026-09-20T23:04:27.071830+00:00",
+  "completed_utc": "2026-09-20T23:05:09.147488+00:00",
+  "wall_seconds": 42.07566225004848,
+  "end_to_end_seconds": 46.46381892898353,
+  "endpoint": {
+    "name": "qwen2p5-1p5b-instruct",
+    "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "model_parameters": 1543714304,
+    "hidden_size": 1536,
+    "state_fact_slots": 2,
+    "batch_size": 1,
+    "model_artifact": {
+      "path": "model.safetensors",
+      "bytes": 3087467144,
+      "sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+    }
+  },
+  "condition": {
+    "name": "sentence_window_coscale",
+    "memory_source": "sentence_window",
+    "memory_representation": "event_facts",
+    "neutral_answer_format": false,
+    "readout_path": "foundation_generation",
+    "fact_slots": 2,
+    "frozen_batch_size": 1,
+    "effective_batch_size": 1,
+    "diagnostic_no_promotion": false
+  },
+  "config": {
+    "path": "/workspace/ascent_revision/out/schema_blind_2026-09/babilong_qwen2p5_generic_writer_16k_ablation.run.json",
+    "sha256": "17bb49cb6d9025ebe728b11cd34f5f62c513bbfc1f10f595ca7b558c67450234"
+  },
+  "data": {
+    "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_10.jsonl",
+    "sha256": "43f56066225ad0a2d3c631096b3730d287470dc8f82b6d8a7afa8c51614e1d0e",
+    "rows": 80,
+    "task_counts": {
+      "qa2": 40,
+      "qa3": 40
+    }
+  },
+  "model_files": [
+    {
+      "path": "model.safetensors",
+      "bytes": 3087467144,
+      "sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+    }
+  ],
+  "model_identity": {
+    "model_type": "qwen2",
+    "architectures": [
+      "Qwen2ForCausalLM"
+    ],
+    "native_context_tokens": 32768,
+    "loaded_parameters": 1543714304
+  },
+  "parser_accuracy": 1.0,
+  "foundation": {
+    "samples": 80,
+    "mean": 0.2,
+    "standard_error": 0.04500351603704096,
+    "ci95_low": 0.11179310856739973,
+    "ci95_high": 0.2882068914326003
+  },
+  "ascent": {
+    "samples": 80,
+    "mean": 0.0125,
+    "standard_error": 0.012499999999999999,
+    "ci95_low": -0.011999999999999997,
+    "ci95_high": 0.037
+  },
+  "gain": {
+    "samples": 80,
+    "mean": -0.1875,
+    "standard_error": 0.04391357305815796,
+    "ci95_low": -0.2735706031939896,
+    "ci95_high": -0.1014293968060104
+  },
+  "remaining_error_elimination": -0.234375,
+  "wins": 0,
+  "regressions": 15,
+  "by_task": {
+    "qa2": {
+      "foundation": {
+        "samples": 40,
+        "mean": 0.15,
+        "standard_error": 0.05717718748968655,
+        "ci95_low": 0.03793271252021435,
+        "ci95_high": 0.26206728747978564
+      },
+      "ascent": {
+        "samples": 40,
+        "mean": 0.0,
+        "standard_error": 0.0,
+        "ci95_low": 0.0,
+        "ci95_high": 0.0
+      },
+      "gain": {
+        "samples": 40,
+        "mean": -0.15,
+        "standard_error": 0.05717718748968655,
+        "ci95_low": -0.26206728747978564,
+        "ci95_high": -0.03793271252021435
+      },
+      "remaining_error_elimination": -0.17647058823529413
+    },
+    "qa3": {
+      "foundation": {
+        "samples": 40,
+        "mean": 0.25,
+        "standard_error": 0.06933752452815363,
+        "ci95_low": 0.11409845192481888,
+        "ci95_high": 0.3859015480751811
+      },
+      "ascent": {
+        "samples": 40,
+        "mean": 0.025,
+        "standard_error": 0.024999999999999998,
+        "ci95_low": -0.023999999999999994,
+        "ci95_high": 0.074
+      },
+      "gain": {
+        "samples": 40,
+        "mean": -0.225,
+        "standard_error": 0.06686668711812965,
+        "ci95_low": -0.3560587067515341,
+        "ci95_high": -0.0939412932484659
+      },
+      "remaining_error_elimination": -0.3
+    }
+  },
+  "state": {
+    "fact_slots": 2,
+    "write_state_payload_bytes": {
+      "mean": 423.625,
+      "maximum": 13302,
+      "scale_policy": "fixed causal world state across endpoints"
+    },
+    "read_state_payload_bytes": {
+      "mean": 471.625,
+      "maximum": 13350,
+      "scale_policy": "query-conditioned fact slots grow with endpoint"
+    },
+    "mean_total_external_state_bytes": 895.25,
+    "state_slots_per_model_parameter": 1.2955765162100876e-09
+  },
+  "systems": {
+    "decode_order": "foundation_first",
+    "warmup_samples_per_arm": 0,
+    "artifact_verification_seconds": 2.246551830030512,
+    "model_load_seconds": 1.4186944310204126,
+    "retrieval_total_seconds": 0.6865620749886148,
+    "retrieval_microseconds_per_sample": 8582.025937357685,
+    "foundation_decode": {
+      "seconds": 36.523779812967405,
+      "samples": 80,
+      "samples_per_second": 2.1903538026367357,
+      "prompt_tokens": 1226117,
+      "prompt_token_cap": 16376,
+      "prompt_truncation_side": "left",
+      "maximum_prompt_tokens": 16201,
+      "samples_at_prompt_token_cap": 0,
+      "generated_tokens": 291,
+      "prompt_tokens_per_second": 33570.375417844334,
+      "allocated_before_bytes": 3088346624,
+      "peak_allocated_bytes": 4640913408,
+      "incremental_peak_bytes": 1552566784
+    },
+    "ascent_decode": {
+      "seconds": 5.542905775015242,
+      "samples": 80,
+      "samples_per_second": 14.432863059047763,
+      "prompt_tokens": 15292,
+      "prompt_token_cap": 16376,
+      "prompt_truncation_side": "left",
+      "maximum_prompt_tokens": 4199,
+      "samples_at_prompt_token_cap": 0,
+      "generated_tokens": 264,
+      "prompt_tokens_per_second": 2758.8417737369796,
+      "allocated_before_bytes": 3096866304,
+      "peak_allocated_bytes": 3499220480,
+      "incremental_peak_bytes": 402354176
+    },
+    "ascent_to_foundation_decode_time_ratio": 0.15176155927452198,
+    "ascent_to_foundation_prompt_token_ratio": 0.012471892975955802
+  },
+  "environment": {
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128",
+    "transformers": "4.57.6",
+    "tokenizers": "0.22.2",
+    "sentencepiece": "0.2.2",
+    "safetensors": "0.8.0",
+    "cuda_device": "NVIDIA A100-SXM4-80GB",
+    "peak_cuda_bytes": 3499220480,
+    "git_commit": "c84f587c0053da8a5fe127748a22cdba719d5f11",
+    "git_dirty": false
+  },
+  "retrieval_cache": null,
+  "preflight": {
+    "target_blindness": {
+      "rows": 80,
+      "blinded_keys": [
+        "target"
+      ],
+      "rows_with_blocked_target_access_attempts": 0,
+      "rows_with_target_read_before_reveal": 0,
+      "keys_read_before_reveal_union": [
+        "input",
+        "question",
+        "task"
+      ],
+      "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+      "rows_with_state_derived_from_input_only": 0,
+      "rows_with_provenance_not_applicable": 80
+    },
+    "target_values_not_rendered_by_prompt_builder": true
+  },
+  "predictions": [
+    {
+      "row_id": "5924678cd4c1c38461253d96a7d33e8302e09935e1efc741fd9538074c56dd31",
+      "task": "qa2",
+      "target": "hallway",
+      "foundation_output": "Paris",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "New York City",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "In like manner, if we wish to ascend to\nthe top of an edifice, we must be content to advance step by step,\notherwise we shall never be able to attain it.",
+        "A young man, who has a natural inclination to the study of this art,"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 269,
+      "persistent_payload_bytes": 221,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15525,
+      "ascent_prompt_tokens": 129,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "594def92cdaf5c666864b885d524b195b675a95e840063680b8e11697b3f85ec",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "Hoxton",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "New York City",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Mason alone dissents from the general opinion, enlarging\non the very few faults or peculiarities which are to be found in the\nbook.",
+        "Wheatley, or Whately (for so little is known of this eminent"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 239,
+      "persistent_payload_bytes": 191,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15506,
+      "ascent_prompt_tokens": 121,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "59a2d99e37c4ff56da721645d4ddb8ff0cf94e9936fd55ccfb3559778090e844",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "Kentucky",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "The question \"Where is the milk?\"",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Yes,\nsir,\" repeating it with unction, \"fifty--thousand--dollars!--in about\ntwo hours, and with a single stroke of the pen!",
+        "I believe I am\nnot overstating, Miss Trixit?\" he added, appealing to Cissy with"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 249,
+      "persistent_payload_bytes": 201,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14235,
+      "ascent_prompt_tokens": 133,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "59d5650908207239ccc056dfed96dadefdfdc8a588105bcf308728c685613969",
+      "task": "qa2",
+      "target": "kitchen",
+      "foundation_output": "John moved to the kitchen.",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 1.0,
+      "ascent_output": "New York City",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "\"Wade\nwould be powerful bad to bother.",
+        "He's ugly sometimes, an' he's jellus o'\nme.\" \"Wal, he's tryin' ter, but I don't"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 165,
+      "persistent_payload_bytes": 117,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15585,
+      "ascent_prompt_tokens": 117,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5a32e392f91a1422882e5a9d4ea335cb36755fddcf0853dc2b74dd25be0e6f32",
+      "task": "qa2",
+      "target": "kitchen",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 1.0,
+      "ascent_output": "The question \"Where is the milk?\"",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "For a time it had\nseemed to her hopeless to try to find another confidante in that class\nwhich despised and shrank from her.",
+        "Then Miss Tabitha\u2019s pleasant words\nand transparent good-heartedness had lifted her out of her despondency,\nand"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 284,
+      "persistent_payload_bytes": 236,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15257,
+      "ascent_prompt_tokens": 133,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5aeefae5146f2ebb51d74cacc4afbffd3827e97bf6f269af2a43318dd88beffd",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "Inverkip",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "field",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "0.007    \"\n    Oxide of iron.",
+        "0.212    \"\n\n       *       *       *       *"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 121,
+      "persistent_payload_bytes": 73,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 13658,
+      "ascent_prompt_tokens": 105,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5b0bd28c83470ee36f8de96fa7014b9c17d451e4ac83501350f28c6fc1b1da42",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "The milk was journeyed to the garden",
+      "foundation_answer": "garden",
+      "foundation_location": "garden",
+      "foundation_score": 1.0,
+      "ascent_output": "USA",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "I imagined that the door\nopened and shut, that persons were walking in the room, and I am\ncertain that I heard noises near my bed for which I could not account.",
+        "Altogether, it was the most uncomfortable night I ever spent, and\nI believe that few persons would have felt entirely at ease in my\nsituation"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 349,
+      "persistent_payload_bytes": 301,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15728,
+      "ascent_prompt_tokens": 145,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5b61b88e8fc78cb469397c0c8f1fe1f15e0e8423d4476391a2e2278d983d0989",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "Clarendon",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "New York City",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Still, if he wishes to go to law, the Court may decide in his favor,\nthough I doubt it.",
+        "His sworn word is all he would have to go upon, and\nif she contradicts his testimony under oath, why the sympathy of a jury\nis, as a rule, with the woman.\" Clavering rose, looked at me with some earnestness, and finally\nasked, in a tone which, though somewhat changed, lacked nothing of its\nformer suavity, if I would be kind enough to give him in writing that\nportion of my opinion which directly bore upon the legality of the\nmarriage; that such a paper would go far towards satisfying his friend\nthat his case had been properly presented; as he was aware that no\nrespectable"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 712,
+      "persistent_payload_bytes": 664,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15395,
+      "ascent_prompt_tokens": 234,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5b7a375a440eab3b32eff21108953720e34d61acc18146ab336ab89c06242918",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "The United States.",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "If\nthey have not got them, write to the proprietors, enclosing the price, in\nletter at our risk, and they will be sent to you at once by mail,\npost-paid.",
+        "Send stamp for the \"New Departure in Medical Treatment WITHOUT MEDICINE,\"\nwith thousands of testimonials,\n\nTHE MAGNETON APPLIANCE CO.,"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 335,
+      "persistent_payload_bytes": 287,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15202,
+      "ascent_prompt_tokens": 147,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5bee999b691fa8fc471f926fb089feec0a3f5f13c15256f6b41d6c48bc19e5b1",
+      "task": "qa2",
+      "target": "bathroom",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "New York City",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Although this opinion was not shared by Captain Flint, who had\ncarefully abstained from over-indulgence, for reasons of his own, he\nencouraged it in his men.",
+        "But even they, while considering it necessary to remain quiet for a\nfew days, to see whether or not, any harm should result to them, in\nconsequence of their late attack on the merchant ship"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 394,
+      "persistent_payload_bytes": 346,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15501,
+      "ascent_prompt_tokens": 157,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5c0af9b70ef25555911366d94e179bc03357ea9a07494d2d52e52272a65bfcae",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "Charleston, South Carolina",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "New York City",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "\"Miss Maggie, I've got to face this thing out, of course.",
+        "Even if I\nhad--made a botch of things at the very start, it didn't help any"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 180,
+      "persistent_payload_bytes": 132,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15688,
+      "ascent_prompt_tokens": 114,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5c20728903959ddb048fdca2733a0a640fcce76a03e26168b138cdb8f87e0be1",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "New York",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "The daily train movement of the latter would be\n  precisely paralleled in New York, though not equalled in amount, if\n  the 42d street station were at Trinity church, and, in addition to\n  the trains which now enter and leave it, all the city trains of the\n  Elevated road were also provided for there.",
+        "The American system is, therefore, one of great waste; for"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 408,
+      "persistent_payload_bytes": 360,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15536,
+      "ascent_prompt_tokens": 161,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5c5c3b2b637031dfd0443e581826f9b7a8433928cc216ca632abe64d7a704ad3",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "New York City",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "And when you do get a start on the decoratin', I shouldn't\ntake too much care over it, you know, if I was you, because we 'ad to\ntake the job for next to nothing or Mr Sweater would never 'ave 'ad it\ndone at all!' Nimrod now began to crawl about the house, snarling and grumbling at\neveryone.",
+        "he bellowed, '"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 354,
+      "persistent_payload_bytes": 306,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14701,
+      "ascent_prompt_tokens": 161,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5caa246081c257c02d76bf231fed1581f0abdce41991ba5e198335915b4e9753",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "The apple is located in the hall.",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "memory",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra journeyed to the kitchen.",
+        "I have lived long enough to\nsee the brand of intellectual inferiority on every orthodox brain"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 173,
+      "persistent_payload_bytes": 125,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15811,
+      "ascent_prompt_tokens": 101,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5cfaa3020328919c36fb189e2998f5f042371e5f3d3d49353bf132cb96532f5b",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "England",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "1;\n      family history, 1-4;\n      childhood, 4;\n      enters Woolwich Academy, 5;\n      early escapades, 5-6;\n      put back six months and elects for Engineers, 6;\n      his spirit, 7;\n      his examinations, _ibid._;\n      gets commission, _ibid._;\n      his work at Pembroke, 8;\n      his brothers, 9;\n      his sisters, 10;\n      his brother-in-law, Dr Moffitt, _ibid._;\n      personal appearance of, 11-14;\n      his height, 11;\n      his voice, 12;\n      ordered to Corfu, 14;\n      changed to Crimea, _ibid._;\n      passes Constantinople, 15;\n      views on the Dardanelles' forts, _ibid._;\n      reaches Balaclava, 16;\n      opinion of French soldiers, 17, 18;\n      his first night in the trenches, 18-19;\n      his topographical knowledge, 19;\n      his special aptitude for war, _ibid._;\n      account of the capture of the Quarries, 21-22;\n      of the first assault on Redan, 22-24;\n      Kinglake's opinion of, 25;\n      on the second assault on Redan, 26-28;\n      praises the Russians, 28;\n      joins Kimburn expedition, _ibid._;\n      destroying Sebastopol, 29-31;\n      his warlike instincts, 31;\n      appointed to Bessarabian Commission, 32;\n      his letters on the delimitation work, 33;\n      ordered to Armenia, _ibid._;\n      journey from Trebizonde, 34;\n      describes Kars, 34-35;\n      his other letters from Armenia, 35-39;\n      ascends Ararat, 39-40;\n      returns home, 41;\n      again ordered to the Caucasus, 41, 42;\n      some personal idiosyncrasies, 43, 44;\n      gazetted captain, 45;\n      appointment at Chatham, 45;\n      sails for China, _ibid._;\n      too late for fighting, _ibid._;\n      describes sack of Summer Palace, 46;\n      buys the Chinese throne, _ibid._;\n      his work at Tientsin, 47;\n      a trip to the Great Wall, 47-49;\n      arrives at Shanghai, 49;\n      distinguishes himself in the field, 50;\n      his daring, 51;\n      gets his coat spoiled, 52;\n      raised to rank of major, _ibid._;\n      surveys country round Shanghai, 52, 53;\n      describes Taepings, 53;\n      nominated for Chinese service, 54;\n      reaches Sungkiang, 60;\n      qualifications for the command, 78;\n      describes his force, 79;\n      inspects it, _ibid._;\n      first action, 79, 80;\n      impresses Chinese, 80;\n      described by Li Hung Chang, _ibid._;\n      made Tsungping, _ibid._;\n      forbids plunder, 81;\n      his flotilla, _ibid._;\n      his strategy, _ibid._;\n      captures Taitsan, 82;\n      difficulty with his officers, 83;\n      besieges Quinsan, _ibid._;\n      reconnoitres it, 84;\n      attacks and takes it, 85-87;\n      removes to Quinsan, 87;\n      deals with a mutiny, 88;\n      incident with General Ching, 89;\n      resigns and withdraws resignation, _ibid._;\n      contends with greater difficulties, 90;\n      undertakes siege of Soochow, 91;\n      negotiates with Burgevine, 92, 93;\n      relieves garrison, 94;\n      great victory, _ibid._;\n      describes the position round Soochow, 95;\n      his hands tied by the Chinese, 96;\n      his main plan of campaign, 97;\n      his first repulse, _ibid._;\n      captures the stockades, 98;\n      his officers, 99;\n      his share in negotiations with Taepings, _ibid._;\n      difficulty about pay, 100;\n      resigns command, _ibid._;\n      guards Li Hung Chang's tent, _ibid._;\n      enters Soochow, 101;\n      scene with Ching, _ibid._;\n      asks Dr Macartney to go to Lar Wang, _ibid._;\n      questions interpreter, _ibid._;\n      detained by Taepings, _ibid._;\n      and then by Imperialists, 102;\n      scene with Ching, _ibid._;\n      identifies the bodies of the Wangs, _ibid._;\n      what he would have done, _ibid._;\n      the fresh evidence relating to the Wangs, 103 _et seq._;\n      conversation with Ching, 103;\n      and Macartney, _ibid._;\n      relations with Macartney, 103, 104;\n      offers him succession to command, 104, 105;\n      letter to Li Hung Chang, 106;\n      Li sends Macartney to Gordon, _ibid._;\n      contents of Gordon's letter, 107;\n      possesses the head of the Lar Wang, 107, 108;\n      frenzied state of, 108;\n      scene with Macartney at Quinsan, 108, 109;\n      his threats, 109;\n      his grave reflection on Macartney, 109, 110;\n      writes to Macartney, 111;\n      makes public retractation, 111;\n      other expressions of regret, 112;\n      refuses Chinese presents, _ibid._;\n      suspension in active command, _ibid._;\n      retakes the field, 113;\n      \"the destiny of China in his hands,\" _ibid._;\n      attacks places west of Taiho Lake, 114-5;\n      enrolls Taepings, 115;\n      severely wounded, 116;\n      second reverse, _ibid._;\n      receives bad news, _ibid._;\n      alters his plans, _ibid._;\n      his force severely defeated, 117;\n      retrieves misfortune, _ibid._;\n      describes the rebellion, 118;\n      made Lieut.-Colonel, _ibid._;\n      his further successes, 119;\n      another reverse, _ibid._;\n      his final victory, 120;\n      what he thought he had done, _ibid._;\n      visits Nanking, _ibid._;\n      drills Chinese troops, 121;\n      appointed Ti-Tu and Yellow Jacket Order, 122;\n      his mandarin dresses, 123;\n      his relations with Li Hung Chang, _ibid._;\n      the Gold Medal, _ibid._;\n      his diary destroyed, 124;\n      returns home, _ibid._;\n      view of his achievements, 125-6;\n      a quiet six months, 128;\n      his excessive modesty, _ibid._;\n      pride in his profession, 129;\n      appointment at Gravesend, _ibid._;\n      his view of the Thames Forts, 130;\n      his work there, _ibid._;\n      his mode of living, 131;\n      supposed _angina pectoris_, _ibid._;\n      wish to join Abyssinian Expedition, 132;\n      described as a modern Jesus Christ, _ibid._;\n      his mission work, 132-3;\n      his boys, 133;\n      sends his medal to Lancashire fund, _ibid._;\n      his love for boys, 134;\n      his kings, _ibid._;\n      some incidents, _ibid._;\n      his pensioners, 135;\n      his coat stolen, _ibid._;\n      his walks, 136;\n      the Snake flags, _ibid._;\n      leaves Gravesend, _ibid._;\n      at Galatz, 137;\n      no place like England, _ibid._;\n      goes to Crimea, 138;\n      attends Napoleon's funeral, _ibid._;\n      casual meeting with Nubar, and its important consequences, 139-40;\n      \"Gold and Silver Idols,\" 140;\n      appointed Governor of the Equatorial Province, 145;\n      reasons for it, _ibid._;\n      leaves Cairo, 146;\n      describes the \"sudd,\" _ibid._;\n      his steamers, 147;\n      his facetiousness, _ibid._;\n      reaches Gondokoro, _ibid._;\n      his firman, _ibid._;\n      his staff, 148;\n      his energy, _ibid._;\n      establishes line of forts, _ibid._;\n      collapse of his staff, 149;\n      his Botany Bay, _ibid._;\n      his policy and justice, 150;\n      his poor troops, _ibid._;\n      organises a black corps, 151;\n      his sound finance, _ibid._;\n      deals with slave trade, 152;\n      incidents with slaves, _ibid._;\n      makes friends everywhere, 153;\n      his goodness a tradition, 153-4;\n      his character misrepresented, 154;\n      his line of forts, 155;\n      the ulterior objects of his task, _ibid._;\n      the control of the Nile, 156;\n      shrinks from notoriety, _ibid._;\n      describes the Lakes, 157;\n      the question with Uganda, 157 _et seq._;\n      proceeds against Kaba Rega, 158-60;\n      his extraordinary energy, 161;\n      does his own work, 161;\n      incident of his courage, 161-2;\n      views of Khedive, 163;\n      returns to Cairo, 163;\n      and home, _ibid._\n      Decision about Egyptian employment, ii.",
+        "1;\n      receives letter from Khedive, 2;\n      consults Duke of Cambridge, _ibid._;\n      returns to Cairo, _ibid._;\n      appointed Governor-General of the Soudan, 2-3;\n      appointed Muchir, or Marshal, etc., 3;\n      sums up his work, 4;\n      his first treatment of Abyssinian Question, 5-6;\n      his entry into Khartoum, 6;\n      public address, 7;\n      first acts of Administration, _ibid._;\n      proposes Slavery Regulations, 7;\n      receives contradictory orders on subject, 8;\n      his decision about them, 8-9;\n      disbands the Bashi-Bazouks, 9;\n      goes to Darfour, _ibid._;\n      relieves garrisons, 10-11;\n      enters Fascher, 11;\n      recalled by alarming news in his rear, _ibid._;\n      his camel described, _ibid._;\n      reaches Dara without troops, 12;\n      his interview with Suleiman, _ibid._;\n      Slatin's account of scene, 12-13;\n      his views on the Slave Question, 13;\n      follows Suleiman to Shaka, 14;\n      indignant letter of, 15;\n      his decision about capital punishment, _ibid._;\n      his views thereupon, 16;\n      some characteristic incidents, _ibid._;\n      what the people thought of him, _ibid._;\n      \"Send us another Governor like Gordon,\" _ibid._;\n      his regular payments, 17;\n      his thoughtfulness, _ibid._;\n      summoned to Cairo, _ibid._;\n      appointed President of Financial Inquiry, 18;\n      his views of money, _ibid._;\n      acts with Lesseps, 19;\n      meets with foreign opposition, 20;\n      scene with Lesseps, 21;\n      scene with Major Evelyn Baring, _ibid._;\n      Gordon's financial proposal, 22;\n      last scenes with Khedive, 23;\n      Gordon's bold offer, _ibid._;\n      financial episode cost Gordon L800, 24;\n      his way of living, _ibid._;\n      leaves Cairo and visits Harrar, 25;\n      his finance in the Soudan, 25-6;\n      deals with Suleiman, 26 _et seq._;\n      takes the field in person, 30;\n      clears out Shaka, 31;\n      again summoned to Cairo, _ibid._;\n      proclaims Tewfik, _ibid._;\n      returns to Cairo, 32;\n      entrusted with mission to Abyssinia, _ibid._;\n      receives letter from King John, 33;\n      called \"Sultan of the Soudan,\" _ibid._;\n      enters Abyssinia, 34;\n      goes to Debra Tabor, _ibid._;\n      interview with King John, _ibid._;\n      prevented returning to Soudan, 35;\n      his opinion of Abyssinia, _ibid._;\n      Khedive's neglect of, 36;\n      called \"mad,\" _ibid._;\n      his work in the Soudan, 36-7;\n      goes to Switzerland, 38;\n      his opinion of wives, 38;\n      first meeting with King of the Belgians, 39;\n      offered Cape command, 40;\n      his memorandum on Eastern Question, 40-2;\n      accepts Private Secretaryship to Lord Ripon, 42;\n      regrets it, 43;\n      interview with Prince of Wales, _ibid._;\n      his letters about it, 44;\n      views on Indian topics, _ibid._;\n      sudden resignation, _ibid._;\n      the Yakoob Khan incident, 45-8;\n      invited to China, 49;\n      full history of that invitation, 49-50;\n      letter from Li Hung Chang, 49;\n      his telegrams to War Office, 50-1;\n      leaves for China, 51;\n      announces his intentions, 52;\n      what he discovered on arrival in China, 53;\n      ignores British Minister, _ibid._;\n      stays with Li Hung Chang, 55;\n      his reply to German Minister, 56;\n      his letter on Li, 57;\n      his advice to China, 58-61;\n      baffles intrigues and secures peace, 59;\n      further passages with War Office, 60;\n      on the Franco-Chinese war, 61, 62;\n      on the Opium Question, 63-4;\n      arrives at Aden, 65;\n      his Central African letters, _ibid._;\n      visits Ireland, 65-6;\n      letter on Irish Question in _Times_, 66-7;\n      letter on Candahar, 68-70;\n      opinion of Abyssinians, 70;\n      his article on irregular warfare, 70-1;\n      offers Cape Government his services for Basutoland, 71;\n      takes Sir Howard Elphinstone's place in the Mauritius, 72;\n      his work there, 72-3;\n      views of England's power, 73;\n      views on coaling stations, _ibid._;\n      visits Seychelles, 74;\n      views on Malta and Mediterranean, 74-5;\n      attains rank of Major-General, 75;\n      summoned to the Cape, _ibid._;\n      leaves in a sailing ship, 76;\n      financial arrangement with Cape Government, _ibid._;\n      his pecuniary loss by Cape employment, _ibid._;\n      his memorandum on Basutoland, 77-9;\n      accepts temporarily post of Commandant-General, 80;\n      drafts a Basuto Convention, 80-1;\n      requested by Mr Sauer to go to Basutoland, 82;\n      relations with Masupha, _ibid._;\n      visits Masupha, 83;\n      betrayed by Sauer, _ibid._;\n      peril of, _ibid._;\n      his account of the affair, 84-5;\n      memorandum on the Native Question, 85-7;\n      his project of military reform, 88;\n      his resignation of Cape command, _ibid._;\n      corresponds with King of the Belgians, 89;\n      goes to the Holy Land, _ibid._;\n      his view of Russian Convent at Jerusalem, 90;\n      advocates Palestine Canal, 90-1;\n      summoned to Belgium, 91;\n      telegraphs for leave, 92;\n      the mistake in the telegram, _ibid._;\n      decides to retire, _ibid._;\n      King Leopold's arrangement, _ibid._;\n      his plans on the Congo, 93-4;\n      public opinion aroused by his Soudan policy, 93-5;\n      visit to War Office, 94;\n      makes his will, _ibid._;\n      goes to Brussels, _ibid._;\n      Soudan not the Congo, 95;\n      leaves Charing Cross, 95;\n      final letters to his sister, 95-6;\n      interview with ministers, 96;\n      loses clothes and orders, _ibid._;\n      his predictions about the Soudan, 97-8;\n      the task imposed on him, 106;\n      why he accepted it, 106-7;\n      memorandum on Egyptian affairs, 107-9;\n      opinions on Hicks's Expedition, 109;\n      on English policy, 110;"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 13350,
+      "persistent_payload_bytes": 13302,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14768,
+      "ascent_prompt_tokens": 4199,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5d1299244df5b4210fbcb6aa1e2506b638a0abf7c4a4c06612cdacde088cf814",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "The question \"Where is the milk?\"",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "[Footnote 47: It is to be noted also that von Th\u00fcmmel\u2019s first\n    servant bears the name Johann.] [Footnote 48: \u201cCharis oder \u00fcber das Sch\u00f6ne und die Sch\u00f6nheit in\n    den bildenden K\u00fcnsten\u201d by Ramdohr, Leipzig, 1793.] [Footnote 49: \u201cSchiller\u2019s Briefe,\u201d edited by Fritz Jonas, III,\n    pp.",
+        "[Footnote 50: \u201cBriefe von"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 379,
+      "persistent_payload_bytes": 331,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14861,
+      "ascent_prompt_tokens": 183,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5d333ae7a6bc87c7ad7f9e366cbb4c3fbea5702df917ebcf6ea7d7f5fec84d35",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "New York City",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "From that time up to\nthe present day the arrears have again accumulated to 86 3/4 alias,\nnamely:--\n\n\n                                                   Alias.",
+        "Don Philip Nellamapane                        57 1/2\n        Don Diogo Poevenelle Mapane                   23\n        Peria Meynaar Oediaar                          4 3/4\n        Chedoega Welemapane                            1 1/2\n                                                      ======\n                     Total                            86 3/4\n\n\nThe result proves that all the honour and favours shown to these people\ndo not induce them to pay up their"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 668,
+      "persistent_payload_bytes": 620,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14270,
+      "ascent_prompt_tokens": 210,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5d66aab579ec6c4ea6008e6ee98a7c9b0b29a106b6636541d7a0896bf7c25919",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "Mexico",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "London",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Gradually the excitement in the city subsided, and one by one the great\nnobles were won over to credit the story of my celestial arrival in\ntheir midst, and I believed the great object of my existence in a fair\nway to be accomplished.",
+        "Every facility was afforded me to learn the royal tongue, and after a"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 351,
+      "persistent_payload_bytes": 303,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15490,
+      "ascent_prompt_tokens": 143,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5d9b461260c396186c11cdc2c39ed0eab286d870f6029d395c5b5517f875809c",
+      "task": "qa2",
+      "target": "kitchen",
+      "foundation_output": "New York City",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "New York City",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "The heat and the excitement had\ntold heavily on the old man, and he seemed dazed and beaten.",
+        "He was leaning on the trailer's shoulder and waiting for his turn in\nthe line in front of the ticket window, when a tall, gawky, good-looking\ncountry lad sprang out of it and at him with an expression of surprise"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 352,
+      "persistent_payload_bytes": 304,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15654,
+      "ascent_prompt_tokens": 149,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5daddfef0df517bd3df672fa453a051adc7f4f6db22cdb363a609327d9a83f3f",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "Bruges",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "New York City",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Odd Fellowship's gem is that bright diadem,\n      Our emblem in age and in youth;\n    For our hearts we must prove in the fire of LOVE,\n      And mould with the hammer of TRUTH.",
+        "_WHITHERWARD._\n\n\nBy pursuing the analogies of nature, the human mind reduces to order"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 310,
+      "persistent_payload_bytes": 262,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14145,
+      "ascent_prompt_tokens": 138,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5dd969c67437b003a59c39f6b3186b06a5f1e0b00396ac53c56062fd330a064d",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "bedroom",
+      "foundation_answer": "bedroom",
+      "foundation_location": "bedroom",
+      "foundation_score": 1.0,
+      "ascent_output": "memory",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "The\nfloor unswept and littered with dirt, scraps of paper, bits of plaster,\npieces of lead pipe and dried mud; and in the midst, the steaming\nbucket of stewed tea and the collection of cracked cups, jam-jam and\ncondensed milk tins.",
+        "And on the seats the men"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 303,
+      "persistent_payload_bytes": 255,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15451,
+      "ascent_prompt_tokens": 142,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5e6d3d02c9eea8980543aad6c61a69d0a8a6bd26a9be06b335dd23869a6b8e9a",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "In the illustration section, there is a",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Clarke's partly finished house",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Clarke's\npartly finished house and went all through that.",
+        "A"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 106,
+      "persistent_payload_bytes": 58,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15424,
+      "ascent_prompt_tokens": 90,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5f2666e5da28a5f164436577e5b1b05b9b5fa968d65d20a394913ce21622f476",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "street",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "\"Why, you were just in the street,\" said Mother Bunch.",
+        "Taking the little animal under my arm, I looked about me till I\ncame to a long garden"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 187,
+      "persistent_payload_bytes": 139,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15512,
+      "ascent_prompt_tokens": 111,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5f6e1d792d973a13b334053d4aaec87b31ec39e5e8303aae0197506a87624f48",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "Perth",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Scotland",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Thou shouldst not have kept this secret, my child--but it is no\ntime to tax thee with thy fault.",
+        "I will mount\ninstantly, and go to our Lord Provost and have his advice, and, as I\ntrust, his protection and that of other true hearted Scottish nobles,\nwho will not see a"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 314,
+      "persistent_payload_bytes": 266,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15669,
+      "ascent_prompt_tokens": 145,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5fcad81d06b0b8969ae4e1c11628de77c744abd9ff0d4461e6206ba1afbaa60f",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "Mary traveled to the office.",
+      "foundation_answer": "office",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "New York City",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Smith, now thoroughly dazed, actually blinked his eyes at the\nquestion, and at the vehemence with which it was hurled into his face.",
+        "\"Why, Miss Maggie, it--it--I--I--\"\n\n\"It isn't good for anything unless we can exchange it for something we\nwant, is it?\" \"Why, I--I suppose we can GIVE it--\"\n\n\"But even"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 348,
+      "persistent_payload_bytes": 300,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15583,
+      "ascent_prompt_tokens": 159,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5fe329a85cfcc0a9616792f7e3483ea072f34c6798f9a95e2ed6b93cc28f30b5",
+      "task": "qa2",
+      "target": "kitchen",
+      "foundation_output": "Washington",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Not applicable",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "In the year of the\nCentennial, 1876, the house was enlarged to three stories, with a flat\ntin roof, and three bay-windows were added, one in the dining room and\ntwo in front of the house, and the front porch was lengthened so as to\nextend from one bay window to the other.",
+        "The new house was heated\nchiefly by a furnace and a large kitchen range, but in the dining room\nand"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 419,
+      "persistent_payload_bytes": 371,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 13644,
+      "ascent_prompt_tokens": 171,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5ffa3a7d7e277cdee267d8d4df96e97a5d0ca07439676a7e8374ce3900c206f6",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "There is an apple there.",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "kitchen",
+      "ascent_answer": "kitchen",
+      "ascent_location": "kitchen",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra moved to the kitchen.",
+        "They want all\nthe light they"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 104,
+      "persistent_payload_bytes": 56,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14928,
+      "ascent_prompt_tokens": 89,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "6022b21936860a5c68e4ff60d09f4572b3a621d17014da8ecab32f1f48f1a610",
+      "task": "qa2",
+      "target": "hallway",
+      "foundation_output": "Hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 1.0,
+      "ascent_output": "H.",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "H.",
+        "Scott, was a supporter of\nPapineau, and had a large"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 101,
+      "persistent_payload_bytes": 53,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15463,
+      "ascent_prompt_tokens": 94,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "603902aeac87233a02aa34d234e1747e6e6dea788fc65a19a681674767f2a08b",
+      "task": "qa2",
+      "target": "hallway",
+      "foundation_output": "Kitchens",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "United States",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "What a dreadful calamity it would be for the world and for mankind if\nall these brain workers were to go on strike.",
+        "Chapter 15\n\nThe Undeserving Persons and the Upper and Nether Millstones\n\n\nHunter had taken on three more"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 267,
+      "persistent_payload_bytes": 219,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15599,
+      "ascent_prompt_tokens": 127,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "60671dd3e29115f83a9f80fe6593db1cbd85c1acb81023829be8bb2fd7eb23b5",
+      "task": "qa2",
+      "target": "hallway",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "northern",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Then came the hordes of\ninvaders from the North, sweeping with irresistible force over regions\nthat the weakness or cowardice of the wearers of the purple left\ndefenceless before them.",
+        "Before the northern tribes had settled in their\npossessions, and had full time to assimilate"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 324,
+      "persistent_payload_bytes": 276,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15560,
+      "ascent_prompt_tokens": 136,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "60a6ba1d67c64528073871a32565646f2dfeae5ecb1edf1b918d081a6135ed94",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "Belleville",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "memory",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "That's where she's bound for,\nif she don't stop before she gets there Guess there ain't many of 'em\ninquired where she was goin', or cared much,\" he added, with a ghastly\neffort to be genial.",
+        "\"I didn't see any use in gettin' murdered, when I couldn't do anything.\" He stared"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 321,
+      "persistent_payload_bytes": 273,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15660,
+      "ascent_prompt_tokens": 152,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "60f064928f15a005bddd31f3aa47a4927ca7818e73532d1e232c3fa3babe6461",
+      "task": "qa2",
+      "target": "kitchen",
+      "foundation_output": "chaichen-itza",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra put down the football.",
+        "It would be lonesome without\nPaul and Hilary; but then, for the time\nbeing, she would be, to all intents and purposes"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 194,
+      "persistent_payload_bytes": 146,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15572,
+      "ascent_prompt_tokens": 113,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "6102a4288dd09f41b3d4f54d347bf96fbe6f16efc4d596c335a1d72576362598",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "bathroom",
+      "foundation_answer": "bathroom",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "hallway",
+      "ascent_answer": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel journeyed to the hallway.",
+        "I\nsay, cut him to mammocks upon the spot!\" \"Your Highness will pardon me,\" said the Earl of Errol; \"I must protect\nhim till his doom is executed.\" \"Then let him be"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 243,
+      "persistent_payload_bytes": 195,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15580,
+      "ascent_prompt_tokens": 128,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "610cf8263162859a08f327a6ce1527d286bbeb036077ebd266f0d7a17850734a",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "John journeyed to the bedroom.",
+      "foundation_answer": "bedroom",
+      "foundation_location": "bedroom",
+      "foundation_score": 1.0,
+      "ascent_output": "The answer to where the football is located",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "\u201cHe\u2019ll be all right as soon as he regains his strength!\u201d the young man\ncried.",
+        "\u201cAnd now, Jimmie,\u201d he went on, \u201clet\u2019s see about your wound.\u201d\n\n\u201cIt\u2019s only a scratch,\u201d the boy replied, \u201cbut it bled like fury, and I\nthink that\u2019s what makes me so weak"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 317,
+      "persistent_payload_bytes": 269,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 13491,
+      "ascent_prompt_tokens": 146,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "612c490aeeaa8bf4b6dea166a2f06458595a985eb772ecd4ba3d363e5368f9b2",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "Mary got the milk there.",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Nelson",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "So Nelson\nsent a staff officer to see if he could find a practicable route.",
+        "This\nofficer did not return until"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 156,
+      "persistent_payload_bytes": 108,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15706,
+      "ascent_prompt_tokens": 102,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "61360d11b76bae2c931c87507da8f571e533fed175f519cd5554e7c5e64f0640",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "Hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "C.",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "C., and that Adam's\nfall occurred about noon of the day he was created.",
+        "They could dilate\n_ad nauseam_ on transubstantiation, the divine essence, and the\nmystery of the Trinity; they could astonishingly allegorize the Bible\nlegends, and read into every word a deep, hidden, incomprehensible\nsense"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 343,
+      "persistent_payload_bytes": 295,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15550,
+      "ascent_prompt_tokens": 150,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "6176f3ec42416b495c93f050ac176b78ba736d3fcdab2dc9ba1baaf21dea9908",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "London",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Harry was\npermitted to spend an hour by her bedside, inhaling the pure spirit\nthat pervaded the soul of the sick one.",
+        "She was so much better that\nher father proposed to visit the city, to attend to some urgent\nbusiness, which had been long"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 286,
+      "persistent_payload_bytes": 238,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15546,
+      "ascent_prompt_tokens": 132,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "619351dbf1b6047d6653a80b817311225071655bc26600b26d4e6c07aa548774",
+      "task": "qa2",
+      "target": "bathroom",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "India",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "A properly constituted Commission of independent men\n     proceeding to the native territories, not accepting the\n     hospitality of those whose conduct they _go_ to investigate, not\n     driving through the territories in hot haste, as is the manner of\n     some Ministers, but a Commission who would patiently and\n     fearlessly inquire into every detail of administration, into\n     every grievance, is the _sine qua non_ of any quiet in the native\n     territories.",
+        "This Commission should detail on brass plates the"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 568,
+      "persistent_payload_bytes": 520,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 16114,
+      "ascent_prompt_tokens": 180,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "61ba1bcecf2cdb044e498ad2171fba7f2807ec7229508961e885d0edfa71ab3f",
+      "task": "qa2",
+      "target": "bathroom",
+      "foundation_output": "Mary got the milk there.",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Not applicable",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Confident that this mode of fighting\nwould not bring us success, and fearful lest the enemy should assume the\noffensive, which, in our disorganized state, must result in disaster, I\nwent to General Custer soon after dark, and said to him that if he would\nlet me get my regiment together, I could break through the rebel line.",
+        "He\nexcitedly replied, \"Never mind your regiment; take anything and everything\nyou can find, horse-holders and all, and break through: we"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 509,
+      "persistent_payload_bytes": 461,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15666,
+      "ascent_prompt_tokens": 183,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "61bac445a39508ce95d0130ba54609a192c960a36dfa526e8bdb98362e088914",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "New York City",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Even the Parson although generally ridiculing the idea of all sorts of\nghosts and hobgoblins, admitted that there was something in this\naffair that staggered him, and he joined with the others in thinking\nthat the sooner they shifted their quarters, the better.",
+        "\"Don't you think that squaw had a hand in it?\" asked one of the men:\n\"didn't you notice how cool she took it all the while?\" \"That's a fact,\" said the Parson;"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 467,
+      "persistent_payload_bytes": 419,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15610,
+      "ascent_prompt_tokens": 177,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5d929434afe20cf04e49436d02c1c3e92fdb03a4c4f9b7dc5f3cebb4418103cc",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "In the passage, the milk is mentioned",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Bracebridge",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Bracebridge had given Jennie a few weeks' vacation in order\nthat she might look for something better, something at which he could\nmake more money.",
+        "CHAPTER XXIV\n\n\nThe problem of the Gerhardt family and its relationship to himself\ncomparatively settled, Kane betook himself to Cincinnati and to"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 339,
+      "persistent_payload_bytes": 291,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15630,
+      "ascent_prompt_tokens": 141,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5e066b000385b79d82b03ea82241fc2c505d886d6580ee337cf5923ecac74c1a",
+      "task": "qa3",
+      "target": "bedroom",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "New York City",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra discarded the apple.",
+        "The main question is whether without the\nPope there can be a true Christianity, 'that is to say, a Christianity,\nactive, powerful, converting, regenerating, conquering,"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 243,
+      "persistent_payload_bytes": 195,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15690,
+      "ascent_prompt_tokens": 121,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5e3df3b9833fecc0f37564ae3c7e101e7d8ec0034ca68b97ce3d1a68f9584c32",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "garden",
+      "foundation_answer": "garden",
+      "foundation_location": "garden",
+      "foundation_score": 1.0,
+      "ascent_output": "Smith",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Smith stood at the bronchos' heads.",
+        "\"Now, Inspector,\" said Cameron, holding him by hand and collar, \"now"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 151,
+      "persistent_payload_bytes": 103,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15705,
+      "ascent_prompt_tokens": 105,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5e51345e0e521ad8980e10e10255f267daa177c5f0172b3dae3f9f7cc73fffef",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "garden",
+      "foundation_answer": "garden",
+      "foundation_location": "garden",
+      "foundation_score": 1.0,
+      "ascent_output": "Memphis",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Several people have asked us why we sit away back there by\nold Mrs.",
+        "Kinney, but we tell them that she sits on"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 156,
+      "persistent_payload_bytes": 108,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15515,
+      "ascent_prompt_tokens": 106,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5e518e295ae506eec6a356c87bfee58bad1824e52ac285afdbc03520f347ea42",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "Commissary Le Clerc",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Commissary Le Clerc\ninterrupted the Prince's writing lessons, proposing to substitute\nRepublican works for those from which the King selected his copies.",
+        "A\nsmith, who was present when the Queen was reading the history of France to\nher children, denounced her to the Commune for choosing the period when\nthe Connstable de Bourbon took arms against France, and said she wished to\ninspire her son with unpatriotic"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 457,
+      "persistent_payload_bytes": 409,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15561,
+      "ascent_prompt_tokens": 167,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5e56c9a0955cb13cf3bbb7dc721d8dd92971717431d06bcb70cced7355301014",
+      "task": "qa3",
+      "target": "office",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "\"If they are happy\nand contented in the present and in their prospects in the future,\nthey will remain.",
+        "We have talked of it\noften, and I have urged them not to waste their lives in a village Sandra travelled to the kitchen."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 271,
+      "persistent_payload_bytes": 223,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15560,
+      "ascent_prompt_tokens": 129,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5e5729ef065c42048b794db4b2348a92dc8210ae6793ea5219faaaf9503ba9cb",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "Kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 1.0,
+      "ascent_output": "port.",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel discarded the football.",
+        "The kind-hearted captain set me on shore at a place where he"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 138,
+      "persistent_payload_bytes": 90,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15667,
+      "ascent_prompt_tokens": 97,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5e676f8f5882769eefc80ab49c371731eaf957da79e2f3702b744b29f17be97d",
+      "task": "qa3",
+      "target": "bedroom",
+      "foundation_output": "garden",
+      "foundation_answer": "garden",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "bathroom",
+      "ascent_answer": "bathroom",
+      "ascent_location": "bathroom",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Heed no longer for me, my lord, when you have placed me under the noble\nlady's charge.",
+        "But my poor father, to be exposed amongst these wild and\ndangerous people!\" \"Think not of that, Catharine,\" said the glover: \"I am as familiar with Mary journeyed to the bathroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 313,
+      "persistent_payload_bytes": 265,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15640,
+      "ascent_prompt_tokens": 146,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5e7687066c72455ab39467436552eae6740ae797e83c3648f1013d33cb111631",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "memory",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "That is quite enough: the\nparent accepts the paper.",
+        "What determined her, therefore, is not simply the smell, which can\neasily be perceived even through the uncut paper, but, above all, the\ncrevice, which will provide an entrance for the vermin, hatched\noutside"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 307,
+      "persistent_payload_bytes": 259,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15597,
+      "ascent_prompt_tokens": 141,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5eb262517de9278fe5973c416cf40810296ba91d38326abd4f0fa54b1e36a158",
+      "task": "qa3",
+      "target": "bedroom",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "Nottingham",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "An Elementary Work, affording at a single glance a comprehensive\n  view of the History of English Architecture, from the Heptarchy to\n  the Reformation.",
+        "By EDMUND SHARPE,"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 217,
+      "persistent_payload_bytes": 169,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 16201,
+      "ascent_prompt_tokens": 119,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5ef59e9b65b5bf94cbec1a9c55d6878f33898a7cf311ab13b8e426b59f0a7510",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 1.0,
+      "ascent_output": "Africa",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "The African departed, to be gone the best Part of an hour.",
+        "When\nhe came back there"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 129,
+      "persistent_payload_bytes": 81,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15455,
+      "ascent_prompt_tokens": 99,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "5f118347b3bb65f2727c743d6e92cbe3d44586b31e7afd6c8178e4f22a67046c",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "London",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "These avowedly do not represent\ncorrectly the forms of the countries portrayed, but they enable the\ngeographer to ascertain what their distances or relative positions are\nby the application of certain rules and formul\u00e6 of no great complexity.",
+        "So long as the narrative is confined\nto individual countries or provinces, it may be perfectly consecutive\nand uninterrupted; but when two or three nations are grouped together,\nfrequent interruptions and recapitulations become necessary; and when\nuniversal history is attempted, it seems impossible to arrange the\nnarrative so as to prevent these from John moved to the garden."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 669,
+      "persistent_payload_bytes": 621,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15643,
+      "ascent_prompt_tokens": 199,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "6057a3bc11dab9b7af7b1d70f95ac30ceb994d74d3e3a69ed7ea717fa1867924",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "forest",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "As I wished her\ngood-night a man's firm steps were heard, and Martin Hartog appeared.",
+        "He cast swift glances at his daughter and me,"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 178,
+      "persistent_payload_bytes": 130,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15718,
+      "ascent_prompt_tokens": 110,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "605cb0577462b8762726ec73d01c0d23aba572ea15053bdd1c789e77a1da79e0",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "office",
+      "foundation_answer": "office",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "Memphis",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "The terrible conflict of the day had left its impress on the Army of the\nTennessee.",
+        "There was but a remnant in line capable of battle when night\ncame"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 196,
+      "persistent_payload_bytes": 148,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15610,
+      "ascent_prompt_tokens": 113,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "6080ca548a2ec59a231794e47968c9a17aa7ecd0dab3da50f1f792597351f816",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "Bathroom",
+      "foundation_answer": "bathroom",
+      "foundation_location": "bathroom",
+      "foundation_score": 1.0,
+      "ascent_output": "Venice",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Philippe de Commynes, writing of his entry into Venice in 1495, says,--\n\n\"Chascun me feit seoir au meillieu de ces deux ambassadeurs qui est\nl'honneur d'Italie que d'estre au meillieu; et me menerent au long de la\ngrant rue, qu'ilz appellent le Canal Grant, et est bien large.",
+        "Les\ngallees y passent a travers et y ay ven navire de quatre cens tonneaux\nou plus pres des maisons: et est la plus belle r"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 447,
+      "persistent_payload_bytes": 399,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15767,
+      "ascent_prompt_tokens": 203,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "60db54ba1462b1ff3b4fcaf8e0b2dfe4b342738a963cf643d2df8a9fa274746f",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "Before the kitchen, the football was in",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "Kansas",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "But the young men who had\nbrought their sweethearts to town, and were standing hand in hand with\nthem, for obvious reasons saw nothing: They scarcely dared to look at\nKansas, and those who did were so loudly rebuked that they turned down\nthe side streets.",
+        "During this part of the day these loving couples, whose devotion was so\npat"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 378,
+      "persistent_payload_bytes": 330,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15616,
+      "ascent_prompt_tokens": 155,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "615a92473766de5ce3d5440fc580103a64e7f4f9d9d2daa40544996bb57815d8",
+      "task": "qa3",
+      "target": "bedroom",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "Marazion",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Another hour, slowly driving down the gradual <DW72> of the country,\nthrough a mining district much more cheerful than that beyond Marazion.",
+        "The mines were all apparently in full work, and the mining villages"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 255,
+      "persistent_payload_bytes": 207,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15557,
+      "ascent_prompt_tokens": 123,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "616672224ed690d68813edce55c0d6ea05800c9745d790786c56d031e5a55ee8",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "forest",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "The Emperor then inquired how his brother Sir Thomas Dale\nfared, \"and after that of his daughter's welfare, her marriage, his\nunknown son, and how they liked, lived and loved together.\" Hamor\nreplied \"that his brother was very well, and his daughter so well\ncontent that she would not change her life to return and live with him,\nwhereat he laughed heartily, and said he was very glad of it.\" Powhatan then desired to know the cause of his unexpected coming, and\nMr.",
+        "Hamor said his message was private, to be delivered to him without\nthe presence of any except one of his councilors,"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 630,
+      "persistent_payload_bytes": 582,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15558,
+      "ascent_prompt_tokens": 215,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "61793df4b6d552028291450cd3bbfd8946d471b66feffe95291fff4119e5fce2",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "California",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "'Tis now a seraph bold, with touch of fire--\n      'Tis now the brush of Fairy's frolic wing.",
+        "Receding now, the dying numbers ring\n      Fainter and fainter down the rugged dell,\n    And"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 233,
+      "persistent_payload_bytes": 185,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15155,
+      "ascent_prompt_tokens": 129,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "61a9d611aea3c3d5038be32aafdeb3a67714ae660f2355eb4eee35a5dd18a659",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "Cape Colony",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "The railway and the customs\nhouse being under the same jurisdiction, it will readily be seen to what\nextent Cape Colony derives its revenues from the Transvaal commerce.",
+        "The Orange Free State again taxes the freight before allowing it to pass\nthrough its territory."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 312,
+      "persistent_payload_bytes": 264,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14510,
+      "ascent_prompt_tokens": 130,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "61ac10f94473c924a5788c9225678525162b00af7aa867516c5b2fadd453be2a",
+      "task": "qa3",
+      "target": "bedroom",
+      "foundation_output": "London",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "London",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "'Lady Monmouth, have you seen this beauty, that Sidonia is going to\nmarry?' 'I have seen the young lady,' said Lady Monmouth; 'but I had not heard\nthat Monsieur Sidonia was about to marry her.' 'Yes,' said Lady Monmouth, calm, but pale.",
+        "'I assure you that it is"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 308,
+      "persistent_payload_bytes": 260,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15647,
+      "ascent_prompt_tokens": 151,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "61ae40e97edc5b64b8f1e401be541a9476ac479b235a6aee182537971f2ca31c",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "garden",
+      "foundation_answer": "garden",
+      "foundation_location": "garden",
+      "foundation_score": 1.0,
+      "ascent_output": "forest",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "The sun shone brightly; and I had my lap full of nuts.",
+        "But\nthere came a little squirrel among them, and"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 150,
+      "persistent_payload_bytes": 102,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15102,
+      "ascent_prompt_tokens": 105,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "61b01ebe635897ac1891ef58fca45bf9deaa3ed7653b456f319d0df3338312ee",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "Italy",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "The illusion to which it is liable is not\nthat of habitually taking duck-ponds for lilied pools, but of being more\nor less transiently and in varying degrees so absorbed in ideal vision\nas to lose the consciousness of surrounding objects or occurrences; and\nwhen that rapt condition is past, the sane genius discriminates clearly\nbetween what has been given in this parenthetic state of excitement, and\nwhat he has known, and may count on, in the ordinary world of\nexperience.",
+        "Dante seems to have expressed these conditions perfectly in\nthat passage of the _Purgatorio_ where, after a triple vision which has\nmade him forget his surroundings, he says--\n\n  \"Quando l'anima mia torno di fuori\n    Alle cose Daniel dropped the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 776,
+      "persistent_payload_bytes": 728,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15547,
+      "ascent_prompt_tokens": 241,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "61b2fed87e3b2655ec362c13dc8dfeac3a2775f0f5965093fb4fe3a0c9f623f7",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "John",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "hallway",
+      "ascent_answer": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Receiving no answer, he sighed more heavily, and gave a complicated\nknock.",
+        "Bars clattered"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 136,
+      "persistent_payload_bytes": 88,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15606,
+      "ascent_prompt_tokens": 100,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "6211ba29640502a5a52c3f5b4fc7f7e6ccf4d6a8325189f4721b404c022d733e",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "garden",
+      "foundation_answer": "garden",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "park",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John left the apple.",
+        "I would lose both body and soul for you"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 107,
+      "persistent_payload_bytes": 59,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14188,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "623a8c09fcce7a325a7d7d791d948f86e98f8dd577c9453a726d92cb96ab64e4",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 1.0,
+      "ascent_output": "bedroom",
+      "ascent_answer": "bedroom",
+      "ascent_location": "bedroom",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "'Anybody would think the work was goin' to be sent to a\nExhibition, the way 'e messes about with it, rubbing it with glasspaper\nand stopping up every little crack!",
+        "I can't understand where 'e gets\nall the glasspaper FROM.' 'I know for a fact that\n'e Daniel went back to the bedroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 329,
+      "persistent_payload_bytes": 281,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15411,
+      "ascent_prompt_tokens": 152,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "6250c3fcec2a3f2f4a670d2d329b835abba321da95ba46f0a180385f15ab4dc8",
+      "task": "qa3",
+      "target": "hallway",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 1.0,
+      "ascent_output": "house",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "And for the Experiments which\nothers have already made, although they would even communicate them to\nhim (which those who call them Secrets would never do,) they are for\nthe most part composed of so many circumstances, or superfluous\ningredients, that it would be very hard for him to decypher the truth of\nthem: Besides, he would find them all so ill exprest, or else so false,\nby reason that those who made them have laboured to make them appear\nconformable to their principles; that if there were any which served\ntheir turn, they could not at least be worth the while which must be\nimployed in the choice of them.",
+        "So that, if there were any in the world\nthat were certainly known to be capable of finding out the greatest\nthings, and the most profitable for the Publick which could be, and that\nother men would therefore labour alwayes to assist him to accomplish his\nDesignes; I do not conceive that they could do more for him, then\nfurnish the expence"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 1004,
+      "persistent_payload_bytes": 956,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15591,
+      "ascent_prompt_tokens": 300,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "6277f996e66a2f5b531ef0e5a063f9568abccac56f8079dcea7dbb6468b0b921",
+      "task": "qa3",
+      "target": "office",
+      "foundation_output": "bathroom",
+      "foundation_answer": "bathroom",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "Mary's house",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Bluebell and her other ladyship--I have forgotten\n    her name.",
+        "I often think of you this bleak, cold weather, and envy\n    Mary dropped the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 194,
+      "persistent_payload_bytes": 146,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 13930,
+      "ascent_prompt_tokens": 114,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "629abe5da74afbdad39b6a60057b132ea3adb319b2ff8659e57509b907939bd6",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "garden",
+      "foundation_answer": "garden",
+      "foundation_location": "garden",
+      "foundation_score": 1.0,
+      "ascent_output": "garden",
+      "ascent_answer": "garden",
+      "ascent_location": "garden",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Mary moved to the garden.",
+        "The shades of his\nwindows had been lowered against"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 123,
+      "persistent_payload_bytes": 75,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15382,
+      "ascent_prompt_tokens": 95,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "62a7662ba85d3e5f629f304273632e4e74d68b670c86197f6b7734c51d53ae45",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "office",
+      "foundation_answer": "office",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "Simon's",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Simon\u2019s\nwitnesses, knights and citizens, come \u201cmuniti litteris patentibus\ncommunitatis Burdegalensis, in qu\u00e2 quasi totum robur Vasconi\u00e6 ad\ndistringendum hostiles et fideles protegendum consistere dignoscitur,\u201d\nsetting forth how good Simon\u2019s government was in every way, and how\nthose who brought charges against him did it only because his strict\njustice had put a check on their misdoings.",
+        "We"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 450,
+      "persistent_payload_bytes": 402,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14763,
+      "ascent_prompt_tokens": 180,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "63772193f0dd0c149b6f472638edb4f49bfe18556d7461137b57e122bc36d92d",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "memory",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Good results are also\nobtained from electricity.",
+        "Among palliative remedies--_"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 124,
+      "persistent_payload_bytes": 76,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15532,
+      "ascent_prompt_tokens": 95,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "640521e666381bff38136272f5f469a05d3e3223b1841362f4d22b3628d189c6",
+      "task": "qa3",
+      "target": "hallway",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "memory",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "[10]\n\nWe may deplore the loss of this or that Ceremony, but a National Church\nexercises her undoubted right in saying at any particular period of her\nhistory how the Sacrament is to be administered, provided the\nessentials of the Sacrament are left untouched.",
+        "The Church Universal\ndecides, once for all, what is essential: {70}"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 374,
+      "persistent_payload_bytes": 326,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15530,
+      "ascent_prompt_tokens": 158,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "643d3f6ef213e044c75081e304fc296d72cf48aa07bae5b7bf2272b3d509b37a",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "office",
+      "foundation_answer": "office",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "park",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra dropped the football.",
+        "Bill,"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 81,
+      "persistent_payload_bytes": 33,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15541,
+      "ascent_prompt_tokens": 85,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "644840c1bbc2c7effc8bafe1b04d5bcdae5c8dd83f9f683236f9592243963e84",
+      "task": "qa3",
+      "target": "office",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "New York City",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "It will be a\nnew pleasure for me to see you to-morrow morning at daybreak.",
+        "It will be\nlike seeing you for the first"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 162,
+      "persistent_payload_bytes": 114,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15708,
+      "ascent_prompt_tokens": 109,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "64ccd37be9b278595d29af207b24e5f3cff7cafcc7b0c03a3a64092e30cd1751",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 1.0,
+      "ascent_output": "Kettledrummle",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Kettledrummle, Poundtext, Macbriar, and other preachers, busied\nthemselves in their ranks, and prevailed on them to raise a psalm.",
+        "But\nthe superstitious among them observed, as an ill omen, that their song of\npraise and triumph sunk into \"a quaver of consternation,\" and resembled\nrather a penitentiary stave sung"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 360,
+      "persistent_payload_bytes": 312,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15501,
+      "ascent_prompt_tokens": 167,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "64f692776995ca137c12e4975fb489a8b5d7c9c8f0664a50586a267ba1807f37",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "memory",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "When teaching horses to stand at \u201cattention\u201d they should not be made to\nstretch themselves out as if they were wanted to reach from one side\nof the ring to the other, neither should they be allowed to stand like\nan elephant on a tub.",
+        "They"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 289,
+      "persistent_payload_bytes": 241,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15390,
+      "ascent_prompt_tokens": 132,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "6516d931fac6380218fe60051b473f99debc3838d727a9150edc9a1934878b4c",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "New York City",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "And it is our judgment, that we are not free to let you pass\nfrom us safe and in life, since Providence hath given you into our hands\nat the moment that we prayed with godly Joshua, saying, 'What shall we\nsay when Israel turneth their backs before their enemies?' --Then camest\nthou, delivered to us as it were by lot, that thou mightest sustain the\npunishment of one that hath wrought folly in Israel.",
+        "This is the Sabbath, and our hand shall not be on thee to spill\nthy blood upon this day; but, when"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 548,
+      "persistent_payload_bytes": 500,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15684,
+      "ascent_prompt_tokens": 200,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "65493e4bcb211d7e1c0b6a89a5d6e43157cfecab3bfd6b8d2ab9cf50f9afc343",
+      "task": "qa3",
+      "target": "hallway",
+      "foundation_output": "Kentucky",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "memory",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "SCENE SIXTH.--THE SECOND GENERATION.",
+        "````The"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 91,
+      "persistent_payload_bytes": 43,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15151,
+      "ascent_prompt_tokens": 92,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "655ae97b0d0a8e9779e35aebcb70fcf53661d90d9598b6ae94e895135fa5cf0c",
+      "task": "qa3",
+      "target": "office",
+      "foundation_output": "garden",
+      "foundation_answer": "garden",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "New York City",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "In the above reasonings, the inclination of the joints of the\nvoussoirs to the curves of the arch has not been considered.",
+        "It is a\nquestion of much nicety, and which I have not been able as yet fully to\ninvestigate: but the natural idea of the arrangement of these lines\n(which in round arches are of course perpendicular to the curve) would\nbe that every voussoir should have the lengths of its outer"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 448,
+      "persistent_payload_bytes": 400,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15412,
+      "ascent_prompt_tokens": 171,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    },
+    {
+      "row_id": "65a1d81c7190bbb3027eff6b892f102244b84abba6adc95c860b6290e618435b",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "Edinburgh",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "memory",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Rigidly he eliminated from his manner\nanything beyond a severe professional interest.",
+        "Mandy"
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 138,
+      "persistent_payload_bytes": 90,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14302,
+      "ascent_prompt_tokens": 97,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "not_applicable": "sentence_window/event_facts"
+        }
+      }
+    }
+  ]
+}

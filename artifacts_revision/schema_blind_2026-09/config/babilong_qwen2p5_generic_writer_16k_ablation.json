@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_qwen2p5_generic_writer_16k_ablation",
+  "status": "revision_generic_writer_ablation_preregistered_before_any_score",
+  "frozen_utc": "2026-08-15T01:45:00+08:00",
+  "seed": 20260815,
+  "tasks": [
+    "qa2",
+    "qa3"
+  ],
+  "panels": [
+    "canonical_16k_confirmation_panel_1",
+    "canonical_16k_confirmation_panel_2",
+    "canonical_16k_confirmation_panel_3",
+    "canonical_16k_confirmation_panel_4",
+    "canonical_16k_confirmation_panel_5",
+    "canonical_16k_confirmation_panel_6",
+    "canonical_16k_confirmation_panel_7",
+    "canonical_16k_confirmation_panel_8",
+    "canonical_16k_confirmation_panel_9",
+    "canonical_16k_confirmation_panel_10"
+  ],
+  "panel_sha256_by_name": {
+    "canonical_16k_confirmation_panel_1": "f9aa249c3a149e62d782e15c748056e9f30ff8a5ddf6d9783f24e4f2d021f327",
+    "canonical_16k_confirmation_panel_2": "f2d091141b5ac6a66ea33b55b3a2b91de5f3ed40b22ded3c0b411dc337a9bd06",
+    "canonical_16k_confirmation_panel_3": "5807b9c03736341c8a57eda24f6e85a6eb0bef11887da4fee66bb652663487ed",
+    "canonical_16k_confirmation_panel_4": "90c22f819099ae8e5fc89883383da38aefd7e805f039a19c7b00ea513182beab",
+    "canonical_16k_confirmation_panel_5": "620e519cb57e5dc25a4e29c2960c7e8832892629895bef094a6656a9619f4051",
+    "canonical_16k_confirmation_panel_6": "6fa9ab3e920d3b9d1db71850f6f844d6e622269e1bb608216677077cbf096444",
+    "canonical_16k_confirmation_panel_7": "e5ffd3995f587fa6640acf26fb27418388cd456b515db3c8743725a541252ab2",
+    "canonical_16k_confirmation_panel_8": "4ee234a77cb5afefbf2293cc907b8f09a5fa2f838e852e89a4d41e4cd92b226a",
+    "canonical_16k_confirmation_panel_9": "0a2aa219a2a6cf8cc1f9578f2d682b8def4912fa9e72116830915e64677f7c5f",
+    "canonical_16k_confirmation_panel_10": "43f56066225ad0a2d3c631096b3730d287470dc8f82b6d8a7afa8c51614e1d0e"
+  },
+  "panel_manifest": {
+    "path": "data/babilong_16k_canonical_confirmation/MANIFEST.json",
+    "sha256": "0a09e957d34ea83ce82891d2f632e584b36a38b7247dfb9354a94947f1a13d0f"
+  },
+  "official_source": {
+    "repository": "RMT-team/babilong-1k-samples",
+    "revision": "fc4d1a584dfc498c37578753bee4cdd91b987ae2",
+    "dataset_config": "16k",
+    "qa2_parquet_sha256": "7337912491e85f723bc305be1e0315f7bdc5f63425e32ad158c3ea3bbd9d2c04",
+    "qa3_parquet_sha256": "84db62a627c50cf33bed43f5e2f6c09f716bf4c15be54a62395f7accc18539f3"
+  },
+  "evaluation_samples": 80,
+  "history_slots": 256,
+  "context_tokens": 16384,
+  "max_new_tokens": 8,
+  "allowed_decode_orders": [
+    "foundation_first"
+  ],
+  "conditions": {
+    "sentence_window_coscale": {
+      "memory_source": "sentence_window",
+      "memory_representation": "event_facts",
+      "state_fact_slots_by_endpoint": {
+        "qwen2p5-0p5b-instruct": 1,
+        "qwen2p5-1p5b-instruct": 2,
+        "qwen2p5-3b-instruct": 3
+      },
+      "writer": "last s(m) generic punctuation-boundary sentences of the input, document order; reads neither the question nor any task vocabulary"
+    },
+    "generic_bm25_coscale": {
+      "memory_source": "generic_bm25",
+      "memory_representation": "event_facts",
+      "state_fact_slots_by_endpoint": {
+        "qwen2p5-0p5b-instruct": 1,
+        "qwen2p5-1p5b-instruct": 2,
+        "qwen2p5-3b-instruct": 3
+      },
+      "writer": "ascent/generic_retrieval.py: deterministic BM25-like lexical chain over generic sentences, s(m) passages, document order"
+    },
+    "bge_m3_coscale": {
+      "memory_source": "bge_m3_hybrid_rerank",
+      "memory_representation": "event_facts",
+      "state_fact_slots_by_endpoint": {
+        "qwen2p5-0p5b-instruct": 1,
+        "qwen2p5-1p5b-instruct": 2,
+        "qwen2p5-3b-instruct": 3
+      },
+      "writer": "BGE-M3 dense + BM25 reciprocal-rank fusion with the official bge-reranker-v2-m3, three target-blind hops, first s(m) passages in document order",
+      "retrieval_cache_by_panel": {}
+    }
+  },
+  "endpoints": [
+    {
+      "name": "qwen2p5-0p5b-instruct",
+      "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "model_parameters": 494032768,
+      "hidden_size": 896,
+      "state_fact_slots": 1,
+      "batch_size": 2,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 988097824,
+        "sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe"
+      }
+    },
+    {
+      "name": "qwen2p5-1p5b-instruct",
+      "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "model_parameters": 1543714304,
+      "hidden_size": 1536,
+      "state_fact_slots": 2,
+      "batch_size": 1,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 3087467144,
+        "sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+      }
+    },
+    {
+      "name": "qwen2p5-3b-instruct",
+      "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+      "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "model_parameters": 3085938688,
+      "hidden_size": 2048,
+      "state_fact_slots": 3,
+      "batch_size": 1,
+      "model_artifacts": [
+        {
+          "path": "model-00001-of-00002.safetensors",
+          "bytes": 3968658944,
+          "sha256": "67347b23fb4165b652eb6611f5e1f2a06dfcddba8e909df1b2b0b1857bee06c2"
+        },
+        {
+          "path": "model-00002-of-00002.safetensors",
+          "bytes": 2203268048,
+          "sha256": "a40d941d0e7e0b966ad8b62bb6d6b7c88cce1299197b599d9d0a4ce59aabfc1d"
+        }
+      ]
+    }
+  ],
+  "primary_analysis": {
+    "estimand": "Panel-clustered change in task-balanced ASCENT-minus-Foundation absolute gain between adjacent co-scaled endpoints on QA2+QA3.",
+    "contrasts": [
+      "qwen2p5-1p5b-instruct minus qwen2p5-0p5b-instruct",
+      "qwen2p5-3b-instruct minus qwen2p5-1p5b-instruct"
+    ],
+    "cluster_unit": "panel",
+    "test": "One-sided paired t-test over ten panel-level gain differences; report unadjusted two-sided 95% Student-t confidence intervals.",
+    "multiplicity": "Holm step-down family-wise correction at alpha 0.05 across the two directional adjacent contrasts.",
+    "gate": "Both adjacent mean increments must be positive and both Holm-adjusted one-sided p-values must be below 0.05. No endpoint, task, or panel may be removed.",
+    "note": "same estimands and Holm family as the canonical confirmation; computed per generic condition by experiments/analyze_generic_writer_ablation.py"
+  },
+  "secondary_analysis": {
+    "canonical_vs_raw_3b": "Paired panel-cluster canonical-minus-raw accuracy and gain at the 3B/3-slot endpoint, overall and by task.",
+    "remaining_error_elimination": "Descriptive panel-cluster RWE at every endpoint and adjacent RWE increments; not a promotion gate because of the registered ceiling.",
+    "endpoint_accuracy": "Foundation and ASCENT accuracy with panel-cluster 95% confidence intervals, overall and by task.",
+    "failure_accounting": "Retain every regression and invalid output; report task and panel localization."
+  },
+  "derived_from": {
+    "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+    "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045",
+    "unchanged": [
+      "panels",
+      "panel_sha256_by_name",
+      "panel_manifest",
+      "official_source",
+      "endpoints",
+      "tasks",
+      "evaluation_samples",
+      "history_slots",
+      "context_tokens",
+      "max_new_tokens",
+      "allowed_decode_orders",
+      "seed"
+    ]
+  },
+  "interpretation_rule_fixed_in_advance": {
+    "co_scaling_survives": "for a generic writer, the three endpoint gains increase strictly with reader scale AND both adjacent one-sided increments pass Holm at family-wise 0.05 (the registered rule of the canonical study)",
+    "co_scaling_collapses": "either condition above fails for that writer",
+    "consequence_if_all_generic_writers_collapse": "the schema is doing the work; the manuscript narrows the claim to structured-fact-retrieval tasks (Option B) and reports these results in Appendix D",
+    "consequence_if_any_generic_writer_survives": "the co-scaling pattern does not depend on the hand-built schema; reported as the direct answer to Reviewer 2 point 2 while still scoping the claim to the evaluated benchmarks (Option A)",
+    "schema_advantage_estimand": "canonical minus generic ASCENT accuracy per endpoint, paired over the ten panels, both measured on the same A100 instance (canonical from artifacts_revision/target_blindness_2026-09), so that no GPU-architecture difference enters the contrast",
+    "foundation_invariance_check": "Foundation predictions must be identical across the three generic conditions and the instrumented canonical run on the same instance (same prompts, same GPU); any difference is reported"
+  }
+}

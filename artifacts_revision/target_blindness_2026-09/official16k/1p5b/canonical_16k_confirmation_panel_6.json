@@ -1,0 +1,3986 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_qwen2p5_canonical_coscale_16k_confirmation",
+  "status": "posthoc_target_blindness_instrumented_rerun_no_independence_claim",
+  "started_utc": "2026-09-20T21:50:12.614781+00:00",
+  "completed_utc": "2026-09-20T21:50:53.377835+00:00",
+  "wall_seconds": 40.763056031020824,
+  "end_to_end_seconds": 46.252935864031315,
+  "endpoint": {
+    "name": "qwen2p5-1p5b-instruct",
+    "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "model_parameters": 1543714304,
+    "hidden_size": 1536,
+    "state_fact_slots": 2,
+    "batch_size": 1,
+    "model_artifact": {
+      "path": "model.safetensors",
+      "bytes": 3087467144,
+      "sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+    }
+  },
+  "condition": {
+    "name": "canonical_coscale",
+    "memory_source": "relevant",
+    "memory_representation": "canonical_event_facts",
+    "neutral_answer_format": false,
+    "readout_path": "foundation_generation",
+    "fact_slots": 2,
+    "frozen_batch_size": 1,
+    "effective_batch_size": 1,
+    "diagnostic_no_promotion": true
+  },
+  "config": {
+    "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+    "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"
+  },
+  "data": {
+    "path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_6.jsonl",
+    "sha256": "6fa9ab3e920d3b9d1db71850f6f844d6e622269e1bb608216677077cbf096444",
+    "rows": 80,
+    "task_counts": {
+      "qa2": 40,
+      "qa3": 40
+    }
+  },
+  "model_files": [
+    {
+      "path": "model.safetensors",
+      "bytes": 3087467144,
+      "sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+    }
+  ],
+  "model_identity": {
+    "model_type": "qwen2",
+    "architectures": [
+      "Qwen2ForCausalLM"
+    ],
+    "native_context_tokens": 32768,
+    "loaded_parameters": 1543714304
+  },
+  "parser_accuracy": 1.0,
+  "foundation": {
+    "samples": 80,
+    "mean": 0.1875,
+    "standard_error": 0.04391357305815796,
+    "ci95_low": 0.1014293968060104,
+    "ci95_high": 0.2735706031939896
+  },
+  "ascent": {
+    "samples": 80,
+    "mean": 0.95,
+    "standard_error": 0.0245207223136842,
+    "ci95_low": 0.901939384265179,
+    "ci95_high": 0.998060615734821
+  },
+  "gain": {
+    "samples": 80,
+    "mean": 0.7625,
+    "standard_error": 0.04787824087586226,
+    "ci95_low": 0.66865864788331,
+    "ci95_high": 0.8563413521166899
+  },
+  "remaining_error_elimination": 0.9384615384615385,
+  "wins": 61,
+  "regressions": 0,
+  "by_task": {
+    "qa2": {
+      "foundation": {
+        "samples": 40,
+        "mean": 0.225,
+        "standard_error": 0.06686668711812965,
+        "ci95_low": 0.0939412932484659,
+        "ci95_high": 0.3560587067515341
+      },
+      "ascent": {
+        "samples": 40,
+        "mean": 1.0,
+        "standard_error": 0.0,
+        "ci95_low": 1.0,
+        "ci95_high": 1.0
+      },
+      "gain": {
+        "samples": 40,
+        "mean": 0.775,
+        "standard_error": 0.06686668711812965,
+        "ci95_low": 0.6439412932484659,
+        "ci95_high": 0.9060587067515341
+      },
+      "remaining_error_elimination": 1.0
+    },
+    "qa3": {
+      "foundation": {
+        "samples": 40,
+        "mean": 0.15,
+        "standard_error": 0.05717718748968655,
+        "ci95_low": 0.03793271252021435,
+        "ci95_high": 0.26206728747978564
+      },
+      "ascent": {
+        "samples": 40,
+        "mean": 0.9,
+        "standard_error": 0.048038446141526144,
+        "ci95_low": 0.8058446455626088,
+        "ci95_high": 0.9941553544373912
+      },
+      "gain": {
+        "samples": 40,
+        "mean": 0.75,
+        "standard_error": 0.06933752452815363,
+        "ci95_low": 0.6140984519248189,
+        "ci95_high": 0.8859015480751811
+      },
+      "remaining_error_elimination": 0.8823529411764706
+    }
+  },
+  "state": {
+    "fact_slots": 2,
+    "write_state_payload_bytes": {
+      "mean": 776.825,
+      "maximum": 1624,
+      "scale_policy": "fixed causal world state across endpoints"
+    },
+    "read_state_payload_bytes": {
+      "mean": 100.8375,
+      "maximum": 105,
+      "scale_policy": "query-conditioned fact slots grow with endpoint"
+    },
+    "mean_total_external_state_bytes": 877.6625,
+    "state_slots_per_model_parameter": 1.2955765162100876e-09
+  },
+  "systems": {
+    "decode_order": "foundation_first",
+    "warmup_samples_per_arm": 0,
+    "artifact_verification_seconds": 2.6568756120395847,
+    "model_load_seconds": 1.6516239360207692,
+    "retrieval_total_seconds": 1.1461148929665796,
+    "retrieval_microseconds_per_sample": 14326.436162082246,
+    "foundation_decode": {
+      "seconds": 36.19196235894924,
+      "samples": 80,
+      "samples_per_second": 2.2104355438526886,
+      "prompt_tokens": 1219766,
+      "prompt_token_cap": 16376,
+      "prompt_truncation_side": "left",
+      "maximum_prompt_tokens": 16376,
+      "samples_at_prompt_token_cap": 1,
+      "generated_tokens": 291,
+      "prompt_tokens_per_second": 33702.67651978773,
+      "allocated_before_bytes": 3088346624,
+      "peak_allocated_bytes": 4657861120,
+      "incremental_peak_bytes": 1569514496
+    },
+    "ascent_decode": {
+      "seconds": 4.564164529030677,
+      "samples": 80,
+      "samples_per_second": 17.52785191926246,
+      "prompt_tokens": 7370,
+      "prompt_token_cap": 16376,
+      "prompt_truncation_side": "left",
+      "maximum_prompt_tokens": 95,
+      "samples_at_prompt_token_cap": 0,
+      "generated_tokens": 226,
+      "prompt_tokens_per_second": 1614.7533580620543,
+      "allocated_before_bytes": 3096866304,
+      "peak_allocated_bytes": 3106319872,
+      "incremental_peak_bytes": 9453568
+    },
+    "ascent_to_foundation_decode_time_ratio": 0.12610989378701343,
+    "ascent_to_foundation_prompt_token_ratio": 0.006042142509300965
+  },
+  "environment": {
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128",
+    "transformers": "4.57.6",
+    "tokenizers": "0.22.2",
+    "sentencepiece": "0.2.2",
+    "safetensors": "0.8.0",
+    "cuda_device": "NVIDIA A100-SXM4-80GB",
+    "peak_cuda_bytes": 3106319872,
+    "git_commit": "ec95bb1df7c89f83b49108d0e4b4fb3d685f3148",
+    "git_dirty": false
+  },
+  "retrieval_cache": null,
+  "preflight": {
+    "target_blindness": {
+      "rows": 80,
+      "blinded_keys": [
+        "target"
+      ],
+      "rows_with_blocked_target_access_attempts": 0,
+      "rows_with_target_read_before_reveal": 0,
+      "keys_read_before_reveal_union": [
+        "input",
+        "question",
+        "task"
+      ],
+      "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+      "rows_with_state_derived_from_input_only": 80,
+      "rows_with_provenance_not_applicable": 0
+    },
+    "target_values_not_rendered_by_prompt_builder": true
+  },
+  "predictions": [
+    {
+      "row_id": "2fbf6c3dedd87e48b919fc2089b983c70313d0e2d0ac6667a871d6d5d46607e1",
+      "task": "qa2",
+      "target": "bathroom",
+      "foundation_output": "bathroom",
+      "foundation_answer": "bathroom",
+      "foundation_location": "bathroom",
+      "foundation_score": 1.0,
+      "ascent_output": "bathroom",
+      "ascent_answer": "bathroom",
+      "ascent_location": "bathroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "sandra moved to the bathroom.",
+        "sandra dropped the football."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 105,
+      "persistent_payload_bytes": 311,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15416,
+      "ascent_prompt_tokens": 91,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "2ffd28ce2ad91bec00207a6fa93a12a3810ea8b99f417a464e6f9a1582f8ce3d",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "The football is put down.",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary moved to the office.",
+        "mary dropped the football."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 99,
+      "persistent_payload_bytes": 372,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14986,
+      "ascent_prompt_tokens": 89,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "30104221ad06133e72fd24479836df9702683a668dc0b3addfb708951501fd2c",
+      "task": "qa2",
+      "target": "kitchen",
+      "foundation_output": "Mary picked up the milk there.",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "kitchen",
+      "ascent_answer": "kitchen",
+      "ascent_location": "kitchen",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "john picked up the milk.",
+        "john moved to the kitchen."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 98,
+      "persistent_payload_bytes": 701,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14283,
+      "ascent_prompt_tokens": 90,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3025261c007e695a61a1e5cb8ecca98b27376c99f01bc29ac3c61cbd6afecd1d",
+      "task": "qa2",
+      "target": "kitchen",
+      "foundation_output": "Hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "kitchen",
+      "ascent_answer": "kitchen",
+      "ascent_location": "kitchen",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "john moved to the kitchen.",
+        "john dropped the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 96,
+      "persistent_payload_bytes": 528,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 13036,
+      "ascent_prompt_tokens": 89,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "307158bbc7829cb7f00182399b98c3b130999a7f8e0b6ebb937a6c5e77fa1460",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "bedroom",
+      "foundation_answer": "bedroom",
+      "foundation_location": "bedroom",
+      "foundation_score": 1.0,
+      "ascent_output": "bedroom",
+      "ascent_answer": "bedroom",
+      "ascent_location": "bedroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "john moved to the bedroom.",
+        "john dropped the football."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 100,
+      "persistent_payload_bytes": 506,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15105,
+      "ascent_prompt_tokens": 89,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "30ca6dac9fd1da4efd643b90c0156fc340626e87698eb7b93f7c4ac310c4f116",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "john moved to the office.",
+        "john dropped the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 96,
+      "persistent_payload_bytes": 923,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15608,
+      "ascent_prompt_tokens": 89,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "316c4727657aeb94ec05dd5a6948da32bf015f119a0e9b0a1365c2bce1f0644c",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "daniel picked up the milk.",
+        "daniel moved to the office."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 101,
+      "persistent_payload_bytes": 494,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 13902,
+      "ascent_prompt_tokens": 92,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3170d066b2b452881bd4f6d472b4d77e256636820fa04d39dd4d85eaea922bfd",
+      "task": "qa2",
+      "target": "bathroom",
+      "foundation_output": "Pasargad\u00e6",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "bathroom",
+      "ascent_answer": "bathroom",
+      "ascent_location": "bathroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "john moved to the bathroom.",
+        "john dropped the football."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 101,
+      "persistent_payload_bytes": 410,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15175,
+      "ascent_prompt_tokens": 89,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3173494daf14b8c4b3c7d4c531f616c5bc328c79009b1735cd11123708b1fd37",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "Virginia",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "daniel picked up the apple.",
+        "daniel moved to the office."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 102,
+      "persistent_payload_bytes": 505,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15396,
+      "ascent_prompt_tokens": 92,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "31cdbebe55e75910d9da034954b62e90e4ed5d970b705ac38dece58f64ebda1d",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "bedroom",
+      "ascent_answer": "bedroom",
+      "ascent_location": "bedroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "john picked up the milk.",
+        "john moved to the bedroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 98,
+      "persistent_payload_bytes": 778,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15221,
+      "ascent_prompt_tokens": 90,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "320b3f18a4484caf9600139968a6f2d8c2fbecfb4f1cada4c4dbf4131995db25",
+      "task": "qa2",
+      "target": "kitchen",
+      "foundation_output": "The milk is located in the kitchen.",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 1.0,
+      "ascent_output": "kitchen",
+      "ascent_answer": "kitchen",
+      "ascent_location": "kitchen",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "sandra moved to the kitchen.",
+        "sandra dropped the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 100,
+      "persistent_payload_bytes": 555,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14225,
+      "ascent_prompt_tokens": 91,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3288c458f0634d4dd2f97742ea9567196009b600964204f7fb319758f60a6dab",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "office",
+      "foundation_answer": "office",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "bedroom",
+      "ascent_answer": "bedroom",
+      "ascent_location": "bedroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary moved to the bedroom.",
+        "mary dropped the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 96,
+      "persistent_payload_bytes": 540,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15810,
+      "ascent_prompt_tokens": 89,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "32c47df19934a1bff26d414479335817a8ea77bdd4f0caff76654497968244f3",
+      "task": "qa2",
+      "target": "bathroom",
+      "foundation_output": "bathroom",
+      "foundation_answer": "bathroom",
+      "foundation_location": "bathroom",
+      "foundation_score": 1.0,
+      "ascent_output": "bathroom",
+      "ascent_answer": "bathroom",
+      "ascent_location": "bathroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary moved to the bathroom.",
+        "mary dropped the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 97,
+      "persistent_payload_bytes": 446,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14472,
+      "ascent_prompt_tokens": 89,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "32df5f513c03b5ab9d219286940ee9076049a9f9b9b744352339b13e4fb33b38",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "Daniel traveled to the bedroom.",
+      "foundation_answer": "bedroom",
+      "foundation_location": "bedroom",
+      "foundation_score": 0.0,
+      "ascent_output": "garden",
+      "ascent_answer": "garden",
+      "ascent_location": "garden",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "daniel moved to the garden.",
+        "daniel dropped the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 99,
+      "persistent_payload_bytes": 493,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15002,
+      "ascent_prompt_tokens": 91,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "332463d9615f2952b3b58f06d35823d2741c533b9c7c4b719a17d8e852d1b8d6",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "On the ground.",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "bedroom",
+      "ascent_answer": "bedroom",
+      "ascent_location": "bedroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "john moved to the bedroom.",
+        "john dropped the football."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 100,
+      "persistent_payload_bytes": 463,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15550,
+      "ascent_prompt_tokens": 89,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3341419a2a8b0123231dafb507908e90b5b53a2340fcfafe5acd39a8a98c4c10",
+      "task": "qa2",
+      "target": "hallway",
+      "foundation_output": "cleaner milk for the streets, indeed",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "hallway",
+      "ascent_answer": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "sandra picked up the milk.",
+        "sandra moved to the hallway."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 102,
+      "persistent_payload_bytes": 498,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15578,
+      "ascent_prompt_tokens": 92,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "337295478baae484e8e684370fbf2f89e35eddf26cce06e16bfd33dda00bb200",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "Windley",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "bedroom",
+      "ascent_answer": "bedroom",
+      "ascent_location": "bedroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "john picked up the football.",
+        "john moved to the bedroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 102,
+      "persistent_payload_bytes": 645,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15355,
+      "ascent_prompt_tokens": 90,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "33a7b4c248f1a6e5d045c94750747d140dd378728df04d488b68373f11941452",
+      "task": "qa2",
+      "target": "hallway",
+      "foundation_output": "Berea",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "hallway",
+      "ascent_answer": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary moved to the hallway.",
+        "mary dropped the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 96,
+      "persistent_payload_bytes": 551,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15669,
+      "ascent_prompt_tokens": 89,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "33b0ac4ee5228c3659a433bac1008e92df3cf71e55d5ce637a3931caf1fc7236",
+      "task": "qa2",
+      "target": "bathroom",
+      "foundation_output": "bathroom",
+      "foundation_answer": "bathroom",
+      "foundation_location": "bathroom",
+      "foundation_score": 1.0,
+      "ascent_output": "bathroom",
+      "ascent_answer": "bathroom",
+      "ascent_location": "bathroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "sandra moved to the bathroom.",
+        "sandra dropped the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 101,
+      "persistent_payload_bytes": 390,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15361,
+      "ascent_prompt_tokens": 91,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "33c00dd5c07bdae497f0f4b22017740172301357e9750eb5beadbbf091c3dc93",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "office",
+      "foundation_answer": "office",
+      "foundation_location": "office",
+      "foundation_score": 1.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary moved to the office.",
+        "mary dropped the football."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 99,
+      "persistent_payload_bytes": 663,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15432,
+      "ascent_prompt_tokens": 89,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "33de38fba3f17586a17e896215f2099437313975c6258f7c87fda5775d3b4781",
+      "task": "qa2",
+      "target": "hallway",
+      "foundation_output": "Mary",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "hallway",
+      "ascent_answer": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary picked up the apple.",
+        "mary moved to the hallway."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 99,
+      "persistent_payload_bytes": 590,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15536,
+      "ascent_prompt_tokens": 90,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3438abdfd6628e330760686672cac7d5b0fd89a4710ac21f7eca9f0e96a03c39",
+      "task": "qa2",
+      "target": "kitchen",
+      "foundation_output": "The milk is at the garden.",
+      "foundation_answer": "garden",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "kitchen",
+      "ascent_answer": "kitchen",
+      "ascent_location": "kitchen",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary picked up the milk.",
+        "mary moved to the kitchen."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 98,
+      "persistent_payload_bytes": 733,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 13124,
+      "ascent_prompt_tokens": 90,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "348219d8a4998c41d9eb2ec0d1a69b99021bf813e7e3b416bd1694cd7b59aee7",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "field",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "sandra picked up the football.",
+        "sandra moved to the office."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 105,
+      "persistent_payload_bytes": 317,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15031,
+      "ascent_prompt_tokens": 92,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "34978754087354b8cca5e29bd0cb165564fc063071142d3e9b9d7c751d6a087a",
+      "task": "qa2",
+      "target": "bathroom",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "bathroom",
+      "ascent_answer": "bathroom",
+      "ascent_location": "bathroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "john moved to the bathroom.",
+        "john dropped the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 97,
+      "persistent_payload_bytes": 561,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15495,
+      "ascent_prompt_tokens": 89,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "34dabd638e5cc8a770a3622d5db0fbb08d47adc5b5d8974dad653548a8a10706",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "storey's gate",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "daniel moved to the office.",
+        "daniel dropped the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 99,
+      "persistent_payload_bytes": 462,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15029,
+      "ascent_prompt_tokens": 91,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3543ffbe0236c2f7ddefdbab083b5c8f1fa655309189ebd6885830fb19f41112",
+      "task": "qa2",
+      "target": "kitchen",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 1.0,
+      "ascent_output": "kitchen",
+      "ascent_answer": "kitchen",
+      "ascent_location": "kitchen",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary moved to the kitchen.",
+        "mary dropped the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 96,
+      "persistent_payload_bytes": 756,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15346,
+      "ascent_prompt_tokens": 89,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "354557b65ac48a0f0092ab38daeb842d998b587c3b9daf66f282c5d2ed697657",
+      "task": "qa2",
+      "target": "kitchen",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 1.0,
+      "ascent_output": "kitchen",
+      "ascent_answer": "kitchen",
+      "ascent_location": "kitchen",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "sandra moved to the kitchen.",
+        "sandra dropped the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 101,
+      "persistent_payload_bytes": 581,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15151,
+      "ascent_prompt_tokens": 91,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "35714e4f54a5471e2f20b366ab3f24f62236a5c3abf3a806f44c03763ba032e2",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "James's Park",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "garden",
+      "ascent_answer": "garden",
+      "ascent_location": "garden",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary moved to the garden.",
+        "mary dropped the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 96,
+      "persistent_payload_bytes": 173,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15605,
+      "ascent_prompt_tokens": 89,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "35dbc19c9fe88f54ce4db71ca83fb1bf099dbe95cb6dd5d8f4c107a9b32d1203",
+      "task": "qa2",
+      "target": "bathroom",
+      "foundation_output": "Khartoum",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "bathroom",
+      "ascent_answer": "bathroom",
+      "ascent_location": "bathroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "john picked up the football.",
+        "john moved to the bathroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 103,
+      "persistent_payload_bytes": 373,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15895,
+      "ascent_prompt_tokens": 90,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "35f2fbe5d951d059a3525687cced916b9b495bb715f2df265c4955bc3416ede4",
+      "task": "qa2",
+      "target": "hallway",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 1.0,
+      "ascent_output": "hallway",
+      "ascent_answer": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary moved to the hallway.",
+        "mary dropped the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 97,
+      "persistent_payload_bytes": 903,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15482,
+      "ascent_prompt_tokens": 89,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "365fd5923cbab9692741b969b5103e5f51f343577ed349d4c364c340e4ef1c40",
+      "task": "qa2",
+      "target": "hallway",
+      "foundation_output": "Babylone",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "hallway",
+      "ascent_answer": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "sandra moved to the hallway.",
+        "sandra dropped the apple."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 101,
+      "persistent_payload_bytes": 721,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15640,
+      "ascent_prompt_tokens": 91,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "376be2bb424706dbd4e7b4bbd4e634f8b0e48701b18d60e9473ef013c04c7152",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "office",
+      "foundation_answer": "office",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "garden",
+      "ascent_answer": "garden",
+      "ascent_location": "garden",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "john moved to the garden.",
+        "john dropped the football."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 99,
+      "persistent_payload_bytes": 924,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15607,
+      "ascent_prompt_tokens": 89,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3779b612077453d48f5166d0a54f64594f21dbde84971e1c31a598f4bbbe438d",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "bedroom",
+      "ascent_answer": "bedroom",
+      "ascent_location": "bedroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "daniel moved to the bedroom.",
+        "daniel dropped the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 100,
+      "persistent_payload_bytes": 466,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15373,
+      "ascent_prompt_tokens": 91,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "377b4c76ce353960935df4350d8ca9189f5a59641d3909fc209751575b8612a9",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "The football is located at Daniel's place",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "garden",
+      "ascent_answer": "garden",
+      "ascent_location": "garden",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "daniel moved to the garden.",
+        "daniel dropped the football."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 103,
+      "persistent_payload_bytes": 604,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15464,
+      "ascent_prompt_tokens": 91,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "379bb511fe89c6a9f8353563965d22d77c7ae599c95594acd6f808405764de3c",
+      "task": "qa2",
+      "target": "bathroom",
+      "foundation_output": "Paris",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "bathroom",
+      "ascent_answer": "bathroom",
+      "ascent_location": "bathroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "sandra picked up the apple.",
+        "sandra moved to the bathroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 104,
+      "persistent_payload_bytes": 277,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14959,
+      "ascent_prompt_tokens": 92,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "37bfe33201e3cf9e175a3dd1fed337523d2b82e6cea90e5c08db76b460304efd",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "at the football there",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "bedroom",
+      "ascent_answer": "bedroom",
+      "ascent_location": "bedroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "john moved to the bedroom.",
+        "john dropped the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 96,
+      "persistent_payload_bytes": 636,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15675,
+      "ascent_prompt_tokens": 89,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "381a6eb54ea35b9d10c9a5fa9a51f8a7a577f941bcb6a50f055820cfb0cb77ed",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "Centreville, Virginia",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "bedroom",
+      "ascent_answer": "bedroom",
+      "ascent_location": "bedroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "daniel moved to the bedroom.",
+        "daniel dropped the milk."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 100,
+      "persistent_payload_bytes": 378,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15833,
+      "ascent_prompt_tokens": 91,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "38538b2c8814a77005203dc968946634051c9ac00a132f9e26f6e6ed5c541ee8",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "The milk is located at Daniel's spot",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "bedroom",
+      "ascent_answer": "bedroom",
+      "ascent_location": "bedroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "daniel picked up the milk.",
+        "daniel moved to the bedroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 102,
+      "persistent_payload_bytes": 715,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14742,
+      "ascent_prompt_tokens": 92,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "385b3317b4bbfc20ce0a2bb907b7d35344093d68050348116c3b7d0f729524ff",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "garden",
+      "ascent_answer": "garden",
+      "ascent_location": "garden",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "daniel picked up the football.",
+        "daniel moved to the garden."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 105,
+      "persistent_payload_bytes": 615,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15551,
+      "ascent_prompt_tokens": 92,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "38852acb2e44518865620fe2975ec62a65578c7e7e685862688bd9cf2814e8c7",
+      "task": "qa2",
+      "target": "kitchen",
+      "foundation_output": "Badillo",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "kitchen",
+      "ascent_answer": "kitchen",
+      "ascent_location": "kitchen",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "sandra picked up the apple.",
+        "sandra moved to the kitchen."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 103,
+      "persistent_payload_bytes": 495,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15550,
+      "ascent_prompt_tokens": 92,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "35a01abf122ab9cc8ff8450008d6d9ad235b34177bec9355dcb106c4b5b46a57",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "garden",
+      "foundation_answer": "garden",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "kitchen",
+      "ascent_answer": "kitchen",
+      "ascent_location": "kitchen",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "john moved to the kitchen.",
+        "john moved to the hallway."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 100,
+      "persistent_payload_bytes": 640,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15516,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "35aff5293553eea0a9c878d8493695c7d9c707250ad54a86c9f1c439a9091d85",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "garden",
+      "foundation_answer": "garden",
+      "foundation_location": "garden",
+      "foundation_score": 1.0,
+      "ascent_output": "garden",
+      "ascent_answer": "garden",
+      "ascent_location": "garden",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "sandra moved to the garden.",
+        "sandra moved to the bedroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 103,
+      "persistent_payload_bytes": 292,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15454,
+      "ascent_prompt_tokens": 95,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "361f7ad5a467873e4239352414e7c01a98d887ce2ad78e035423e51cb1058e42",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "football there",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "kitchen",
+      "ascent_answer": "kitchen",
+      "ascent_location": "kitchen",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "sandra moved to the kitchen.",
+        "sandra moved to the bathroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 105,
+      "persistent_payload_bytes": 950,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15683,
+      "ascent_prompt_tokens": 95,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3654a40bb78dde6f4e0f7394f6e8927dd1a429afc979573ddb72438bc28b0d97",
+      "task": "qa3",
+      "target": "bedroom",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "bedroom",
+      "ascent_answer": "bedroom",
+      "ascent_location": "bedroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary moved to the bedroom.",
+        "mary moved to the kitchen."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 100,
+      "persistent_payload_bytes": 1496,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15603,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3655f671c505b7f97c484bde36323d42422aa156fcc8b60f9fec83bfe30fc502",
+      "task": "qa3",
+      "target": "bedroom",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "bedroom",
+      "ascent_answer": "bedroom",
+      "ascent_location": "bedroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "daniel moved to the bedroom.",
+        "daniel moved to the kitchen."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 104,
+      "persistent_payload_bytes": 1302,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15472,
+      "ascent_prompt_tokens": 95,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "365ed4fc712fd6c2963d6bb0995d645a448e8436b57875560c6b23beb5f64370",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "bedroom",
+      "foundation_answer": "bedroom",
+      "foundation_location": "bedroom",
+      "foundation_score": 0.0,
+      "ascent_output": "bathroom",
+      "ascent_answer": "bathroom",
+      "ascent_location": "bathroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary moved to the bathroom.",
+        "mary moved to the hallway."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 101,
+      "persistent_payload_bytes": 521,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15313,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "36fe9e73e9ba474f41fcf2bd420bee0842b83d19741cf630e3b2e41b416bbbb9",
+      "task": "qa3",
+      "target": "office",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "sink",
+      "ascent_answer": null,
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "sandra moved to the office.",
+        "sandra moved to the bedroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 103,
+      "persistent_payload_bytes": 1203,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15605,
+      "ascent_prompt_tokens": 95,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3733350bfd736b71fab6760897ae9547f76f87b5e65dc878abbaef35c908fc41",
+      "task": "qa3",
+      "target": "office",
+      "foundation_output": "Daniel",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary moved to the office.",
+        "mary moved to the hallway."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 99,
+      "persistent_payload_bytes": 898,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15666,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "374cacdafd4ff8843ad864ffde5708507dc9163d31759b77adb09c3c881fb30d",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "back room",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "garden",
+      "ascent_answer": "garden",
+      "ascent_location": "garden",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "john moved to the garden.",
+        "john moved to the hallway."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 99,
+      "persistent_payload_bytes": 867,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14668,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "376f75aaa76cd8ccfebd7811085cf58ddd36e2a60dc84fe660e809cd083e2c47",
+      "task": "qa3",
+      "target": "bedroom",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "kitchen",
+      "ascent_answer": "kitchen",
+      "ascent_location": "kitchen",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "daniel moved to the bedroom.",
+        "daniel moved to the office."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 103,
+      "persistent_payload_bytes": 905,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15197,
+      "ascent_prompt_tokens": 95,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3826f6d35678f2309f81742b1c15bc48a3bdaf17e81ff66f2b3263d7af550645",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "Kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "bathroom",
+      "ascent_answer": "bathroom",
+      "ascent_location": "bathroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "daniel moved to the bathroom.",
+        "daniel moved to the bedroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 105,
+      "persistent_payload_bytes": 1185,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 13156,
+      "ascent_prompt_tokens": 95,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "393d62122e11760a9ed4cba60478fb28e5a9ce17576138ef41b7c501483bbdbe",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "garden",
+      "ascent_answer": "garden",
+      "ascent_location": "garden",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary moved to the garden.",
+        "mary moved to the bathroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 100,
+      "persistent_payload_bytes": 1434,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15503,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "39501f6b6f4e9ae9aef435bd0b2bc56efcf384b94cd74b3bddb2de92d78d4440",
+      "task": "qa3",
+      "target": "office",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary moved to the office.",
+        "mary moved to the hallway."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 99,
+      "persistent_payload_bytes": 875,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15585,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "396f54833ec583faab4f78a4c75ff56d58409c59c9f081760e836aa22988dfa1",
+      "task": "qa3",
+      "target": "bedroom",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "bedroom",
+      "ascent_answer": "bedroom",
+      "ascent_location": "bedroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary moved to the bedroom.",
+        "mary moved to the office."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 99,
+      "persistent_payload_bytes": 466,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15530,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3999bfda18d77cbe8460f6013b5a4b42b869d684b2edde9cd01c93e966d33a9c",
+      "task": "qa3",
+      "target": "hallway",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 1.0,
+      "ascent_output": "hallway",
+      "ascent_answer": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary moved to the hallway.",
+        "mary moved to the kitchen."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 100,
+      "persistent_payload_bytes": 571,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14563,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "39bcd1d4f5ac687ccbda81da3d358700c9e4b72e1950ef6c8a4719b6fe88bf0f",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "garden",
+      "ascent_answer": "garden",
+      "ascent_location": "garden",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary moved to the garden.",
+        "mary moved to the bedroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 99,
+      "persistent_payload_bytes": 857,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15587,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "39d472818cc1da5e7ae622a76fb05e98f20587a6b084d068e3546e2aa6773417",
+      "task": "qa3",
+      "target": "office",
+      "foundation_output": "office",
+      "foundation_answer": "office",
+      "foundation_location": "office",
+      "foundation_score": 1.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "daniel moved to the office.",
+        "daniel moved to the garden."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 102,
+      "persistent_payload_bytes": 983,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15531,
+      "ascent_prompt_tokens": 95,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "39d95b2a6d16bc573c76857df839dc857899c3d9038aeb431802d3e087ba3293",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "football was left at the hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "bathroom",
+      "ascent_answer": "bathroom",
+      "ascent_location": "bathroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "sandra moved to the bathroom.",
+        "sandra moved to the garden."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 104,
+      "persistent_payload_bytes": 700,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15527,
+      "ascent_prompt_tokens": 95,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3a0c7c79049e9afedce0a0451219344899d408fb70dccc2e4c09195a7bbd2999",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "bathroom",
+      "ascent_answer": "bathroom",
+      "ascent_location": "bathroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "daniel moved to the bathroom.",
+        "daniel moved to the bedroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 105,
+      "persistent_payload_bytes": 1490,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15709,
+      "ascent_prompt_tokens": 95,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3a94eb9d15bb69cb382e19d9221873d2d9ee6a27f07d91a63c88cebdec503a16",
+      "task": "qa3",
+      "target": "hallway",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "hallway",
+      "ascent_answer": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary moved to the hallway.",
+        "mary moved to the bedroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 100,
+      "persistent_payload_bytes": 1431,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15385,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3b08af760cf21eba32d77b5129653212c681fcefcc5fa6914a335fa3214d8e16",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "bathroom",
+      "ascent_answer": "bathroom",
+      "ascent_location": "bathroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "sandra moved to the bathroom.",
+        "sandra moved to the hallway."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 105,
+      "persistent_payload_bytes": 936,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15348,
+      "ascent_prompt_tokens": 95,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3b1316754f32b689860d355b6f3fde10af87ec68488f8a56969292b06958f0f6",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "bathroom",
+      "ascent_answer": "bathroom",
+      "ascent_location": "bathroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "sandra moved to the bathroom.",
+        "sandra moved to the office."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 104,
+      "persistent_payload_bytes": 1062,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15178,
+      "ascent_prompt_tokens": 95,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3bac699ec223815b81a766a584d2da2f4a582d87f0e982712683725a4e5a1c18",
+      "task": "qa3",
+      "target": "hallway",
+      "foundation_output": "Before the bathroom, the apple was in",
+      "foundation_answer": "bathroom",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "hallway",
+      "ascent_answer": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "sandra moved to the hallway.",
+        "sandra moved to the bathroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 105,
+      "persistent_payload_bytes": 998,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 16376,
+      "ascent_prompt_tokens": 95,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3bc56187f2a4b48ca7481f71b751f6fd9682f1484397f14bdaffe185c56b1209",
+      "task": "qa3",
+      "target": "office",
+      "foundation_output": "football",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "sandra moved to the office.",
+        "sandra moved to the bathroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 104,
+      "persistent_payload_bytes": 718,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15532,
+      "ascent_prompt_tokens": 95,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3bc69d75a9486e874cb2bf2a84f3137739790b8a4ba22d894c9341ac9f7bf3c8",
+      "task": "qa3",
+      "target": "hallway",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 1.0,
+      "ascent_output": "hallway",
+      "ascent_answer": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "john moved to the hallway.",
+        "john moved to the bedroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 100,
+      "persistent_payload_bytes": 1153,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15517,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3c4af2e73a2399130720232c32dd2d8afec08507a8ef7ef729a0d4e4b83eaa12",
+      "task": "qa3",
+      "target": "hallway",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 1.0,
+      "ascent_output": "hallway",
+      "ascent_answer": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "daniel moved to the hallway.",
+        "daniel moved to the garden."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 103,
+      "persistent_payload_bytes": 1624,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15739,
+      "ascent_prompt_tokens": 95,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3c8a6011177e4eded76a54817eada8b11331eadef252e8521fcca1253f4d2596",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "garden",
+      "ascent_answer": "garden",
+      "ascent_location": "garden",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "sandra moved to the garden.",
+        "sandra moved to the bathroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 104,
+      "persistent_payload_bytes": 1085,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 14888,
+      "ascent_prompt_tokens": 95,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3d34fa86a7f676cf51fc5973883172709843fce486d5638f66ba00bdb09115f3",
+      "task": "qa3",
+      "target": "office",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "daniel moved to the office.",
+        "daniel moved to the bathroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 104,
+      "persistent_payload_bytes": 1062,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15567,
+      "ascent_prompt_tokens": 95,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3d3e5bd89de1fda13b1f554021168c44c18a5a31af85f1cd0430cec5f3c0432c",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "office",
+      "foundation_answer": "office",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "garden",
+      "ascent_answer": "garden",
+      "ascent_location": "garden",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary moved to the garden.",
+        "mary moved to the office."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 98,
+      "persistent_payload_bytes": 699,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15162,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3d79361c7cd834daa9fa500c5708164c8c2a0f44df43de01c495b361bcc5eb6d",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "bathroom",
+      "ascent_answer": "bathroom",
+      "ascent_location": "bathroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "daniel moved to the bathroom.",
+        "daniel moved to the bedroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 105,
+      "persistent_payload_bytes": 1297,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15581,
+      "ascent_prompt_tokens": 95,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3dce952b92cd6449678033cd6289717d66e5b14fc402a7316860a95b34fa1e7e",
+      "task": "qa3",
+      "target": "bedroom",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "kitchen",
+      "ascent_answer": "kitchen",
+      "ascent_location": "kitchen",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "john moved to the bedroom.",
+        "john moved to the bathroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 101,
+      "persistent_payload_bytes": 1121,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15483,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3dee7c28e000dc72a531edc150d6b77d4bdab231d88439dce5273d203b59d568",
+      "task": "qa3",
+      "target": "bedroom",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "bedroom",
+      "ascent_answer": "bedroom",
+      "ascent_location": "bedroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "john moved to the bedroom.",
+        "john moved to the hallway."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 100,
+      "persistent_payload_bytes": 1172,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15683,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3e8fc5ab190b30ab57f8373f139e591f9004dfdc0e46f2a8b788e7511abcf848",
+      "task": "qa3",
+      "target": "office",
+      "foundation_output": "apple there",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_answer": "office",
+      "ascent_location": "office",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "sandra moved to the office.",
+        "sandra moved to the kitchen."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 103,
+      "persistent_payload_bytes": 979,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15380,
+      "ascent_prompt_tokens": 95,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3f2fdc71829aaddc93a70f94ed6786845b97422c304a55b441b1229a82ee713e",
+      "task": "qa3",
+      "target": "hallway",
+      "foundation_output": "kitchen",
+      "foundation_answer": "kitchen",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "hallway",
+      "ascent_answer": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "john moved to the hallway.",
+        "john moved to the bathroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 101,
+      "persistent_payload_bytes": 957,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 13398,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "3f376ebf571902ff6bbf5fe465fa0a99adc9cae27f7a7e1c4344487837a4ae46",
+      "task": "qa3",
+      "target": "hallway",
+      "foundation_output": "bathroom",
+      "foundation_answer": "bathroom",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "hallway",
+      "ascent_answer": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary moved to the hallway.",
+        "mary moved to the kitchen."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 100,
+      "persistent_payload_bytes": 826,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15476,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "405d897bb473b9036647e148898caa64785788f0827c900bcb6dab188ab31801",
+      "task": "qa3",
+      "target": "hallway",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 1.0,
+      "ascent_output": "hallway",
+      "ascent_answer": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary moved to the hallway.",
+        "mary moved to the bedroom."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 100,
+      "persistent_payload_bytes": 1170,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15668,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "40f03fa56992de82af9ac04fbd5fa22e463a853103a234081b5dc3925ded4c09",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "bathroom",
+      "ascent_answer": "bathroom",
+      "ascent_location": "bathroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary moved to the bathroom.",
+        "mary moved to the garden."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 100,
+      "persistent_payload_bytes": 1616,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15625,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "411434662adfc0bd0c8d26243de4730a29c964342817580014537d29ece91589",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "milk",
+      "foundation_answer": null,
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "hallway",
+      "ascent_answer": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "sandra moved to the bathroom.",
+        "sandra moved to the hallway."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 105,
+      "persistent_payload_bytes": 1277,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15725,
+      "ascent_prompt_tokens": 95,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "41202c09b3a9aab70e6835e00d5fecdf6293a32a7a652c317f8117d6bb05bf7d",
+      "task": "qa3",
+      "target": "bedroom",
+      "foundation_output": "garden",
+      "foundation_answer": "garden",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "bedroom",
+      "ascent_answer": "bedroom",
+      "ascent_location": "bedroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "mary moved to the bedroom.",
+        "mary moved to the kitchen."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 100,
+      "persistent_payload_bytes": 666,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 13871,
+      "ascent_prompt_tokens": 93,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    },
+    {
+      "row_id": "41207aebee4a702dec4cb73d4b489eb7dcbcd66ee2b4fbec733982ba56c3940c",
+      "task": "qa3",
+      "target": "bedroom",
+      "foundation_output": "hallway",
+      "foundation_answer": "hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "bedroom",
+      "ascent_answer": "bedroom",
+      "ascent_location": "bedroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "daniel moved to the bedroom.",
+        "daniel moved to the garden."
+      ],
+      "structured_inventory": null,
+      "structured_count": null,
+      "retained_read_state_bytes": 103,
+      "persistent_payload_bytes": 610,
+      "write_budget_bytes": null,
+      "write_payload_utilization": null,
+      "foundation_prompt_tokens": 15646,
+      "ascent_prompt_tokens": 95,
+      "target_blindness": {
+        "blinded_keys": [
+          "target"
+        ],
+        "keys_read_before_reveal": [
+          "input",
+          "question",
+          "task"
+        ],
+        "blocked_target_access_attempts": 0,
+        "revealed_phase": "parser_audit_after_state_and_prompt_construction",
+        "target_read_before_reveal": false,
+        "state_provenance": {
+          "retained_facts": 2,
+          "all_sources_verbatim_at_recorded_position": true,
+          "all_parsed_fields_present_in_source_sentence": true,
+          "all_rendered_strings_derived_from_own_fact": true,
+          "state_derived_from_input_only": true
+        }
+      }
+    }
+  ]
+}

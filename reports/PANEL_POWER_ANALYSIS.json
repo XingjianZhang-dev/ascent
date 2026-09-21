@@ -1,0 +1,402 @@
+{
+  "schema_version": 1,
+  "inputs": {
+    "paper/data/evidence/primary_panel.csv": "42196325239eb6bd75633864ebc895c5319bc11e9b04dad8ee8ae139829ffa91",
+    "paper/data/evidence/factorial_panel.csv": "e29e627f41ae6e2b79c062337ce0a3d4ba763de8535dc4af7e2fa2faf32867dc",
+    "paper/data/evidence/interaction_intervals.csv": "04f7e418e4942d0296e1a4e13c268cf2cf0250ebe6187e76e9af35576bc01fbf"
+  },
+  "method": {
+    "unit_of_inference": "panel (paired across panels); Student t with df = panels - 1",
+    "power_model": "exact non-central t: power = P(T_{df, ncp} > t_{1-alpha, df}) with ncp = delta / SE, SE taken from the observed between-panel SD",
+    "mde": "delta solving power(delta) = power_target at the smallest registered per-test alpha (Holm: 0.05/2 one-sided; Bonferroni: 0.05/8 two-sided i.e. 0.05/16 one-sided)",
+    "caveat": "retrospective power uses the observed SE as if it were the true SD; it characterizes the design's sensitivity, not the probability that the observed result is true"
+  },
+  "primary_studies": [
+    {
+      "study": "Official 16K",
+      "panels": 10,
+      "df": 9,
+      "family": {
+        "size": 2,
+        "procedure": "Holm step-down, one-sided",
+        "family_alpha": 0.05,
+        "smallest_step_alpha": 0.025
+      },
+      "power_target": 0.8,
+      "t_critical_two_sided_0975": 2.262157162798205,
+      "t_critical_one_sided_alpha_smallest": 2.262157162798205,
+      "endpoints": {
+        "0.5B": {
+          "n": 10,
+          "df": 9,
+          "mean": 0.10500000000000001,
+          "sd": 0.05177408189003022,
+          "se": 0.016372402253657083,
+          "t": 6.4132311418470245,
+          "ci95_low": 0.06796305296967617,
+          "ci95_high": 0.14203694703032385,
+          "mean_points": 10.500000000000002,
+          "se_points": 1.6372402253657083
+        },
+        "1.5B": {
+          "n": 10,
+          "df": 9,
+          "mean": 0.7887500000000001,
+          "sd": 0.03793726546696681,
+          "se": 0.011996816707406646,
+          "t": 65.7466075574063,
+          "ci95_low": 0.7616113151545629,
+          "ci95_high": 0.8158886848454372,
+          "mean_points": 78.875,
+          "se_points": 1.1996816707406646
+        },
+        "3B": {
+          "n": 10,
+          "df": 9,
+          "mean": 0.8262500000000002,
+          "sd": 0.02316157018281215,
+          "se": 0.007324331596352891,
+          "t": 112.80892858693436,
+          "ci95_low": 0.8096812108166013,
+          "ci95_high": 0.842818789183399,
+          "mean_points": 82.62500000000001,
+          "se_points": 0.7324331596352891
+        }
+      },
+      "adjacent_increments": [
+        {
+          "contrast": "0.5B -> 1.5B",
+          "n": 10,
+          "df": 9,
+          "mean": 0.6837500000000001,
+          "sd": 0.057750060125028826,
+          "se": 0.01826217250067594,
+          "t": 37.4407809352744,
+          "mean_points": 68.37500000000001,
+          "sd_points": 5.775006012502883,
+          "se_points": 1.826217250067594,
+          "ci95_two_sided_points": [
+            64.24380956693396,
+            72.50619043306605
+          ],
+          "one_sided_p_raw": 1.715402673978263e-11,
+          "mde_points_at_alpha_smallest_power_target": 5.751919007090068,
+          "mde_points_approx_central_t": 5.744477800400063,
+          "achieved_power_at_alpha_smallest": 1.0,
+          "achieved_power_at_alpha_family": 1.0,
+          "one_sided_p_holm": 3.430805347956526e-11,
+          "passes_registered_family": true
+        },
+        {
+          "contrast": "1.5B -> 3B",
+          "n": 10,
+          "df": 9,
+          "mean": 0.03749999999999998,
+          "sd": 0.05270462766947298,
+          "se": 0.016666666666666663,
+          "t": 2.249999999999999,
+          "mean_points": 3.749999999999998,
+          "sd_points": 5.270462766947298,
+          "se_points": 1.6666666666666663,
+          "ci95_two_sided_points": [
+            -0.020261937997009816,
+            7.520261937997005
+          ],
+          "one_sided_p_raw": 0.02550163035347543,
+          "mde_points_at_alpha_smallest_power_target": 5.2493927971212715,
+          "mde_points_approx_central_t": 5.242601704139565,
+          "achieved_power_at_alpha_smallest": 0.5192321282005659,
+          "achieved_power_at_alpha_family": 0.6670376949116914,
+          "one_sided_p_holm": 0.02550163035347543,
+          "passes_registered_family": true
+        }
+      ]
+    },
+    {
+      "study": "Semantic holdout",
+      "panels": 10,
+      "df": 9,
+      "family": {
+        "size": 2,
+        "procedure": "Holm step-down, one-sided",
+        "family_alpha": 0.05,
+        "smallest_step_alpha": 0.025
+      },
+      "power_target": 0.8,
+      "t_critical_two_sided_0975": 2.262157162798205,
+      "t_critical_one_sided_alpha_smallest": 2.262157162798205,
+      "endpoints": {
+        "0.5B": {
+          "n": 10,
+          "df": 9,
+          "mean": 0.035,
+          "sd": 0.03987828704668466,
+          "se": 0.012610621625351296,
+          "t": 2.7754381219113777,
+          "ci95_low": 0.00647279196287363,
+          "ci95_high": 0.06352720803712637,
+          "mean_points": 3.5000000000000004,
+          "se_points": 1.2610621625351295
+        },
+        "1.5B": {
+          "n": 10,
+          "df": 9,
+          "mean": 0.7725,
+          "sd": 0.04281744192888375,
+          "se": 0.013540064007726596,
+          "t": 57.052906068920734,
+          "ci95_low": 0.741870247220175,
+          "ci95_high": 0.8031297527798249,
+          "mean_points": 77.25,
+          "se_points": 1.3540064007726595
+        },
+        "3B": {
+          "n": 10,
+          "df": 9,
+          "mean": 0.8075000000000001,
+          "sd": 0.056886827219586704,
+          "se": 0.01798919428743575,
+          "t": 44.88805819191052,
+          "ci95_low": 0.7668056152897088,
+          "ci95_high": 0.8481943847102914,
+          "mean_points": 80.75000000000001,
+          "se_points": 1.7989194287435748
+        }
+      },
+      "adjacent_increments": [
+        {
+          "contrast": "0.5B -> 1.5B",
+          "n": 10,
+          "df": 9,
+          "mean": 0.7374999999999999,
+          "sd": 0.034359213546813816,
+          "se": 0.010865337342004407,
+          "t": 67.87640151299233,
+          "mean_points": 73.75,
+          "sd_points": 3.4359213546813816,
+          "se_points": 1.0865337342004406,
+          "ci95_two_sided_points": [
+            71.29208993055659,
+            76.2079100694434
+          ],
+          "one_sided_p_raw": 8.258558471869434e-14,
+          "mde_points_at_alpha_smallest_power_target": 3.422185414884644,
+          "mde_points_approx_central_t": 3.4177581639146135,
+          "achieved_power_at_alpha_smallest": 1.0,
+          "achieved_power_at_alpha_family": 1.0,
+          "one_sided_p_holm": 1.651711694373887e-13,
+          "passes_registered_family": true
+        },
+        {
+          "contrast": "1.5B -> 3B",
+          "n": 10,
+          "df": 9,
+          "mean": 0.03500000000000003,
+          "sd": 0.05096294950473551,
+          "se": 0.016115899671511426,
+          "t": 2.171768297979083,
+          "mean_points": 3.500000000000003,
+          "sd_points": 5.096294950473551,
+          "se_points": 1.6115899671511427,
+          "ci95_two_sided_points": [
+            -0.14566978768467756,
+            7.1456697876846835
+          ],
+          "one_sided_p_raw": 0.028973178615706884,
+          "mde_points_at_alpha_smallest_power_target": 5.07592125928567,
+          "mde_points_approx_central_t": 5.069354584896484,
+          "achieved_power_at_alpha_smallest": 0.49161500301825095,
+          "achieved_power_at_alpha_family": 0.6405435291632804,
+          "one_sided_p_holm": 0.028973178615706884,
+          "passes_registered_family": true
+        }
+      ]
+    }
+  ],
+  "factorial": {
+    "study": "Numeric factorial (candidate-normalized NLL gain, nats)",
+    "panels": 9,
+    "df": 8,
+    "family": {
+      "size": 8,
+      "procedure": "Bonferroni-simultaneous two-sided 95% intervals; positive lower bound required",
+      "two_sided_alpha_per_estimand": 0.00625
+    },
+    "power_target": 0.8,
+    "t_critical_bonferroni": 3.676567780902171,
+    "estimands": [
+      {
+        "estimand": "Diagonal gain: 1.5B/K2",
+        "n": 9,
+        "df": 8,
+        "mean": 0.3881704357070042,
+        "sd": 0.0628880657347377,
+        "se": 0.0209626885782459,
+        "t": 18.51720661966182,
+        "bonferroni_ci_low": 0.3110996902791394,
+        "bonferroni_ci_high": 0.465241181134869,
+        "reported": null,
+        "matches_reported_to_1e-9": false,
+        "one_sided_p_raw": 3.7283679097641305e-08,
+        "one_sided_p_bonferroni": 2.9826943278113044e-07,
+        "mde_nats_at_bonferroni_power_target": 0.09838581615850674,
+        "achieved_power_at_bonferroni": 1.0
+      },
+      {
+        "estimand": "Diagonal gain: 3B/K3",
+        "n": 9,
+        "df": 8,
+        "mean": 2.0992871063258463,
+        "sd": 0.12371020581255555,
+        "se": 0.04123673527085185,
+        "t": 50.90817914020767,
+        "bonferroni_ci_low": 1.9476774540394401,
+        "bonferroni_ci_high": 2.250896758612252,
+        "reported": null,
+        "matches_reported_to_1e-9": false,
+        "one_sided_p_raw": 1.2276333211642745e-11,
+        "one_sided_p_bonferroni": 9.821066569314196e-11,
+        "mde_nats_at_bonferroni_power_target": 0.19353957581306247,
+        "achieved_power_at_bonferroni": 1.0
+      },
+      {
+        "estimand": "Diagonal gain: 7B/K5",
+        "n": 9,
+        "df": 8,
+        "mean": 7.406131652706986,
+        "sd": 0.20822005707103036,
+        "se": 0.06940668569034346,
+        "t": 106.70631480300463,
+        "bonferroni_ci_low": 7.150953268318665,
+        "bonferroni_ci_high": 7.661310037095306,
+        "reported": null,
+        "matches_reported_to_1e-9": false,
+        "one_sided_p_raw": 3.3232953799650704e-14,
+        "one_sided_p_bonferroni": 2.6586363039720563e-13,
+        "mde_nats_at_bonferroni_power_target": 0.3257517943374797,
+        "achieved_power_at_bonferroni": 1.0
+      },
+      {
+        "estimand": "Diagonal: 1.5B to 3B",
+        "n": 9,
+        "df": 8,
+        "mean": 1.7111166706188419,
+        "sd": 0.13970361840828027,
+        "se": 0.04656787280276009,
+        "t": 36.74457448091603,
+        "bonferroni_ci_low": 1.5399067298470637,
+        "bonferroni_ci_high": 1.88232661139062,
+        "reported": {
+          "mean": 1.7111166706188419,
+          "ci_low": 1.539906729847063,
+          "ci_high": 1.8823266113906207
+        },
+        "matches_reported_to_1e-9": true,
+        "one_sided_p_raw": 1.6497012539626905e-10,
+        "one_sided_p_bonferroni": 1.3197610031701524e-09,
+        "mde_nats_at_bonferroni_power_target": 0.21856061808883,
+        "achieved_power_at_bonferroni": 1.0
+      },
+      {
+        "estimand": "Diagonal: 3B to 7B",
+        "n": 9,
+        "df": 8,
+        "mean": 5.30684454638114,
+        "sd": 0.2070391121239953,
+        "se": 0.0690130373746651,
+        "t": 76.89626117411402,
+        "bonferroni_ci_low": 5.053113436707249,
+        "bonferroni_ci_high": 5.560575656055032,
+        "reported": {
+          "mean": 5.30684454638114,
+          "ci_low": 5.053113436707248,
+          "ci_high": 5.560575656055033
+        },
+        "matches_reported_to_1e-9": true,
+        "one_sided_p_raw": 4.558609242659701e-13,
+        "one_sided_p_bonferroni": 3.6468873941277606e-12,
+        "mde_nats_at_bonferroni_power_target": 0.3239042540912525,
+        "achieved_power_at_bonferroni": 1.0
+      },
+      {
+        "estimand": "7B refinement: K3 to K5",
+        "n": 9,
+        "df": 8,
+        "mean": 1.4557100905740443,
+        "sd": 0.3199972351110653,
+        "se": 0.10666574503702177,
+        "t": 13.647400016460706,
+        "bonferroni_ci_low": 1.0635462490450045,
+        "bonferroni_ci_high": 1.8478739321030841,
+        "reported": {
+          "mean": 1.4557100905740443,
+          "ci_low": 1.0635462490450032,
+          "ci_high": 1.8478739321030855
+        },
+        "matches_reported_to_1e-9": true,
+        "one_sided_p_raw": 3.999566708528988e-07,
+        "one_sided_p_bonferroni": 3.1996533668231903e-06,
+        "mde_nats_at_bonferroni_power_target": 0.5006226344703308,
+        "achieved_power_at_bonferroni": 0.9999999999983895
+      },
+      {
+        "estimand": "Interaction: 1.5B to 3B",
+        "n": 9,
+        "df": 8,
+        "mean": 0.7811361208972267,
+        "sd": 0.19745491609231158,
+        "se": 0.06581830536410387,
+        "t": 11.868067957326117,
+        "bonferroni_ci_low": 0.539150660001982,
+        "bonferroni_ci_high": 1.0231215817924715,
+        "reported": {
+          "mean": 0.7811361208972267,
+          "ci_low": 0.5391506600019811,
+          "ci_high": 1.0231215817924724
+        },
+        "matches_reported_to_1e-9": true,
+        "one_sided_p_raw": 1.1661039946635527e-06,
+        "one_sided_p_bonferroni": 9.328831957308422e-06,
+        "mde_nats_at_bonferroni_power_target": 0.30891016995488096,
+        "achieved_power_at_bonferroni": 0.9999999965167394
+      },
+      {
+        "estimand": "Interaction: 3B to 7B",
+        "n": 9,
+        "df": 8,
+        "mean": 0.9678215136493579,
+        "sd": 0.24200585565446528,
+        "se": 0.08066861855148842,
+        "t": 11.99749705682174,
+        "bonferroni_ci_low": 0.6712378697530683,
+        "bonferroni_ci_high": 1.2644051575456474,
+        "reported": {
+          "mean": 0.9678215136493579,
+          "ci_low": 0.6712378697530674,
+          "ci_high": 1.2644051575456483
+        },
+        "matches_reported_to_1e-9": true,
+        "one_sided_p_raw": 1.0736387457969253e-06,
+        "one_sided_p_bonferroni": 8.589109966375402e-06,
+        "mde_nats_at_bonferroni_power_target": 0.37860829945275865,
+        "achieved_power_at_bonferroni": 0.9999999979205912
+      }
+    ]
+  },
+  "sanity": {
+    "t_0975_df9": 2.262157162798205,
+    "official_first_increment_raw_p": 1.715402673978263e-11,
+    "official_first_increment_t": 37.4407809352744,
+    "official_first_increment_se_points": 1.826217250067594,
+    "official_second_increment_raw_p": 0.02550163035347543,
+    "official_second_increment_holm_p": 0.02550163035347543,
+    "official_second_increment_t": 2.249999999999999,
+    "official_second_increment_se_points": 1.6666666666666663,
+    "official_mde_points_first_contrast_se": 5.751919007090068,
+    "official_mde_points_second_contrast_se": 5.2493927971212715,
+    "official_achieved_power_second_increment": 0.5192321282005659,
+    "bonferroni_t_crit_1_minus_005_over_16_df8": 3.676567780902171,
+    "factorial_all_reported_intervals_reproduced": true
+  },
+  "headline": "The official-16K design is well powered for the first adjacent increment and underpowered for the second: at the registered one-sided level 0.025 with 80% power the minimum detectable increment is 5.25 points (using the second contrast's SE), so the observed 3.75-point 1.5B->3B increment was detected at 0.52 power and is significant but marginal (p_Holm = 0.0255)."
+}

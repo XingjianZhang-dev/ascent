@@ -1,0 +1,835 @@
+{
+  "comparison": "cross-architecture reproduction ladder (retained Blackwell reference vs A100 rerun)",
+  "pairs": 5,
+  "all_scientific_fields_and_predictions_equal": false,
+  "all_panel_statistics_print_identically": false,
+  "all_binary64_identical": false,
+  "results": [
+    {
+      "family": "factorial",
+      "reference": {
+        "path": "artifacts/sum_numeric_candidate/confirmation/node1/rounds_5_sum_numeric_candidate_panel_2_qwen2p5-7b-instruct.json",
+        "sha256": "556e600bdf21a9185cd47ffa4d4877e0d943d93f575587da64a5a489cf2b5154",
+        "status": "prospective_sum_numeric_candidate_development_frozen_before_any_score",
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "git_commit": "f133a9689adb870680d462049c0dd4e0bfc41e9a",
+        "git_dirty": false,
+        "started_utc": "2026-08-15T00:01:18.718603+00:00"
+      },
+      "rerun": {
+        "path": "artifacts_revision/crossnode_2026-09/factorial/rounds_5_sum_numeric_candidate_panel_2_qwen2p5-7b-instruct.json",
+        "sha256": "9b794b144c9637124fea780b40608179835d0ddac6b0eaca266fe02ab34e56c7",
+        "status": "posthoc_cross_node_candidate_audit_no_independence_claim",
+        "gpu": "NVIDIA A100-SXM4-80GB",
+        "git_commit": "9c15400132f2c809625d6848a70ab9d3bad2f36f",
+        "git_dirty": false,
+        "started_utc": "2026-09-20T21:05:07.187070+00:00"
+      },
+      "ladder": {
+        "1_discrete": {
+          "top_level_scientific_fields_equal": {
+            "experiment": true,
+            "config_sha256": true,
+            "data_sha256": true,
+            "panel": true,
+            "rounds": true,
+            "endpoint": true,
+            "model_files": true,
+            "model_identity": true,
+            "preflight": true,
+            "foundation_accuracy": true,
+            "ascent_accuracy": false
+          },
+          "all_top_level_scientific_fields_equal": false,
+          "rows": 256,
+          "row_ids_same_order": true,
+          "fields": [
+            "row_id",
+            "target",
+            "foundation_answer",
+            "ascent_answer",
+            "retained_first_observations",
+            "retained_second_observations"
+          ],
+          "all_discrete_fields_identical": false,
+          "rows_differing_per_field": {
+            "foundation_answer": 2,
+            "ascent_answer": 2
+          },
+          "differing_row_ids": {
+            "foundation_answer": [
+              "sum_numeric_candidate_p02_r0141",
+              "sum_numeric_candidate_p02_r0210"
+            ],
+            "ascent_answer": [
+              "sum_numeric_candidate_p02_r0179",
+              "sum_numeric_candidate_p02_r0193"
+            ]
+          },
+          "argmax_flips": {
+            "foundation_probabilities": {
+              "rows_flipped": 2,
+              "row_ids": [
+                "sum_numeric_candidate_p02_r0141",
+                "sum_numeric_candidate_p02_r0210"
+              ]
+            },
+            "ascent_probabilities": {
+              "rows_flipped": 2,
+              "row_ids": [
+                "sum_numeric_candidate_p02_r0179",
+                "sum_numeric_candidate_p02_r0193"
+              ]
+            }
+          }
+        },
+        "2_continuous": {
+          "top_level_statistics": {
+            "values_compared": 15,
+            "keys_missing_on_one_side": [],
+            "max_abs_diff": 0.01137917333155336,
+            "max_abs_diff_at": "gain_nll.ci95_high",
+            "max_rel_diff": 0.005622709209251503,
+            "max_rel_diff_at": "gain_nll.standard_error",
+            "binary64_identical": false,
+            "binary64_mismatching_values": 12
+          },
+          "per_row": {
+            "values_compared": 8448,
+            "keys_missing_on_one_side": [],
+            "max_abs_diff": 1.122891337354119,
+            "max_abs_diff_at": "row[76].gain_nll",
+            "max_rel_diff": 1.1979512395137768,
+            "max_rel_diff_at": "row[115].gain_nll",
+            "binary64_identical": false,
+            "binary64_mismatching_values": 8440
+          }
+        },
+        "3_panel_precision": {
+          "all_print_identically": false,
+          "statistics": {
+            "foundation_accuracy": {
+              "reference": 0.01953125,
+              "rerun": 0.01953125,
+              "decimals": 4,
+              "reference_printed": "0.0195",
+              "rerun_printed": "0.0195",
+              "prints_identically": true,
+              "abs_diff": 0.0
+            },
+            "ascent_accuracy": {
+              "reference": 0.90234375,
+              "rerun": 0.8984375,
+              "decimals": 4,
+              "reference_printed": "0.9023",
+              "rerun_printed": "0.8984",
+              "prints_identically": false,
+              "abs_diff": 0.00390625
+            },
+            "foundation_nll.mean": {
+              "reference": 8.490090286678786,
+              "rerun": 8.498230312957935,
+              "decimals": 3,
+              "reference_printed": "8.490",
+              "rerun_printed": "8.498",
+              "prints_identically": false,
+              "abs_diff": 0.008140026279148671
+            },
+            "ascent_nll.mean": {
+              "reference": 0.9326193451389948,
+              "rerun": 0.9324614541779536,
+              "decimals": 3,
+              "reference_printed": "0.933",
+              "rerun_printed": "0.932",
+              "prints_identically": false,
+              "abs_diff": 0.00015789096104124045
+            },
+            "gain_nll.mean": {
+              "reference": 7.557470941539791,
+              "rerun": 7.5657688587799825,
+              "decimals": 3,
+              "reference_printed": "7.557",
+              "rerun_printed": "7.566",
+              "prints_identically": false,
+              "abs_diff": 0.008297917240191133
+            }
+          }
+        },
+        "4_binary64": {
+          "all_stored_floats_binary64_identical": false,
+          "note": "expected on matched hardware; on a different GPU architecture a failure here reflects differing kernel reduction paths and is not a reproduction failure"
+        }
+      },
+      "verdicts": {
+        "scientific_fields_and_predictions_equal": false,
+        "panel_statistics_print_identically": false,
+        "binary64_identical": false
+      },
+      "label": "factorial_panel_2_k5_7b"
+    },
+    {
+      "family": "factorial",
+      "reference": {
+        "path": "artifacts/sum_numeric_candidate/confirmation/node1/rounds_5_sum_numeric_candidate_panel_3_qwen2p5-7b-instruct.json",
+        "sha256": "ed69c8428747ce8d084be44854d8a777bfd5024d6eda4659c675d49611bb747d",
+        "status": "prospective_sum_numeric_candidate_development_frozen_before_any_score",
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "git_commit": "f133a9689adb870680d462049c0dd4e0bfc41e9a",
+        "git_dirty": false,
+        "started_utc": "2026-08-15T00:02:43.453189+00:00"
+      },
+      "rerun": {
+        "path": "artifacts_revision/crossnode_2026-09/factorial/rounds_5_sum_numeric_candidate_panel_3_qwen2p5-7b-instruct.json",
+        "sha256": "0c7178433be46b0c1fa273aa67ef8f829184f9fe0760fecf3413b99543fd4cf8",
+        "status": "posthoc_cross_node_candidate_audit_no_independence_claim",
+        "gpu": "NVIDIA A100-SXM4-80GB",
+        "git_commit": "9c15400132f2c809625d6848a70ab9d3bad2f36f",
+        "git_dirty": false,
+        "started_utc": "2026-09-20T21:06:01.644879+00:00"
+      },
+      "ladder": {
+        "1_discrete": {
+          "top_level_scientific_fields_equal": {
+            "experiment": true,
+            "config_sha256": true,
+            "data_sha256": true,
+            "panel": true,
+            "rounds": true,
+            "endpoint": true,
+            "model_files": true,
+            "model_identity": true,
+            "preflight": true,
+            "foundation_accuracy": true,
+            "ascent_accuracy": false
+          },
+          "all_top_level_scientific_fields_equal": false,
+          "rows": 256,
+          "row_ids_same_order": true,
+          "fields": [
+            "row_id",
+            "target",
+            "foundation_answer",
+            "ascent_answer",
+            "retained_first_observations",
+            "retained_second_observations"
+          ],
+          "all_discrete_fields_identical": false,
+          "rows_differing_per_field": {
+            "foundation_answer": 1,
+            "ascent_answer": 1
+          },
+          "differing_row_ids": {
+            "foundation_answer": [
+              "sum_numeric_candidate_p03_r0200"
+            ],
+            "ascent_answer": [
+              "sum_numeric_candidate_p03_r0156"
+            ]
+          },
+          "argmax_flips": {
+            "foundation_probabilities": {
+              "rows_flipped": 1,
+              "row_ids": [
+                "sum_numeric_candidate_p03_r0200"
+              ]
+            },
+            "ascent_probabilities": {
+              "rows_flipped": 1,
+              "row_ids": [
+                "sum_numeric_candidate_p03_r0156"
+              ]
+            }
+          }
+        },
+        "2_continuous": {
+          "top_level_statistics": {
+            "values_compared": 15,
+            "keys_missing_on_one_side": [],
+            "max_abs_diff": 0.020417481883193034,
+            "max_abs_diff_at": "foundation_nll.ci95_low",
+            "max_rel_diff": 0.007787392424265222,
+            "max_rel_diff_at": "gain_nll.standard_error",
+            "binary64_identical": false,
+            "binary64_mismatching_values": 12
+          },
+          "per_row": {
+            "values_compared": 8448,
+            "keys_missing_on_one_side": [],
+            "max_abs_diff": 1.3559233667636592,
+            "max_abs_diff_at": "row[23].gain_nll",
+            "max_rel_diff": 1.63253428445372,
+            "max_rel_diff_at": "row[187].gain_nll",
+            "binary64_identical": false,
+            "binary64_mismatching_values": 8443
+          }
+        },
+        "3_panel_precision": {
+          "all_print_identically": false,
+          "statistics": {
+            "foundation_accuracy": {
+              "reference": 0.01953125,
+              "rerun": 0.01953125,
+              "decimals": 4,
+              "reference_printed": "0.0195",
+              "rerun_printed": "0.0195",
+              "prints_identically": true,
+              "abs_diff": 0.0
+            },
+            "ascent_accuracy": {
+              "reference": 0.83203125,
+              "rerun": 0.8359375,
+              "decimals": 4,
+              "reference_printed": "0.8320",
+              "rerun_printed": "0.8359",
+              "prints_identically": false,
+              "abs_diff": 0.00390625
+            },
+            "foundation_nll.mean": {
+              "reference": 8.598381615682634,
+              "rerun": 8.616461283288427,
+              "decimals": 3,
+              "reference_printed": "8.598",
+              "rerun_printed": "8.616",
+              "prints_identically": false,
+              "abs_diff": 0.01807966760579305
+            },
+            "ascent_nll.mean": {
+              "reference": 1.298953135125207,
+              "rerun": 1.3060470312488657,
+              "decimals": 3,
+              "reference_printed": "1.299",
+              "rerun_printed": "1.306",
+              "prints_identically": false,
+              "abs_diff": 0.007093896123658627
+            },
+            "gain_nll.mean": {
+              "reference": 7.2994284805574265,
+              "rerun": 7.310414252039562,
+              "decimals": 3,
+              "reference_printed": "7.299",
+              "rerun_printed": "7.310",
+              "prints_identically": false,
+              "abs_diff": 0.010985771482135753
+            }
+          }
+        },
+        "4_binary64": {
+          "all_stored_floats_binary64_identical": false,
+          "note": "expected on matched hardware; on a different GPU architecture a failure here reflects differing kernel reduction paths and is not a reproduction failure"
+        }
+      },
+      "verdicts": {
+        "scientific_fields_and_predictions_equal": false,
+        "panel_statistics_print_identically": false,
+        "binary64_identical": false
+      },
+      "label": "factorial_panel_3_k5_7b"
+    },
+    {
+      "family": "babilong",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/0p5b/canonical_16k_confirmation_panel_1.json",
+        "sha256": "ea6e3bcc52f50d16d9b01017c03a05b7676b72271ea91c232d761a477f04fe28",
+        "status": "prospective_16k_confirmation_frozen_before_any_16k_decoder_score",
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "git_commit": "4fd25e992e3099b9a4ecb7880071ef097ef5cd24",
+        "git_dirty": false,
+        "started_utc": "2026-08-14T17:46:01.707954+00:00"
+      },
+      "rerun": {
+        "path": "artifacts_revision/crossnode_2026-09/official16k/canonical/0p5b/canonical_16k_confirmation_panel_1.json",
+        "sha256": "d3e2168aac30d3535ad21287e52143eee1e9eb5ccff95121c3effd43dc27f55d",
+        "status": "posthoc_cross_architecture_audit_rerun_no_independence_claim",
+        "gpu": "NVIDIA A100-SXM4-80GB",
+        "git_commit": "9c15400132f2c809625d6848a70ab9d3bad2f36f",
+        "git_dirty": false,
+        "started_utc": "2026-09-20T21:06:08.200087+00:00"
+      },
+      "ladder": {
+        "1_discrete": {
+          "top_level_scientific_fields_equal": {
+            "experiment": true,
+            "endpoint": true,
+            "config": true,
+            "data": true,
+            "model_files": true,
+            "model_identity": false,
+            "parser_accuracy": true,
+            "wins": true,
+            "regressions": false,
+            "state": true,
+            "condition_excluding_diagnostic_flag": true,
+            "by_task": false
+          },
+          "all_top_level_scientific_fields_equal": false,
+          "rows": 80,
+          "row_ids_same_order": true,
+          "fields": [
+            "row_id",
+            "task",
+            "target",
+            "foundation_output",
+            "foundation_answer",
+            "foundation_location",
+            "foundation_score",
+            "ascent_output",
+            "ascent_answer",
+            "ascent_location",
+            "ascent_score",
+            "supporting_fact_count",
+            "retained_fact_count",
+            "retained_facts",
+            "structured_inventory",
+            "structured_count",
+            "retained_read_state_bytes",
+            "persistent_payload_bytes",
+            "write_budget_bytes",
+            "write_payload_utilization",
+            "foundation_prompt_tokens",
+            "ascent_prompt_tokens"
+          ],
+          "all_discrete_fields_identical": false,
+          "rows_differing_per_field": {
+            "foundation_output": 10,
+            "foundation_answer": 1,
+            "foundation_location": 1,
+            "foundation_score": 1,
+            "ascent_output": 1,
+            "ascent_answer": 1,
+            "ascent_location": 1
+          },
+          "differing_row_ids": {
+            "foundation_output": [
+              "04f7b27139ffdfd41848e0c1fbc0387dd91771ee47b1d6ebfc99f3b6d0f6f5da",
+              "0650f371468586fc7fd85a51a333c5767454067d6f52e4075d40bcf9fba9ca30",
+              "0946545ee4d0608b7de4b2def150dc73c66d4f430a6bbf70f9da33b078852434",
+              "09774799de02f40804538a7827b1b929ee1f488789389909747af922a9023111",
+              "09c9e7d416820578696b88a15336aa185ef1fd9d5c438e33992422d2041e53a1",
+              "0ac9eefe0c03b9ef60d2285360c6ab00cd1c24675cd53a565a0afbf431699745",
+              "0b3d68b531133f13cb1ab5dac3c622ae8c26bba8b244375a1515452c649f58b4",
+              "0be1043849670ae55ae902928f9e6378932cdcc0a1b3132196197de5ce9b724b",
+              "0497c004500fa711ab542afc427dd4b33141d01018c9e62c475f5fddda62a2ec",
+              "0839a2cadc143a3ba5732b4f98979fc6836a2049a80f80366b33d912c52af6e0"
+            ],
+            "foundation_answer": [
+              "0b3d68b531133f13cb1ab5dac3c622ae8c26bba8b244375a1515452c649f58b4"
+            ],
+            "foundation_location": [
+              "0b3d68b531133f13cb1ab5dac3c622ae8c26bba8b244375a1515452c649f58b4"
+            ],
+            "foundation_score": [
+              "0b3d68b531133f13cb1ab5dac3c622ae8c26bba8b244375a1515452c649f58b4"
+            ],
+            "ascent_output": [
+              "09bac03b223a4fb8959207d72fbae7156ded8ac303a0eb61f7c60c0b0e67b28f"
+            ],
+            "ascent_answer": [
+              "09bac03b223a4fb8959207d72fbae7156ded8ac303a0eb61f7c60c0b0e67b28f"
+            ],
+            "ascent_location": [
+              "09bac03b223a4fb8959207d72fbae7156ded8ac303a0eb61f7c60c0b0e67b28f"
+            ]
+          },
+          "argmax_flips": null
+        },
+        "2_continuous": {
+          "top_level_statistics": {
+            "values_compared": 15,
+            "keys_missing_on_one_side": [],
+            "max_abs_diff": 0.016024001260305676,
+            "max_abs_diff_at": "foundation.ci95_high",
+            "max_rel_diff": 0.2925518327141706,
+            "max_rel_diff_at": "gain.ci95_low",
+            "binary64_identical": false,
+            "binary64_mismatching_values": 8
+          },
+          "per_row": null
+        },
+        "3_panel_precision": {
+          "all_print_identically": false,
+          "statistics": {
+            "foundation.mean": {
+              "reference": 0.1,
+              "rerun": 0.1125,
+              "decimals": 4,
+              "reference_printed": "0.1000",
+              "rerun_printed": "0.1125",
+              "prints_identically": false,
+              "abs_diff": 0.012499999999999997
+            },
+            "ascent.mean": {
+              "reference": 0.1625,
+              "rerun": 0.1625,
+              "decimals": 4,
+              "reference_printed": "0.1625",
+              "rerun_printed": "0.1625",
+              "prints_identically": true,
+              "abs_diff": 0.0
+            },
+            "gain.mean": {
+              "reference": 0.0625,
+              "rerun": 0.05,
+              "decimals": 4,
+              "reference_printed": "0.0625",
+              "rerun_printed": "0.0500",
+              "prints_identically": false,
+              "abs_diff": 0.012499999999999997
+            },
+            "remaining_error_elimination": {
+              "reference": 0.06944444444444445,
+              "rerun": 0.05633802816901409,
+              "decimals": 4,
+              "reference_printed": "0.0694",
+              "rerun_printed": "0.0563",
+              "prints_identically": false,
+              "abs_diff": 0.013106416275430355
+            }
+          }
+        },
+        "4_binary64": {
+          "all_stored_floats_binary64_identical": false,
+          "note": "expected on matched hardware; on a different GPU architecture a failure here reflects differing kernel reduction paths and is not a reproduction failure"
+        }
+      },
+      "verdicts": {
+        "scientific_fields_and_predictions_equal": false,
+        "panel_statistics_print_identically": false,
+        "binary64_identical": false
+      },
+      "label": "official16k_panel_1_0p5b"
+    },
+    {
+      "family": "babilong",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/1p5b/canonical_16k_confirmation_panel_1.json",
+        "sha256": "30f56570f1fbdc65d5a26836d341b001a36e0979ffab7f4f66cb67fee0740d31",
+        "status": "prospective_16k_confirmation_frozen_before_any_16k_decoder_score",
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "git_commit": "4fd25e992e3099b9a4ecb7880071ef097ef5cd24",
+        "git_dirty": false,
+        "started_utc": "2026-08-14T17:46:04.959935+00:00"
+      },
+      "rerun": {
+        "path": "artifacts_revision/crossnode_2026-09/official16k/canonical/1p5b/canonical_16k_confirmation_panel_1.json",
+        "sha256": "18d4283c0d3567baaf7e3b8367ef8366150b2df611bccb9ed7c7108512a4e9c0",
+        "status": "posthoc_cross_architecture_audit_rerun_no_independence_claim",
+        "gpu": "NVIDIA A100-SXM4-80GB",
+        "git_commit": "9c15400132f2c809625d6848a70ab9d3bad2f36f",
+        "git_dirty": false,
+        "started_utc": "2026-09-20T21:07:13.262329+00:00"
+      },
+      "ladder": {
+        "1_discrete": {
+          "top_level_scientific_fields_equal": {
+            "experiment": true,
+            "endpoint": true,
+            "config": true,
+            "data": true,
+            "model_files": true,
+            "model_identity": false,
+            "parser_accuracy": true,
+            "wins": false,
+            "regressions": true,
+            "state": true,
+            "condition_excluding_diagnostic_flag": true,
+            "by_task": false
+          },
+          "all_top_level_scientific_fields_equal": false,
+          "rows": 80,
+          "row_ids_same_order": true,
+          "fields": [
+            "row_id",
+            "task",
+            "target",
+            "foundation_output",
+            "foundation_answer",
+            "foundation_location",
+            "foundation_score",
+            "ascent_output",
+            "ascent_answer",
+            "ascent_location",
+            "ascent_score",
+            "supporting_fact_count",
+            "retained_fact_count",
+            "retained_facts",
+            "structured_inventory",
+            "structured_count",
+            "retained_read_state_bytes",
+            "persistent_payload_bytes",
+            "write_budget_bytes",
+            "write_payload_utilization",
+            "foundation_prompt_tokens",
+            "ascent_prompt_tokens"
+          ],
+          "all_discrete_fields_identical": false,
+          "rows_differing_per_field": {
+            "foundation_output": 5,
+            "foundation_answer": 3,
+            "foundation_location": 3,
+            "foundation_score": 1
+          },
+          "differing_row_ids": {
+            "foundation_output": [
+              "05238a96f8745656428ae0add2c81df5c02138101683cef5eb07b4e3743488c9",
+              "052cd5b720abb16db731fd9765ef75af074d158876faa60e389cfc255063bd48",
+              "07487021ba06776e8479100c5ecc7d6e93c7623c7239dc377704abc3759e11ed",
+              "0b832d56396651d6045503dc5fa5b330bd5cfe37cdd86fe599a59a4270ba3953",
+              "00b0bfaa4ddbe338fdb0fbe0603a397d97780d566ea7a333b49a74db70a712ee"
+            ],
+            "foundation_answer": [
+              "05238a96f8745656428ae0add2c81df5c02138101683cef5eb07b4e3743488c9",
+              "07487021ba06776e8479100c5ecc7d6e93c7623c7239dc377704abc3759e11ed",
+              "00b0bfaa4ddbe338fdb0fbe0603a397d97780d566ea7a333b49a74db70a712ee"
+            ],
+            "foundation_location": [
+              "05238a96f8745656428ae0add2c81df5c02138101683cef5eb07b4e3743488c9",
+              "07487021ba06776e8479100c5ecc7d6e93c7623c7239dc377704abc3759e11ed",
+              "00b0bfaa4ddbe338fdb0fbe0603a397d97780d566ea7a333b49a74db70a712ee"
+            ],
+            "foundation_score": [
+              "00b0bfaa4ddbe338fdb0fbe0603a397d97780d566ea7a333b49a74db70a712ee"
+            ]
+          },
+          "argmax_flips": null
+        },
+        "2_continuous": {
+          "top_level_statistics": {
+            "values_compared": 15,
+            "keys_missing_on_one_side": [],
+            "max_abs_diff": 0.015299904732605563,
+            "max_abs_diff_at": "gain.ci95_low",
+            "max_rel_diff": 0.13612334762781717,
+            "max_rel_diff_at": "foundation.ci95_low",
+            "binary64_identical": false,
+            "binary64_mismatching_values": 8
+          },
+          "per_row": null
+        },
+        "3_panel_precision": {
+          "all_print_identically": false,
+          "statistics": {
+            "foundation.mean": {
+              "reference": 0.1375,
+              "rerun": 0.15,
+              "decimals": 4,
+              "reference_printed": "0.1375",
+              "rerun_printed": "0.1500",
+              "prints_identically": false,
+              "abs_diff": 0.012499999999999983
+            },
+            "ascent.mean": {
+              "reference": 1.0,
+              "rerun": 1.0,
+              "decimals": 4,
+              "reference_printed": "1.0000",
+              "rerun_printed": "1.0000",
+              "prints_identically": true,
+              "abs_diff": 0.0
+            },
+            "gain.mean": {
+              "reference": 0.8625,
+              "rerun": 0.85,
+              "decimals": 4,
+              "reference_printed": "0.8625",
+              "rerun_printed": "0.8500",
+              "prints_identically": false,
+              "abs_diff": 0.012500000000000067
+            },
+            "remaining_error_elimination": {
+              "reference": 1.0,
+              "rerun": 1.0,
+              "decimals": 4,
+              "reference_printed": "1.0000",
+              "rerun_printed": "1.0000",
+              "prints_identically": true,
+              "abs_diff": 0.0
+            }
+          }
+        },
+        "4_binary64": {
+          "all_stored_floats_binary64_identical": false,
+          "note": "expected on matched hardware; on a different GPU architecture a failure here reflects differing kernel reduction paths and is not a reproduction failure"
+        }
+      },
+      "verdicts": {
+        "scientific_fields_and_predictions_equal": false,
+        "panel_statistics_print_identically": false,
+        "binary64_identical": false
+      },
+      "label": "official16k_panel_1_1p5b"
+    },
+    {
+      "family": "babilong",
+      "reference": {
+        "path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/3b/canonical_16k_confirmation_panel_1.json",
+        "sha256": "f09d939e3f595a07351e33c15a58f1a540697b45ed535e42d3c4f498de10c3b8",
+        "status": "prospective_16k_confirmation_frozen_before_any_16k_decoder_score",
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "git_commit": "4fd25e992e3099b9a4ecb7880071ef097ef5cd24",
+        "git_dirty": false,
+        "started_utc": "2026-08-14T17:52:23.678132+00:00"
+      },
+      "rerun": {
+        "path": "artifacts_revision/crossnode_2026-09/official16k/canonical/3b/canonical_16k_confirmation_panel_1.json",
+        "sha256": "d62f05566e740da6dac818c79f0a2477b94a94a90f53e254ac9a30b63ce38e17",
+        "status": "posthoc_cross_architecture_audit_rerun_no_independence_claim",
+        "gpu": "NVIDIA A100-SXM4-80GB",
+        "git_commit": "9c15400132f2c809625d6848a70ab9d3bad2f36f",
+        "git_dirty": false,
+        "started_utc": "2026-09-20T21:08:05.592280+00:00"
+      },
+      "ladder": {
+        "1_discrete": {
+          "top_level_scientific_fields_equal": {
+            "experiment": true,
+            "endpoint": true,
+            "config": true,
+            "data": true,
+            "model_files": true,
+            "model_identity": false,
+            "parser_accuracy": true,
+            "wins": false,
+            "regressions": true,
+            "state": true,
+            "condition_excluding_diagnostic_flag": true,
+            "by_task": false
+          },
+          "all_top_level_scientific_fields_equal": false,
+          "rows": 80,
+          "row_ids_same_order": true,
+          "fields": [
+            "row_id",
+            "task",
+            "target",
+            "foundation_output",
+            "foundation_answer",
+            "foundation_location",
+            "foundation_score",
+            "ascent_output",
+            "ascent_answer",
+            "ascent_location",
+            "ascent_score",
+            "supporting_fact_count",
+            "retained_fact_count",
+            "retained_facts",
+            "structured_inventory",
+            "structured_count",
+            "retained_read_state_bytes",
+            "persistent_payload_bytes",
+            "write_budget_bytes",
+            "write_payload_utilization",
+            "foundation_prompt_tokens",
+            "ascent_prompt_tokens"
+          ],
+          "all_discrete_fields_identical": false,
+          "rows_differing_per_field": {
+            "foundation_output": 8,
+            "foundation_answer": 2,
+            "foundation_location": 2,
+            "ascent_output": 1,
+            "ascent_answer": 1,
+            "ascent_location": 1,
+            "ascent_score": 1
+          },
+          "differing_row_ids": {
+            "foundation_output": [
+              "00525ed111233bb306f87b6d168758cdf866d10956e4c1e5153d61c7ca1f585e",
+              "065d2fab41dbdd05f304eb4e7f281e7ec7beae46dc337dba16faf35f136d7174",
+              "09bfcfd2d5c791098d6b4f208ebcc229e790639e3c858ae0153e348edc4127e6",
+              "00707b828333e0db211f639510c12da84e23e8141133dab2b0f26bdf78870ee4",
+              "063e9875e221cd3faa16f6d769142b78ea600475320cba6ca424e549b1426792",
+              "06e023fef8e8b037769db8a2c5da66499b655776bc3e64bb829710c0d77a581a",
+              "0834c1ce57f0cfef945b813246cbf0152bc22275a69d49f9d8068a487e7f136b",
+              "0870cf7d4e7945c166ff1ce5d69e3560aa298035892d532c3443ba4c88c427bf"
+            ],
+            "foundation_answer": [
+              "065d2fab41dbdd05f304eb4e7f281e7ec7beae46dc337dba16faf35f136d7174",
+              "06e023fef8e8b037769db8a2c5da66499b655776bc3e64bb829710c0d77a581a"
+            ],
+            "foundation_location": [
+              "065d2fab41dbdd05f304eb4e7f281e7ec7beae46dc337dba16faf35f136d7174",
+              "06e023fef8e8b037769db8a2c5da66499b655776bc3e64bb829710c0d77a581a"
+            ],
+            "ascent_output": [
+              "03795d413c9b825aeb79c709b3d5bdd3cfce6e6d078e98a7324ed8f17b960f99"
+            ],
+            "ascent_answer": [
+              "03795d413c9b825aeb79c709b3d5bdd3cfce6e6d078e98a7324ed8f17b960f99"
+            ],
+            "ascent_location": [
+              "03795d413c9b825aeb79c709b3d5bdd3cfce6e6d078e98a7324ed8f17b960f99"
+            ],
+            "ascent_score": [
+              "03795d413c9b825aeb79c709b3d5bdd3cfce6e6d078e98a7324ed8f17b960f99"
+            ]
+          },
+          "argmax_flips": null
+        },
+        "2_continuous": {
+          "top_level_statistics": {
+            "values_compared": 15,
+            "keys_missing_on_one_side": [],
+            "max_abs_diff": 0.03699999999999992,
+            "max_abs_diff_at": "ascent.ci95_low",
+            "max_rel_diff": 1.0,
+            "max_rel_diff_at": "ascent.standard_error",
+            "binary64_identical": false,
+            "binary64_mismatching_values": 8
+          },
+          "per_row": null
+        },
+        "3_panel_precision": {
+          "all_print_identically": false,
+          "statistics": {
+            "foundation.mean": {
+              "reference": 0.1875,
+              "rerun": 0.1875,
+              "decimals": 4,
+              "reference_printed": "0.1875",
+              "rerun_printed": "0.1875",
+              "prints_identically": true,
+              "abs_diff": 0.0
+            },
+            "ascent.mean": {
+              "reference": 0.9875,
+              "rerun": 1.0,
+              "decimals": 4,
+              "reference_printed": "0.9875",
+              "rerun_printed": "1.0000",
+              "prints_identically": false,
+              "abs_diff": 0.012499999999999956
+            },
+            "gain.mean": {
+              "reference": 0.8,
+              "rerun": 0.8125,
+              "decimals": 4,
+              "reference_printed": "0.8000",
+              "rerun_printed": "0.8125",
+              "prints_identically": false,
+              "abs_diff": 0.012499999999999956
+            },
+            "remaining_error_elimination": {
+              "reference": 0.9846153846153847,
+              "rerun": 1.0,
+              "decimals": 4,
+              "reference_printed": "0.9846",
+              "rerun_printed": "1.0000",
+              "prints_identically": false,
+              "abs_diff": 0.01538461538461533
+            }
+          }
+        },
+        "4_binary64": {
+          "all_stored_floats_binary64_identical": false,
+          "note": "expected on matched hardware; on a different GPU architecture a failure here reflects differing kernel reduction paths and is not a reproduction failure"
+        }
+      },
+      "verdicts": {
+        "scientific_fields_and_predictions_equal": false,
+        "panel_statistics_print_identically": false,
+        "binary64_identical": false
+      },
+      "label": "official16k_panel_1_3b"
+    }
+  ]
+}

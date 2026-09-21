@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_array_revision1_cross_architecture_reproduction_audit",
+  "phase": "2A",
+  "preregistered_utc": "2026-09-20T21:10:00Z",
+  "purpose": "Extend cross-node reproduction coverage from the single preregistered factorial development panel to confirmation panels and to the headline official-16K BABILong panel, on a GPU of a different architecture from every retained run, so that prediction-level reproduction can be reported independently of bit-level identity.",
+  "hardware": {
+    "reference_runs": "NVIDIA RTX PRO 6000 Blackwell Server Edition (compute capability 12.0), three separately provisioned instances; see reports/NODE_IDENTITY_EVIDENCE_2026-09-20.json",
+    "rerun": "NVIDIA A100-SXM4-80GB (Ampere, compute capability 8.0), Vast.ai instance, hostname 067dc8350c5b, GPU UUID GPU-5b892f6f-ac8e-8c99-71ed-7efad31c6765, serial 1652523038517, driver 580.159.03",
+    "rule": "Exactly one machine is used. No matched-architecture machine is sought, and no second machine is used to retry any cell. Selecting hardware until a comparison passes is the same class of error as selecting seeds."
+  },
+  "software_parity": {
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128",
+    "transformers": "4.57.6",
+    "cudnn": "9.10.2 (91002)",
+    "note": "identical pinned versions to reproduction/environment.json; the only intended difference from the reference runs is the GPU architecture"
+  },
+  "runner_code": {
+    "commit_rule": "the runs execute from a clean git worktree at the commit that contains this file; environment_before.json and environment_after.json must both record git_dirty=false and the same commit",
+    "experiments/run_noisy_composition_candidate.py": {"sha256": "e6d0c0724ff7dad95fafcd3586c6a5b8de221a148ddfc3a479725e4ac9724f50", "changed_since_reference_runs": false},
+    "experiments/run_babilong_prompt.py": {"sha256": "ecff9829d691181265c79e26173473fdc44bbb90157af5109b5897ec93653cf3", "changed_since_reference_runs": true, "change": "adds --audit-label so that new audit records carry a descriptive status instead of the legacy 'posthoc_code_audit_correction_rerun_no_independence_claim' constant; the computation path is untouched (see git diff 98462d9..HEAD -- experiments/run_babilong_prompt.py)"},
+    "experiments/compare_crossarch_reproduction.py": {"sha256": "f2b0c2fc82c9f5b80a10062dba2dbc61720dd901cc1f9ba23e6e42d2eb91455e"},
+    "experiments/record_run_environment.py": {"sha256": "5fa4825a75b7507e4288e4ccd5890fe07827aff9e0a1141c13fcbf50c4d7f724"}
+  },
+  "cells": [
+    {
+      "id": "factorial_panel_2_k5_7b",
+      "group": "factorial confirmation panel",
+      "selection_rule": "the lowest-numbered confirmation panel of the numeric factorial (panel 1 is the development panel already covered by the retained node1/node2 pair)",
+      "runner": "experiments/run_noisy_composition_candidate.py",
+      "config": {"path": "configs/posttraining_noisy_composition_sum_numeric_candidate.json", "sha256": "ea488327c9f29d7d551c2d02205bd03471cf1927c0fb16ba2f02cbf0b181c510"},
+      "panel": "sum_numeric_candidate_panel_2",
+      "panel_data": {"path": "data/posttraining_noisy_composition_sum_numeric_candidate/sum_numeric_candidate_panel_2.jsonl", "sha256": "98f7930332a855878d45f7cdb0dc0c9f5185e3819cde02d0818dd561740b335a"},
+      "endpoint": "qwen2p5-7b-instruct",
+      "model": {"repo_id": "Qwen/Qwen2.5-7B-Instruct", "revision": "a09a35458c702b33eeacc393d103063234e8bc28"},
+      "rounds": 5,
+      "rows": 256,
+      "reference": {"path": "artifacts/sum_numeric_candidate/confirmation/node1/rounds_5_sum_numeric_candidate_panel_2_qwen2p5-7b-instruct.json", "sha256": "556e600bdf21a9185cd47ffa4d4877e0d943d93f575587da64a5a489cf2b5154", "git_commit": "f133a9689adb870680d462049c0dd4e0bfc41e9a", "hostname": "autodl-container-d91lagjqwt-00a4d7fe"},
+      "output": "artifacts_revision/crossnode_2026-09/factorial/rounds_5_sum_numeric_candidate_panel_2_qwen2p5-7b-instruct.json"
+    },
+    {
+      "id": "factorial_panel_3_k5_7b",
+      "group": "factorial confirmation panel",
+      "selection_rule": "the next confirmation panel in numeric order, run because the budget allows a second panel",
+      "runner": "experiments/run_noisy_composition_candidate.py",
+      "config": {"path": "configs/posttraining_noisy_composition_sum_numeric_candidate.json", "sha256": "ea488327c9f29d7d551c2d02205bd03471cf1927c0fb16ba2f02cbf0b181c510"},
+      "panel": "sum_numeric_candidate_panel_3",
+      "panel_data": {"path": "data/posttraining_noisy_composition_sum_numeric_candidate/sum_numeric_candidate_panel_3.jsonl", "sha256": "3744174b65909ec792a988ea2334b234edd54bfc06a9280bc610febf71e6a51e"},
+      "endpoint": "qwen2p5-7b-instruct",
+      "model": {"repo_id": "Qwen/Qwen2.5-7B-Instruct", "revision": "a09a35458c702b33eeacc393d103063234e8bc28"},
+      "rounds": 5,
+      "rows": 256,
+      "reference": {"path": "artifacts/sum_numeric_candidate/confirmation/node1/rounds_5_sum_numeric_candidate_panel_3_qwen2p5-7b-instruct.json", "sha256": "ed69c8428747ce8d084be44854d8a777bfd5024d6eda4659c675d49611bb747d", "git_commit": "f133a9689adb870680d462049c0dd4e0bfc41e9a", "hostname": "autodl-container-d91lagjqwt-00a4d7fe"},
+      "output": "artifacts_revision/crossnode_2026-09/factorial/rounds_5_sum_numeric_candidate_panel_3_qwen2p5-7b-instruct.json"
+    },
+    {
+      "id": "official16k_panel_1_0p5b",
+      "group": "official 16K BABILong panel (headline result)",
+      "selection_rule": "the lowest-numbered confirmation panel of the official-16K family; the same panel for all three readers so the co-scaled diagonal on one panel is reproduced end to end",
+      "runner": "experiments/run_babilong_prompt.py",
+      "config": {"path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json", "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"},
+      "panel_data": {"path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_1.jsonl", "sha256": "f9aa249c3a149e62d782e15c748056e9f30ff8a5ddf6d9783f24e4f2d021f327"},
+      "endpoint": "qwen2p5-0p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": ["foundation", "ascent"],
+      "model": {"repo_id": "Qwen/Qwen2.5-0.5B-Instruct", "revision": "7ae557604adf67be50417f59c2c2f167def9a775"},
+      "rows": 80,
+      "audit_label": "posthoc_cross_architecture_audit_rerun_no_independence_claim",
+      "reference": {"path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/0p5b/canonical_16k_confirmation_panel_1.json", "sha256": "ea6e3bcc52f50d16d9b01017c03a05b7676b72271ea91c232d761a477f04fe28", "git_commit": "4fd25e992e3099b9a4ecb7880071ef097ef5cd24"},
+      "output": "artifacts_revision/crossnode_2026-09/official16k/canonical/0p5b/canonical_16k_confirmation_panel_1.json"
+    },
+    {
+      "id": "official16k_panel_1_1p5b",
+      "group": "official 16K BABILong panel (headline result)",
+      "selection_rule": "as above",
+      "runner": "experiments/run_babilong_prompt.py",
+      "config": {"path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json", "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"},
+      "panel_data": {"path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_1.jsonl", "sha256": "f9aa249c3a149e62d782e15c748056e9f30ff8a5ddf6d9783f24e4f2d021f327"},
+      "endpoint": "qwen2p5-1p5b-instruct",
+      "condition": "canonical_coscale",
+      "arms": ["foundation", "ascent"],
+      "model": {"repo_id": "Qwen/Qwen2.5-1.5B-Instruct", "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"},
+      "rows": 80,
+      "audit_label": "posthoc_cross_architecture_audit_rerun_no_independence_claim",
+      "reference": {"path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/1p5b/canonical_16k_confirmation_panel_1.json", "sha256": "30f56570f1fbdc65d5a26836d341b001a36e0979ffab7f4f66cb67fee0740d31", "git_commit": "4fd25e992e3099b9a4ecb7880071ef097ef5cd24"},
+      "output": "artifacts_revision/crossnode_2026-09/official16k/canonical/1p5b/canonical_16k_confirmation_panel_1.json"
+    },
+    {
+      "id": "official16k_panel_1_3b",
+      "group": "official 16K BABILong panel (headline result)",
+      "selection_rule": "as above",
+      "runner": "experiments/run_babilong_prompt.py",
+      "config": {"path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json", "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045"},
+      "panel_data": {"path": "data/babilong_16k_canonical_confirmation/canonical_16k_confirmation_panel_1.jsonl", "sha256": "f9aa249c3a149e62d782e15c748056e9f30ff8a5ddf6d9783f24e4f2d021f327"},
+      "endpoint": "qwen2p5-3b-instruct",
+      "condition": "canonical_coscale",
+      "arms": ["foundation", "ascent"],
+      "model": {"repo_id": "Qwen/Qwen2.5-3B-Instruct", "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1"},
+      "rows": 80,
+      "audit_label": "posthoc_cross_architecture_audit_rerun_no_independence_claim",
+      "reference": {"path": "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/canonical/3b/canonical_16k_confirmation_panel_1.json", "sha256": "f09d939e3f595a07351e33c15a58f1a540697b45ed535e42d3c4f498de10c3b8", "git_commit": "4fd25e992e3099b9a4ecb7880071ef097ef5cd24"},
+      "output": "artifacts_revision/crossnode_2026-09/official16k/canonical/3b/canonical_16k_confirmation_panel_1.json"
+    }
+  ],
+  "comparison": {
+    "script": "experiments/compare_crossarch_reproduction.py",
+    "targets_fixed_before_execution": true,
+    "ladder": [
+      "1_discrete: per-row identity of every discrete scientific field (answers, generated strings, scores, argmax candidates, retained facts, state bytes, prompt-token counts) and of every top-level scientific field; reported as the number of differing rows per field",
+      "2_continuous: per-row max absolute and max relative difference over every stored NLL and probability value, reported as numbers",
+      "3_panel_precision: whether each panel statistic prints identically at manuscript precision (accuracies 4 decimals, NLL nats 3 decimals), with raw values from both sides",
+      "4_binary64: whether every stored float is IEEE-754 binary64 identical"
+    ],
+    "expectations_stated_in_advance": {
+      "1_discrete": "expected to hold for BABILong (greedy decoding, discrete outputs) and for factorial argmax candidates; any row that differs is a finding and is reported with its row_id",
+      "2_continuous": "last-bit differences expected across architectures; magnitudes are reported, not judged",
+      "3_panel_precision": "the scientifically meaningful test: whether the numbers printed in the paper survive a different operator implementation",
+      "4_binary64": "may fail across architectures; failure here is an expected consequence of differing tensor-core and reduction paths and is not described as a reproduction failure"
+    }
+  },
+  "interpretation_rules": {
+    "all_levels_hold": "report architecture-independent prediction-level and bit-level reproduction for the named cells",
+    "levels_1_and_3_hold_level_4_fails": "report architecture-independent reproduction of every prediction, scientific field and printed statistic; keep the bit-identity claim scoped to the retained matched-architecture node pair (development panel 1); state the max abs/rel differences",
+    "level_1_fails_for_some_rows": "report exactly how many rows differ per cell and by how much every panel statistic moves; the manuscript reproducibility section states this; no cell is rerun, no other hardware is used, and no seed, batch size, dtype or setting is changed",
+    "a_run_aborts": "the log is kept under artifacts_revision/crossnode_2026-09/logs/, the abort is recorded in docs/EXPERIMENT_LEDGER.md, and it is disclosed; the cell is not silently re-executed with different settings",
+    "no_number_in_the_manuscript_may_be_replaced": "reference records remain the reported values regardless of outcome; the rerun is audit evidence only and is labelled no_independence_claim"
+  },
+  "manuscript_wording_bound_to_outcome": {
+    "cross_node_coverage_sentence_template": "Cross-instance reruns now cover: the factorial development panel (matched architecture, binary64-identical), factorial confirmation panels 2 and 3 for Qwen2.5-7B/K=5 (different architecture, <outcome>), official-16K confirmation panel 1 for Qwen2.5-0.5B/1.5B/3B in both arms (different architecture, <outcome>), official-16K panel 1 for Qwen2.5-7B (matched architecture, identical), and all ten official-16K panels for Qwen3-8B (third instance, identical). Every other experimental cell was run once.",
+    "never_write": ["bit-exact for the A100 rerun unless level 4 holds", "independent replication for any post-hoc audit rerun", "physical node without the GPU-identity table"]
+  },
+  "run_hygiene": {
+    "environment_snapshots": ["artifacts_revision/crossnode_2026-09/environment_before.json", "artifacts_revision/crossnode_2026-09/environment_after.json"],
+    "git_dirty_required": false,
+    "gpu_uuid_recorded": true,
+    "results_hashed_after_transfer": "artifacts_revision/crossnode_2026-09/SHA256SUMS.txt is written on the local machine after rsync and re-verified against the remote hashes",
+    "existing_artifact_paths_written": "none"
+  }
+}

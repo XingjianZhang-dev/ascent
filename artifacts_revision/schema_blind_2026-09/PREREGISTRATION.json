@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_array_revision1_schema_blind_writer_ablation",
+  "phase": "2C",
+  "preregistered_utc": "2026-09-20T22:05:00Z",
+  "purpose": "Separate 'structured external state helps frozen readers, more so as they scale' from 'this parser solves this benchmark' by replacing the writer with schema-free state constructions and leaving everything else fixed.",
+  "fixed": [
+    "the ten official-16K confirmation panels and their hashes",
+    "per-reader slot budget s(m) = 1/2/3",
+    "the bullet-list serialisation and the reader prompt template",
+    "readers Qwen2.5-0.5B/1.5B/3B at the pinned revisions",
+    "greedy decoding, 8 new tokens, bf16, batch sizes from the frozen config",
+    "the scorer and the panel-clustered estimator with Holm family-wise control"
+  ],
+  "varied": {
+    "sentence_window_coscale": "last s(m) generic sentences of the input (recency; reads nothing task-specific)",
+    "generic_bm25_coscale": "deterministic BM25-like lexical chain over generic sentences (ascent/generic_retrieval.py, unchanged)",
+    "bge_m3_coscale": "BGE-M3 dense + BM25 RRF with the official bge-reranker-v2-m3, three target-blind hops (experiments/prepare_babilong_bge_cache.py, unchanged; protocol re-pinned to the 16K panels)"
+  },
+  "config": {
+    "path": "artifacts_revision/schema_blind_2026-09/config/babilong_qwen2p5_generic_writer_16k_ablation.json",
+    "sha256": "61d193dec7dd0b839b84b4193433957e3b46bd4ead03aa3573f4bb5fcb828edb",
+    "note": "committed with an empty retrieval_cache_by_panel map; the run copy fills in cache paths and hashes mechanically after cache generation and before any reader score; the run copy records the committed config's hash"
+  },
+  "retrieval_protocol": {
+    "path": "artifacts_revision/schema_blind_2026-09/config/babilong_bge_m3_retrieval_protocol_16k.json",
+    "sha256": "d194e654460c8341ee720475eb77ace5c04e1bc706198458dde6d171e2292d2a"
+  },
+  "runner_change": "experiments/run_babilong_prompt.py gains memory_source 'sentence_window' (selection of the last s(m) sentences and its instruction text); no existing path is altered",
+  "hardware": "NVIDIA A100-SXM4-80GB, UUID GPU-5b892f6f-ac8e-8c99-71ed-7efad31c6765, /venv/py3123 (Python 3.12.3, torch 2.8.0+cu128, transformers 4.57.6)",
+  "cells": "3 writers x 3 readers x 10 panels = 90 runner jobs, both arms each",
+  "analysis": {
+    "script": "experiments/analyze_generic_writer_ablation.py",
+    "same_instance_canonical_comparator": "artifacts_revision/target_blindness_2026-09/official16k (Phase 2B instrumented canonical run on the same A100)"
+  },
+  "interpretation_rule": {
+    "co_scaling_survives": "for a generic writer, the three endpoint gains increase strictly with reader scale AND both adjacent one-sided increments pass Holm at family-wise 0.05 (the registered rule of the canonical study)",
+    "co_scaling_collapses": "either condition above fails for that writer",
+    "consequence_if_all_generic_writers_collapse": "the schema is doing the work; the manuscript narrows the claim to structured-fact-retrieval tasks (Option B) and reports these results in Appendix D",
+    "consequence_if_any_generic_writer_survives": "the co-scaling pattern does not depend on the hand-built schema; reported as the direct answer to Reviewer 2 point 2 while still scoping the claim to the evaluated benchmarks (Option A)",
+    "schema_advantage_estimand": "canonical minus generic ASCENT accuracy per endpoint, paired over the ten panels, both measured on the same A100 instance (canonical from artifacts_revision/target_blindness_2026-09), so that no GPU-architecture difference enters the contrast",
+    "foundation_invariance_check": "Foundation predictions must be identical across the three generic conditions and the instrumented canonical run on the same instance (same prompts, same GPU); any difference is reported"
+  },
+  "no_number_replaced": "the canonical results in the manuscript are unchanged by this ablation; it adds Appendix D and determines whether the framing is narrowed (Option B) or kept with generalisation evidence (Option A)",
+  "abort_policy": "if a job aborts, its log is kept, the abort is disclosed, and the cell is re-executed once with identical settings only if the abort was an infrastructure failure (OOM, I/O); a second failure leaves the cell missing and reported as missing"
+}
