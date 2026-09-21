@@ -1,0 +1,2721 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_smollm2_8k_generic_retrieval_confirmatory",
+  "status": "generic_retrieval_control_frozen_before_any_control_panel_model_score",
+  "started_utc": "2026-08-14T04:33:43.136329+00:00",
+  "completed_utc": "2026-08-14T04:34:10.584408+00:00",
+  "wall_seconds": 27.448074902873486,
+  "end_to_end_seconds": 29.307770687155426,
+  "endpoint": {
+    "name": "smollm2-360m-instruct",
+    "repo_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+    "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+    "model_parameters": 361821120,
+    "hidden_size": 960,
+    "state_fact_slots": 2,
+    "batch_size": 4,
+    "model_artifact": {
+      "path": "model.safetensors",
+      "bytes": 723674912,
+      "sha256": "e6bffe7435d7ddc10fd3b9a9efd429dafbacb1cb17015fb5562664e7532bf86e"
+    }
+  },
+  "condition": {
+    "name": "scale_generic_bm25",
+    "memory_source": "generic_bm25",
+    "fact_slots": 2
+  },
+  "config": {
+    "path": "configs/babilong_smollm2_8k_generic_retrieval_confirmatory.json",
+    "sha256": "aed634c807740ae4ed6de1966d68ed25934e24fee5d1499ec9fac85607d64d38"
+  },
+  "data": {
+    "path": "data/babilong_1k_8k_robustness/robustness_panel_3.jsonl",
+    "sha256": "bb58bbadf5ae613bccacca63fe2e2903d99c37c47ce80c94aae5559f59f049e2",
+    "rows": 120,
+    "task_counts": {
+      "qa1": 40,
+      "qa2": 40,
+      "qa3": 40
+    }
+  },
+  "model_files": [
+    {
+      "path": "model.safetensors",
+      "bytes": 723674912,
+      "sha256": "e6bffe7435d7ddc10fd3b9a9efd429dafbacb1cb17015fb5562664e7532bf86e"
+    }
+  ],
+  "parser_accuracy": 1.0,
+  "foundation": {
+    "samples": 120,
+    "mean": 0.16666666666666666,
+    "standard_error": 0.03416333590378282,
+    "ci95_low": 0.09970652829525233,
+    "ci95_high": 0.23362680503808098
+  },
+  "ascent": {
+    "samples": 120,
+    "mean": 0.21666666666666667,
+    "standard_error": 0.03776555522604266,
+    "ci95_low": 0.14264617842362304,
+    "ci95_high": 0.2906871549097103
+  },
+  "gain": {
+    "samples": 120,
+    "mean": 0.05,
+    "standard_error": 0.047115686933144385,
+    "ci95_low": -0.04234674638896299,
+    "ci95_high": 0.142346746388963
+  },
+  "wins": 19,
+  "regressions": 13,
+  "by_task": {
+    "qa1": {
+      "foundation": {
+        "samples": 40,
+        "mean": 0.25,
+        "standard_error": 0.06933752452815363,
+        "ci95_low": 0.11409845192481888,
+        "ci95_high": 0.3859015480751811
+      },
+      "ascent": {
+        "samples": 40,
+        "mean": 0.65,
+        "standard_error": 0.07637626158259733,
+        "ci95_low": 0.5003025272981092,
+        "ci95_high": 0.7996974727018908
+      },
+      "gain": {
+        "samples": 40,
+        "mean": 0.4,
+        "standard_error": 0.09999999999999999,
+        "ci95_low": 0.20400000000000004,
+        "ci95_high": 0.596
+      }
+    },
+    "qa2": {
+      "foundation": {
+        "samples": 40,
+        "mean": 0.225,
+        "standard_error": 0.06686668711812965,
+        "ci95_low": 0.0939412932484659,
+        "ci95_high": 0.3560587067515341
+      },
+      "ascent": {
+        "samples": 40,
+        "mean": 0.0,
+        "standard_error": 0.0,
+        "ci95_low": 0.0,
+        "ci95_high": 0.0
+      },
+      "gain": {
+        "samples": 40,
+        "mean": -0.225,
+        "standard_error": 0.06686668711812965,
+        "ci95_low": -0.3560587067515341,
+        "ci95_high": -0.0939412932484659
+      }
+    },
+    "qa3": {
+      "foundation": {
+        "samples": 40,
+        "mean": 0.025,
+        "standard_error": 0.024999999999999998,
+        "ci95_low": -0.023999999999999994,
+        "ci95_high": 0.074
+      },
+      "ascent": {
+        "samples": 40,
+        "mean": 0.0,
+        "standard_error": 0.0,
+        "ci95_low": 0.0,
+        "ci95_high": 0.0
+      },
+      "gain": {
+        "samples": 40,
+        "mean": -0.025,
+        "standard_error": 0.024999999999999998,
+        "ci95_low": -0.074,
+        "ci95_high": 0.023999999999999994
+      }
+    }
+  },
+  "state": {
+    "fact_slots": 2,
+    "write_state_payload_bytes": {
+      "mean": 30004.375,
+      "maximum": 33846,
+      "scale_policy": "full-corpus UTF-8 lower bound for generic lexical index"
+    },
+    "read_state_payload_bytes": {
+      "mean": 154.275,
+      "maximum": 1119,
+      "scale_policy": "query-conditioned fact slots grow with endpoint"
+    },
+    "mean_total_external_state_bytes": 30158.65,
+    "state_slots_per_model_parameter": 5.527593303563927e-09
+  },
+  "systems": {
+    "decode_order": "foundation_first",
+    "warmup_samples_per_arm": 0,
+    "artifact_verification_seconds": 0.5484863170422614,
+    "model_load_seconds": 0.7270831172354519,
+    "retrieval_total_seconds": 0.5653560999780893,
+    "retrieval_microseconds_per_sample": 4711.300833150744,
+    "foundation_decode": {
+      "seconds": 23.82604911690578,
+      "samples": 120,
+      "samples_per_second": 5.036504349134996,
+      "prompt_tokens": 903181,
+      "generated_tokens": 903,
+      "prompt_tokens_per_second": 37907.29195463413,
+      "allocated_before_bytes": 738273792,
+      "peak_allocated_bytes": 3718071296,
+      "incremental_peak_bytes": 2979797504
+    },
+    "ascent_decode": {
+      "seconds": 3.6053535561077297,
+      "samples": 120,
+      "samples_per_second": 33.28383697535331,
+      "prompt_tokens": 12823,
+      "generated_tokens": 675,
+      "prompt_tokens_per_second": 3556.655346124629,
+      "allocated_before_bytes": 746793472,
+      "peak_allocated_bytes": 849961472,
+      "incremental_peak_bytes": 103168000
+    },
+    "ascent_to_foundation_decode_time_ratio": 0.1513198238792159,
+    "ascent_to_foundation_prompt_token_ratio": 0.01419759715937337
+  },
+  "environment": {
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128",
+    "transformers": "4.57.6",
+    "cuda_device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "peak_cuda_bytes": 849961472,
+    "git_commit": "1d435662e1c6a55b62107a71357f740687461f3a",
+    "git_dirty": false
+  },
+  "predictions": [
+    {
+      "row_id": "38ce853cd4086e15204188bb65e1526a12cdebf9a42fee2a7cb92154d06feae9",
+      "task": "qa1",
+      "target": "hallway",
+      "foundation_output": "Based on the passage, Daniel is a",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "- Sandra travelled to the hallway.",
+      "ascent_location": "hallway",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra travelled to the hallway.",
+        "Daniel journeyed to the hallway."
+      ],
+      "retained_read_state_bytes": 112,
+      "persistent_payload_bytes": 31748,
+      "foundation_prompt_tokens": 7718,
+      "ascent_prompt_tokens": 94
+    },
+    {
+      "row_id": "390b785e4437c7d25d2a23fcb7b88160e231e028743298d76fcc248894f81f9e",
+      "task": "qa1",
+      "target": "bedroom",
+      "foundation_output": "Sandra is in the Tower.",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra journeyed to the bedroom.",
+        "Daniel journeyed to the office."
+      ],
+      "retained_read_state_bytes": 111,
+      "persistent_payload_bytes": 31516,
+      "foundation_prompt_tokens": 7791,
+      "ascent_prompt_tokens": 93
+    },
+    {
+      "row_id": "3968882d4ee98da903dcd4cebdbb9046f1d35fd986c10bb5662e70b958329e02",
+      "task": "qa1",
+      "target": "office",
+      "foundation_output": "Sandra is a character in the story",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra moved to the garden.",
+      "ascent_location": "garden",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra moved to the garden.",
+        "Sandra travelled to the office."
+      ],
+      "retained_read_state_bytes": 106,
+      "persistent_payload_bytes": 29733,
+      "foundation_prompt_tokens": 7816,
+      "ascent_prompt_tokens": 91
+    },
+    {
+      "row_id": "3998d27d076b5e771f344eda383d7683fa0a77e2ad346918da14c97419d5dd63",
+      "task": "qa1",
+      "target": "bedroom",
+      "foundation_output": "Mary is in the bedroom.",
+      "foundation_location": "bedroom",
+      "foundation_score": 1.0,
+      "ascent_output": "Mary is in the bedroom.",
+      "ascent_location": "bedroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Mary moved to the kitchen.",
+        "Heinsius thinks that this\nand the following line are spurious.] Mary went back to the bedroom."
+      ],
+      "retained_read_state_bytes": 168,
+      "persistent_payload_bytes": 29215,
+      "foundation_prompt_tokens": 8056,
+      "ascent_prompt_tokens": 107
+    },
+    {
+      "row_id": "39ab9dc388de1e91f51a12021f2c0d551a41e8841a56a09abe5458b19e4486c2",
+      "task": "qa1",
+      "target": "kitchen",
+      "foundation_output": "Sandra is in the garden.",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra is in the kitchen.",
+      "ascent_location": "kitchen",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra travelled to the garden.",
+        "Sandra went back to the kitchen."
+      ],
+      "retained_read_state_bytes": 111,
+      "persistent_payload_bytes": 31299,
+      "foundation_prompt_tokens": 7593,
+      "ascent_prompt_tokens": 92
+    },
+    {
+      "row_id": "39baf4814cd2a795c161c71ee167011b86dea224b89e73d2af72a95a09168d53",
+      "task": "qa1",
+      "target": "office",
+      "foundation_output": "Sandra is in the office.",
+      "foundation_location": "office",
+      "foundation_score": 1.0,
+      "ascent_output": "Sandra went to the office.",
+      "ascent_location": "office",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra went to the office.",
+        "Sandra went to the office."
+      ],
+      "retained_read_state_bytes": 100,
+      "persistent_payload_bytes": 29636,
+      "foundation_prompt_tokens": 7422,
+      "ascent_prompt_tokens": 91
+    },
+    {
+      "row_id": "39f064ffa5e253ff624751655955877945a5d25bb542196d9f66eeb3b64eaf32",
+      "task": "qa1",
+      "target": "bathroom",
+      "foundation_output": "John is at the bathroom.",
+      "foundation_location": "bathroom",
+      "foundation_score": 1.0,
+      "ascent_output": "- John moved to the office.",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John moved to the office.",
+        "John travelled to the bathroom."
+      ],
+      "retained_read_state_bytes": 104,
+      "persistent_payload_bytes": 30679,
+      "foundation_prompt_tokens": 7708,
+      "ascent_prompt_tokens": 91
+    },
+    {
+      "row_id": "3a00ea6b89424cdeebb61be14685accf3b8665286ea18672b5e2a86fa7f87477",
+      "task": "qa1",
+      "target": "hallway",
+      "foundation_output": "Sandra is the name of the woman",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra went back to the kitchen.",
+        "Sandra went to the hallway."
+      ],
+      "retained_read_state_bytes": 107,
+      "persistent_payload_bytes": 28831,
+      "foundation_prompt_tokens": 7480,
+      "ascent_prompt_tokens": 93
+    },
+    {
+      "row_id": "3a07fea0b823a607b15f6da748afd010eaa0de6520662015eb7b58f6a240ce25",
+      "task": "qa1",
+      "target": "bathroom",
+      "foundation_output": "Sandra is a horse that won the",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra went to the bathroom.",
+      "ascent_location": "bathroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra went to the bathroom.",
+        "Daniel travelled to the bathroom."
+      ],
+      "retained_read_state_bytes": 109,
+      "persistent_payload_bytes": 31535,
+      "foundation_prompt_tokens": 7914,
+      "ascent_prompt_tokens": 91
+    },
+    {
+      "row_id": "3a1c099c74886044a938aacb9c4f647791a64ecd583dcf7954f67393cb9bd0da",
+      "task": "qa1",
+      "target": "bathroom",
+      "foundation_output": "Mary is in the bathroom.",
+      "foundation_location": "bathroom",
+      "foundation_score": 1.0,
+      "ascent_output": "bathroom",
+      "ascent_location": "bathroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John moved to the bathroom.",
+        "Mary journeyed to the bathroom."
+      ],
+      "retained_read_state_bytes": 106,
+      "persistent_payload_bytes": 32321,
+      "foundation_prompt_tokens": 7602,
+      "ascent_prompt_tokens": 92
+    },
+    {
+      "row_id": "3a2b1fc77a2b771a03127ad28bd14c7f9d8868987605df7916bee6fc10cbd221",
+      "task": "qa1",
+      "target": "kitchen",
+      "foundation_output": "Sandra is at the office.",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra moved to the garden.",
+      "ascent_location": "garden",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra moved to the garden.",
+        "Sandra moved to the kitchen."
+      ],
+      "retained_read_state_bytes": 103,
+      "persistent_payload_bytes": 24690,
+      "foundation_prompt_tokens": 6441,
+      "ascent_prompt_tokens": 91
+    },
+    {
+      "row_id": "3b03a6ab15289dab903b86a4ded16c5075b6491566668b4e1ef288d0a7c9e892",
+      "task": "qa1",
+      "target": "garden",
+      "foundation_output": "Sandra is in the garden.",
+      "foundation_location": "garden",
+      "foundation_score": 1.0,
+      "ascent_output": "Garden",
+      "ascent_location": "garden",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra went back to the kitchen.",
+        "Sandra went back to the garden."
+      ],
+      "retained_read_state_bytes": 111,
+      "persistent_payload_bytes": 31804,
+      "foundation_prompt_tokens": 6883,
+      "ascent_prompt_tokens": 93
+    },
+    {
+      "row_id": "3b8bea9e0356e0092b56362fcfa888c2fd7eb48a193436714ca8f768feb2e1ce",
+      "task": "qa1",
+      "target": "kitchen",
+      "foundation_output": "Mary is standing in front of the mirror",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Mary is in the kitchen.",
+      "ascent_location": "kitchen",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Mary travelled to the bathroom.",
+        "Mary went to the kitchen."
+      ],
+      "retained_read_state_bytes": 104,
+      "persistent_payload_bytes": 30238,
+      "foundation_prompt_tokens": 7780,
+      "ascent_prompt_tokens": 91
+    },
+    {
+      "row_id": "3bca24c00ec399d6ae6b32dc9a0d7dd0f624370a40d5071b685a5f5541866777",
+      "task": "qa1",
+      "target": "kitchen",
+      "foundation_output": "John is in the Red Lion.",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "- John went back to the bathroom.",
+      "ascent_location": "bathroom",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John went back to the bathroom.",
+        "John went to the kitchen."
+      ],
+      "retained_read_state_bytes": 104,
+      "persistent_payload_bytes": 22611,
+      "foundation_prompt_tokens": 6128,
+      "ascent_prompt_tokens": 92
+    },
+    {
+      "row_id": "3c054672641513edd17eb96a7972cd2c053e09bf7a8f932a4fcb8021265934a9",
+      "task": "qa1",
+      "target": "kitchen",
+      "foundation_output": "Sandra is in the bathroom.",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra is in the kitchen.",
+      "ascent_location": "kitchen",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "\"General,\" he said, \"we are attacked in force.\" \"Go back,\" replied General Thomas, without betraying any more excitement\nthan if he were ordering his men out on review, \"form your men in the\nmost advantageous position, and hold the enemy until I can bring up the\nrest of the troops.\" Sandra went to the kitchen.",
+        "He fought until\nhe was entirely deserted by his men and surrounded by us; he then tried\nto cut his way out, but his horse was shot and he captured.\" \"It must be Calhoun,\" and he rushed to\nwhere the prisoners were confined."
+      ],
+      "retained_read_state_bytes": 581,
+      "persistent_payload_bytes": 25940,
+      "foundation_prompt_tokens": 7558,
+      "ascent_prompt_tokens": 203
+    },
+    {
+      "row_id": "3c36b787a0e74dca69414ad10e3109644a87fd875efef1099941f982756969ca",
+      "task": "qa1",
+      "target": "garden",
+      "foundation_output": "Daniel is in the garden.",
+      "foundation_location": "garden",
+      "foundation_score": 1.0,
+      "ascent_output": "Daniel is in the garden.",
+      "ascent_location": "garden",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel journeyed to the garden.",
+        "John moved to the garden."
+      ],
+      "retained_read_state_bytes": 104,
+      "persistent_payload_bytes": 30254,
+      "foundation_prompt_tokens": 7476,
+      "ascent_prompt_tokens": 92
+    },
+    {
+      "row_id": "3c46fb7b696537041c388359b1611519cfef811c60e2281fffe180bdbd709aba",
+      "task": "qa1",
+      "target": "office",
+      "foundation_output": "Sandra is in the bathroom.",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_location": "office",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra journeyed to the kitchen.",
+        "Sandra went back to the office."
+      ],
+      "retained_read_state_bytes": 111,
+      "persistent_payload_bytes": 29114,
+      "foundation_prompt_tokens": 7480,
+      "ascent_prompt_tokens": 93
+    },
+    {
+      "row_id": "3c87cf026d242c56a8fff53b9113da6378ee2bd757881c7f84638430e0689d93",
+      "task": "qa1",
+      "target": "kitchen",
+      "foundation_output": "John is in the Congo.",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "John went to the office.",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "\"Same boy wot yo' give\nmoney to in Boma.\" \"Can it be possible that he is\nmixed up in this affair?\" John went to the office.",
+        "John journeyed to the kitchen."
+      ],
+      "retained_read_state_bytes": 201,
+      "persistent_payload_bytes": 30040,
+      "foundation_prompt_tokens": 7628,
+      "ascent_prompt_tokens": 124
+    },
+    {
+      "row_id": "3ca681d2d4906f03c669ba978e6013876feb032e9cd7002c177cf4b40fca4673",
+      "task": "qa1",
+      "target": "hallway",
+      "foundation_output": "Daniel is a character in the book \"",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Daniel went back to the hallway.",
+      "ascent_location": "hallway",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "C'est l'effet que doit produire la\nlecture de cet ouvrage, qui quoique destine aux amateurs et aux\ncompositeurs des jardins, offre aux gens de gout, aux artistes et\nsur-tout aux peintres, des observations fines et singulieres sur\nplusieurs effets de perspective et sur les arts en general; aux\nphilosophes, des reflections justes sur les affections de notre ame; aux\npoetes, des descriptions exactes, quoique vives, des plus beaux jardins\nd'Angleterre dans tous les genres, qui decelent dans l'Auteur un oeil\ninfiment exerce, une grande connoissance des beaux arts, une belle\nimagination et un esprit accoutume a penser.\" Daniel went back to the hallway.",
+        "\"[58]\n\n\nDANIEL MALTHUS, ESQ."
+      ],
+      "retained_read_state_bytes": 730,
+      "persistent_payload_bytes": 29776,
+      "foundation_prompt_tokens": 7803,
+      "ascent_prompt_tokens": 291
+    },
+    {
+      "row_id": "3cf56e2e4fb0c67b14044070a6da09f3ded4dda1c15da7acf581e6b11ac26db0",
+      "task": "qa1",
+      "target": "office",
+      "foundation_output": "Mary is a character in the story who",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Mary is in the office.",
+      "ascent_location": "office",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Mary went back to the office.",
+        "His little body had been crushed\nin the crevice at the back part of the drawer, through which he had been\nendeavouring to escape, and he was really and irrecoverably gone."
+      ],
+      "retained_read_state_bytes": 248,
+      "persistent_payload_bytes": 32611,
+      "foundation_prompt_tokens": 7636,
+      "ascent_prompt_tokens": 128
+    },
+    {
+      "row_id": "3d222a66ecbd04dee913e110c6d85b5d63007249c2e31853de2d98195cfbfa97",
+      "task": "qa1",
+      "target": "kitchen",
+      "foundation_output": "Sandra is at the kitchen.",
+      "foundation_location": "kitchen",
+      "foundation_score": 1.0,
+      "ascent_output": "Sandra.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra journeyed to the kitchen.",
+        "Sandra moved to the kitchen."
+      ],
+      "retained_read_state_bytes": 108,
+      "persistent_payload_bytes": 30306,
+      "foundation_prompt_tokens": 7666,
+      "ascent_prompt_tokens": 92
+    },
+    {
+      "row_id": "3d2f3ebb6e63022d419b0b805e1167e44625c06545c8f6528d21ffbb08c9993f",
+      "task": "qa1",
+      "target": "bathroom",
+      "foundation_output": "Sandra moved to the kitchen.",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra moved to the bathroom.",
+      "ascent_location": "bathroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra moved to the bathroom.",
+        "Sandra went to the bathroom."
+      ],
+      "retained_read_state_bytes": 105,
+      "persistent_payload_bytes": 30105,
+      "foundation_prompt_tokens": 7066,
+      "ascent_prompt_tokens": 91
+    },
+    {
+      "row_id": "3db3ad642dd9913e1e10084658363515ae57c8ac85966c5aced2af104777a967",
+      "task": "qa1",
+      "target": "office",
+      "foundation_output": "Sandra is sitting in the office.",
+      "foundation_location": "office",
+      "foundation_score": 1.0,
+      "ascent_output": "Sandra moved to the office.",
+      "ascent_location": "office",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "\"Go on,\" he ses, \"out with 'im.\" Sandra went back to the bathroom.",
+        "Sandra moved to the office."
+      ],
+      "retained_read_state_bytes": 141,
+      "persistent_payload_bytes": 29795,
+      "foundation_prompt_tokens": 7704,
+      "ascent_prompt_tokens": 106
+    },
+    {
+      "row_id": "3e6cc35d4542235773b5c299234032becc1a024b4bde003624058c59f50051a2",
+      "task": "qa1",
+      "target": "office",
+      "foundation_output": "Mary is a character in the story who",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Mary's bedroom.",
+      "ascent_location": "bedroom",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Mary journeyed to the bedroom.",
+        "Mary travelled to the office."
+      ],
+      "retained_read_state_bytes": 107,
+      "persistent_payload_bytes": 31182,
+      "foundation_prompt_tokens": 7823,
+      "ascent_prompt_tokens": 92
+    },
+    {
+      "row_id": "3e935f63e238415859931e7429cdb8d58bd926ffd6b70145348469647a834596",
+      "task": "qa1",
+      "target": "bathroom",
+      "foundation_output": "John is in the bathroom.",
+      "foundation_location": "bathroom",
+      "foundation_score": 1.0,
+      "ascent_output": "The man on the bow of the boat",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "The man on the bow of the\nboat is the notorious pirate Flint.\" John journeyed to the garden.",
+        "John travelled to the bathroom."
+      ],
+      "retained_read_state_bytes": 171,
+      "persistent_payload_bytes": 33262,
+      "foundation_prompt_tokens": 7831,
+      "ascent_prompt_tokens": 107
+    },
+    {
+      "row_id": "3e99cf71564506ff3fec7eca0930d22a47c789873ab3ed8237fd66798ae4146f",
+      "task": "qa1",
+      "target": "bedroom",
+      "foundation_output": "John is in the city of Palen",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "- John went back to the office.",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John went back to the office.",
+        "John went back to the bedroom."
+      ],
+      "retained_read_state_bytes": 107,
+      "persistent_payload_bytes": 32106,
+      "foundation_prompt_tokens": 7608,
+      "ascent_prompt_tokens": 93
+    },
+    {
+      "row_id": "3ec120c859b3ab6eddd352de29cf66bc046062b942e526583908e9689bbbe89d",
+      "task": "qa1",
+      "target": "bathroom",
+      "foundation_output": "Sandra is in the garden.",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra journeyed to the bathroom.",
+      "ascent_location": "bathroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra journeyed to the garden.",
+        "Sandra journeyed to the bathroom."
+      ],
+      "retained_read_state_bytes": 112,
+      "persistent_payload_bytes": 27545,
+      "foundation_prompt_tokens": 7673,
+      "ascent_prompt_tokens": 93
+    },
+    {
+      "row_id": "3ee76f35a6db8b465097e6b5a2805934b729148ef49365db772e035e7ef75b95",
+      "task": "qa1",
+      "target": "bedroom",
+      "foundation_output": "The text discusses the sacrament of marriage,",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Mary went to the bedroom.",
+      "ascent_location": "bedroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 1,
+      "retained_facts": [
+        "Mary went to the bedroom."
+      ],
+      "retained_read_state_bytes": 49,
+      "persistent_payload_bytes": 31204,
+      "foundation_prompt_tokens": 7788,
+      "ascent_prompt_tokens": 83
+    },
+    {
+      "row_id": "3f24e2aca9c9fede780092fabcd6f5fe08bf4add133d7ef03cb7c50255943a4e",
+      "task": "qa1",
+      "target": "bedroom",
+      "foundation_output": "John is in the \"Children's Gar",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Cambridge",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John travelled to the bedroom.",
+        "\"Who could have foretold this twenty years ago?\" Cambridge: Stereotyped and Printed by John Wilson & Son."
+      ],
+      "retained_read_state_bytes": 183,
+      "persistent_payload_bytes": 29922,
+      "foundation_prompt_tokens": 7746,
+      "ascent_prompt_tokens": 110
+    },
+    {
+      "row_id": "3f808457626d8922d2236ecbf6db645a8d1f855163ce4018908f49a36c5d20cf",
+      "task": "qa1",
+      "target": "office",
+      "foundation_output": "Daniel is a character in the story who",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_location": "office",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel travelled to the bedroom.",
+        "(By this\n     means France would be as interested in stopping Russian progress\n     as England is.) Daniel travelled to the office."
+      ],
+      "retained_read_state_bytes": 211,
+      "persistent_payload_bytes": 27720,
+      "foundation_prompt_tokens": 6820,
+      "ascent_prompt_tokens": 110
+    },
+    {
+      "row_id": "3fce4909ed0f961f182d8ec6d23887a48da221353d5cd367606af61b14f5aae9",
+      "task": "qa1",
+      "target": "garden",
+      "foundation_output": "Sandra is a character in the story",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra journeyed to the garden.",
+      "ascent_location": "garden",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra journeyed to the garden.",
+        "John went to the garden."
+      ],
+      "retained_read_state_bytes": 103,
+      "persistent_payload_bytes": 27677,
+      "foundation_prompt_tokens": 6741,
+      "ascent_prompt_tokens": 92
+    },
+    {
+      "row_id": "3feba48bfdf00229c35fc3b3b04a5d018f4332b73b529a3f388c4d831f66db02",
+      "task": "qa1",
+      "target": "garden",
+      "foundation_output": "Sandra is in the kitchen.",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra moved to the kitchen.",
+      "ascent_location": "kitchen",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra moved to the kitchen.",
+        "Sandra went to the garden."
+      ],
+      "retained_read_state_bytes": 102,
+      "persistent_payload_bytes": 32171,
+      "foundation_prompt_tokens": 7768,
+      "ascent_prompt_tokens": 91
+    },
+    {
+      "row_id": "3ff0d1ed7e94fae9634ad389000741533a5888991c71f871b9358fcae945e95e",
+      "task": "qa1",
+      "target": "office",
+      "foundation_output": "Daniel is in the first scene of the",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_location": "office",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel journeyed to the hallway.",
+        "Daniel went to the office."
+      ],
+      "retained_read_state_bytes": 106,
+      "persistent_payload_bytes": 30217,
+      "foundation_prompt_tokens": 7817,
+      "ascent_prompt_tokens": 93
+    },
+    {
+      "row_id": "40996ce8fe1dfca94fb16f9e85d300af3b5dd098c67ae452b34e8dca0a53f37e",
+      "task": "qa1",
+      "target": "office",
+      "foundation_output": "Daniel is a character in the story who",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Daniel went back to the office.",
+      "ascent_location": "office",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "And there entered, in afternoon gown and cap, probably just put on, a\nmiddle-aged, but still comely matron, who insisted that, even at this\nearly hour--3 P.M.--to get a cup of tea for us was \"no trouble\nat all.\" Daniel journeyed to the kitchen.",
+        "Daniel went back to the office."
+      ],
+      "retained_read_state_bytes": 323,
+      "persistent_payload_bytes": 30537,
+      "foundation_prompt_tokens": 7769,
+      "ascent_prompt_tokens": 154
+    },
+    {
+      "row_id": "40cc856ecf96c0220f0621a36d153d16319b1f101a4a41f1c71e313f4b2be0af",
+      "task": "qa1",
+      "target": "bedroom",
+      "foundation_output": "John is at the boarding house in St",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "- Page 84.--To the",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Page 84.--To the list of those deceased authors, whose portraits I have\nnot been able to discover, I must add the following:\n\n\nJOHN BRADDICK, Esq.",
+        "John went back to the bedroom."
+      ],
+      "retained_read_state_bytes": 224,
+      "persistent_payload_bytes": 28384,
+      "foundation_prompt_tokens": 7811,
+      "ascent_prompt_tokens": 128
+    },
+    {
+      "row_id": "41ab08ec9e6773454d70f363575e2229505cc600d866613803632d884f153fc0",
+      "task": "qa1",
+      "target": "garden",
+      "foundation_output": "Mary went to the garden.",
+      "foundation_location": "garden",
+      "foundation_score": 1.0,
+      "ascent_output": "Mary went to the garden.",
+      "ascent_location": "garden",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Mary went back to the bedroom.",
+        "Mary went to the garden."
+      ],
+      "retained_read_state_bytes": 102,
+      "persistent_payload_bytes": 30537,
+      "foundation_prompt_tokens": 7870,
+      "ascent_prompt_tokens": 92
+    },
+    {
+      "row_id": "41c61de59f55fa3cac144b72974eb09122e14225d3217b268b4a232fa18ecda6",
+      "task": "qa1",
+      "target": "kitchen",
+      "foundation_output": "Mary is the female character in the story",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Mary journeyed to the garden.",
+      "ascent_location": "garden",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Mary journeyed to the garden.",
+        "Mary journeyed to the kitchen."
+      ],
+      "retained_read_state_bytes": 107,
+      "persistent_payload_bytes": 27500,
+      "foundation_prompt_tokens": 7903,
+      "ascent_prompt_tokens": 93
+    },
+    {
+      "row_id": "41e956ddcfe3b70fc794a40cf9c3e1b4fcc15669c8145827ea52e4f5a5fc0258",
+      "task": "qa1",
+      "target": "office",
+      "foundation_output": "Daniel is a character in the story who",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Daniel is in the office.",
+      "ascent_location": "office",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel travelled to the office.",
+        "John moved to the office."
+      ],
+      "retained_read_state_bytes": 104,
+      "persistent_payload_bytes": 29838,
+      "foundation_prompt_tokens": 7467,
+      "ascent_prompt_tokens": 91
+    },
+    {
+      "row_id": "420475c63fa9b761a0a28e0bc883399293b4975003a9fc3fb8d80413fb359d27",
+      "task": "qa1",
+      "target": "kitchen",
+      "foundation_output": "Mary is in the garden.",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "Mary is in the kitchen.",
+      "ascent_location": "kitchen",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Mary travelled to the garden.",
+        "Mary moved to the kitchen."
+      ],
+      "retained_read_state_bytes": 103,
+      "persistent_payload_bytes": 29976,
+      "foundation_prompt_tokens": 7834,
+      "ascent_prompt_tokens": 91
+    },
+    {
+      "row_id": "4226d5421b437340548f2604a5b365cf07a2165073adc01d190193109f7660d1",
+      "task": "qa1",
+      "target": "bathroom",
+      "foundation_output": "Sandra is in the garden.",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra is in the bathroom.",
+      "ascent_location": "bathroom",
+      "ascent_score": 1.0,
+      "supporting_fact_count": 1,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "But I mind, when I was a gilpy of a lassock, seeing the Duke, that was\nhim that lost his head at London--folk said it wasna a very gude ane, but\nit was aye a sair loss to him, puir gentleman--Aweel, he wan the\npopinjay, for few cared to win it ower his Grace's head--weel, he had a\ncomely presence, and when a' the gentles mounted to show their capers,\nhis Grace was as near to me as I am to you; and he said to me, 'Tak tent\no' yoursell, my bonny lassie, (these were his very words,) for my horse\nis not very chancy.' --And now, as ye say ye had sae little to eat or\ndrink, I'll let you see that I havena been sae unmindfu' o' you; for I\ndinna think it's safe for young folk to gang to their bed on an empty\nstamach.\" To do Mrs Wilson justice, her nocturnal harangues upon such occasions not\nunfrequently terminated with this sage apophthegm, which always prefaced\nthe producing of some provision a little better than ordinary, such as\nshe now placed before him.",
+        "Sae, gude-night to ye, Mr Henry, and see that ye tak\ngude care o' the candle.\" Sandra moved to the bathroom."
+      ],
+      "retained_read_state_bytes": 1119,
+      "persistent_payload_bytes": 29888,
+      "foundation_prompt_tokens": 7651,
+      "ascent_prompt_tokens": 396
+    },
+    {
+      "row_id": "3ab3b9f962d4996d87c050dcf24decf9708d6b786e6789442073e6bb03ed7065",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "The apple is in the bathroom.",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "Mary left the apple.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Mary took the apple there.",
+        "Mary left the apple."
+      ],
+      "retained_read_state_bytes": 94,
+      "persistent_payload_bytes": 32077,
+      "foundation_prompt_tokens": 7722,
+      "ascent_prompt_tokens": 91
+    },
+    {
+      "row_id": "3ac10870dd69bcac805998b32404ff3299be0fc23bca6098b163f817f25a6382",
+      "task": "qa2",
+      "target": "hallway",
+      "foundation_output": "The apple is in the garden.",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra picked up the football there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra picked up the football there.",
+        "John picked up the apple there."
+      ],
+      "retained_read_state_bytes": 115,
+      "persistent_payload_bytes": 32410,
+      "foundation_prompt_tokens": 7752,
+      "ascent_prompt_tokens": 94
+    },
+    {
+      "row_id": "3ae4da1877cfc476e49d1c188eaf7edc8b74fdc2ee193a86a72297203b5dd15a",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "The football is in the office.",
+      "foundation_location": "office",
+      "foundation_score": 1.0,
+      "ascent_output": "John picked up the football there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John picked up the football there.",
+        "\"No, sir, 'e was fast asleep, but I wasn't feeling very well, so I had\ngot up thinking I'd make myself a cup of tea, and just then I 'eard a\ncar come whizzing along, and then there was a bang."
+      ],
+      "retained_read_state_bytes": 274,
+      "persistent_payload_bytes": 30710,
+      "foundation_prompt_tokens": 7666,
+      "ascent_prompt_tokens": 145
+    },
+    {
+      "row_id": "3b0a6930b5677c4dc1af8e1b70d06bc73ab6c3c9cd23193b0548468639a0fbda",
+      "task": "qa2",
+      "target": "kitchen",
+      "foundation_output": "The football is in the kitchen.",
+      "foundation_location": "kitchen",
+      "foundation_score": 1.0,
+      "ascent_output": "John picked up the football there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John picked up the football there.",
+        "John put down the football."
+      ],
+      "retained_read_state_bytes": 109,
+      "persistent_payload_bytes": 29932,
+      "foundation_prompt_tokens": 7268,
+      "ascent_prompt_tokens": 93
+    },
+    {
+      "row_id": "3b30beb0e47809e3729dc9da27cdf1a9c415a30635a773fbfb569c953e9fc7fa",
+      "task": "qa2",
+      "target": "hallway",
+      "foundation_output": "The milk is in the kitchen.",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "Daniel took the milk there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel took the milk there.",
+        "John got the milk there."
+      ],
+      "retained_read_state_bytes": 99,
+      "persistent_payload_bytes": 31453,
+      "foundation_prompt_tokens": 7630,
+      "ascent_prompt_tokens": 92
+    },
+    {
+      "row_id": "3b9b08a714f7421075f77ce3ce35c9b55c072a1513e3c7f1a19bfe9339689951",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "The apple is in the bathroom.",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra picked up the apple there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra picked up the apple there.",
+        "Sandra dropped the apple."
+      ],
+      "retained_read_state_bytes": 106,
+      "persistent_payload_bytes": 29665,
+      "foundation_prompt_tokens": 7458,
+      "ascent_prompt_tokens": 92
+    },
+    {
+      "row_id": "3bcaa5dcfefb3caa1197295728079c7e5919a1dc977e2862c9191c5867c416e2",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "The milk is in the bathtub.",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "John picked up the milk there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John picked up the milk there.",
+        "John put down the milk."
+      ],
+      "retained_read_state_bytes": 101,
+      "persistent_payload_bytes": 29771,
+      "foundation_prompt_tokens": 7823,
+      "ascent_prompt_tokens": 93
+    },
+    {
+      "row_id": "3c9a6b5a1f30b582b82bef08cc6faf498f54ad98ef2a12e5bdbb6296d8947664",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "The apple is in the cupboard near",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Daniel left the apple.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "But he had a huge piece of comb in each paw, and\nwas gobbling away, eating honey, wax, bees and all, as if nothing had\nhappened.\" Daniel grabbed the apple there.",
+        "Daniel left the apple."
+      ],
+      "retained_read_state_bytes": 231,
+      "persistent_payload_bytes": 29213,
+      "foundation_prompt_tokens": 7776,
+      "ascent_prompt_tokens": 128
+    },
+    {
+      "row_id": "3ce28de7673c9b6f9a173cd33c6f09e027982df319f846833a90126b5d8fe7c9",
+      "task": "qa2",
+      "target": "bathroom",
+      "foundation_output": "The apple is in the garden.",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra picked up the apple there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "JAMES PAYN for his dealings with\n    \"that barbarous race,\" suggests that as an _amende honorable_ he\n    should write a book in praise of boys.] Sandra picked up the apple there.",
+        "Sandra picked up the apple there."
+      ],
+      "retained_read_state_bytes": 260,
+      "persistent_payload_bytes": 26162,
+      "foundation_prompt_tokens": 7327,
+      "ascent_prompt_tokens": 131
+    },
+    {
+      "row_id": "3d36cbe94440d2b5fc6f23a4851ca6066d097220f5d8da626b6e4f7505515361",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "The apple is in the bedroom.",
+      "foundation_location": "bedroom",
+      "foundation_score": 1.0,
+      "ascent_output": "John left the apple.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John grabbed the apple there.",
+        "John left the apple."
+      ],
+      "retained_read_state_bytes": 97,
+      "persistent_payload_bytes": 30542,
+      "foundation_prompt_tokens": 7070,
+      "ascent_prompt_tokens": 91
+    },
+    {
+      "row_id": "3d9955833f05f23db8e1fe59f8ba66a56d63cb7ae57b84fbf90eebd4810995e2",
+      "task": "qa2",
+      "target": "hallway",
+      "foundation_output": "Based on the information in the doc,",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Mary got the milk there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Mary got the milk there.",
+        "John got the football there."
+      ],
+      "retained_read_state_bytes": 100,
+      "persistent_payload_bytes": 28531,
+      "foundation_prompt_tokens": 7481,
+      "ascent_prompt_tokens": 92
+    },
+    {
+      "row_id": "3decb6da823150980af2ac64a6134db5de482bb13141121ced9ca0e74d689fbf",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "The milk is in the basket near,",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Daniel got the milk there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel got the milk there.",
+        "Mary got the apple there."
+      ],
+      "retained_read_state_bytes": 99,
+      "persistent_payload_bytes": 31599,
+      "foundation_prompt_tokens": 7735,
+      "ascent_prompt_tokens": 92
+    },
+    {
+      "row_id": "3e00dd95f8d5232d8b5480a5ab6e29fc194d03e09ca320ec4ab538a402934c22",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "The apple is in the garden.",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "Wittenberg",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel grabbed the apple there.",
+        "The modern history of dysentery may be said to begin with Daniel\nSennertus, whose first _Tractatus de Dysenteria_ was published at {781}\nWittenberg in 1626."
+      ],
+      "retained_read_state_bytes": 235,
+      "persistent_payload_bytes": 31696,
+      "foundation_prompt_tokens": 7604,
+      "ascent_prompt_tokens": 136
+    },
+    {
+      "row_id": "3e71d86f295cd418e61f99d4f6962bb2dc2f234387703e6978d88a890bdbf884",
+      "task": "qa2",
+      "target": "hallway",
+      "foundation_output": "The milk is in the bathroom.",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "John took the milk there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John took the milk there.",
+        "John dropped the milk there."
+      ],
+      "retained_read_state_bytes": 101,
+      "persistent_payload_bytes": 33590,
+      "foundation_prompt_tokens": 7717,
+      "ascent_prompt_tokens": 92
+    },
+    {
+      "row_id": "3ea385aff36970dbbc78140fd99247b49e1bed546fe9b2cc9d5ab3ff246547a7",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "The football is in the \"lair",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "The football is in the old woman's",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "When I heard the awfu' threatenings\no' the oppressors, I e'en took my cloak about me, and sate down by the\nwayside, to warn ony of our puir scattered remnant that chanced to come\nthis gate, before they fell into the nets of the spoilers.\" said the stranger; \"and can you give me\nhiding there?\" \"I have,\" said the old woman, \"a hut by the way-side, it may be a mile\nfrom hence; but four men of Belial, called dragoons, are lodged therein,\nto spoil my household goods at their pleasure, because I will not wait\nupon the thowless, thriftless, fissenless ministry of that carnal man,\nJohn Halftext, the curate.\" \"Good night, good woman, and thanks for thy counsel,\" said the stranger,\nas he rode away.",
+        "John grabbed the football there."
+      ],
+      "retained_read_state_bytes": 777,
+      "persistent_payload_bytes": 29487,
+      "foundation_prompt_tokens": 7453,
+      "ascent_prompt_tokens": 276
+    },
+    {
+      "row_id": "3f3363ae42052bb896a39f17f10055d1312ae4efd9009b5c8c759f7c5812c591",
+      "task": "qa2",
+      "target": "hallway",
+      "foundation_output": "The football is in the corner of the",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Mary took the football there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Mary took the football there.",
+        "Mary put down the football there."
+      ],
+      "retained_read_state_bytes": 110,
+      "persistent_payload_bytes": 20355,
+      "foundation_prompt_tokens": 6135,
+      "ascent_prompt_tokens": 93
+    },
+    {
+      "row_id": "3f3e2452f415349ae0a79ff7dcb026ce8f9e76f46c3a384c66f88420cf03fbb3",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "The milk is in the bathroom.",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra took the milk there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra picked up the apple there.",
+        "Sandra took the milk there."
+      ],
+      "retained_read_state_bytes": 108,
+      "persistent_payload_bytes": 30197,
+      "foundation_prompt_tokens": 7690,
+      "ascent_prompt_tokens": 93
+    },
+    {
+      "row_id": "3f80fcf93ffa2c1cb0ce06328591429f10e0fb3fac06d4c617adaf77ce9479ad",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "The football is in the bathroom.",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "Daniel picked up the football there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel picked up the football there.",
+        "Daniel left the football."
+      ],
+      "retained_read_state_bytes": 109,
+      "persistent_payload_bytes": 26066,
+      "foundation_prompt_tokens": 6881,
+      "ascent_prompt_tokens": 92
+    },
+    {
+      "row_id": "4008a0a6f9a729c67dc2947066f82223e8c02023dcea8fb1c03517727b437ba9",
+      "task": "qa2",
+      "target": "kitchen",
+      "foundation_output": "The milk is in the kitchen.",
+      "foundation_location": "kitchen",
+      "foundation_score": 1.0,
+      "ascent_output": "John grabbed the milk there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John grabbed the football there.",
+        "John grabbed the milk there."
+      ],
+      "retained_read_state_bytes": 108,
+      "persistent_payload_bytes": 29010,
+      "foundation_prompt_tokens": 7716,
+      "ascent_prompt_tokens": 92
+    },
+    {
+      "row_id": "4080f08222ac58498fb973055abde7f702b9a7b9a350dd55e696494e33f58f75",
+      "task": "qa2",
+      "target": "hallway",
+      "foundation_output": "The football is a part of a building",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "- Daniel grabbed the football there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel grabbed the football there.",
+        "Daniel journeyed to the hallway."
+      ],
+      "retained_read_state_bytes": 114,
+      "persistent_payload_bytes": 28651,
+      "foundation_prompt_tokens": 6847,
+      "ascent_prompt_tokens": 94
+    },
+    {
+      "row_id": "40adc9cc03c8ec8f9a655c7b93251da01416d4a554f5b63a311e2badce554fa9",
+      "task": "qa2",
+      "target": "hallway",
+      "foundation_output": "The apple is found in the following location",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Mary picked up the apple there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Mary put down the apple there.",
+        "Mary picked up the apple there."
+      ],
+      "retained_read_state_bytes": 109,
+      "persistent_payload_bytes": 29801,
+      "foundation_prompt_tokens": 7725,
+      "ascent_prompt_tokens": 94
+    },
+    {
+      "row_id": "40be22ac5d0bd76899f8566aeff1e9fa346519f8b7a2abdc84f1cdb1d7e97b27",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "The football is in the saddle bag.",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Daniel.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel got the football there.",
+        "Daniel moved to the office."
+      ],
+      "retained_read_state_bytes": 105,
+      "persistent_payload_bytes": 29287,
+      "foundation_prompt_tokens": 7479,
+      "ascent_prompt_tokens": 92
+    },
+    {
+      "row_id": "40d633495114b503c65f8b34cfad72bba03fce101b8e3ee57ce5912dfba5e269",
+      "task": "qa2",
+      "target": "bathroom",
+      "foundation_output": "The apple is in the Royal Gallery at",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra picked up the apple there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "\"Before I\nretire, my friend,\" he said, \"I would like to express again the\nadmiration which the tasteful luxury of this smoking room has aroused\nin me, and to ask, if I may, whether those stained-glass windows up\nthere are merely fanciful portraits?\" Ames quickly glanced up at the faces of the beautiful women portrayed\nin the rectangular glass windows which lined the room just below the\nceiling.",
+        "Sandra picked up the apple there."
+      ],
+      "retained_read_state_bytes": 478,
+      "persistent_payload_bytes": 32102,
+      "foundation_prompt_tokens": 7806,
+      "ascent_prompt_tokens": 181
+    },
+    {
+      "row_id": "4162c7627c145feaf0c7aa34552624c61cb56bdaebaae9ad3f32b01f384efb35",
+      "task": "qa2",
+      "target": "kitchen",
+      "foundation_output": "The football is in the kitchen.",
+      "foundation_location": "kitchen",
+      "foundation_score": 1.0,
+      "ascent_output": "Sandra",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Mary took the football there.",
+        "Sandra took the football there."
+      ],
+      "retained_read_state_bytes": 108,
+      "persistent_payload_bytes": 31850,
+      "foundation_prompt_tokens": 7770,
+      "ascent_prompt_tokens": 92
+    },
+    {
+      "row_id": "4172f38feadc5dfd79ee1a7990a9beffeefc7fcb19913aa3170d80fc5b03b803",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "The milk is in the kitchen.",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra got the milk there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra got the milk there.",
+        "Sandra discarded the milk."
+      ],
+      "retained_read_state_bytes": 100,
+      "persistent_payload_bytes": 28913,
+      "foundation_prompt_tokens": 7717,
+      "ascent_prompt_tokens": 91
+    },
+    {
+      "row_id": "419d61fca6f9324f65aae40007cf97bb2ccf9e717c82a75f696731bf37f8b5f3",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "The football is in the hallway.",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "Daniel",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel got the football there.",
+        "Daniel left the football."
+      ],
+      "retained_read_state_bytes": 103,
+      "persistent_payload_bytes": 31626,
+      "foundation_prompt_tokens": 7885,
+      "ascent_prompt_tokens": 91
+    },
+    {
+      "row_id": "421d96e794984fe53b4b9ef5c0076729aabd7adda69a3c3a336b6e782f10fd38",
+      "task": "qa2",
+      "target": "hallway",
+      "foundation_output": "The football is in the lower picture.",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "John.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John grabbed the football there.",
+        "John dropped the football."
+      ],
+      "retained_read_state_bytes": 106,
+      "persistent_payload_bytes": 32622,
+      "foundation_prompt_tokens": 7972,
+      "ascent_prompt_tokens": 91
+    },
+    {
+      "row_id": "422a53a09dd297dcff4bda52ab40cafb1bcfc1618d388094474099a0ed2e47b6",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "The football is in the room where Harry",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra left the football.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra took the football there.",
+        "Sandra left the football."
+      ],
+      "retained_read_state_bytes": 104,
+      "persistent_payload_bytes": 31343,
+      "foundation_prompt_tokens": 7817,
+      "ascent_prompt_tokens": 91
+    },
+    {
+      "row_id": "423137072e6a20b8366f21e59c9138817401692275913e740641debb8fa9becf",
+      "task": "qa2",
+      "target": "bathroom",
+      "foundation_output": "The football is in the corner of the",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "John picked up the football there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John picked up the football there.",
+        "John picked up the football there."
+      ],
+      "retained_read_state_bytes": 116,
+      "persistent_payload_bytes": 22972,
+      "foundation_prompt_tokens": 6488,
+      "ascent_prompt_tokens": 94
+    },
+    {
+      "row_id": "42c065d085fdb74bf60b410b21ce00261fe506089ee13769bdbb8706b187b301",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "The apple is in the garden.",
+      "foundation_location": "garden",
+      "foundation_score": 1.0,
+      "ascent_output": "Sandra got the apple there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra got the apple there.",
+        "Sandra discarded the apple."
+      ],
+      "retained_read_state_bytes": 102,
+      "persistent_payload_bytes": 31972,
+      "foundation_prompt_tokens": 7798,
+      "ascent_prompt_tokens": 91
+    },
+    {
+      "row_id": "42d509fe269e55925b03aa060949d9014ba6c15a8bd6689dc760d1d72a020136",
+      "task": "qa2",
+      "target": "bedroom",
+      "foundation_output": "The football is discarded by Sandra.",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra discarded the football.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "And it will be much\ncheaper for both of us.\" \"That, indeed; but the idea of boarding with the old man is not to be\nthought of.\" \"I should think you would like to be with your mother and your\nbrothers and sisters.\" Sandra went back to the kitchen.",
+        "Harry saw how much he had suffered during the last fortnight; but it\nseemed natural to him that he should suffer terribly at the thought of\n Sandra discarded the football."
+      ],
+      "retained_read_state_bytes": 465,
+      "persistent_payload_bytes": 32245,
+      "foundation_prompt_tokens": 7838,
+      "ascent_prompt_tokens": 178
+    },
+    {
+      "row_id": "435735d9de7b9d2fc9b6c7cac3a0da422833ee1ad3de25cc948fc8ad84418f6f",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "The milk is on the table in the",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Daniel picked up the milk there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel picked up the milk there.",
+        "Daniel discarded the milk."
+      ],
+      "retained_read_state_bytes": 106,
+      "persistent_payload_bytes": 31125,
+      "foundation_prompt_tokens": 7835,
+      "ascent_prompt_tokens": 92
+    },
+    {
+      "row_id": "4424649f14da39e034ef47a3b387eba28ad1f4476501d7e7ea62254baea802e2",
+      "task": "qa2",
+      "target": "kitchen",
+      "foundation_output": "The apple is in the kitchen.",
+      "foundation_location": "kitchen",
+      "foundation_score": 1.0,
+      "ascent_output": "Mary got the apple there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Mary got the apple there.",
+        "Mary put down the apple."
+      ],
+      "retained_read_state_bytes": 97,
+      "persistent_payload_bytes": 32275,
+      "foundation_prompt_tokens": 7701,
+      "ascent_prompt_tokens": 92
+    },
+    {
+      "row_id": "44f35b3de8878426751ff7e16f0f1f18bca2e5bded6516d9b41c0f0f972325af",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "The apple is in the garden.",
+      "foundation_location": "garden",
+      "foundation_score": 1.0,
+      "ascent_output": "Sandra picked up the apple there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra picked up the apple there.",
+        "Sandra dropped the apple."
+      ],
+      "retained_read_state_bytes": 106,
+      "persistent_payload_bytes": 29817,
+      "foundation_prompt_tokens": 7823,
+      "ascent_prompt_tokens": 92
+    },
+    {
+      "row_id": "452fb185bcbe945b6962bf0ed9164c15d255cc305e9a131dd63fc02d66a88ffc",
+      "task": "qa2",
+      "target": "garden",
+      "foundation_output": "The milk is in the pocket of Bl",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra left the milk.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "If he\nwants milk up comes milk.",
+        "Sandra left the milk."
+      ],
+      "retained_read_state_bytes": 100,
+      "persistent_payload_bytes": 29597,
+      "foundation_prompt_tokens": 7694,
+      "ascent_prompt_tokens": 95
+    },
+    {
+      "row_id": "4552dd7274dcab04aa5eaaf1c001a2e18fcfad3ffaae940976a0412b3a4f91a7",
+      "task": "qa2",
+      "target": "bathroom",
+      "foundation_output": "The football is in the kitchen.",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra picked up the football there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra picked up the football there.",
+        "Sandra left the football."
+      ],
+      "retained_read_state_bytes": 109,
+      "persistent_payload_bytes": 31154,
+      "foundation_prompt_tokens": 7830,
+      "ascent_prompt_tokens": 92
+    },
+    {
+      "row_id": "456cf7a956be7062229d668313cd88001f21375291b4a22b32b431a06afdd056",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "The milk is in the kitchen.",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra got the milk there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra got the milk there.",
+        "Sandra left the milk."
+      ],
+      "retained_read_state_bytes": 95,
+      "persistent_payload_bytes": 30678,
+      "foundation_prompt_tokens": 7790,
+      "ascent_prompt_tokens": 91
+    },
+    {
+      "row_id": "458d852efe17c597f14f4aac4574eda846ef18937c6d5a05046dc5e5e870c255",
+      "task": "qa2",
+      "target": "bathroom",
+      "foundation_output": "The apple is in the garden.",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "- Daniel dropped the apple.\n-",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel dropped the apple.",
+        "John dropped the apple."
+      ],
+      "retained_read_state_bytes": 96,
+      "persistent_payload_bytes": 23884,
+      "foundation_prompt_tokens": 6438,
+      "ascent_prompt_tokens": 90
+    },
+    {
+      "row_id": "459bf595a05d224eda6015db936a648d1d7336efdf657d128d1eb53176bb09a2",
+      "task": "qa2",
+      "target": "kitchen",
+      "foundation_output": "The milk is in the kitchen.",
+      "foundation_location": "kitchen",
+      "foundation_score": 1.0,
+      "ascent_output": "Sandra picked up the milk there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra picked up the milk there.",
+        "Daniel took the milk there."
+      ],
+      "retained_read_state_bytes": 107,
+      "persistent_payload_bytes": 29261,
+      "foundation_prompt_tokens": 7974,
+      "ascent_prompt_tokens": 93
+    },
+    {
+      "row_id": "45cb177db2daf78a105e01803a9f259fd626430872dc11d942a552baa37392c7",
+      "task": "qa2",
+      "target": "office",
+      "foundation_output": "The apple is in the garden.",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra left the apple.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 2,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra grabbed the apple there.",
+        "Sandra left the apple."
+      ],
+      "retained_read_state_bytes": 101,
+      "persistent_payload_bytes": 29481,
+      "foundation_prompt_tokens": 7494,
+      "ascent_prompt_tokens": 91
+    },
+    {
+      "row_id": "31718f423a3068274f050fd7162c2b0db7c85b811cdffc7831741b97bc71d929",
+      "task": "qa3",
+      "target": "office",
+      "foundation_output": "The milk was in the kitchen before Sandra",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra picked up the milk there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra picked up the milk there.",
+        "Sandra grabbed the milk there."
+      ],
+      "retained_read_state_bytes": 110,
+      "persistent_payload_bytes": 30934,
+      "foundation_prompt_tokens": 7723,
+      "ascent_prompt_tokens": 96
+    },
+    {
+      "row_id": "31b19593f2e55638a57ba4e41df5c4c06b588dadb8ceea6ef5ec4350a962ad48",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "The apple was in the bathroom before the",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "- Daniel went back to the bathroom.",
+      "ascent_location": "bathroom",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel went back to the bathroom.",
+        "Sandra went back to the bathroom."
+      ],
+      "retained_read_state_bytes": 114,
+      "persistent_payload_bytes": 29815,
+      "foundation_prompt_tokens": 7437,
+      "ascent_prompt_tokens": 97
+    },
+    {
+      "row_id": "31e64fed53560de51e594bb578e52ca670369f70d6a982450d03eca3767c0b9b",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "The football was discarded in the hallway",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John moved to the hallway.",
+        "Mary moved to the hallway."
+      ],
+      "retained_read_state_bytes": 100,
+      "persistent_payload_bytes": 30909,
+      "foundation_prompt_tokens": 7860,
+      "ascent_prompt_tokens": 98
+    },
+    {
+      "row_id": "31f68a2548360d524f56537eae45a01d176f90118598094c548b481b6e1dca39",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "The apple was in the office before the",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "- Sandra travelled to the office.",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra travelled to the office.",
+        "John travelled to the office."
+      ],
+      "retained_read_state_bytes": 108,
+      "persistent_payload_bytes": 30736,
+      "foundation_prompt_tokens": 7820,
+      "ascent_prompt_tokens": 95
+    },
+    {
+      "row_id": "322dba4fbd9c0bd077b799c476785eb4b053ebd75082c1c7e13426a601196295",
+      "task": "qa3",
+      "target": "hallway",
+      "foundation_output": "The football was in the bathroom before the",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "Mary went to the bathroom.",
+      "ascent_location": "bathroom",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Mary went to the bathroom.",
+        "Sandra went back to the bathroom."
+      ],
+      "retained_read_state_bytes": 107,
+      "persistent_payload_bytes": 31906,
+      "foundation_prompt_tokens": 7541,
+      "ascent_prompt_tokens": 96
+    },
+    {
+      "row_id": "32b893dc1d8ede2773d03892bea0cf4f1b13201b475ee1c2cb9edd9726d2f0e2",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "The football was dropped by Sandra before the",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Mary went back to the office.",
+        "Mary went back to the office."
+      ],
+      "retained_read_state_bytes": 106,
+      "persistent_payload_bytes": 24942,
+      "foundation_prompt_tokens": 6441,
+      "ascent_prompt_tokens": 97
+    },
+    {
+      "row_id": "32cd6e6e4a7b89545efce6abb0ce5fd9e81c2c0abb4b4d15b74b79e8fa2ce145",
+      "task": "qa3",
+      "target": "office",
+      "foundation_output": "The apple was in the bedroom before the",
+      "foundation_location": "bedroom",
+      "foundation_score": 0.0,
+      "ascent_output": "- John travelled to the bedroom.",
+      "ascent_location": "bedroom",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John travelled to the bedroom.",
+        "John put down the apple."
+      ],
+      "retained_read_state_bytes": 102,
+      "persistent_payload_bytes": 23863,
+      "foundation_prompt_tokens": 5453,
+      "ascent_prompt_tokens": 95
+    },
+    {
+      "row_id": "32e055e2456affac93d8b4ca816ba56836fad38e02dafbe26fedd6d4adb1e197",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "The Mary dropped the milk before the office",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "- John went back to the office.",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John went back to the office.",
+        "Mary went back to the office."
+      ],
+      "retained_read_state_bytes": 106,
+      "persistent_payload_bytes": 31625,
+      "foundation_prompt_tokens": 7606,
+      "ascent_prompt_tokens": 97
+    },
+    {
+      "row_id": "3321e4f2742fe00b972a63e88a14912528cf2c48d075392bb3ff6356b3c2d36c",
+      "task": "qa3",
+      "target": "hallway",
+      "foundation_output": "The milk was in the kitchen before the",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "Daniel discarded the milk.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "\"Still, that couldn't go on for ever.\" \"Well, but only one day more father, dear!\" \"No, it's better we take you home now; perhaps, indeed, it's already\ntoo late.\" Daniel grabbed the milk.",
+        "Daniel discarded the milk."
+      ],
+      "retained_read_state_bytes": 261,
+      "persistent_payload_bytes": 29101,
+      "foundation_prompt_tokens": 7657,
+      "ascent_prompt_tokens": 139
+    },
+    {
+      "row_id": "334bb50dddde923c60eb6c424483875a4d62d5e9f783731e8b7bec3606eba5af",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "The milk was in the office before the",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra picked up the milk there.",
+        "Sandra journeyed to the office."
+      ],
+      "retained_read_state_bytes": 111,
+      "persistent_payload_bytes": 29949,
+      "foundation_prompt_tokens": 7165,
+      "ascent_prompt_tokens": 97
+    },
+    {
+      "row_id": "33a712ec3b0f3aaeadad011eef4868e5b0a7c9bb412ea6ad081066d41be79db5",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "Before the hallway, the apple was",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "- John went back to the hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John went back to the hallway.",
+        "Sandra went to the hallway."
+      ],
+      "retained_read_state_bytes": 105,
+      "persistent_payload_bytes": 31573,
+      "foundation_prompt_tokens": 7787,
+      "ascent_prompt_tokens": 99
+    },
+    {
+      "row_id": "33b517ead15c653454f0b947f2bc7681379659216937762d2428335b9efb8bb8",
+      "task": "qa3",
+      "target": "hallway",
+      "foundation_output": "The apple was in the garden before the",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra put down the apple.",
+        "Sandra put down the apple."
+      ],
+      "retained_read_state_bytes": 100,
+      "persistent_payload_bytes": 32995,
+      "foundation_prompt_tokens": 7819,
+      "ascent_prompt_tokens": 95
+    },
+    {
+      "row_id": "353d8ed3261fb606007b96a830d0c0830b9c441e77af70c519d249dd8d445e80",
+      "task": "qa3",
+      "target": "bedroom",
+      "foundation_output": "The milk was on the table before the",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "The milk was in the office.",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "'I shall soon learn to find content, if not happiness, from other\nsources,' said Coningsby; 'and mere riches, however vast, could at no\ntime have secured my felicity.' John travelled to the office.",
+        "Coningsby; do not let me believe that I, who\nwould sacrifice my life for your happiness, am the cause of such\ncalamities!' 'Whatever be my lot, I repeat I can sustain it,' said Coningsby, with a\ncheek of scarlet."
+      ],
+      "retained_read_state_bytes": 457,
+      "persistent_payload_bytes": 33472,
+      "foundation_prompt_tokens": 7768,
+      "ascent_prompt_tokens": 189
+    },
+    {
+      "row_id": "3563945c5e4b0267057d4ffabfd498cfdcd9c60e2e95a736bb70506793f1460d",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "The milk was dropped by Mary before the",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "The Bloody Angle",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "After the battle this point was\nknown as the \"Bloody Angle,\" and also as \"Hell's Hole.\" Daniel went back to the hallway.",
+        "Mary went to the hallway."
+      ],
+      "retained_read_state_bytes": 193,
+      "persistent_payload_bytes": 32540,
+      "foundation_prompt_tokens": 7799,
+      "ascent_prompt_tokens": 123
+    },
+    {
+      "row_id": "358d04bcbb4f22365897a06fa496a2d6f2d9467faff8366641e38800c0bd72a5",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "The apple was before the bathroom.",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "Mary",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Mary journeyed to the bathroom.",
+        "Sandra journeyed to the bathroom."
+      ],
+      "retained_read_state_bytes": 112,
+      "persistent_payload_bytes": 31194,
+      "foundation_prompt_tokens": 7836,
+      "ascent_prompt_tokens": 97
+    },
+    {
+      "row_id": "35a9b83dc33c0622e4ec0d7c7735ca47c125a381dc87779eaca2c6a89c2ddbff",
+      "task": "qa3",
+      "target": "office",
+      "foundation_output": "The football was in the hallway before",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "hallway",
+      "ascent_location": "hallway",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John got the football there.",
+        "John dropped the football."
+      ],
+      "retained_read_state_bytes": 102,
+      "persistent_payload_bytes": 31659,
+      "foundation_prompt_tokens": 7735,
+      "ascent_prompt_tokens": 95
+    },
+    {
+      "row_id": "35d6f238e10b9dab2c6ab6bcb3880d35a9fe40f3884b7628fa999857bb19f9c7",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "Before the office, the milk was at",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "Daniel went back to the office.",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "\"Is not the Bible warfare the same kind of warfare as the Indians\nthemselves carry on?\" Daniel went back to the office.",
+        "Daniel went back to the office."
+      ],
+      "retained_read_state_bytes": 198,
+      "persistent_payload_bytes": 32001,
+      "foundation_prompt_tokens": 7671,
+      "ascent_prompt_tokens": 119
+    },
+    {
+      "row_id": "35d9938fd6c8c569c63f673e9266bad66816062b66bcdd9e3e9532a1f6e5a191",
+      "task": "qa3",
+      "target": "office",
+      "foundation_output": "The milk was in the hallway before",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "Daniel.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel grabbed the milk.",
+        "Daniel went back to the hallway."
+      ],
+      "retained_read_state_bytes": 104,
+      "persistent_payload_bytes": 31084,
+      "foundation_prompt_tokens": 7851,
+      "ascent_prompt_tokens": 97
+    },
+    {
+      "row_id": "35fc07aac4aaf10fd404ddc3a4f695e4fad954b872478d4a4a993b4a0722e751",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "The apple was in the bedroom before the",
+      "foundation_location": "bedroom",
+      "foundation_score": 0.0,
+      "ascent_output": "Mary discarded the apple there.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Mary discarded the apple there.",
+        "Mary discarded the apple."
+      ],
+      "retained_read_state_bytes": 104,
+      "persistent_payload_bytes": 27190,
+      "foundation_prompt_tokens": 6781,
+      "ascent_prompt_tokens": 94
+    },
+    {
+      "row_id": "360dcc995daf7700bce429e55de468005b56d3ec5dbe58b6a4ebc411246e7fe4",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "The football was dropped before the office.",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra journeyed to the office.",
+        "Sandra went back to the office."
+      ],
+      "retained_read_state_bytes": 110,
+      "persistent_payload_bytes": 27660,
+      "foundation_prompt_tokens": 6469,
+      "ascent_prompt_tokens": 97
+    },
+    {
+      "row_id": "368808688531265e7a1a939b283d26894cfe3386069934cf8de59c0a3c5f65ec",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "The football was in the bathroom before the",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "memory:\n- Mary got the football",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Mary got the football.",
+        "Mary put down the football there."
+      ],
+      "retained_read_state_bytes": 103,
+      "persistent_payload_bytes": 27390,
+      "foundation_prompt_tokens": 6843,
+      "ascent_prompt_tokens": 95
+    },
+    {
+      "row_id": "36986446873e20ab81ea75df1c81c453c60ae3dfc594ffc46372ea232bab9717",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "The football was before the office in the",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John travelled to the office.",
+        "John travelled to the office."
+      ],
+      "retained_read_state_bytes": 106,
+      "persistent_payload_bytes": 30022,
+      "foundation_prompt_tokens": 7599,
+      "ascent_prompt_tokens": 95
+    },
+    {
+      "row_id": "36e728d22b67402625777c046493007ab278bd9806cf9f84a6417c948258cc33",
+      "task": "qa3",
+      "target": "hallway",
+      "foundation_output": "The football was in the bathroom before the",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "Mary went to the bathroom.",
+      "ascent_location": "bathroom",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Mary went to the bathroom.",
+        "Sandra went back to the bathroom."
+      ],
+      "retained_read_state_bytes": 107,
+      "persistent_payload_bytes": 24711,
+      "foundation_prompt_tokens": 5940,
+      "ascent_prompt_tokens": 96
+    },
+    {
+      "row_id": "36ee0d18e56f2da0bb6494b463bd6b3cadcb4d026dd2a6d794e9c257763a92d0",
+      "task": "qa3",
+      "target": "office",
+      "foundation_output": "Before the bathroom, the apple was discarded",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "- Daniel went back to the bathroom.",
+      "ascent_location": "bathroom",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel went back to the bathroom.",
+        "Mary went back to the bathroom."
+      ],
+      "retained_read_state_bytes": 112,
+      "persistent_payload_bytes": 32368,
+      "foundation_prompt_tokens": 7935,
+      "ascent_prompt_tokens": 97
+    },
+    {
+      "row_id": "385cdfe647b10f6dd5c288a4de36ce8d35b79d03b91c1b3be92ebc2d237587d1",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "The apple was placed in the garden before",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "- John travelled to the garden.",
+      "ascent_location": "garden",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John travelled to the garden.",
+        "John went to the garden."
+      ],
+      "retained_read_state_bytes": 101,
+      "persistent_payload_bytes": 31121,
+      "foundation_prompt_tokens": 7887,
+      "ascent_prompt_tokens": 95
+    },
+    {
+      "row_id": "385e9b7955b296e34fc5b73e5d0b382cb863b939a68a13fd978c6f221313bfae",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "The football was discarded before the office.",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel discarded the football.",
+        "Sandra discarded the football."
+      ],
+      "retained_read_state_bytes": 108,
+      "persistent_payload_bytes": 33846,
+      "foundation_prompt_tokens": 7897,
+      "ascent_prompt_tokens": 93
+    },
+    {
+      "row_id": "387618eb1d41f929357160b9a37517185b84d50a49604318e3aab5d3acec8ff5",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "Before the garden, the football was in",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "The football was in the garden before the",
+      "ascent_location": "garden",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "\"But,\" resumed Agricola, addressing himself to Gabriel, who seemed also\nto have become more and more absorbed, \"in what manner or by what means\ndid this woman come to your assistance?\" Sandra went back to the garden.",
+        "Mary went back to the garden."
+      ],
+      "retained_read_state_bytes": 293,
+      "persistent_payload_bytes": 31018,
+      "foundation_prompt_tokens": 7877,
+      "ascent_prompt_tokens": 139
+    },
+    {
+      "row_id": "38dbab87bfb27872b6f5b5334a91e9f1c021f8534ebb34edc28f2dbdc58b1a0c",
+      "task": "qa3",
+      "target": "office",
+      "foundation_output": "The milk was taken from the garden before",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra left the milk there.",
+        "John left the milk."
+      ],
+      "retained_read_state_bytes": 94,
+      "persistent_payload_bytes": 28929,
+      "foundation_prompt_tokens": 6912,
+      "ascent_prompt_tokens": 94
+    },
+    {
+      "row_id": "3915fbd192864e4ad17b00874e78f98b53336f7ed4108702fa68ba50aa8eb364",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "Before the hallway, the apple was",
+      "foundation_location": "hallway",
+      "foundation_score": 0.0,
+      "ascent_output": "Daniel travelled to the hallway.",
+      "ascent_location": "hallway",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "or Ise a dead man, shuah!\" Daniel travelled to the hallway.",
+        "Daniel travelled to the hallway."
+      ],
+      "retained_read_state_bytes": 139,
+      "persistent_payload_bytes": 30220,
+      "foundation_prompt_tokens": 7836,
+      "ascent_prompt_tokens": 109
+    },
+    {
+      "row_id": "39666ac4a44d4480a376ccad4bea1f9c5912902c597c31411a5a9e81d44b1dca",
+      "task": "qa3",
+      "target": "hallway",
+      "foundation_output": "The apple was in the bathroom.",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "- John journeyed to the bathroom.",
+      "ascent_location": "bathroom",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John journeyed to the bathroom.",
+        "Daniel journeyed to the bathroom."
+      ],
+      "retained_read_state_bytes": 112,
+      "persistent_payload_bytes": 31066,
+      "foundation_prompt_tokens": 7671,
+      "ascent_prompt_tokens": 97
+    },
+    {
+      "row_id": "397a797df916a9659407a822133a168315b3376b25e1fd9670ef159cfb945149",
+      "task": "qa3",
+      "target": "bedroom",
+      "foundation_output": "The apple was in the bathroom before the",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "- John moved to the bathroom.",
+      "ascent_location": "bathroom",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "John moved to the bathroom.",
+        "John journeyed to the bathroom."
+      ],
+      "retained_read_state_bytes": 106,
+      "persistent_payload_bytes": 30077,
+      "foundation_prompt_tokens": 7834,
+      "ascent_prompt_tokens": 96
+    },
+    {
+      "row_id": "3991c9fe84da73f4d206257bb075cd04a96513175ac58560ff86e5a23bb99841",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "The milk was discarded by the Ninety",
+      "foundation_location": null,
+      "foundation_score": 0.0,
+      "ascent_output": "Mary moved to the office.",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Mary moved to the office.",
+        "Mary went back to the office."
+      ],
+      "retained_read_state_bytes": 102,
+      "persistent_payload_bytes": 31244,
+      "foundation_prompt_tokens": 7852,
+      "ascent_prompt_tokens": 96
+    },
+    {
+      "row_id": "3a09afd2387dea74489ba49086134f9eafb120ba161dd3a16077ef7b87300963",
+      "task": "qa3",
+      "target": "office",
+      "foundation_output": "The milk was discarded before the garden.",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra took the milk.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra took the milk.",
+        "Sandra discarded the milk."
+      ],
+      "retained_read_state_bytes": 95,
+      "persistent_payload_bytes": 30575,
+      "foundation_prompt_tokens": 7488,
+      "ascent_prompt_tokens": 93
+    },
+    {
+      "row_id": "3a3c66101c381b08d8f79e928246ba8360e6b3f4f5a84493be4d3681545300a9",
+      "task": "qa3",
+      "target": "garden",
+      "foundation_output": "The football was in the kitchen before the",
+      "foundation_location": "kitchen",
+      "foundation_score": 0.0,
+      "ascent_output": "Sandra.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra picked up the football.",
+        "Sandra put down the football there."
+      ],
+      "retained_read_state_bytes": 113,
+      "persistent_payload_bytes": 27894,
+      "foundation_prompt_tokens": 6964,
+      "ascent_prompt_tokens": 96
+    },
+    {
+      "row_id": "3a3e862008f9ce3198dc29256315ec1d6b7fb4a22cda2bf58e24004e0bf6a8f2",
+      "task": "qa3",
+      "target": "hallway",
+      "foundation_output": "The milk was in the garden before the",
+      "foundation_location": "garden",
+      "foundation_score": 0.0,
+      "ascent_output": "Daniel took the milk.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel took the milk.",
+        "Daniel put down the milk."
+      ],
+      "retained_read_state_bytes": 94,
+      "persistent_payload_bytes": 30803,
+      "foundation_prompt_tokens": 7555,
+      "ascent_prompt_tokens": 94
+    },
+    {
+      "row_id": "3a7ffe05a00f2a8b1a52de8e8b62ab2b0caad98321269e81c8dd975050e8a332",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "The football was in the bathroom before the",
+      "foundation_location": "bathroom",
+      "foundation_score": 0.0,
+      "ascent_output": "- Daniel left the football.",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel left the football.",
+        "Daniel took the football."
+      ],
+      "retained_read_state_bytes": 98,
+      "persistent_payload_bytes": 31990,
+      "foundation_prompt_tokens": 8004,
+      "ascent_prompt_tokens": 93
+    },
+    {
+      "row_id": "3aa2127b27b20344fb9cd3a49cdf1bb385729a5cf444d668a6c5a881b7a96868",
+      "task": "qa3",
+      "target": "kitchen",
+      "foundation_output": "The milk was in the kitchen before the",
+      "foundation_location": "kitchen",
+      "foundation_score": 1.0,
+      "ascent_output": "Daniel",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel dropped the milk.",
+        "Sandra dropped the milk."
+      ],
+      "retained_read_state_bytes": 96,
+      "persistent_payload_bytes": 33221,
+      "foundation_prompt_tokens": 7810,
+      "ascent_prompt_tokens": 93
+    },
+    {
+      "row_id": "3aa84a0ae88a9d3f1d78821a55325691fbcb176fa1b43d08d03dd9f62ba36bed",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "The milk was at the office.",
+      "foundation_location": "office",
+      "foundation_score": 0.0,
+      "ascent_output": "office",
+      "ascent_location": "office",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Sandra got the milk.",
+        "Sandra got the milk."
+      ],
+      "retained_read_state_bytes": 88,
+      "persistent_payload_bytes": 29452,
+      "foundation_prompt_tokens": 7503,
+      "ascent_prompt_tokens": 93
+    },
+    {
+      "row_id": "3ad5d1e16da37704cb26ae75d4e61344890108bd36351ba974ccde84e2e9d1fc",
+      "task": "qa3",
+      "target": "hallway",
+      "foundation_output": "The milk was in the bedroom before the",
+      "foundation_location": "bedroom",
+      "foundation_score": 0.0,
+      "ascent_output": "- You see, this\ncountry breeds",
+      "ascent_location": null,
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "You see, this\ncountry breeds good horses.\" John travelled to the bedroom.",
+        "John travelled to the bedroom."
+      ],
+      "retained_read_state_bytes": 151,
+      "persistent_payload_bytes": 32420,
+      "foundation_prompt_tokens": 7830,
+      "ascent_prompt_tokens": 105
+    },
+    {
+      "row_id": "3b17cc823515397b105d95332947ae45c3887d39eec631c8a5205b02457ce12e",
+      "task": "qa3",
+      "target": "bathroom",
+      "foundation_output": "The apple was in the bedroom before the",
+      "foundation_location": "bedroom",
+      "foundation_score": 0.0,
+      "ascent_output": "- Daniel travelled to the bedroom.",
+      "ascent_location": "bedroom",
+      "ascent_score": 0.0,
+      "supporting_fact_count": 3,
+      "retained_fact_count": 2,
+      "retained_facts": [
+        "Daniel travelled to the bedroom.",
+        "Daniel went to the bedroom."
+      ],
+      "retained_read_state_bytes": 107,
+      "persistent_payload_bytes": 30425,
+      "foundation_prompt_tokens": 7831,
+      "ascent_prompt_tokens": 95
+    }
+  ]
+}

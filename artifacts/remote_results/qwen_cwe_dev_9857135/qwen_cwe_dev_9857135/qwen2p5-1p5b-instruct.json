@@ -1,0 +1,2269 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_ruler_cwe_qwen2p5_16k_certified_development",
+  "status": "development_cross_architecture_frozen_before_any_qwen_cwe_model_score",
+  "completed_utc": "2026-08-14T07:59:52.704152+00:00",
+  "endpoint": {
+    "name": "qwen2p5-1p5b-instruct",
+    "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "model_parameters": 1543714304,
+    "hidden_size": 1536,
+    "batch_size": 1,
+    "model_artifact": {
+      "path": "model.safetensors",
+      "bytes": 3087467144,
+      "sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+    }
+  },
+  "config": {
+    "path": "configs/ruler_cwe_qwen2p5_16k_certified_development.json",
+    "sha256": "9c212664faec2e1b95a3957c448b87c86e7c75a51b3eb49f1f9b7a88a4041f14"
+  },
+  "data": {
+    "path": "data/ruler_cwe_qwen2p5_dev_seed383803_16k_safe/cwe/validation.jsonl",
+    "sha256": "73e0014a4cfb4d2f589d6cae15f22fc599a75d62516d62d6fe04cb6170270fa1",
+    "rows": 60
+  },
+  "data_seed": null,
+  "model_files": [
+    {
+      "path": "model.safetensors",
+      "bytes": 3087467144,
+      "sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+    }
+  ],
+  "parser_accuracy": 1.0,
+  "foundation": {
+    "samples": 60,
+    "mean": 0.12666666666666665,
+    "standard_error": 0.019436506316151,
+    "ci95_low": 0.0885711142870107,
+    "ci95_high": 0.1647622190463226
+  },
+  "fixed_ascent": {
+    "samples": 60,
+    "mean": 0.38499999999999995,
+    "standard_error": 0.014810478806773119,
+    "ci95_low": 0.35597146153872467,
+    "ci95_high": 0.41402853846127524
+  },
+  "fixed_gain": {
+    "samples": 60,
+    "mean": 0.25833333333333336,
+    "standard_error": 0.009883978551932713,
+    "ci95_low": 0.23896073537154525,
+    "ci95_high": 0.2777059312951215
+  },
+  "scale_ascent": {
+    "samples": 60,
+    "mean": 0.7383333333333335,
+    "standard_error": 0.00892266417444186,
+    "ci95_low": 0.7208449115514275,
+    "ci95_high": 0.7558217551152395
+  },
+  "scale_gain": {
+    "samples": 60,
+    "mean": 0.6116666666666667,
+    "standard_error": 0.016137065917379328,
+    "ci95_low": 0.5800380174686032,
+    "ci95_high": 0.6432953158647302
+  },
+  "fixed_wins": 58,
+  "fixed_regressions": 0,
+  "scale_wins": 60,
+  "scale_regressions": 0,
+  "state": {
+    "memory_slots": 1024,
+    "fixed_certified_word_slots": 3,
+    "scale_certified_word_slots": 7,
+    "mean_write_payload_bytes": 14907.283333333333,
+    "maximum_write_payload_bytes": 15132,
+    "mean_fixed_read_payload_bytes": 46.416666666666664,
+    "mean_scale_read_payload_bytes": 107.41666666666667,
+    "mean_scale_total_state_bytes": 15014.699999999999,
+    "scale_total_state_bytes_per_model_parameter": 9.7263463589698e-06
+  },
+  "systems": {
+    "target_blind_counter_seconds": 0.10142594948410988,
+    "counter_microseconds_per_sample": 1690.4324914018314,
+    "foundation_decode_seconds": 65.88259481266141,
+    "foundation_prompt_tokens": 944959,
+    "maximum_foundation_prompt_tokens": 15909,
+    "foundation_generated_tokens": 5103,
+    "allocated_before_bytes": 3088346624,
+    "peak_allocated_bytes": 4613965824,
+    "incremental_peak_bytes": 1525619200
+  },
+  "measurement_boundary": "Foundation is one exact greedy full-context decode. Fixed and scale ASCENT scores append certified counter evidence without a second neural decode. Counter time/state and model decode time/memory are reported separately.",
+  "environment": {
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128",
+    "transformers": "4.57.6",
+    "cuda_device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "git_commit": "985713575f93d1a3277a089ab779ca7d3588d508",
+    "git_dirty": false
+  },
+  "predictions": [
+    {
+      "index": 0,
+      "references": [
+        "hiring",
+        "online",
+        "ignore",
+        "chime",
+        "e-mail",
+        "apology",
+        "abrasive",
+        "activation",
+        "everybody",
+        "ivory"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"sandwich\"\n2. \"dog\"\n3. \"cat\"\n4. \"house\"\n5. \"car\"\n6. \"tree\"\n7. \"book\"\n8. \"pen\"\n9. \"key\"\n10. \"door\"\n\nThese words have appeared with higher frequency compared to other entries in the provided list.",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "abrasive",
+        "ignore",
+        "ivory"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "abrasive",
+        "ignore",
+        "ivory",
+        "chime",
+        "activation",
+        "apology",
+        "online"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 642,
+      "write_payload_bytes": 14753,
+      "prompt_tokens": 15616
+    },
+    {
+      "index": 1,
+      "references": [
+        "tsunami",
+        "kitty",
+        "analytics",
+        "absence",
+        "cleavage",
+        "colorful",
+        "wander",
+        "vixen",
+        "yoke",
+        "filth"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"vixen\"\n2. \"filth\"\n3. \"cleavage\"\n4. \"tombstone\"\n5. \"sickle\"\n6. \"mole\"\n7. \"penny\"\n8. \"dollar\"\n9. \"shilling\"\n10. \"franc\"\n\nThese words have appeared with very high frequency in the provided text.",
+      "foundation_score": 0.3,
+      "fixed_certified_words": [
+        "wander",
+        "absence",
+        "analytics"
+      ],
+      "fixed_score": 0.6,
+      "scale_certified_words": [
+        "wander",
+        "absence",
+        "analytics",
+        "colorful",
+        "yoke",
+        "vixen",
+        "tsunami"
+      ],
+      "scale_score": 0.9,
+      "counter_entries": 650,
+      "write_payload_bytes": 14962,
+      "prompt_tokens": 15807
+    },
+    {
+      "index": 2,
+      "references": [
+        "bower",
+        "suspension",
+        "fairness",
+        "translate",
+        "scholar",
+        "billboard",
+        "street",
+        "guidance",
+        "hub",
+        "tailspin"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"unique\"\n2. \"angora\"\n3. \"suffocation\"\n4. \"snakebite\"\n5. \"correlate\"\n6. \"raffle\"\n7. \"comparison\"\n8. \"trophy\"\n9. \"provision\"\n10. \"ashram\"\n\nThese words consistently appear at high frequencies throughout the provided text.",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "street",
+        "fairness",
+        "tailspin"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "street",
+        "fairness",
+        "tailspin",
+        "translate",
+        "guidance",
+        "billboard",
+        "suspension"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 643,
+      "write_payload_bytes": 14868,
+      "prompt_tokens": 15655
+    },
+    {
+      "index": 3,
+      "references": [
+        "prosperity",
+        "geology",
+        "wrapper",
+        "march",
+        "semiconductor",
+        "headphones",
+        "juicy",
+        "seaweed",
+        "jellybeans",
+        "recommendation"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"jellybeans\"\n2. \"seaweed\"\n3. \"brassiere\"\n4. \"courtroom\"\n5. \"monsoon\"\n6. \"death\"\n7. \"expedition\"\n8. \"cheek\"\n9. \"integral\"\n10. \"swear\"\n\nThese words appear with relatively high frequency compared to other entries in the list.",
+      "foundation_score": 0.2,
+      "fixed_certified_words": [
+        "juicy",
+        "march",
+        "wrapper"
+      ],
+      "fixed_score": 0.5,
+      "scale_certified_words": [
+        "juicy",
+        "march",
+        "wrapper",
+        "headphones",
+        "jellybeans",
+        "seaweed",
+        "prosperity"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 651,
+      "write_payload_bytes": 15054,
+      "prompt_tokens": 15801
+    },
+    {
+      "index": 4,
+      "references": [
+        "vibration",
+        "mission",
+        "favor",
+        "absorbed",
+        "bank",
+        "sow",
+        "pricing",
+        "switching",
+        "unbecoming",
+        "socks"
+      ],
+      "foundation_output": "The top 10 words that appear most often in the given list are:\n\n1. bank\n2. glass\n3. salt\n4. egg\n5. meat\n6. fish\n7. chicken\n8. pork\n9. beef\n10. potato\n\nThese words have appeared with high frequencies in the provided text.",
+      "foundation_score": 0.1,
+      "fixed_certified_words": [
+        "pricing",
+        "absorbed",
+        "favor"
+      ],
+      "fixed_score": 0.4,
+      "scale_certified_words": [
+        "pricing",
+        "absorbed",
+        "favor",
+        "sow",
+        "unbecoming",
+        "switching",
+        "vibration"
+      ],
+      "scale_score": 0.8,
+      "counter_entries": 652,
+      "write_payload_bytes": 15132,
+      "prompt_tokens": 15686
+    },
+    {
+      "index": 5,
+      "references": [
+        "quadrant",
+        "greasy",
+        "inspection",
+        "postbox",
+        "crewmember",
+        "minnow",
+        "steady",
+        "swan",
+        "credibility",
+        "kingdom"
+      ],
+      "foundation_output": "The top 10 most common words in the given list are:\n\n1. \"inspection\"\n2. \"postbox\"\n3. \"corruption\"\n4. \"bankrupt\"\n5. \"corporatist\"\n6. \"corporate\"\n7. \"corporations\"\n8. \"corporates\"\n9. \"corporal\"\n10. \"corporalities\"\n\nThese words appear frequently due to their repeated usage throughout the text.",
+      "foundation_score": 0.2,
+      "fixed_certified_words": [
+        "steady",
+        "postbox",
+        "inspection"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "steady",
+        "postbox",
+        "inspection",
+        "minnow",
+        "credibility",
+        "swan",
+        "quadrant"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 651,
+      "write_payload_bytes": 14916,
+      "prompt_tokens": 15877
+    },
+    {
+      "index": 6,
+      "references": [
+        "silent",
+        "filthy",
+        "tonic",
+        "macaroon",
+        "exception",
+        "billowy",
+        "migration",
+        "amount",
+        "comprehension",
+        "saffron"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"bank\"\n2. \"bank\"\n3. \"bank\"\n4. \"bank\"\n5. \"bank\"\n6. \"bank\"\n7. \"bank\"\n8. \"bank\"\n9. \"bank\"\n10. \"bank\"\n\nAll ten entries in this list are identical and repeat many times due to being repeated throughout the text.",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "migration",
+        "macaroon",
+        "tonic"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "migration",
+        "macaroon",
+        "tonic",
+        "billowy",
+        "comprehension",
+        "amount",
+        "silent"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 649,
+      "write_payload_bytes": 15036,
+      "prompt_tokens": 15894
+    },
+    {
+      "index": 7,
+      "references": [
+        "contractor",
+        "web",
+        "mover",
+        "stepping-stone",
+        "sunbonnet",
+        "utensil",
+        "overthrow",
+        "nit",
+        "casino",
+        "walk"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"bankrupt\"\n2. \"bankruptcy\"\n3. \"bankroll\"\n4. \"banknote\"\n5. \"bankruptcy\"\n6. \"bankruptcy\"\n7. \"bankruptcy\"\n8. \"bankruptcy\"\n9. \"bankruptcy\"\n10. \"bankruptcy\"\n\nThese terms all relate to financial or legal bankruptcy, which appears frequently in this list.",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "overthrow",
+        "mover",
+        "walk"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "overthrow",
+        "mover",
+        "walk",
+        "stepping-stone",
+        "nit",
+        "utensil",
+        "web"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 642,
+      "write_payload_bytes": 14857,
+      "prompt_tokens": 15734
+    },
+    {
+      "index": 8,
+      "references": [
+        "trove",
+        "decade",
+        "pronunciation",
+        "volatility",
+        "wash",
+        "skin",
+        "behest",
+        "jazzy",
+        "tense",
+        "ceramic"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"word\"\n2. \"list\"\n3. \"words\"\n4. \"appear\"\n5. \"most\"\n6. \"often\"\n7. \"the\"\n8. \"are\"\n9. \"in\"\n10. \"above\"\n\nThese words frequently recur due to their usage as part of larger phrases and sentences rather than appearing individually with higher frequency.",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "behest",
+        "pronunciation",
+        "ceramic"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "behest",
+        "pronunciation",
+        "ceramic",
+        "volatility",
+        "jazzy",
+        "skin",
+        "decade"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 644,
+      "write_payload_bytes": 14904,
+      "prompt_tokens": 15584
+    },
+    {
+      "index": 9,
+      "references": [
+        "heaven",
+        "setting",
+        "courage",
+        "fang",
+        "be",
+        "sincere",
+        "pocketbook",
+        "suburb",
+        "absurd",
+        "skean"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"word\"\n2. \"list\"\n3. \"above\"\n4. \"words\"\n5. \"the\"\n6. \"in\"\n7. \"of\"\n8. \"that\"\n9. \"this\"\n10. \"is\"",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "heaven",
+        "pocketbook",
+        "courage"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "heaven",
+        "pocketbook",
+        "courage",
+        "skean",
+        "fang",
+        "suburb",
+        "sincere"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 643,
+      "write_payload_bytes": 14740,
+      "prompt_tokens": 15628
+    },
+    {
+      "index": 10,
+      "references": [
+        "witch-hunt",
+        "dam",
+        "interview",
+        "man",
+        "purse",
+        "shoreline",
+        "skate",
+        "cream",
+        "elderberry",
+        "suspension"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"sandwich\"\n2. \"iceberg\"\n3. \"sunset\"\n4. \"sunrise\"\n5. \"sandals\"\n6. \"sandwich\"\n7. \"sandwich\"\n8. \"sandwich\"\n9. \"sandwich\"\n10. \"sandwich\"\n\nThese words all appear multiple times in the provided text and have high frequency counts.",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "skate",
+        "man",
+        "interview"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "skate",
+        "man",
+        "interview",
+        "shoreline",
+        "elderberry",
+        "cream",
+        "witch-hunt"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 653,
+      "write_payload_bytes": 15039,
+      "prompt_tokens": 15862
+    },
+    {
+      "index": 11,
+      "references": [
+        "earthquake",
+        "journey",
+        "overnighter",
+        "beginning",
+        "checking",
+        "battle",
+        "charter",
+        "century",
+        "listen",
+        "e-reader"
+      ],
+      "foundation_output": "The top 10 most common words in the given list are:\n\n1. \"century\"\n2. \"e-reader\"\n3. \"bankrupt\"\n4. \"hurt\"\n5. \"village\"\n6. \"mud\"\n7. \"neologism\"\n8. \"bacterium\"\n9. \"tireless\"\n10. \"hysterical\"\n\nThese words appear with high frequency in the provided text.",
+      "foundation_score": 0.2,
+      "fixed_certified_words": [
+        "charter",
+        "beginning",
+        "overnighter"
+      ],
+      "fixed_score": 0.5,
+      "scale_certified_words": [
+        "charter",
+        "beginning",
+        "overnighter",
+        "battle",
+        "listen",
+        "century",
+        "earthquake"
+      ],
+      "scale_score": 0.8,
+      "counter_entries": 651,
+      "write_payload_bytes": 14968,
+      "prompt_tokens": 15791
+    },
+    {
+      "index": 12,
+      "references": [
+        "abusive",
+        "socialism",
+        "suite",
+        "toothsome",
+        "buckwheat",
+        "wholesale",
+        "dive",
+        "scorpion",
+        "cassava",
+        "jazz"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"dive\"\n2. \"chocolate\"\n3. \"cheese\"\n4. \"barrel\"\n5. \"tulip\"\n6. \"juice\"\n7. \"beef\"\n8. \"apple\"\n9. \"eggplant\"\n10. \"mushroom\"\n\nThese words appear with high frequency in the provided text.",
+      "foundation_score": 0.1,
+      "fixed_certified_words": [
+        "dive",
+        "suite",
+        "jazz"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "dive",
+        "suite",
+        "jazz",
+        "toothsome",
+        "scorpion",
+        "wholesale",
+        "socialism"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 642,
+      "write_payload_bytes": 14799,
+      "prompt_tokens": 15686
+    },
+    {
+      "index": 13,
+      "references": [
+        "delicious",
+        "sender",
+        "secrecy",
+        "tightfisted",
+        "flipped-out",
+        "grass",
+        "spite",
+        "society",
+        "reminder",
+        "evolution"
+      ],
+      "foundation_output": "The top 10 most common words in the given list are:\n\n1. \"evolution\"\n2. \"society\"\n3. \"grass\"\n4. \"winner\"\n5. \"nutty\"\n6. \"bankrupt\"\n7. \"hunger\"\n8. \"disaster\"\n9. \"miser\"\n10. \"waste\"\n\nThese words appear frequently due to their repeated use throughout the text.",
+      "foundation_score": 0.3,
+      "fixed_certified_words": [
+        "spite",
+        "tightfisted",
+        "secrecy"
+      ],
+      "fixed_score": 0.6,
+      "scale_certified_words": [
+        "spite",
+        "tightfisted",
+        "secrecy",
+        "grass",
+        "reminder",
+        "society",
+        "delicious"
+      ],
+      "scale_score": 0.8,
+      "counter_entries": 647,
+      "write_payload_bytes": 14924,
+      "prompt_tokens": 15842
+    },
+    {
+      "index": 14,
+      "references": [
+        "bathrobe",
+        "weather",
+        "deployment",
+        "comptroller",
+        "husband",
+        "obedient",
+        "yellow",
+        "eager",
+        "contribution",
+        "task"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. deployment\n2. shiny\n3. yellow\n4. boss\n5. boss\n6. boss\n7. boss\n8. boss\n9. boss\n10. boss\n\nThese words appear multiple times and have similar frequencies, making them stand out as the most commonly used terms in this list.",
+      "foundation_score": 0.2,
+      "fixed_certified_words": [
+        "yellow",
+        "comptroller",
+        "deployment"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "yellow",
+        "comptroller",
+        "deployment",
+        "obedient",
+        "contribution",
+        "eager",
+        "bathrobe"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 653,
+      "write_payload_bytes": 15032,
+      "prompt_tokens": 15909
+    },
+    {
+      "index": 15,
+      "references": [
+        "gauntlet",
+        "greatness",
+        "decency",
+        "item",
+        "attainment",
+        "mark",
+        "belligerency",
+        "silo",
+        "step",
+        "episode"
+      ],
+      "foundation_output": "The top 10 most common words in the given list are:\n\n1. \"belligerency\"\n2. \"item\"\n3. \"attainment\"\n4. \"silhouette\"\n5. \"gauntlet\"\n6. \"sugar\"\n7. \"pumpkin\"\n8. \"chocolate\"\n9. \"treat\"\n10. \"cookie\"\n\nThese words appear frequently due to their repeated usage throughout the list.",
+      "foundation_score": 0.4,
+      "fixed_certified_words": [
+        "belligerency",
+        "item",
+        "decency"
+      ],
+      "fixed_score": 0.5,
+      "scale_certified_words": [
+        "belligerency",
+        "item",
+        "decency",
+        "mark",
+        "step",
+        "silo",
+        "gauntlet"
+      ],
+      "scale_score": 0.8,
+      "counter_entries": 655,
+      "write_payload_bytes": 15035,
+      "prompt_tokens": 15877
+    },
+    {
+      "index": 16,
+      "references": [
+        "discover",
+        "chunky",
+        "enter",
+        "scarf",
+        "rear",
+        "terrorist",
+        "achieve",
+        "pike",
+        "appearance",
+        "various"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"accelerate\"\n2. \"interaction\"\n3. \"foal\"\n4. \"activity\"\n5. \"numismatist\"\n6. \"wasp\"\n7. \"census\"\n8. \"congregation\"\n9. \"carnival\"\n10. \"withdraw\"\n\nThese words consistently appear at high frequencies throughout the provided text.",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "achieve",
+        "scarf",
+        "enter"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "achieve",
+        "scarf",
+        "enter",
+        "terrorist",
+        "appearance",
+        "pike",
+        "discover"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 650,
+      "write_payload_bytes": 14975,
+      "prompt_tokens": 15731
+    },
+    {
+      "index": 17,
+      "references": [
+        "capacity",
+        "witty",
+        "mother-in-law",
+        "flower",
+        "workbench",
+        "tall",
+        "limo",
+        "yellow",
+        "overload",
+        "divorce"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"limo\"\n2. \"road\"\n3. \"prairie\"\n4. \"hiring\"\n5. \"press\"\n6. \"logic\"\n7. \"barn\"\n8. \"recording\"\n9. \"analysis\"\n10. \"brush\"\n\nThese words have appeared with high frequency in the provided text.",
+      "foundation_score": 0.1,
+      "fixed_certified_words": [
+        "limo",
+        "flower",
+        "mother-in-law"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "limo",
+        "flower",
+        "mother-in-law",
+        "tall",
+        "overload",
+        "yellow",
+        "capacity"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 652,
+      "write_payload_bytes": 15000,
+      "prompt_tokens": 15877
+    },
+    {
+      "index": 18,
+      "references": [
+        "cigarette",
+        "logo",
+        "aircraft",
+        "dentist",
+        "alphabet",
+        "printing",
+        "portion",
+        "waveform",
+        "ectoderm",
+        "sparrow"
+      ],
+      "foundation_output": "The top 10 most common words in the given list are:\n\n1. word (appears 10 times)\n2. list (appears 9 times)\n3. list (appears 9 times again)\n4. word (appears 8 times)\n5. word (appears 7 times)\n6. word (appears 6 times)\n7. word (appears 5 times)\n8. word (appears 4 times)\n9. word (appears 3 times)\n10. word (appears 2 times)\n\nNote: There",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "portion",
+        "dentist",
+        "aircraft"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "portion",
+        "dentist",
+        "aircraft",
+        "printing",
+        "ectoderm",
+        "waveform",
+        "cigarette"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 652,
+      "write_payload_bytes": 14995,
+      "prompt_tokens": 15822
+    },
+    {
+      "index": 19,
+      "references": [
+        "bathe",
+        "silkworm",
+        "furtive",
+        "photography",
+        "drain",
+        "clinic",
+        "make",
+        "racing",
+        "playwright",
+        "approve"
+      ],
+      "foundation_output": "The top 10 words that appear most often in the given list are:\n\n1. \"make\"\n2. \"silkworm\"\n3. \"drain\"\n4. \"photography\"\n5. \"bankruptcy\"\n6. \"futile\"\n7. \"clerk\"\n8. \"bank\"\n9. \"bankrupt\"\n10. \"bank\"\n\nThese words have appeared with high frequency in the provided text.",
+      "foundation_score": 0.4,
+      "fixed_certified_words": [
+        "make",
+        "furtive",
+        "approve"
+      ],
+      "fixed_score": 0.6,
+      "scale_certified_words": [
+        "make",
+        "furtive",
+        "approve",
+        "photography",
+        "racing",
+        "clinic",
+        "silkworm"
+      ],
+      "scale_score": 0.8,
+      "counter_entries": 640,
+      "write_payload_bytes": 14723,
+      "prompt_tokens": 15664
+    },
+    {
+      "index": 20,
+      "references": [
+        "ugliest",
+        "strive",
+        "industrialization",
+        "burro",
+        "mainland",
+        "tested",
+        "absent",
+        "foxglove",
+        "abundant",
+        "stacking"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"burro\"\n2. \"surface\"\n3. \"lavatory\"\n4. \"luggage\"\n5. \"airplane\"\n6. \"hotel\"\n7. \"restaurant\"\n8. \"airport\"\n9. \"carpet\"\n10. \"bathroom\"\n\nThese words appear frequently due to their repeated use throughout the text.",
+      "foundation_score": 0.1,
+      "fixed_certified_words": [
+        "absent",
+        "industrialization",
+        "stacking"
+      ],
+      "fixed_score": 0.4,
+      "scale_certified_words": [
+        "absent",
+        "industrialization",
+        "stacking",
+        "burro",
+        "foxglove",
+        "tested",
+        "strive"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 644,
+      "write_payload_bytes": 14882,
+      "prompt_tokens": 15704
+    },
+    {
+      "index": 21,
+      "references": [
+        "anorak",
+        "spool",
+        "prosecution",
+        "stall",
+        "baseline",
+        "amenity",
+        "fire",
+        "withdraw",
+        "toad",
+        "defiant"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"word\"\n2. \"list\"\n3. \"words\"\n4. \"appear\"\n5. \"most\"\n6. \"often\"\n7. \"in\"\n8. \"the\"\n9. \"above\"\n10. \"are\"",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "fire",
+        "prosecution",
+        "defiant"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "fire",
+        "prosecution",
+        "defiant",
+        "stall",
+        "withdraw",
+        "amenity",
+        "spool"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 643,
+      "write_payload_bytes": 14813,
+      "prompt_tokens": 15708
+    },
+    {
+      "index": 22,
+      "references": [
+        "elimination",
+        "receptive",
+        "interconnection",
+        "calculation",
+        "draft",
+        "succinct",
+        "footnote",
+        "smell",
+        "cooking",
+        "ratio"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"word\"\n2. \"list\"\n3. \"above\"\n4. \"the\"\n5. \"are\"\n6. \"of\"\n7. \"and\"\n8. \"in\"\n9. \"to\"\n10. \"a\"",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "footnote",
+        "calculation",
+        "interconnection"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "footnote",
+        "calculation",
+        "interconnection",
+        "succinct",
+        "cooking",
+        "smell",
+        "elimination"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 650,
+      "write_payload_bytes": 14976,
+      "prompt_tokens": 15707
+    },
+    {
+      "index": 23,
+      "references": [
+        "pew",
+        "snail",
+        "homeless",
+        "ruthless",
+        "reduce",
+        "tiresome",
+        "furniture",
+        "garage",
+        "salsa",
+        "trouble"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"garage\"\n2. \"salsa\"\n3. \"tire\" (plural)\n4. \"moon\"\n5. \"sun\"\n6. \"shock\"\n7. \"game\"\n8. \"pound\"\n9. \"hug\"\n10. \"love\"\n\nThese words appear frequently in the provided text and can be considered as the most common terms based on their occurrence count.",
+      "foundation_score": 0.2,
+      "fixed_certified_words": [
+        "furniture",
+        "homeless",
+        "trouble"
+      ],
+      "fixed_score": 0.5,
+      "scale_certified_words": [
+        "furniture",
+        "homeless",
+        "trouble",
+        "ruthless",
+        "garage",
+        "tiresome",
+        "snail"
+      ],
+      "scale_score": 0.8,
+      "counter_entries": 639,
+      "write_payload_bytes": 14757,
+      "prompt_tokens": 15552
+    },
+    {
+      "index": 24,
+      "references": [
+        "merchant",
+        "biopsy",
+        "damaging",
+        "champagne",
+        "elk",
+        "midwife",
+        "sentiment",
+        "bait",
+        "weather",
+        "craftsman"
+      ],
+      "foundation_output": "The top 10 most common words in the given list are:\n\n1. \"biopsy\"\n2. \"chocolate\"\n3. \"beef\"\n4. \"candle\"\n5. \"egg\"\n6. \"fish\"\n7. \"hamburger\"\n8. \"sandwich\"\n9. \"salad\"\n10. \"steak\"\n\nThese words appear frequently due to their repeated usage throughout the text.",
+      "foundation_score": 0.1,
+      "fixed_certified_words": [
+        "sentiment",
+        "champagne",
+        "damaging"
+      ],
+      "fixed_score": 0.4,
+      "scale_certified_words": [
+        "sentiment",
+        "champagne",
+        "damaging",
+        "midwife",
+        "weather",
+        "bait",
+        "merchant"
+      ],
+      "scale_score": 0.8,
+      "counter_entries": 652,
+      "write_payload_bytes": 15005,
+      "prompt_tokens": 15777
+    },
+    {
+      "index": 25,
+      "references": [
+        "welcome",
+        "licence",
+        "genocide",
+        "liability",
+        "wealth",
+        "literature",
+        "gift",
+        "serval",
+        "forsake",
+        "tulip"
+      ],
+      "foundation_output": "The top 10 words that appear most often in the given list are:\n\n1. radar\n2. suicide\n3. belly\n4. foal\n5. ecumenist\n6. sunlamp\n7. perspective\n8. lanai\n9. horizon\n10. morbid\n\nThese words have appeared with higher frequency compared to other entries in the provided list.",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "gift",
+        "liability",
+        "genocide"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "gift",
+        "liability",
+        "genocide",
+        "literature",
+        "forsake",
+        "serval",
+        "welcome"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 651,
+      "write_payload_bytes": 14850,
+      "prompt_tokens": 15820
+    },
+    {
+      "index": 26,
+      "references": [
+        "cadet",
+        "pound",
+        "bladder",
+        "councilperson",
+        "training",
+        "loft",
+        "morbidity",
+        "otter",
+        "clan",
+        "hero"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"councilperson\"\n2. \"banker\"\n3. \"hut\"\n4. \"pig\"\n5. \"car\"\n6. \"dog\"\n7. \"cat\"\n8. \"mouse\"\n9. \"cow\"\n10. \"horse\"",
+      "foundation_score": 0.1,
+      "fixed_certified_words": [
+        "morbidity",
+        "bladder",
+        "hero"
+      ],
+      "fixed_score": 0.4,
+      "scale_certified_words": [
+        "morbidity",
+        "bladder",
+        "hero",
+        "councilperson",
+        "otter",
+        "loft",
+        "pound"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 643,
+      "write_payload_bytes": 14723,
+      "prompt_tokens": 15657
+    },
+    {
+      "index": 27,
+      "references": [
+        "support",
+        "grove",
+        "education",
+        "candle",
+        "babe",
+        "crude",
+        "meme",
+        "mountain",
+        "dynamo",
+        "badger"
+      ],
+      "foundation_output": "The top 10 most common words in the given list are:\n\n1. step-son\n2. peaceful\n3. unity\n4. secret\n5. cowardly\n6. breakdown\n7. jodhpurs\n8. dinner\n9. gambling\n10. household\n\nThese words appear frequently in the provided text and can be considered the most common terms based on their frequency count.",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "meme",
+        "candle",
+        "education"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "meme",
+        "candle",
+        "education",
+        "crude",
+        "dynamo",
+        "mountain",
+        "support"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 650,
+      "write_payload_bytes": 14984,
+      "prompt_tokens": 15853
+    },
+    {
+      "index": 28,
+      "references": [
+        "taste",
+        "mime",
+        "tile",
+        "army",
+        "update",
+        "settle",
+        "clothes",
+        "hospital",
+        "cupcake",
+        "yoyo"
+      ],
+      "foundation_output": "The top 10 most common words in the given list are:\n\n1. \"update\"\n2. \"cupcake\"\n3. \"store\"\n4. \"store\"\n5. \"store\"\n6. \"store\"\n7. \"store\"\n8. \"store\"\n9. \"store\"\n10. \"store\"\n\nThese words appear frequently due to their repeated usage throughout the text.",
+      "foundation_score": 0.2,
+      "fixed_certified_words": [
+        "clothes",
+        "tile",
+        "yoyo"
+      ],
+      "fixed_score": 0.5,
+      "scale_certified_words": [
+        "clothes",
+        "tile",
+        "yoyo",
+        "army",
+        "hospital",
+        "settle",
+        "mime"
+      ],
+      "scale_score": 0.9,
+      "counter_entries": 643,
+      "write_payload_bytes": 14894,
+      "prompt_tokens": 15615
+    },
+    {
+      "index": 29,
+      "references": [
+        "detective",
+        "gigantic",
+        "swell",
+        "downturn",
+        "filing",
+        "endure",
+        "footwear",
+        "brick",
+        "in-laws",
+        "reaction"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"sandwich\"\n2. \"dog\"\n3. \"cat\"\n4. \"book\"\n5. \"car\"\n6. \"bike\"\n7. \"train\"\n8. \"plane\"\n9. \"bus\"\n10. \"truck\"\n\nThese words have appeared with high frequency in the provided text.",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "footwear",
+        "downturn",
+        "swell"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "footwear",
+        "downturn",
+        "swell",
+        "endure",
+        "in-laws",
+        "brick",
+        "detective"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 651,
+      "write_payload_bytes": 14931,
+      "prompt_tokens": 15724
+    },
+    {
+      "index": 30,
+      "references": [
+        "snowplow",
+        "incandescence",
+        "bedrock",
+        "waste",
+        "bush",
+        "transparency",
+        "peripheral",
+        "super",
+        "emery",
+        "mast"
+      ],
+      "foundation_output": "The top 10 most common words in the given list are:\n\n1. \"word\"\n2. \"list\"\n3. \"words\"\n4. \"common\"\n5. \"appear\"\n6. \"most\"\n7. \"often\"\n8. \"in\"\n9. \"the\"\n10. \"above\"\n\nThese words frequently recur due to their frequent usage within the context provided.",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "peripheral",
+        "bedrock",
+        "mast"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "peripheral",
+        "bedrock",
+        "mast",
+        "waste",
+        "super",
+        "transparency",
+        "incandescence"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 642,
+      "write_payload_bytes": 14767,
+      "prompt_tokens": 15764
+    },
+    {
+      "index": 31,
+      "references": [
+        "opportunist",
+        "pinecone",
+        "cytokine",
+        "sandal",
+        "stylus",
+        "loyalty",
+        "voyage",
+        "invoice",
+        "SUV",
+        "crystal"
+      ],
+      "foundation_output": "The top 10 most common words in the given list are:\n\n1. \"git\"\n2. \"subexpression\"\n3. \"key\"\n4. \"park\"\n5. \"mankind\"\n6. \"willow\"\n7. \"telephone\"\n8. \"insight\"\n9. \"conformation\"\n10. \"concerned\"\n\nThese words appear frequently due to their repeated usage throughout the provided text.",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "voyage",
+        "sandal",
+        "cytokine"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "voyage",
+        "sandal",
+        "cytokine",
+        "loyalty",
+        "SUV",
+        "invoice",
+        "opportunist"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 653,
+      "write_payload_bytes": 15059,
+      "prompt_tokens": 15826
+    },
+    {
+      "index": 32,
+      "references": [
+        "dust",
+        "analogy",
+        "mustache",
+        "furnace",
+        "disgusted",
+        "switchboard",
+        "policeman",
+        "museum",
+        "figure",
+        "notion"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"mustache\"\n2. \"museum\"\n3. \"furniture\"\n4. \"carpet\"\n5. \"sweater\"\n6. \"shoes\"\n7. \"shirt\"\n8. \"pants\"\n9. \"coat\"\n10. \"dress\"\n\nThese words appear frequently due to their repeated usage throughout the list.",
+      "foundation_score": 0.2,
+      "fixed_certified_words": [
+        "policeman",
+        "mustache",
+        "notion"
+      ],
+      "fixed_score": 0.4,
+      "scale_certified_words": [
+        "policeman",
+        "mustache",
+        "notion",
+        "furnace",
+        "museum",
+        "switchboard",
+        "analogy"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 641,
+      "write_payload_bytes": 14823,
+      "prompt_tokens": 15673
+    },
+    {
+      "index": 33,
+      "references": [
+        "motion",
+        "lack",
+        "pastoral",
+        "conga",
+        "entree",
+        "throat",
+        "study",
+        "allocation",
+        "invent",
+        "veto"
+      ],
+      "foundation_output": "The top 10 most common words in the given list are:\n\n1. study\n2. entry\n3. election\n4. vote\n5. election\n6. election\n7. election\n8. election\n9. election\n10. election\n\nNote that \"election\" appears multiple times at the bottom due to its frequent use in political contexts and other similar terms.",
+      "foundation_score": 0.1,
+      "fixed_certified_words": [
+        "study",
+        "conga",
+        "pastoral"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "study",
+        "conga",
+        "pastoral",
+        "throat",
+        "invent",
+        "allocation",
+        "motion"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 652,
+      "write_payload_bytes": 15013,
+      "prompt_tokens": 15843
+    },
+    {
+      "index": 34,
+      "references": [
+        "fortunate",
+        "e-book",
+        "gander",
+        "restaurant",
+        "merchant",
+        "mapping",
+        "revascularisation",
+        "stance",
+        "recognize",
+        "disposal"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"word\"\n2. \"list\"\n3. \"words\"\n4. \"appear\"\n5. \"most\"\n6. \"often\"\n7. \"the\"\n8. \"are\"\n9. \"in\"\n10. \"of\"\n\nThese words frequently recur due to their usage as part of larger phrases and sentences rather than appearing individually with high frequency.",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "restaurant",
+        "revascularisation",
+        "gander"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "restaurant",
+        "revascularisation",
+        "gander",
+        "disposal",
+        "stance",
+        "mapping",
+        "e-book"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 641,
+      "write_payload_bytes": 14888,
+      "prompt_tokens": 15663
+    },
+    {
+      "index": 35,
+      "references": [
+        "warn",
+        "revenge",
+        "everyone",
+        "try",
+        "doll",
+        "ancestor",
+        "crackers",
+        "dusty",
+        "budget",
+        "drake"
+      ],
+      "foundation_output": "The top 10 most common words in the given list are:\n\n1. \"crackers\"\n2. \"authority\"\n3. \"instrument\"\n4. \"fortnight\"\n5. \"SUV\"\n6. \"hippodrome\"\n7. \"whorl\"\n8. \"brown\"\n9. \"vegetarianism\"\n10. \"hedgehog\"\n\nThese words appear frequently in the provided text and can be considered as the most common terms based on their frequency.",
+      "foundation_score": 0.1,
+      "fixed_certified_words": [
+        "crackers",
+        "try",
+        "everyone"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "crackers",
+        "try",
+        "everyone",
+        "ancestor",
+        "budget",
+        "dusty",
+        "warn"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 652,
+      "write_payload_bytes": 14968,
+      "prompt_tokens": 15821
+    },
+    {
+      "index": 36,
+      "references": [
+        "alto",
+        "suspend",
+        "toothsome",
+        "govern",
+        "century",
+        "magic",
+        "perception",
+        "wiring",
+        "lava",
+        "fiberglass"
+      ],
+      "foundation_output": "The top 10 words that appear most often in the given list are:\n\n1. \"magic\"\n2. \"toothsome\"\n3. \"wiring\"\n4. \"soda\"\n5. \"couch\"\n6. \"bankroll\"\n7. \"govern\"\n8. \"hobby\"\n9. \"lava\"\n10. \"shrimp\"\n\nThese words have appeared with high frequency in the provided text.",
+      "foundation_score": 0.5,
+      "fixed_certified_words": [
+        "perception",
+        "govern",
+        "toothsome"
+      ],
+      "fixed_score": 0.6,
+      "scale_certified_words": [
+        "perception",
+        "govern",
+        "toothsome",
+        "magic",
+        "lava",
+        "wiring",
+        "alto"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 652,
+      "write_payload_bytes": 15114,
+      "prompt_tokens": 15803
+    },
+    {
+      "index": 37,
+      "references": [
+        "windshield",
+        "spatula",
+        "confidentiality",
+        "minimalism",
+        "monopoly",
+        "schedule",
+        "safeguard",
+        "cynic",
+        "photograph",
+        "noise"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"player\"\n2. \"mortality\"\n3. \"twilight\"\n4. \"gaze\"\n5. \"philosophy\"\n6. \"stall\"\n7. \"negotiate\"\n8. \"chime\"\n9. \"goal\"\n10. \"wild\"\n\nThese words consistently appear multiple times throughout the provided text.",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "safeguard",
+        "minimalism",
+        "confidentiality"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "safeguard",
+        "minimalism",
+        "confidentiality",
+        "schedule",
+        "photograph",
+        "cynic",
+        "windshield"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 652,
+      "write_payload_bytes": 15123,
+      "prompt_tokens": 15765
+    },
+    {
+      "index": 38,
+      "references": [
+        "joke",
+        "premium",
+        "border",
+        "plowman",
+        "dictator",
+        "chorus",
+        "alarm",
+        "tug",
+        "start",
+        "productivity"
+      ],
+      "foundation_output": "The top 10 most common words in the given list are:\n\n1. \"alarm\"\n2. \"productivity\"\n3. \"border\"\n4. \"tug\"\n5. \"sponge\"\n6. \"shrink\"\n7. \"fear\"\n8. \"hose\"\n9. \"plowman\"\n10. \"cancer\"\n\nThese words appear frequently in the provided text and can be considered as the most common terms based on their frequency count.",
+      "foundation_score": 0.5,
+      "fixed_certified_words": [
+        "alarm",
+        "border",
+        "productivity"
+      ],
+      "fixed_score": 0.5,
+      "scale_certified_words": [
+        "alarm",
+        "border",
+        "productivity",
+        "plowman",
+        "tug",
+        "chorus",
+        "premium"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 643,
+      "write_payload_bytes": 14765,
+      "prompt_tokens": 15607
+    },
+    {
+      "index": 39,
+      "references": [
+        "contest",
+        "beaver",
+        "dramatic",
+        "interrupt",
+        "fierce",
+        "appropriation",
+        "accordion",
+        "anticipate",
+        "captain",
+        "confidentiality"
+      ],
+      "foundation_output": "The top 10 most common words in the given list are:\n\n1. \"beaver\"\n2. \"accordance\"\n3. \"accordance\"\n4. \"accordance\"\n5. \"accordance\"\n6. \"accordance\"\n7. \"accordance\"\n8. \"accordance\"\n9. \"accordance\"\n10. \"accordance\"\n\nAll of these words appear multiple times in the list and have similar frequencies.",
+      "foundation_score": 0.1,
+      "fixed_certified_words": [
+        "accordion",
+        "dramatic",
+        "confidentiality"
+      ],
+      "fixed_score": 0.4,
+      "scale_certified_words": [
+        "accordion",
+        "dramatic",
+        "confidentiality",
+        "interrupt",
+        "anticipate",
+        "appropriation",
+        "beaver"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 644,
+      "write_payload_bytes": 14947,
+      "prompt_tokens": 15605
+    },
+    {
+      "index": 40,
+      "references": [
+        "harmonica",
+        "trigger",
+        "squatter",
+        "resist",
+        "ink",
+        "clay",
+        "fundraising",
+        "cholesterol",
+        "village",
+        "cloth"
+      ],
+      "foundation_output": "The top 10 most common words in the given list are:\n\n1. ink\n2. bank\n3. book\n4. money\n5. dollar\n6. account\n7. credit\n8. debt\n9. balance\n10. payment\n\nThese words frequently appear together and have high frequency counts in the provided text.",
+      "foundation_score": 0.1,
+      "fixed_certified_words": [
+        "fundraising",
+        "resist",
+        "squatter"
+      ],
+      "fixed_score": 0.4,
+      "scale_certified_words": [
+        "fundraising",
+        "resist",
+        "squatter",
+        "clay",
+        "village",
+        "cholesterol",
+        "harmonica"
+      ],
+      "scale_score": 0.8,
+      "counter_entries": 653,
+      "write_payload_bytes": 15091,
+      "prompt_tokens": 15903
+    },
+    {
+      "index": 41,
+      "references": [
+        "sailor",
+        "llama",
+        "insight",
+        "romantic",
+        "scissors",
+        "lawsuit",
+        "crocus",
+        "molar",
+        "coordinate",
+        "souvenir"
+      ],
+      "foundation_output": "The top 10 words that appear most often in the given list are:\n\n1. scissors\n2. llama\n3. dagger\n4. knife\n5. gun\n6. bomb\n7. grenade\n8. rocket\n9. missile\n10. torpedo\n\nThese words have appeared with high frequency in the provided text.",
+      "foundation_score": 0.2,
+      "fixed_certified_words": [
+        "crocus",
+        "romantic",
+        "insight"
+      ],
+      "fixed_score": 0.5,
+      "scale_certified_words": [
+        "crocus",
+        "romantic",
+        "insight",
+        "lawsuit",
+        "coordinate",
+        "molar",
+        "sailor"
+      ],
+      "scale_score": 0.9,
+      "counter_entries": 650,
+      "write_payload_bytes": 15007,
+      "prompt_tokens": 15748
+    },
+    {
+      "index": 42,
+      "references": [
+        "master",
+        "caffeine",
+        "clover",
+        "buddy",
+        "establish",
+        "warlike",
+        "rabbi",
+        "unaccountable",
+        "sherbet",
+        "gig"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"theism\"\n2. \"wolf\"\n3. \"spending\"\n4. \"relish\"\n5. \"sleepy\"\n6. \"great-grandmother\"\n7. \"protocol\"\n8. \"roomy\"\n9. \"bookmark\"\n10. \"glucose\"\n\nThese words appear with high frequency in the provided text.",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "rabbi",
+        "clover",
+        "gig"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "rabbi",
+        "clover",
+        "gig",
+        "buddy",
+        "unaccountable",
+        "warlike",
+        "caffeine"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 644,
+      "write_payload_bytes": 14736,
+      "prompt_tokens": 15748
+    },
+    {
+      "index": 43,
+      "references": [
+        "tow",
+        "limestone",
+        "degree",
+        "hemp",
+        "circle",
+        "sewer",
+        "passbook",
+        "cello",
+        "agent",
+        "suicide"
+      ],
+      "foundation_output": "The top 10 most common words in the given list are:\n\n1. foot\n2. trend\n3. normal\n4. arch\n5. peony\n6. snowboarding\n7. pegboard\n8. passbook\n9. sail\n10. harpsichord\n\nThese words appear with high frequency in the provided text.",
+      "foundation_score": 0.1,
+      "fixed_certified_words": [
+        "passbook",
+        "degree",
+        "suicide"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "passbook",
+        "degree",
+        "suicide",
+        "hemp",
+        "cello",
+        "sewer",
+        "limestone"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 643,
+      "write_payload_bytes": 14785,
+      "prompt_tokens": 15601
+    },
+    {
+      "index": 44,
+      "references": [
+        "softdrink",
+        "crystallography",
+        "virtue",
+        "navigate",
+        "fob",
+        "slash",
+        "accurate",
+        "woodshed",
+        "agent",
+        "classroom"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"agent\"\n2. \"fob\"\n3. \"salt\"\n4. \"agent\"\n5. \"agent\"\n6. \"agent\"\n7. \"agent\"\n8. \"agent\"\n9. \"agent\"\n10. \"agent\"\n\nThese words all appear multiple times and are considered the most frequently used terms in this list.",
+      "foundation_score": 0.2,
+      "fixed_certified_words": [
+        "accurate",
+        "virtue",
+        "classroom"
+      ],
+      "fixed_score": 0.5,
+      "scale_certified_words": [
+        "accurate",
+        "virtue",
+        "classroom",
+        "navigate",
+        "woodshed",
+        "slash",
+        "crystallography"
+      ],
+      "scale_score": 0.9,
+      "counter_entries": 643,
+      "write_payload_bytes": 14849,
+      "prompt_tokens": 15761
+    },
+    {
+      "index": 45,
+      "references": [
+        "ringworm",
+        "remember",
+        "coincidence",
+        "moor",
+        "wed",
+        "tenant",
+        "plate",
+        "gap",
+        "illiteracy",
+        "save"
+      ],
+      "foundation_output": "The top 10 most common words in the given list are:\n\n1. \"save\"\n2. \"plate\"\n3. \"tenet\"\n4. \"ring\"\n5. \"wed\"\n6. \"gap\"\n7. \"belong\"\n8. \"subprime\"\n9. \"squirrel\"\n10. \"vacuous\"\n\nThese words appear frequently in the provided text and can be considered as the most common terms based on their occurrence count.",
+      "foundation_score": 0.4,
+      "fixed_certified_words": [
+        "plate",
+        "moor",
+        "coincidence"
+      ],
+      "fixed_score": 0.6,
+      "scale_certified_words": [
+        "plate",
+        "moor",
+        "coincidence",
+        "tenant",
+        "illiteracy",
+        "gap",
+        "ringworm"
+      ],
+      "scale_score": 0.9,
+      "counter_entries": 652,
+      "write_payload_bytes": 14835,
+      "prompt_tokens": 15816
+    },
+    {
+      "index": 46,
+      "references": [
+        "gauntlet",
+        "accelerant",
+        "ossified",
+        "snowflake",
+        "flow",
+        "edible",
+        "breastplate",
+        "attempt",
+        "grease",
+        "venom"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"terracotta\"\n2. \"cabinet\"\n3. \"chocolate\"\n4. \"mango\"\n5. \"banana\"\n6. \"apple\"\n7. \"orange\"\n8. \"pear\"\n9. \"grapefruit\"\n10. \"strawberry\"\n\nThese words have appeared with high frequency in the provided text.",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "breastplate",
+        "ossified",
+        "venom"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "breastplate",
+        "ossified",
+        "venom",
+        "snowflake",
+        "attempt",
+        "edible",
+        "accelerant"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 642,
+      "write_payload_bytes": 14741,
+      "prompt_tokens": 15696
+    },
+    {
+      "index": 47,
+      "references": [
+        "fault",
+        "fragrance",
+        "centimeter",
+        "unlock",
+        "detector",
+        "mean",
+        "porthole",
+        "bury",
+        "share",
+        "pharmacopoeia"
+      ],
+      "foundation_output": "The top 10 most common words in the given list are:\n\n1. centimeter\n2. shelter\n3. jumbo\n4. sniff\n5. attenuation\n6. piccolo\n7. ringworm\n8. relationship\n9. heartbeat\n10. magnification\n\nThese words appear frequently in the provided text and can be considered as the most common terms based on their frequency count.",
+      "foundation_score": 0.1,
+      "fixed_certified_words": [
+        "porthole",
+        "centimeter",
+        "pharmacopoeia"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "porthole",
+        "centimeter",
+        "pharmacopoeia",
+        "unlock",
+        "bury",
+        "mean",
+        "fragrance"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 638,
+      "write_payload_bytes": 14708,
+      "prompt_tokens": 15751
+    },
+    {
+      "index": 48,
+      "references": [
+        "luncheonette",
+        "poison",
+        "chateau",
+        "rank",
+        "pyridine",
+        "tongue",
+        "frustration",
+        "habitat",
+        "summary",
+        "jealousy"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"word\"\n2. \"list\"\n3. \"above\"\n4. \"words\"\n5. \"the\"\n6. \"in\"\n7. \"are\"\n8. \"of\"\n9. \"and\"\n10. \"to\"",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "frustration",
+        "chateau",
+        "jealousy"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "frustration",
+        "chateau",
+        "jealousy",
+        "rank",
+        "habitat",
+        "tongue",
+        "poison"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 640,
+      "write_payload_bytes": 14791,
+      "prompt_tokens": 15747
+    },
+    {
+      "index": 49,
+      "references": [
+        "nougat",
+        "battery",
+        "elver",
+        "text",
+        "caravan",
+        "designation",
+        "countryside",
+        "skylight",
+        "atelier",
+        "panoramic"
+      ],
+      "foundation_output": "The top 10 most common words in the given list are:\n\n1. boulevard\n2. boulevard\n3. boulevard\n4. boulevard\n5. boulevard\n6. boulevard\n7. boulevard\n8. boulevard\n9. boulevard\n10. boulevard\n\nAll ten entries in this list are identical and repeat \"boulevard\" ten times each.",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "countryside",
+        "elver",
+        "panoramic"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "countryside",
+        "elver",
+        "panoramic",
+        "text",
+        "skylight",
+        "designation",
+        "battery"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 639,
+      "write_payload_bytes": 14691,
+      "prompt_tokens": 15755
+    },
+    {
+      "index": 50,
+      "references": [
+        "bathtub",
+        "town",
+        "eponym",
+        "afford",
+        "tensor",
+        "behavior",
+        "wine",
+        "eternity",
+        "butane",
+        "island"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"butane\"\n2. \"tensor\"\n3. \"behavior\"\n4. \"island\"\n5. \"ratification\"\n6. \"fishing\"\n7. \"sulfur\"\n8. \"tattoo\"\n9. \"museum\"\n10. \"parchment\"",
+      "foundation_score": 0.4,
+      "fixed_certified_words": [
+        "wine",
+        "afford",
+        "eponym"
+      ],
+      "fixed_score": 0.7,
+      "scale_certified_words": [
+        "wine",
+        "afford",
+        "eponym",
+        "behavior",
+        "butane",
+        "eternity",
+        "bathtub"
+      ],
+      "scale_score": 0.9,
+      "counter_entries": 652,
+      "write_payload_bytes": 15083,
+      "prompt_tokens": 15897
+    },
+    {
+      "index": 51,
+      "references": [
+        "ingredient",
+        "steep",
+        "toothbrush",
+        "scattered",
+        "year",
+        "aftermath",
+        "grandma",
+        "intelligence",
+        "drudgery",
+        "co-producer"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"word\"\n2. \"list\"\n3. \"above\"\n4. \"the\"\n5. \"in\"\n6. \"and\"\n7. \"to\"\n8. \"of\"\n9. \"that\"\n10. \"for\"\n\nThese words appear frequently due to their usage as parts of sentences and phrases within the text.",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "co-producer",
+        "grandma",
+        "toothbrush"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "co-producer",
+        "grandma",
+        "toothbrush",
+        "scattered",
+        "intelligence",
+        "aftermath",
+        "steep"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 641,
+      "write_payload_bytes": 14786,
+      "prompt_tokens": 15727
+    },
+    {
+      "index": 52,
+      "references": [
+        "overdraw",
+        "possibility",
+        "seabass",
+        "best-seller",
+        "sight",
+        "composite",
+        "tripod",
+        "racing",
+        "probability",
+        "wood"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"bawdy\"\n2. \"oxford\"\n3. \"yesterday\"\n4. \"pressurisation\"\n5. \"standardisation\"\n6. \"imported\"\n7. \"duck\"\n8. \"tripod\"\n9. \"jogging\"\n10. \"glue\"\n\nThese words have appeared with higher frequency compared to other entries in the provided list.",
+      "foundation_score": 0.1,
+      "fixed_certified_words": [
+        "tripod",
+        "seabass",
+        "wood"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "tripod",
+        "seabass",
+        "wood",
+        "best-seller",
+        "racing",
+        "composite",
+        "possibility"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 644,
+      "write_payload_bytes": 14765,
+      "prompt_tokens": 15634
+    },
+    {
+      "index": 53,
+      "references": [
+        "lay",
+        "pavement",
+        "vacuum",
+        "neologism",
+        "compass",
+        "score",
+        "avalanche",
+        "kitty",
+        "courage",
+        "echidna"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"bank\"\n2. \"bank\"\n3. \"bank\"\n4. \"bank\"\n5. \"bank\"\n6. \"bank\"\n7. \"bank\"\n8. \"bank\"\n9. \"bank\"\n10. \"bank\"\n\nThese entries all appear exactly once in the provided text.",
+      "foundation_score": 0.0,
+      "fixed_certified_words": [
+        "avalanche",
+        "neologism",
+        "vacuum"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "avalanche",
+        "neologism",
+        "vacuum",
+        "score",
+        "courage",
+        "kitty",
+        "lay"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 653,
+      "write_payload_bytes": 14998,
+      "prompt_tokens": 15787
+    },
+    {
+      "index": 54,
+      "references": [
+        "luggage",
+        "telling",
+        "sin",
+        "exhibition",
+        "explanation",
+        "trigger",
+        "quart",
+        "attitude",
+        "duckling",
+        "elimination"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"duckling\"\n2. \"quart\"\n3. \"exhibition\"\n4. \"sin\"\n5. \"luggage\"\n6. \"telling\"\n7. \"terrace\"\n8. \"vaccine\"\n9. \"shark\"\n10. \"motel\"\n\nThese words appear with high frequency in the provided text.",
+      "foundation_score": 0.6,
+      "fixed_certified_words": [
+        "quart",
+        "exhibition",
+        "sin"
+      ],
+      "fixed_score": 0.6,
+      "scale_certified_words": [
+        "quart",
+        "exhibition",
+        "sin",
+        "trigger",
+        "duckling",
+        "attitude",
+        "luggage"
+      ],
+      "scale_score": 0.8,
+      "counter_entries": 653,
+      "write_payload_bytes": 14980,
+      "prompt_tokens": 15710
+    },
+    {
+      "index": 55,
+      "references": [
+        "gallon",
+        "bugle",
+        "tour",
+        "channel",
+        "doctorate",
+        "expansionism",
+        "slaw",
+        "saffron",
+        "ocean",
+        "approve"
+      ],
+      "foundation_output": "The top 10 words that appear most often in the given list are:\n\n1. bugle\n2. bugle\n3. bugle\n4. bugle\n5. bugle\n6. bugle\n7. bugle\n8. bugle\n9. bugle\n10. bugle\n\nAll ten entries in this list contain \"bugle\" as one of their words.",
+      "foundation_score": 0.1,
+      "fixed_certified_words": [
+        "slaw",
+        "tour",
+        "approve"
+      ],
+      "fixed_score": 0.4,
+      "scale_certified_words": [
+        "slaw",
+        "tour",
+        "approve",
+        "channel",
+        "saffron",
+        "expansionism",
+        "bugle"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 642,
+      "write_payload_bytes": 14838,
+      "prompt_tokens": 15781
+    },
+    {
+      "index": 56,
+      "references": [
+        "alpaca",
+        "sage",
+        "transplantation",
+        "login",
+        "surname",
+        "vaccine",
+        "embassy",
+        "type",
+        "acknowledgment",
+        "angstrom"
+      ],
+      "foundation_output": "The top 10 most common words in the given list are:\n\n1. alpaca\n2. sheep\n3. eagle\n4. lion\n5. bear\n6. cat\n7. dog\n8. horse\n9. cow\n10. fish\n\nThese animals and creatures frequently appear in the provided list, likely due to their widespread use or frequent mention in various contexts.",
+      "foundation_score": 0.1,
+      "fixed_certified_words": [
+        "embassy",
+        "login",
+        "transplantation"
+      ],
+      "fixed_score": 0.4,
+      "scale_certified_words": [
+        "embassy",
+        "login",
+        "transplantation",
+        "vaccine",
+        "acknowledgment",
+        "type",
+        "alpaca"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 651,
+      "write_payload_bytes": 14946,
+      "prompt_tokens": 15855
+    },
+    {
+      "index": 57,
+      "references": [
+        "cultured",
+        "proprietor",
+        "discourse",
+        "insurgence",
+        "surgery",
+        "footnote",
+        "immense",
+        "counterterrorism",
+        "proposition",
+        "contour"
+      ],
+      "foundation_output": "The top 10 most common words in the given list are:\n\n1. \"counterterrorism\"\n2. \"counterterrorism\"\n3. \"counterterrorism\"\n4. \"counterterrorism\"\n5. \"counterterrorism\"\n6. \"counterterrorism\"\n7. \"counterterrorism\"\n8. \"counterterrorism\"\n9. \"counterterrorism\"\n10. \"counterterrorism\"\n\nAll ten entries in this list are identical and repeat many times due to being part of compound terms like \"counter-terrorism\" or \"counter terrorism\".",
+      "foundation_score": 0.1,
+      "fixed_certified_words": [
+        "immense",
+        "insurgence",
+        "discourse"
+      ],
+      "fixed_score": 0.4,
+      "scale_certified_words": [
+        "immense",
+        "insurgence",
+        "discourse",
+        "footnote",
+        "proposition",
+        "counterterrorism",
+        "cultured"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 651,
+      "write_payload_bytes": 15040,
+      "prompt_tokens": 15845
+    },
+    {
+      "index": 58,
+      "references": [
+        "discreet",
+        "turnip",
+        "sight",
+        "share",
+        "final",
+        "ozone",
+        "wetland",
+        "grill",
+        "fifth",
+        "antecedent"
+      ],
+      "foundation_output": "The top 10 most common words in the given list are:\n\n1. \"wetland\"\n2. \"eavesdropper\"\n3. \"signup\"\n4. \"jasmine\"\n5. \"cast\"\n6. \"radio\"\n7. \"education\"\n8. \"wild\"\n9. \"disapprove\"\n10. \"fraud\"\n\nThese words appear with high frequency in the provided text.",
+      "foundation_score": 0.1,
+      "fixed_certified_words": [
+        "wetland",
+        "sight",
+        "antecedent"
+      ],
+      "fixed_score": 0.3,
+      "scale_certified_words": [
+        "wetland",
+        "sight",
+        "antecedent",
+        "share",
+        "grill",
+        "ozone",
+        "turnip"
+      ],
+      "scale_score": 0.7,
+      "counter_entries": 643,
+      "write_payload_bytes": 14791,
+      "prompt_tokens": 15574
+    },
+    {
+      "index": 59,
+      "references": [
+        "calculation",
+        "crawdad",
+        "woodchuck",
+        "sanity",
+        "systemize",
+        "terrible",
+        "come",
+        "backup",
+        "staircase",
+        "billboard"
+      ],
+      "foundation_output": "The top 10 most frequent words in the given list are:\n\n1. \"backup\"\n2. \"crawdad\"\n3. \"systemize\"\n4. \"treatment\"\n5. \"fence\"\n6. \"bank\"\n7. \"hanger\"\n8. \"pound\"\n9. \"laboratory\"\n10. \"mold\"",
+      "foundation_score": 0.3,
+      "fixed_certified_words": [
+        "come",
+        "sanity",
+        "woodchuck"
+      ],
+      "fixed_score": 0.6,
+      "scale_certified_words": [
+        "come",
+        "sanity",
+        "woodchuck",
+        "terrible",
+        "staircase",
+        "backup",
+        "calculation"
+      ],
+      "scale_score": 0.9,
+      "counter_entries": 653,
+      "write_payload_bytes": 14982,
+      "prompt_tokens": 15793
+    }
+  ]
+}
