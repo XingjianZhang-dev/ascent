@@ -1,5 +1,5 @@
-# Fresh-clone reproduction transcript (post-push): git clone https://github.com/XingjianZhang-dev/ascent.git at commit 32af12a5b89b9a2a43a3f708c6e12d60e41bd2e3
-# 2026-09-21T04:29:47Z  host: Darwin 25.5.0 arm64  python: Python 3.12.9
+# Fresh-clone reproduction transcript (post-push): git clone https://github.com/XingjianZhang-dev/ascent.git at commit 908a18c5ea38cef02704ffbe7e990641609a29a1
+# 2026-09-21T05:38:26Z  host: Darwin 25.5.0 arm64  python: Python 3.12.9
 $ python3 -m venv .venv && source .venv/bin/activate && pip install -r reproduction/requirements-reproduce.txt
 
 numpy==2.3.2
@@ -36,7 +36,7 @@ python3 experiments/reproduce_all_tables.py
   [ok] paper/generated/generic_writer_ablation.tex byte-identical
   [ok] paper/generated/generic_writer_ablation_text.tex byte-identical
   [ok] reports/PANEL_POWER_ANALYSIS.json: max |float diff| = 0.000e+00
-  [ok] reports/row_audits/FACTORIAL_TRANSITION_ROW_AUDIT_13824.csv byte-identical
+  [ok] reports/row_audits/FACTORIAL_TRANSITION_ROW_AUDIT_13824.csv: header, row count and non-float columns identical; max |float diff| = 0.000e+00 (tolerance 1e-12)
 == 4. Every reported number, from the recomputed analyses ==
   Official 16K qwen2p5-0p5b-instruct: gain 10.50 pts [0.0680, 0.1420]
   Official 16K qwen2p5-1p5b-instruct: gain 78.88 pts [0.7616, 0.8159]
@@ -64,11 +64,11 @@ python3 experiments/reproduce_all_tables.py
   Around-7B granite-3p3-8b-instruct: gain 85.63 pts [83.1, 88.1]
   Around-7B qwen3-8b-nonthinking: gain 72.00 pts [67.7, 76.3]
 == Result ==
-ALL REPORTED NUMBERS REPRODUCED (recomputed outputs in /var/folders/4m/lp403snj48xg_jyprkcy6x_c0000gn/T/ascent_reproduce_cqo4u7jr)
+ALL REPORTED NUMBERS REPRODUCED (recomputed outputs in /var/folders/4m/lp403snj48xg_jyprkcy6x_c0000gn/T/ascent_reproduce_tbuqe1lg)
 exit status: 0
 $ make test
 SKIPPED [1] tests/conftest.py:52: benchmark row bodies are not redistributed (data/babilong_qwen_qa78_8k_nonredundant/headroom_development.jsonl); rebuild with the construction scripts
 SKIPPED [1] tests/conftest.py:58: optional GPU-stack dependency 'torch' is not installed (reproduction/requirements-core.txt)
 SKIPPED [3] tests/test_target_blindness.py:15: benchmark row bodies are not redistributed; rebuild the panels with experiments/prepare_babilong_panel.py
-228 passed, 21 skipped, 12 warnings in 1.75s
+237 passed, 21 skipped, 12 warnings in 1.74s
 exit status: 0
