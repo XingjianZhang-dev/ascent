@@ -17,7 +17,7 @@ This file records, for every file in this repository, whether AI tools were invo
 | Assistance | Files |
 |---|---:|
 | no | 2439 |
-| yes | 313 |
+| yes | 314 |
 
 ## Per-file table
 
@@ -2568,6 +2568,7 @@ This file records, for every file in this repository, whether AI tools were invo
 | `experiments/run_target_blindness_audit.sh` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | job script | environment snapshots before/after; SHA256SUMS of outputs |
 | `experiments/verify_babilong_cross_node_replication.py` | yes — author-written; ChatGPT (chat) and OpenAI Codex used for editing and refactoring | audit/build/plot script | outputs cross-checked by experiments/audit_manuscript_consistency.py and experiments/audit_paper_claims.py |
 | `experiments/verify_reproduction_package.py` | yes — author-written; ChatGPT (chat) and OpenAI Codex used for editing and refactoring | audit/build/plot script | outputs cross-checked by experiments/audit_manuscript_consistency.py and experiments/audit_paper_claims.py |
+| `paper/CHANGELOG_REVISION1.md` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | document | every quantitative statement cites a file path and SHA-256 that this repository contains; numbers cross-checked by make reproduce |
 | `paper/data/evidence/around7b_panel.csv` | no — machine-generated record | table/CSV rendered from analysis JSON | byte-identical regeneration by make reproduce |
 | `paper/data/evidence/evidence_profile.json` | no — machine-generated record | table/CSV rendered from analysis JSON | byte-identical regeneration by make reproduce |
 | `paper/data/evidence/factorial_panel.csv` | no — machine-generated record | table/CSV rendered from analysis JSON | byte-identical regeneration by make reproduce |

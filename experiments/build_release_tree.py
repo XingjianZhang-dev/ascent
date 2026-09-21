@@ -183,6 +183,9 @@ def main() -> None:
             shutil.copy2(DEV / "docs" / name, target / "docs" / name)
     for item in PAPER_COPY:
         counts[item] = copy_tree(DEV / item, target / item)
+    # the revision changelog is cited by the response letter as paper/CHANGELOG_REVISION1.md
+    shutil.copy2(DEV / "paper/CHANGELOG_REVISION1.md", target / "paper/CHANGELOG_REVISION1.md")
+    counts["paper/CHANGELOG_REVISION1.md"] = 1
     counts["reports"] = copy_tree(DEV / "reports", target / "reports", skip_file=lambda p: p.suffix == ".html")
     counts["artifacts"] = copy_tree(DEV / "artifacts", target / "artifacts", skip_file=is_benchmark_body)
     counts["data"] = copy_tree(DEV / "data", target / "data", skip_file=is_benchmark_body)
