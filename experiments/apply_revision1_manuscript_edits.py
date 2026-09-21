@@ -352,7 +352,7 @@ The code and analysis artifacts supporting this study are publicly available at
 \url{https://doi.org/10.5281/zenodo.<version-id>}. Panel identifiers, hashes,
 and construction scripts are released for BABILong and RULER; the underlying
 benchmark corpora are not redistributed and remain under their original
-licences (Apache-2.0 and BSD components; see \texttt{THIRD\_PARTY\_NOTICES.md}).
+licences (Apache-2.0 and BSD components; see \path{THIRD_PARTY_NOTICES.md}).
 Third-party model weights are not redistributed and remain subject to their
 original licences.""",
     ),

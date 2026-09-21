@@ -249,9 +249,19 @@ def main() -> int:
             print(f"  Factorial {name}: {e['mean']:.3f} nats [{e['ci95_low']:.3f}, {e['ci95_high']:.3f}]"
                   + (f"; Bonferroni [{b['ci95_low']:.3f}, {b['ci95_high']:.3f}]" if b else ""))
         prov = f["provenance"]
-        print(f"  Factorial row checks: {sum(v for c in prov['nonredundant_rows_by_endpoint_and_transition'].values() for v in c.values())} "
+        row_checks = sum(v for c in prov["nonredundant_rows_by_endpoint_and_transition"].values() for v in c.values())
+        # The retained record's key ``exact_posterior_strictly_improves_every_transition_every_panel`` asserts that
+        # the panel-MEAN exact-posterior NLL (config field ``exact_posterior_mean_nll_by_panel_and_rounds``) decreases
+        # on every K transition in every panel. It is not a per-row statement; the per-row tally comes from the CSV.
+        import csv as _csv
+        with (tmp / "FACTORIAL_TRANSITION_ROW_AUDIT_13824.csv").open() as handle:
+            audit_rows = list(_csv.DictReader(handle))
+        per_row_improved = sum(1 for r in audit_rows if float(r["exact_posterior_delta"]) > 0)
+        print(f"  Factorial row checks (nesting + non-redundancy, by construction): {row_checks:,} of {len(audit_rows):,} "
               f"(every_transition_changes_every_row={prov['every_transition_changes_every_row']}, "
-              f"exact_posterior_strictly_improves_every_transition_every_panel={prov['exact_posterior_strictly_improves_every_transition_every_panel']})")
+              f"panel_mean_exact_posterior_nll_decreases_every_transition_every_panel={prov['exact_posterior_strictly_improves_every_transition_every_panel']})")
+        print(f"  per-row exact-posterior improvement: {per_row_improved:,} of {len(audit_rows):,} "
+              "(not guaranteed; Proposition 2 is an expectation-level statement)")
         a7 = recomputed["around7b"]
         for ep, res in a7.get("endpoint_results", {}).items():
             g = res["primary"]["gain"] if "primary" in res else res.get("gain", {})

@@ -1,5 +1,7 @@
 # ASCENT — Scale-Complementary External State for Frozen Long-Context Language Models
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22865846.svg)](https://doi.org/10.5281/zenodo.22865846)
+
 Code, frozen configurations, per-row experimental records, and audit
 documents for the manuscript *ASCENT: Scale-Complementary External State for
 Frozen Long-Context Language Models* (Xingjian Zhang; Array, Elsevier,
@@ -91,9 +93,10 @@ recorded SHA-256 values remain verifiable.
 
 ## Archive and citation
 
-Zenodo version DOI: `10.5281/zenodo.<version-id>` (recorded here, in
-`CITATION.cff` and in `VERIFICATION.md` once minted). Please cite the article
-and this repository; see `CITATION.cff`.
+Zenodo version DOI of this release (`v1.0-array-revision-1`): `10.5281/zenodo.22865847`
+(<https://doi.org/10.5281/zenodo.22865847>); the badge above always resolves to
+the latest archived version. Please cite the article and this repository; see
+`CITATION.cff`.
 
 ## Licences
 

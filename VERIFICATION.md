@@ -7,8 +7,8 @@ what happened, and what this repository does not cover.
 Manuscript: *ASCENT: Scale-Complementary External State for Frozen
 Long-Context Language Models* (Array, ARRAY-D-26-05300, revision 1).
 Public repository: <https://github.com/XingjianZhang-dev/ascent>.
-Archive: Zenodo version DOI `10.5281/zenodo.<version-id>` (recorded here once
-minted). The private development repository (276 commits; hash/date/subject
+Archive: Zenodo version DOI `10.5281/zenodo.22865847`
+(<https://doi.org/10.5281/zenodo.22865847>, release `v1.0-array-revision-1`). The private development repository (276 commits; hash/date/subject
 log in `docs/DEV_HISTORY_LOG.txt`) and the frozen 2026-08-23 backup archive
 (SHA-256 `431049c38a3c91e7b0fb1f8a3d5a52484aeae609a81a12af0c9c5272a5e00821`)
 are available to the editor or a data-integrity reviewer on request.
@@ -79,8 +79,12 @@ The exact Bayesian posterior NLL of the target improves on 10,791 of the
 13,824 transitions (78 %), and the frozen reader's own candidate NLL improves
 on 7,435 (54 %). The registered exact-posterior check is at the panel-mean
 level (strictly decreasing mean exact-posterior NLL with K on every panel),
-which holds. The reported gains are panel averages, and their intervals are
-panel-clustered.
+which holds; in the retained analysis record this panel-mean check is stored
+under the legacy key `provenance.exact_posterior_strictly_improves_every_transition_every_panel`
+(kept unchanged for record compatibility), and `make reproduce` prints it as
+`panel_mean_exact_posterior_nll_decreases_every_transition_every_panel` next
+to the per-row tally. The reported gains are panel averages, and their
+intervals are panel-clustered.
 
 ## 4. What "exact" means, and where each level was observed
 
