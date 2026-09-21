@@ -33,8 +33,9 @@ reported number. Expected last line:
 ALL REPORTED NUMBERS REPRODUCED
 ```
 
-A transcript from a fresh clone is in
-`reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt`. `make test` runs the unit
+Transcripts from fresh clones are in
+`reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt` (macOS) and
+`reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT_LINUX.txt` (Linux, Python 3.11). `make test` runs the unit
 tests (tests that need withheld benchmark row bodies or a GPU stack report as
 skipped, not passed).
 
