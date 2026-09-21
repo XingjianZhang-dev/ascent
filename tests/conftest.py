@@ -19,6 +19,28 @@ ROOT = Path(__file__).resolve().parents[1]
 OPTIONAL_DEPENDENCIES = {"torch", "transformers", "sentencepiece", "tokenizers", "safetensors", "bibtexparser", "accelerate"}
 
 
+class OptionalDependencyModule(pytest.Module):
+    """Report a test module as skipped, not errored, when an optional GPU-stack import is missing."""
+
+    def _getobj(self):
+        try:
+            return super()._getobj()
+        except pytest.Collector.CollectError as error:
+            cause = error.__cause__ or error.__context__
+            name = (getattr(cause, "name", None) or "").split(".")[0]
+            if isinstance(cause, ModuleNotFoundError) and name in OPTIONAL_DEPENDENCIES:
+                raise pytest.skip.Exception(
+                    f"module imports optional GPU-stack dependency {name!r}, which is not installed "
+                    "(reproduction/requirements-core.txt)",
+                    allow_module_level=True,
+                ) from cause
+            raise
+
+
+def pytest_pycollect_makemodule(module_path, parent):
+    return OptionalDependencyModule.from_parent(parent, path=module_path)
+
+
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_call(item):
     outcome = yield
