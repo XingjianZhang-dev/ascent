@@ -36,7 +36,7 @@ DEV = Path(__file__).resolve().parents[1]
 
 TOP_LEVEL_COPY = ["ascent", "experiments", "tests", "configs", "reproduction", "artifacts_revision", "pyproject.toml", "Makefile", "PREREGISTRATION_TIMELINE.md"]
 DOCS_COPY = ["EXPERIMENT_LEDGER.md", "EXPERIMENT_PROTOCOL.md", "ASCENT_TASK_SCOPE_PROTOCOL.md", "DESIGN_RISKS.md", "DEV_HISTORY_LOG.txt", "AROUND_7B_COMPLETION_AUDIT.md"]
-PAPER_COPY = ["paper/data/evidence", "paper/generated"]
+PAPER_COPY = ["paper/data/evidence", "paper/generated", "paper/figures"]  # figures: rendered by plot_manuscript_evidence.py from paper/data/evidence
 RELEASE_DOCS = ["README.md", "LICENSE", "LICENSE-DATA", "THIRD_PARTY_NOTICES.md", "CITATION.cff", "VERIFICATION.md", "AI_ASSISTANCE.md", "WRITER_SCHEMA_AND_SCOPE.md", ".gitleaks.toml"]
 
 HELD_BACK_ARCHIVES = [
@@ -182,7 +182,7 @@ def main() -> None:
         if (DEV / "docs" / name).is_file():
             shutil.copy2(DEV / "docs" / name, target / "docs" / name)
     for item in PAPER_COPY:
-        counts[item] = copy_tree(DEV / item, target / item)
+        counts[item] = copy_tree(DEV / item, target / item, skip_file=(lambda q: "concepts" in q.parts) if item.endswith("figures") else None)
     # the revision changelog is cited by the response letter as paper/CHANGELOG_REVISION1.md
     shutil.copy2(DEV / "paper/CHANGELOG_REVISION1.md", target / "paper/CHANGELOG_REVISION1.md")
     counts["paper/CHANGELOG_REVISION1.md"] = 1

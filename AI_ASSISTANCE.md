@@ -17,7 +17,7 @@ This file records, for every file in this repository, whether AI tools were invo
 | Assistance | Files |
 |---|---:|
 | no | 2439 |
-| yes | 314 |
+| yes | 350 |
 
 ## Per-file table
 
@@ -2492,6 +2492,7 @@ This file records, for every file in this repository, whether AI tools were invo
 | `experiments/build_array_supplement.py` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | audit/comparison/analysis script | self-tests on known-identical and deliberately different pairs; outputs cross-checked against retained manifests; make reproduce |
 | `experiments/build_array_title_page.py` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | audit/comparison/analysis script | self-tests on known-identical and deliberately different pairs; outputs cross-checked against retained manifests; make reproduce |
 | `experiments/build_array_upload_folder.py` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | audit/comparison/analysis script | self-tests on known-identical and deliberately different pairs; outputs cross-checked against retained manifests; make reproduce |
+| `experiments/build_em_upload.py` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | audit/comparison/analysis script | self-tests on known-identical and deliberately different pairs; outputs cross-checked against retained manifests; make reproduce |
 | `experiments/build_neural_networks_submission_bundle.py` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | audit/comparison/analysis script | self-tests on known-identical and deliberately different pairs; outputs cross-checked against retained manifests; make reproduce |
 | `experiments/build_neural_networks_supplement.py` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | audit/comparison/analysis script | self-tests on known-identical and deliberately different pairs; outputs cross-checked against retained manifests; make reproduce |
 | `experiments/build_neural_networks_upload_folder.py` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | audit/comparison/analysis script | self-tests on known-identical and deliberately different pairs; outputs cross-checked against retained manifests; make reproduce |
@@ -2575,6 +2576,41 @@ This file records, for every file in this repository, whether AI tools were invo
 | `paper/data/evidence/interaction_intervals.csv` | no — machine-generated record | table/CSV rendered from analysis JSON | byte-identical regeneration by make reproduce |
 | `paper/data/evidence/primary_panel.csv` | no — machine-generated record | table/CSV rendered from analysis JSON | byte-identical regeneration by make reproduce |
 | `paper/data/evidence/systems.csv` | no — machine-generated record | table/CSV rendered from analysis JSON | byte-identical regeneration by make reproduce |
+| `paper/figures/ascent_method.pdf` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/ascent_method.png` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/ascent_method.svg` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/ascent_method_grayscale.png` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/ascent_method_preview.png` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/factorial_interaction.pdf` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/factorial_interaction.png` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/factorial_interaction.svg` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/factorial_interaction_grayscale.png` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/factorial_interaction_preview.png` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/large_model_breadth.pdf` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/large_model_breadth.png` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/large_model_breadth.svg` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/large_model_breadth_grayscale.png` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/large_model_breadth_preview.png` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/latest_factorial_boundaries.pdf` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/latest_factorial_boundaries.png` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/latest_factorial_boundaries.svg` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/latest_factorial_boundaries_grayscale.png` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/latest_factorial_boundaries_preview.png` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/primary_scaling.pdf` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/primary_scaling.png` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/primary_scaling.svg` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/primary_scaling_grayscale.png` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/primary_scaling_preview.png` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/qwen_primary_evidence.pdf` | yes — author-written; language refinement (ChatGPT/Codex) | file | see VERIFICATION.md |
+| `paper/figures/qwen_primary_evidence.png` | yes — author-written; language refinement (ChatGPT/Codex) | file | see VERIFICATION.md |
+| `paper/figures/qwen_primary_evidence.svg` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/qwen_primary_evidence_grayscale.png` | yes — author-written; language refinement (ChatGPT/Codex) | file | see VERIFICATION.md |
+| `paper/figures/qwen_primary_evidence_preview.png` | yes — author-written; language refinement (ChatGPT/Codex) | file | see VERIFICATION.md |
+| `paper/figures/systems_efficiency.pdf` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/systems_efficiency.png` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/systems_efficiency.svg` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/systems_efficiency_grayscale.png` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
+| `paper/figures/systems_efficiency_preview.png` | yes — drafted by Claude Code (Anthropic) from the author's specification, 2026-09; author reviewed | revision-stage file | see VERIFICATION.md |
 | `paper/generated/around7b_results.tex` | no — machine-generated record | table/CSV rendered from analysis JSON | byte-identical regeneration by make reproduce |
 | `paper/generated/babilong_4k_8k_results.tex` | no — machine-generated record | table/CSV rendered from analysis JSON | byte-identical regeneration by make reproduce |
 | `paper/generated/cross_task_confirmations.tex` | no — machine-generated record | table/CSV rendered from analysis JSON | byte-identical regeneration by make reproduce |

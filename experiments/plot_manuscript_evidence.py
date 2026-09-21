@@ -241,19 +241,21 @@ def plot_breadth(frame: pd.DataFrame, output: Path, helpers: dict) -> None:
         ax.errorbar(mean, yy, xerr=[[mean - low], [high - mean]], fmt=marker,
                     color=color, markerfacecolor="white", markeredgewidth=1.2,
                     markersize=5.8, elinewidth=1.4, capsize=2.6, zorder=4)
-        ax.annotate(f"{fmt(mean, 1)}  [{fmt(low, 1)}, {fmt(high, 1)}]", (high, yy),
-                    xytext=(6, 0), textcoords="offset points", ha="left",
+        # label above the row, centred on the mean: clear of the jittered panel
+        # dots (which stay within +-0.13 of the row) and never past the right edge
+        ax.annotate(f"{fmt(mean, 1)}  [{fmt(low, 1)}, {fmt(high, 1)}]", (mean, yy),
+                    xytext=(0, 10), textcoords="offset points", ha="center",
                     va="center", fontsize=7.0, color=color, fontweight="bold")
-    ax.axvline(0, color=INK, linewidth=0.8, linestyle=(0, (3, 2)))
     ax.set_yticks(y, order)
     ax.set_ylim(-0.55, len(order) - 0.45)
-    ax.set_xlim(0, 100)
-    ax.set_xticks((0, 20, 40, 60, 80, 100))
+    ax.set_xlim(50, 100)
+    ax.set_xticks((50, 60, 70, 80, 90, 100))
     ax.set_xlabel("ASCENT - Foundation accuracy (points)")
     ax.set_title("Strong gains across five public 7B-8B reader families",
                  color=NAVY, fontweight="bold")
-    ax.text(0.995, 0.03, "dots: 10 task panels  |  symbols: mean ± 95% CI",
-            transform=ax.transAxes, ha="right", va="bottom", color=MUTED,
+    # legend note below the axis, right-aligned on the x-label line, off the data
+    ax.text(1.0, -0.19, "dots: 10 task panels  |  symbols: mean ± 95% CI",
+            transform=ax.transAxes, ha="right", va="top", color=MUTED,
             fontsize=6.5)
     style_axes(ax, grid="x")
     helpers["finish"](fig, (ax,), output, (7.48, 2.60), panel_labels=False)
