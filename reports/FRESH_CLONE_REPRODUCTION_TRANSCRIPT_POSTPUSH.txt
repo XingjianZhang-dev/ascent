@@ -1,5 +1,5 @@
-# Fresh-clone reproduction transcript (post-push): git clone https://github.com/XingjianZhang-dev/ascent.git at commit 3edb2ac882b6c7b434c303eecc1a508392666348
-# 2026-09-21T00:27:04Z  host: Darwin 25.5.0 arm64  python: Python 3.12.9
+# Fresh-clone reproduction transcript (post-push): git clone https://github.com/XingjianZhang-dev/ascent.git at commit a38cf13c8d9ecedb292e5ffaa8a823adce86b830
+# 2026-09-21T00:44:28Z  host: Darwin 25.5.0 arm64  python: Python 3.12.9
 $ python3 -m venv .venv && source .venv/bin/activate && pip install -r reproduction/requirements-reproduce.txt
 
 numpy==2.3.2
@@ -56,15 +56,16 @@ python3 experiments/reproduce_all_tables.py
   Factorial gain_qwen2p5-7b-instruct_k5: 7.406 nats [7.246, 7.566]; Bonferroni [7.151, 7.661]
   Factorial second_diagonal_gain_increment: 5.307 nats [5.148, 5.466]; Bonferroni [5.053, 5.561]
   Factorial second_model_by_state_interaction: 0.968 nats [0.782, 1.154]; Bonferroni [0.671, 1.264]
-  Factorial row checks: 13824 (every_transition_changes_every_row=True, exact_posterior_strictly_improves_every_transition_every_panel=True)
+  Factorial row checks (nesting + non-redundancy, by construction): 13,824 of 13,824 (every_transition_changes_every_row=True, panel_mean_exact_posterior_nll_decreases_every_transition_every_panel=True)
+  per-row exact-posterior improvement: 10,791 of 13,824 (not guaranteed; Proposition 2 is an expectation-level statement)
   Around-7B qwen2p5-7b-instruct: gain 66.75 pts [62.9, 70.6]
   Around-7B mistral-7b-instruct-v0p3: gain 80.75 pts [77.3, 84.2]
   Around-7B falcon3-7b-instruct: gain 80.88 pts [77.3, 84.4]
   Around-7B granite-3p3-8b-instruct: gain 85.62 pts [83.1, 88.1]
   Around-7B qwen3-8b-nonthinking: gain 72.00 pts [67.7, 76.3]
 == Result ==
-ALL REPORTED NUMBERS REPRODUCED (recomputed outputs in /var/folders/4m/lp403snj48xg_jyprkcy6x_c0000gn/T/ascent_reproduce_paaq56nf)
+ALL REPORTED NUMBERS REPRODUCED (recomputed outputs in /var/folders/4m/lp403snj48xg_jyprkcy6x_c0000gn/T/ascent_reproduce_xfrvveuy)
 exit=0
 $ make test
-228 passed, 21 skipped, 12 warnings in 1.44s
+228 passed, 21 skipped, 12 warnings in 1.51s
 exit=0
