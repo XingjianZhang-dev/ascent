@@ -35,16 +35,13 @@ SESSION_START = datetime(2026, 9, 20, 16, 0, tzinfo=timezone(timedelta(hours=-4)
 BACKUP_INDEX = DEV / "backups/ASCENT_GPU_FINAL_20260823/PROJECT_FILES_SHA256.tsv"
 
 DECLARATION = (
-    "The author wrote the paper and the code; both were committed and frozen before the revision "
-    "(repository history; PREREGISTRATION_TIMELINE.md). During the preparation of this work the "
-    "author used ChatGPT and OpenAI Codex to refine language and to edit and refactor code, and, during the "
-    "revision, Claude Code (Anthropic) to draft, from the author's specifications, revision-stage "
-    "audit, comparison, instrumentation, analysis, release and documentation files, the "
-    "sentence-window baseline writer of the Appendix D ablation, and wording of revised passages "
-    "and of the response to the reviewers. No AI tool produced any reported measurement. After "
-    "using these tools, the author reviewed and edited the content as needed and takes full "
-    "responsibility for the content of the publication. A per-file record with the evidence is "
-    "provided as AI_ASSISTANCE.md in the repository."
+    "During the preparation and revision of this work, the author used ChatGPT and Codex (OpenAI) and, "
+    "during the revision, Claude Code (Anthropic) as assistive tools for implementing author-specified "
+    "code modifications, conducting routine checks, and improving the clarity and wording of the "
+    "manuscript and response to reviewers. No AI tool produced any reported measurement. All research "
+    "questions, methodological decisions, experimental design, validation, interpretation of results, "
+    "and final written content were determined, reviewed, and approved by the author, who takes full "
+    "responsibility for the work. A per-file record is provided as AI_ASSISTANCE.md in the repository."
 )
 
 SUMMARY = (
@@ -52,10 +49,10 @@ SUMMARY = (
     "tests and the frozen configurations were committed between 2026-08-14 and 2026-08-23 "
     "(`docs/DEV_HISTORY_LOG.txt`), every configuration was frozen before any score was inspected "
     "(`PREREGISTRATION_TIMELINE.md`), and every result record carries the commit of the runner that "
-    "produced it. ChatGPT and OpenAI Codex were used to edit and refactor code and to refine language. Claude "
-    "Code (Anthropic) was used only during the revision, from 2026-09-20, for the file categories "
-    "named in the declaration below. Generated outputs are attributed to the script that produced "
-    "them; no AI tool produced a measurement."
+    "produced it. ChatGPT and Codex (OpenAI) were used as assistive tools for code edits and language; "
+    "Claude Code (Anthropic) was used only during the revision, from 2026-09-20, for author-specified "
+    "code modifications, routine checks and wording. Generated outputs are attributed to the script "
+    "that produced them; no AI tool produced a measurement."
 )
 
 # Measured on 2026-09-20 against the members of the frozen 2026-08-23 archive
@@ -66,7 +63,7 @@ EVIDENCE = (
     "- **Share.** Of the {total_code_lines:,} lines of code in this repository, {author_share:.0f}% are author-written "
     "({author_code_lines:,} lines in files untouched by the revision plus {rev_author_lines:,} pre-existing lines in the "
     "14 files the revision edited); {claude_share:.0f}% ({claude_code_lines:,} lines in the revision's support scripts and "
-    "395 lines added to pre-existing files) were drafted by Claude Code from the author's specifications. Of the revised "
+    "395 lines added to pre-existing files) were author-specified and implemented with Claude Code. Of the revised "
     "manuscript's 5,756 body words, about 77% are the submitted author-written text; 1,305 words were added in the "
     "revision and 355 deleted.\n"
     "- **Code.** {author_code_files} author-written code files ({author_code_lines:,} lines: all of `ascent/` except "
@@ -74,7 +71,7 @@ EVIDENCE = (
     "the tests) are listed below with the date and commit at which each was first added to the development "
     "repository, all before the revision began on 2026-09-20 (`docs/DEV_HISTORY_LOG.txt`). The revision added "
     "{claude_code_files} support scripts ({claude_code_lines:,} lines: audit, comparison, instrumentation, analysis and "
-    "release tooling, listed as drafted by Claude Code) and edited 14 pre-existing code files by +395/−45 lines "
+    "release tooling, author-specified and implemented with Claude Code) and edited 14 pre-existing code files by +395/−45 lines "
     "against their 2026-08-23 archive copies (`experiments/run_babilong_prompt.py`: +83/−7 for the audit label, "
     "the blinded row view and the sentence-window baseline; the rest audit, rendering and test guards).\n"
     "- **Results.** Every reported number is the output of the author-written runners on the frozen "
@@ -88,8 +85,8 @@ EVIDENCE = (
 
 AUTHOR_CODE = "author-written"
 AUTHOR_PROSE = "author-written"
-AUTHOR_REV = "author-written; revision edits drafted by Claude Code"
-CLAUDE = "drafted by Claude Code from the author's specification (revision)"
+AUTHOR_REV = "author-written; revision edits implemented with Claude Code"
+CLAUDE = "author-specified; implemented with Claude Code (revision)"
 UPSTREAM = "third-party text; no AI"
 
 HAND_SUFFIXES = {".py", ".sh", ".md", ".toml", ".cff", ".tex"}
@@ -379,17 +376,17 @@ def main() -> None:
     code_counts = {"author": [0, 0], "claude": [0, 0], "rev": [0, 0]}
     for rel, a, _ in rows:
         if rel.split("/")[0] in {"ascent", "experiments", "tests"} and rel.endswith((".py", ".sh")):
-            key = "rev" if "revision edits" in a else ("author" if a.startswith("author-written") else ("claude" if a.startswith("drafted by Claude Code") else None))
+            key = "rev" if "revision edits" in a else ("author" if a.startswith("author-written") else ("claude" if a.startswith("author-specified; implemented with Claude Code") else None))
             if key:
                 code_counts[key][0] += 1
                 code_counts[key][1] += sum(1 for _ in (args.tree / rel).open(errors="ignore"))
     total_code_lines = sum(v[1] for v in code_counts.values())
     counts: dict[str, int] = defaultdict(int)
     for _, a, _ in rows:
-        if a.startswith("drafted by Claude Code"):
-            counts["drafted by Claude Code in the revision (support files named in the declaration)"] += 1
-        elif "revision edits drafted by Claude Code" in a:
-            counts["author-written, revision edits drafted by Claude Code"] += 1
+        if a.startswith("author-specified; implemented with Claude Code"):
+            counts["author-specified, implemented with Claude Code in the revision (support files)"] += 1
+        elif "revision edits implemented with Claude Code" in a:
+            counts["author-written, revision edits implemented with Claude Code"] += 1
         elif a.startswith("author-written"):
             counts["author-written"] += 1
         elif a.startswith("third-party"):
@@ -412,7 +409,7 @@ def main() -> None:
                         claude_share=100 * (code_counts["claude"][1] + 395) / total_code_lines),
         "## Attribution",
         "",
-        "Hand-written files are attributed from the development tree: files last modified before the revision session (2026-09-20 16:00 EDT), or unchanged since the frozen 2026-08-23 backup inventory, are author-written; files created in the revision were drafted by Claude Code; pre-existing files changed in the revision are author-written with revision changes drafted by Claude Code. Generated files name the script that generates them; runner and analysis scripts are resolved from each record's schema (the script whose string literals contain the record's top-level keys). Build previews are not part of the release.",
+        "Hand-written files are attributed from the development tree: files last modified before the revision session (2026-09-20 16:00 EDT), or unchanged since the frozen 2026-08-23 backup inventory, are author-written; files created in the revision were author-specified and implemented with Claude Code; pre-existing files changed in the revision are author-written with revision edits implemented with Claude Code. Generated files name the script that generates them; runner and analysis scripts are resolved from each record's schema (the script whose string literals contain the record's top-level keys). Build previews are not part of the release.",
         "",
         f"Files: {len(files)} ({len(rows)} rows; each figure is one row across its formats). "
         + "; ".join(f"{k}: {v}" for k, v in sorted(counts.items(), key=lambda kv: -kv[1] if kv[0].startswith('author-written') and ',' not in kv[0] else kv[1])) + ". "

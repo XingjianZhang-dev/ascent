@@ -369,9 +369,9 @@ def audit(root: Path) -> dict:
         phrase in tex
         for phrase in (
             "Declaration of generative AI and AI-assisted technologies",
-            "ChatGPT and OpenAI Codex",
+            "Codex (OpenAI)",
             "Claude Code (Anthropic)",
-            "takes full responsibility for the content of",
+            "takes full responsibility for the work",
         )
     )
     # The manuscript declaration must equal, word for word, the declaration

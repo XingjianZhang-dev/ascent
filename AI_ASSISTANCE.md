@@ -1,23 +1,23 @@
 # AI assistance record
 
-The author wrote the paper and the code. The method, the experiment runners, the analyses, the tests and the frozen configurations were committed between 2026-08-14 and 2026-08-23 (`docs/DEV_HISTORY_LOG.txt`), every configuration was frozen before any score was inspected (`PREREGISTRATION_TIMELINE.md`), and every result record carries the commit of the runner that produced it. ChatGPT and OpenAI Codex were used to edit and refactor code and to refine language. Claude Code (Anthropic) was used only during the revision, from 2026-09-20, for the file categories named in the declaration below. Generated outputs are attributed to the script that produced them; no AI tool produced a measurement.
+The author wrote the paper and the code. The method, the experiment runners, the analyses, the tests and the frozen configurations were committed between 2026-08-14 and 2026-08-23 (`docs/DEV_HISTORY_LOG.txt`), every configuration was frozen before any score was inspected (`PREREGISTRATION_TIMELINE.md`), and every result record carries the commit of the runner that produced it. ChatGPT and Codex (OpenAI) were used as assistive tools for code edits and language; Claude Code (Anthropic) was used only during the revision, from 2026-09-20, for author-specified code modifications, routine checks and wording. Generated outputs are attributed to the script that produced them; no AI tool produced a measurement.
 
 ## Manuscript declaration (verbatim)
 
-> The author wrote the paper and the code; both were committed and frozen before the revision (repository history; PREREGISTRATION_TIMELINE.md). During the preparation of this work the author used ChatGPT and OpenAI Codex to refine language and to edit and refactor code, and, during the revision, Claude Code (Anthropic) to draft, from the author's specifications, revision-stage audit, comparison, instrumentation, analysis, release and documentation files, the sentence-window baseline writer of the Appendix D ablation, and wording of revised passages and of the response to the reviewers. No AI tool produced any reported measurement. After using these tools, the author reviewed and edited the content as needed and takes full responsibility for the content of the publication. A per-file record with the evidence is provided as AI_ASSISTANCE.md in the repository.
+> During the preparation and revision of this work, the author used ChatGPT and Codex (OpenAI) and, during the revision, Claude Code (Anthropic) as assistive tools for implementing author-specified code modifications, conducting routine checks, and improving the clarity and wording of the manuscript and response to reviewers. No AI tool produced any reported measurement. All research questions, methodological decisions, experimental design, validation, interpretation of results, and final written content were determined, reviewed, and approved by the author, who takes full responsibility for the work. A per-file record is provided as AI_ASSISTANCE.md in the repository.
 
 ## Evidence
 
-- **Share.** Of the 40,691 lines of code in this repository, 89% are author-written (33,147 lines in files untouched by the revision plus 3,023 pre-existing lines in the 14 files the revision edited); 11% (4,126 lines in the revision's support scripts and 395 lines added to pre-existing files) were drafted by Claude Code from the author's specifications. Of the revised manuscript's 5,756 body words, about 77% are the submitted author-written text; 1,305 words were added in the revision and 355 deleted.
-- **Code.** 217 author-written code files (33,147 lines: all of `ascent/` except `ascent/target_blindness.py`, every experiment runner, every analysis script of the original submission, the tests) are listed below with the date and commit at which each was first added to the development repository, all before the revision began on 2026-09-20 (`docs/DEV_HISTORY_LOG.txt`). The revision added 22 support scripts (4,126 lines: audit, comparison, instrumentation, analysis and release tooling, listed as drafted by Claude Code) and edited 14 pre-existing code files by +395/−45 lines against their 2026-08-23 archive copies (`experiments/run_babilong_prompt.py`: +83/−7 for the audit label, the blinded row view and the sentence-window baseline; the rest audit, rendering and test guards).
+- **Share.** Of the 40,688 lines of code in this repository, 89% are author-written (33,147 lines in files untouched by the revision plus 3,023 pre-existing lines in the 14 files the revision edited); 11% (4,123 lines in the revision's support scripts and 395 lines added to pre-existing files) were author-specified and implemented with Claude Code. Of the revised manuscript's 5,756 body words, about 77% are the submitted author-written text; 1,305 words were added in the revision and 355 deleted.
+- **Code.** 217 author-written code files (33,147 lines: all of `ascent/` except `ascent/target_blindness.py`, every experiment runner, every analysis script of the original submission, the tests) are listed below with the date and commit at which each was first added to the development repository, all before the revision began on 2026-09-20 (`docs/DEV_HISTORY_LOG.txt`). The revision added 22 support scripts (4,123 lines: audit, comparison, instrumentation, analysis and release tooling, author-specified and implemented with Claude Code) and edited 14 pre-existing code files by +395/−45 lines against their 2026-08-23 archive copies (`experiments/run_babilong_prompt.py`: +83/−7 for the audit label, the blinded row view and the sentence-window baseline; the rest audit, rendering and test guards).
 - **Results.** Every reported number is the output of the author-written runners on the frozen configurations; the records embed the runner's git commit, the configuration SHA-256 and the weight-shard hashes, and `make reproduce` recomputes every number from them.
 - **Manuscript.** The submitted manuscript (2026-08-23; git `0b99b3d`, 4,681 body words) is the author's text; the revision's latexdiff against it adds 1,305 words and deletes 355 (Section 8, Appendices A–E, the scope statements), so about three quarters of the revised text is the submitted text unchanged. The added passages were specified by the author and worded with Claude Code, then reviewed and edited by the author.
 
 ## Attribution
 
-Hand-written files are attributed from the development tree: files last modified before the revision session (2026-09-20 16:00 EDT), or unchanged since the frozen 2026-08-23 backup inventory, are author-written; files created in the revision were drafted by Claude Code; pre-existing files changed in the revision are author-written with revision changes drafted by Claude Code. Generated files name the script that generates them; runner and analysis scripts are resolved from each record's schema (the script whose string literals contain the record's top-level keys). Build previews are not part of the release.
+Hand-written files are attributed from the development tree: files last modified before the revision session (2026-09-20 16:00 EDT), or unchanged since the frozen 2026-08-23 backup inventory, are author-written; files created in the revision were author-specified and implemented with Claude Code; pre-existing files changed in the revision are author-written with revision edits implemented with Claude Code. Generated files name the script that generates them; runner and analysis scripts are resolved from each record's schema (the script whose string literals contain the record's top-level keys). Build previews are not part of the release.
 
-Files: 2775 (2761 rows; each figure is one row across its formats). author-written: 350; third-party text: 2; author-written, revision edits drafted by Claude Code: 15; drafted by Claude Code in the revision (support files named in the declaration): 39; generated by the author's scripts (runner outputs, analyses, tables, figures, audits, manifests): 2355. The method implementation (`ascent/`, except the revision's target-blindness instrumentation module), the experiment runners, the analysis scripts of the original submission and the frozen configurations are author-written.
+Files: 2775 (2761 rows; each figure is one row across its formats). author-written: 350; third-party text: 2; author-written, revision edits implemented with Claude Code: 15; author-specified, implemented with Claude Code in the revision (support files): 39; generated by the author's scripts (runner outputs, analyses, tables, figures, audits, manifests): 2355. The method implementation (`ascent/`, except the revision's target-blindness instrumentation module), the experiment runners, the analysis scripts of the original submission and the frozen configurations are author-written.
 
 ## Per-file table
 
@@ -25,17 +25,17 @@ Files: 2775 (2761 rows; each figure is one row across its formats). author-writt
 |---|---|---|
 | `.gitattributes` | generated file | see VERIFICATION.md |
 | `.gitignore` | generated by experiments/build_release_tree.py | — |
-| `.gitleaks.toml` | drafted by Claude Code from the author's specification (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
+| `.gitleaks.toml` | author-specified; implemented with Claude Code (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
 | `AI_ASSISTANCE.md` | generated by experiments/build_ai_assistance_table.py; summary text drafted by Claude Code | declaration below checked word for word against the manuscript by audit_paper_claims.py |
-| `CITATION.cff` | drafted by Claude Code from the author's specification (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
+| `CITATION.cff` | author-specified; implemented with Claude Code (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
 | `LICENSE` | third-party text; no AI | see VERIFICATION.md |
 | `LICENSE-DATA` | third-party text; no AI | see VERIFICATION.md |
-| `Makefile` | drafted by Claude Code from the author's specification (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
+| `Makefile` | author-specified; implemented with Claude Code (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
 | `PREREGISTRATION_TIMELINE.md` | generated by experiments/build_preregistration_timeline.py | derived from git history and result timestamps |
-| `README.md` | drafted by Claude Code from the author's specification (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
-| `THIRD_PARTY_NOTICES.md` | drafted by Claude Code from the author's specification (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
-| `VERIFICATION.md` | drafted by Claude Code from the author's specification (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
-| `WRITER_SCHEMA_AND_SCOPE.md` | drafted by Claude Code from the author's specification (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
+| `README.md` | author-specified; implemented with Claude Code (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
+| `THIRD_PARTY_NOTICES.md` | author-specified; implemented with Claude Code (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
+| `VERIFICATION.md` | author-specified; implemented with Claude Code (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
+| `WRITER_SCHEMA_AND_SCOPE.md` | author-specified; implemented with Claude Code (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
 | `artifacts/around7b_crossnode/qwen7b-panel1-exact-audit.json` | generated by experiments/run_babilong_prompt.py on the frozen configuration | config, panel and weight-shard SHA-256 recorded in the record; manifests re-verified |
 | `artifacts/around7b_crossnode/qwen7b-panel1-node1.json` | generated by experiments/run_babilong_prompt.py on the frozen configuration | config, panel and weight-shard SHA-256 recorded in the record; manifests re-verified |
 | `artifacts/around7b_crossnode/qwen7b-panel1-node2.json` | generated by experiments/run_babilong_prompt.py on the frozen configuration | config, panel and weight-shard SHA-256 recorded in the record; manifests re-verified |
@@ -1577,9 +1577,9 @@ Files: 2775 (2761 rows; each figure is one row across its formats). author-writt
 | `artifacts/sum_replay/development/node2/rounds_5_sum_replay_panel_1_qwen2p5-3b-instruct.json` | generated by experiments/run_noisy_composition_prompt.py on the frozen configuration | config, panel and weight-shard SHA-256 recorded in the record; manifests re-verified |
 | `artifacts/sum_replay/development_analysis.json` | generated by experiments/analyze_noisy_composition_factorial.py | recomputed from the per-row records (make reproduce for the four reported analyses) |
 | `artifacts_revision/crossnode_2026-09/CROSSARCH_COMPARISON.json` | generated by experiments/compare_crossarch_reproduction.py | self-tests on identical and different pairs; inputs hash-verified |
-| `artifacts_revision/crossnode_2026-09/CROSSARCH_REPRODUCTION_REPORT.md` | drafted by Claude Code from the author's specification (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
-| `artifacts_revision/crossnode_2026-09/DEVIATIONS.md` | drafted by Claude Code from the author's specification (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
-| `artifacts_revision/crossnode_2026-09/PREREGISTRATION.json` | drafted by Claude Code from the author's specification (revision) | committed before execution (commit hash in the file) |
+| `artifacts_revision/crossnode_2026-09/CROSSARCH_REPRODUCTION_REPORT.md` | author-specified; implemented with Claude Code (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
+| `artifacts_revision/crossnode_2026-09/DEVIATIONS.md` | author-specified; implemented with Claude Code (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
+| `artifacts_revision/crossnode_2026-09/PREREGISTRATION.json` | author-specified; implemented with Claude Code (revision) | committed before execution (commit hash in the file) |
 | `artifacts_revision/crossnode_2026-09/SAME_GPU_RUN1_VS_RUN2_CONTROL.json` | generated by experiments/compare_crossarch_reproduction.py | self-tests on identical and different pairs; inputs hash-verified |
 | `artifacts_revision/crossnode_2026-09/SHA256SUMS.remote.txt` | generated by sha256sum | re-verified against the files (reports/RELEASE_TREE_INTEGRITY.txt) |
 | `artifacts_revision/crossnode_2026-09/SHA256SUMS.txt` | generated by sha256sum | re-verified against the files (reports/RELEASE_TREE_INTEGRITY.txt) |
@@ -1658,7 +1658,7 @@ Files: 2775 (2761 rows; each figure is one row across its formats). author-writt
 | `artifacts_revision/crossnode_2026-09_run1_python3.12.14/official16k/canonical/1p5b/canonical_16k_confirmation_panel_1.json` | generated by experiments/run_babilong_prompt.py on the frozen configuration | config, panel and weight-shard SHA-256 recorded in the record; manifests re-verified |
 | `artifacts_revision/crossnode_2026-09_run1_python3.12.14/official16k/canonical/3b/canonical_16k_confirmation_panel_1.json` | generated by experiments/run_babilong_prompt.py on the frozen configuration | config, panel and weight-shard SHA-256 recorded in the record; manifests re-verified |
 | `artifacts_revision/schema_blind_2026-09/GENERIC_WRITER_ABLATION.json` | generated by experiments/analyze_generic_writer_ablation.py | recomputed by make reproduce |
-| `artifacts_revision/schema_blind_2026-09/PREREGISTRATION.json` | drafted by Claude Code from the author's specification (revision) | committed before execution (commit hash in the file) |
+| `artifacts_revision/schema_blind_2026-09/PREREGISTRATION.json` | author-specified; implemented with Claude Code (revision) | committed before execution (commit hash in the file) |
 | `artifacts_revision/schema_blind_2026-09/SHA256SUMS.remote.txt` | generated by sha256sum | re-verified against the files (reports/RELEASE_TREE_INTEGRITY.txt) |
 | `artifacts_revision/schema_blind_2026-09/babilong_qwen2p5_generic_writer_16k_ablation.run.json` | config copy written by experiments/run_generic_writer_ablation.sh | SHA-256 recorded in every result record |
 | `artifacts_revision/schema_blind_2026-09/bge_cache/canonical_16k_confirmation_panel_1.json` | generated by experiments/prepare_babilong_bge_cache.py | hash-verified BAAI/bge-m3 and reranker shards; SHA256SUMS.remote.txt |
@@ -1887,7 +1887,7 @@ Files: 2775 (2761 rows; each figure is one row across its formats). author-writt
 | `artifacts_revision/schema_blind_2026-09/sentence_window_coscale/qwen2p5-3b-instruct/canonical_16k_confirmation_panel_7.json` | generated by experiments/run_babilong_prompt.py on the frozen configuration | config, panel and weight-shard SHA-256 recorded in the record; manifests re-verified |
 | `artifacts_revision/schema_blind_2026-09/sentence_window_coscale/qwen2p5-3b-instruct/canonical_16k_confirmation_panel_8.json` | generated by experiments/run_babilong_prompt.py on the frozen configuration | config, panel and weight-shard SHA-256 recorded in the record; manifests re-verified |
 | `artifacts_revision/schema_blind_2026-09/sentence_window_coscale/qwen2p5-3b-instruct/canonical_16k_confirmation_panel_9.json` | generated by experiments/run_babilong_prompt.py on the frozen configuration | config, panel and weight-shard SHA-256 recorded in the record; manifests re-verified |
-| `artifacts_revision/target_blindness_2026-09/PREREGISTRATION.json` | drafted by Claude Code from the author's specification (revision) | committed before execution (commit hash in the file) |
+| `artifacts_revision/target_blindness_2026-09/PREREGISTRATION.json` | author-specified; implemented with Claude Code (revision) | committed before execution (commit hash in the file) |
 | `artifacts_revision/target_blindness_2026-09/SHA256SUMS.remote.txt` | generated by sha256sum | re-verified against the files (reports/RELEASE_TREE_INTEGRITY.txt) |
 | `artifacts_revision/target_blindness_2026-09/TARGET_BLINDNESS_AUDIT.json` | generated by experiments/analyze_target_blindness_audit.py | recomputed from the released row records |
 | `artifacts_revision/target_blindness_2026-09/control_uninstrumented/semantic_holdout/0p5b/canonical_train_8k_semantic_panel_1.json` | generated by experiments/run_babilong_prompt.py on the frozen configuration | config, panel and weight-shard SHA-256 recorded in the record; manifests re-verified |
@@ -2062,7 +2062,7 @@ Files: 2775 (2761 rows; each figure is one row across its formats). author-writt
 | `ascent/ruler_qa_memory.py` | author-written (committed 2026-08-14, 80037a1) | tests/; cross-instance reproduction (VERIFICATION.md §4) |
 | `ascent/ruler_vt_memory.py` | author-written (committed 2026-08-13, 3de6b93) | tests/; cross-instance reproduction (VERIFICATION.md §4) |
 | `ascent/state_accounting.py` | author-written (committed 2026-08-14, ec4694d) | tests/; cross-instance reproduction (VERIFICATION.md §4) |
-| `ascent/target_blindness.py` | drafted by Claude Code from the author's specification (revision) | tests/test_target_blindness.py; same-instance instrumented run identical to the uninstrumented run |
+| `ascent/target_blindness.py` | author-specified; implemented with Claude Code (revision) | tests/test_target_blindness.py; same-instance instrumented run identical to the uninstrumented run |
 | `configs/babilong_around7b_16k_extension_confirmatory.json` | author-written frozen configuration (freeze commit 65e1491) | SHA-256 recorded in every result record; PREREGISTRATION_TIMELINE.md |
 | `configs/babilong_around7b_16k_extension_design.json` | author-written frozen configuration (freeze commit 860e9f1) | SHA-256 recorded in every result record; PREREGISTRATION_TIMELINE.md |
 | `configs/babilong_bge_m3_retrieval_protocol.json` | generated by experiments/prepare_babilong_bge_cache.py (freeze commit 78ab8d1) | SHA-256 recorded in every result record; PREREGISTRATION_TIMELINE.md |
@@ -2418,7 +2418,7 @@ Files: 2775 (2761 rows; each figure is one row across its formats). author-writt
 | `docs/ASCENT_TASK_SCOPE_PROTOCOL.md` | author-written (committed 2026-08-14, a15fbd1) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
 | `docs/DESIGN_RISKS.md` | author-written (committed 2026-08-13, 66702f3) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
 | `docs/DEV_HISTORY_LOG.txt` | generated by experiments/build_preregistration_timeline.py | derived from git history and result timestamps |
-| `docs/EXPERIMENT_LEDGER.md` | author-written; revision edits drafted by Claude Code (committed 2026-08-13, e333c13) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
+| `docs/EXPERIMENT_LEDGER.md` | author-written; revision edits implemented with Claude Code (committed 2026-08-13, e333c13) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
 | `docs/EXPERIMENT_PROTOCOL.md` | author-written (committed 2026-08-13, e333c13) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
 | `experiments/analyze_array_third_node_audit.py` | author-written (committed 2026-09-20, 0b99b3d) | make reproduce (byte-identical tables, recomputed analyses) |
 | `experiments/analyze_babilong_around7b_extension.py` | author-written (committed 2026-08-15, 73e78ac) | make reproduce (byte-identical tables, recomputed analyses) |
@@ -2448,17 +2448,17 @@ Files: 2775 (2761 rows; each figure is one row across its formats). author-writt
 | `experiments/analyze_composition_factorial.py` | author-written (committed 2026-08-13, 11c7f9f) | make reproduce (byte-identical tables, recomputed analyses) |
 | `experiments/analyze_cross_node_replication.py` | author-written (committed 2026-08-14, ffe6c78) | make reproduce (byte-identical tables, recomputed analyses) |
 | `experiments/analyze_exact_kv_dominance.py` | author-written (committed 2026-08-13, d5e4408) | make reproduce (byte-identical tables, recomputed analyses) |
-| `experiments/analyze_generic_writer_ablation.py` | drafted by Claude Code from the author's specification (revision) | make reproduce (byte-identical tables, recomputed analyses) |
+| `experiments/analyze_generic_writer_ablation.py` | author-specified; implemented with Claude Code (revision) | make reproduce (byte-identical tables, recomputed analyses) |
 | `experiments/analyze_latency_tail_audit.py` | author-written (committed 2026-08-14, ffe6c78) | make reproduce (byte-identical tables, recomputed analyses) |
 | `experiments/analyze_latent_factorial.py` | author-written (committed 2026-08-13, 2175080) | make reproduce (byte-identical tables, recomputed analyses) |
 | `experiments/analyze_latent_scale_curve.py` | author-written (committed 2026-08-13, b11cd36) | make reproduce (byte-identical tables, recomputed analyses) |
 | `experiments/analyze_natural_repeat.py` | author-written (committed 2026-08-13, 64d712f) | make reproduce (byte-identical tables, recomputed analyses) |
-| `experiments/analyze_noisy_composition_candidate.py` | author-written; revision edits drafted by Claude Code (committed 2026-08-15, 95764cf) | make reproduce (byte-identical tables, recomputed analyses) |
+| `experiments/analyze_noisy_composition_candidate.py` | author-written; revision edits implemented with Claude Code (committed 2026-08-15, 95764cf) | make reproduce (byte-identical tables, recomputed analyses) |
 | `experiments/analyze_noisy_composition_factorial.py` | author-written (committed 2026-08-15, c0e2114) | make reproduce (byte-identical tables, recomputed analyses) |
 | `experiments/analyze_overwrite_address_value.py` | author-written (committed 2026-08-14, 1bd917e) | make reproduce (byte-identical tables, recomputed analyses) |
 | `experiments/analyze_overwrite_affine_binding.py` | author-written (committed 2026-08-14, 1bd917e) | make reproduce (byte-identical tables, recomputed analyses) |
 | `experiments/analyze_overwrite_factorial.py` | author-written (committed 2026-08-13, 11c7f9f) | make reproduce (byte-identical tables, recomputed analyses) |
-| `experiments/analyze_panel_power.py` | drafted by Claude Code from the author's specification (revision) | make reproduce (byte-identical tables, recomputed analyses) |
+| `experiments/analyze_panel_power.py` | author-specified; implemented with Claude Code (revision) | make reproduce (byte-identical tables, recomputed analyses) |
 | `experiments/analyze_probe_state_accounting.py` | author-written (committed 2026-08-14, ec4694d) | make reproduce (byte-identical tables, recomputed analyses) |
 | `experiments/analyze_ruler_aggregation_confirmation.py` | author-written (committed 2026-08-14, f416297) | make reproduce (byte-identical tables, recomputed analyses) |
 | `experiments/analyze_ruler_aggregation_development.py` | author-written (committed 2026-08-14, a386ec0) | make reproduce (byte-identical tables, recomputed analyses) |
@@ -2472,50 +2472,50 @@ Files: 2775 (2761 rows; each figure is one row across its formats). author-writt
 | `experiments/analyze_ruler_vt_seed_panel.py` | author-written (committed 2026-08-13, c06a0f5) | make reproduce (byte-identical tables, recomputed analyses) |
 | `experiments/analyze_static_replay_control.py` | author-written (committed 2026-08-14, 2ae9b3e) | make reproduce (byte-identical tables, recomputed analyses) |
 | `experiments/analyze_static_replay_panel.py` | author-written (committed 2026-08-14, bbe577c) | make reproduce (byte-identical tables, recomputed analyses) |
-| `experiments/analyze_target_blindness_audit.py` | drafted by Claude Code from the author's specification (revision) | make reproduce (byte-identical tables, recomputed analyses) |
-| `experiments/apply_revision1_manuscript_edits.py` | drafted by Claude Code from the author's specification (revision) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
+| `experiments/analyze_target_blindness_audit.py` | author-specified; implemented with Claude Code (revision) | make reproduce (byte-identical tables, recomputed analyses) |
+| `experiments/apply_revision1_manuscript_edits.py` | author-specified; implemented with Claude Code (revision) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/audit_around7b_checkpoint.py` | author-written (committed 2026-08-15, bc2efb8) | outputs cross-checked against retained manifests; make reproduce |
-| `experiments/audit_around7b_diagnostics.py` | drafted by Claude Code from the author's specification (revision) | outputs cross-checked against retained manifests; make reproduce |
+| `experiments/audit_around7b_diagnostics.py` | author-specified; implemented with Claude Code (revision) | outputs cross-checked against retained manifests; make reproduce |
 | `experiments/audit_array_submission_package.py` | author-written (committed 2026-09-20, 0b99b3d) | outputs cross-checked against retained manifests; make reproduce |
 | `experiments/audit_babilong_generative_factorial.py` | author-written (committed 2026-08-14, c4f7f30) | outputs cross-checked against retained manifests; make reproduce |
 | `experiments/audit_babilong_qwen_preflight.py` | author-written (committed 2026-08-15, a11016d) | outputs cross-checked against retained manifests; make reproduce |
 | `experiments/audit_falcon3_factorial_preflight.py` | author-written (committed 2026-08-15, 169a3cf) | outputs cross-checked against retained manifests; make reproduce |
 | `experiments/audit_formal_validation_records.py` | author-written (committed 2026-09-20, 0b99b3d) | outputs cross-checked against retained manifests; make reproduce |
-| `experiments/audit_manuscript_consistency.py` | author-written; revision edits drafted by Claude Code (committed 2026-09-20, c84f587) | outputs cross-checked against retained manifests; make reproduce |
+| `experiments/audit_manuscript_consistency.py` | author-written; revision edits implemented with Claude Code (committed 2026-09-20, c84f587) | outputs cross-checked against retained manifests; make reproduce |
 | `experiments/audit_neural_networks_submission_package.py` | author-written (committed 2026-09-20, 0b99b3d) | outputs cross-checked against retained manifests; make reproduce |
-| `experiments/audit_paper_claims.py` | author-written; revision edits drafted by Claude Code (committed 2026-08-15, 98462d9) | outputs cross-checked against retained manifests; make reproduce |
+| `experiments/audit_paper_claims.py` | author-written; revision edits implemented with Claude Code (committed 2026-08-15, 98462d9) | outputs cross-checked against retained manifests; make reproduce |
 | `experiments/audit_ruler_full_context_data.py` | author-written (committed 2026-08-14, b940362) | outputs cross-checked against retained manifests; make reproduce |
 | `experiments/audit_ruler_qa_dual_path.py` | author-written (committed 2026-08-14, 8566dae) | outputs cross-checked against retained manifests; make reproduce |
 | `experiments/audit_ruler_qa_evidence.py` | author-written (committed 2026-08-14, 80037a1) | outputs cross-checked against retained manifests; make reproduce |
-| `experiments/build_ai_assistance_table.py` | drafted by Claude Code from the author's specification (revision) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
+| `experiments/build_ai_assistance_table.py` | author-specified; implemented with Claude Code (revision) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/build_array_submission_bundle.py` | author-written (committed 2026-09-20, 0b99b3d) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/build_array_supplement.py` | author-written (committed 2026-09-20, 0b99b3d) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/build_array_title_page.py` | author-written (committed 2026-09-20, 0b99b3d) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/build_array_upload_folder.py` | author-written (committed 2026-09-20, 0b99b3d) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
-| `experiments/build_em_upload.py` | drafted by Claude Code from the author's specification (revision) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
+| `experiments/build_em_upload.py` | author-specified; implemented with Claude Code (revision) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/build_neural_networks_submission_bundle.py` | author-written (committed 2026-09-20, 0b99b3d) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/build_neural_networks_supplement.py` | author-written (committed 2026-09-20, 0b99b3d) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/build_neural_networks_upload_folder.py` | author-written (committed 2026-09-20, 0b99b3d) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
-| `experiments/build_preregistration_timeline.py` | drafted by Claude Code from the author's specification (revision) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
-| `experiments/build_release_tree.py` | drafted by Claude Code from the author's specification (revision) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
+| `experiments/build_preregistration_timeline.py` | author-specified; implemented with Claude Code (revision) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
+| `experiments/build_release_tree.py` | author-specified; implemented with Claude Code (revision) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/build_tnnls_readiness_report.py` | author-written (committed 2026-08-14, c4f7f30) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/build_verified_bibliography.py` | author-written (committed 2026-09-20, 0b99b3d) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/check_foundation_cache_equivalence.py` | author-written (committed 2026-08-14, 8004f02) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
-| `experiments/compare_crossarch_reproduction.py` | drafted by Claude Code from the author's specification (revision) | outputs cross-checked against retained manifests; make reproduce |
+| `experiments/compare_crossarch_reproduction.py` | author-specified; implemented with Claude Code (revision) | outputs cross-checked against retained manifests; make reproduce |
 | `experiments/compare_factorial_cross_node.py` | author-written (committed 2026-09-20, 0b99b3d) | outputs cross-checked against retained manifests; make reproduce |
-| `experiments/compare_third_node_audit.py` | drafted by Claude Code from the author's specification (revision) | outputs cross-checked against retained manifests; make reproduce |
+| `experiments/compare_third_node_audit.py` | author-specified; implemented with Claude Code (revision) | outputs cross-checked against retained manifests; make reproduce |
 | `experiments/create_declaration_of_interest.py` | author-written (committed 2026-09-20, 0b99b3d) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/diagnose_babilong_decode_context.py` | author-written (committed 2026-08-14, 4775015) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/export_manuscript_evidence.py` | author-written (committed 2026-09-20, 0b99b3d) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/export_paper_figure_data.py` | author-written (committed 2026-08-15, 2e11a19) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
-| `experiments/extract_phase0_archive_evidence.py` | drafted by Claude Code from the author's specification (revision) | outputs cross-checked against retained manifests; make reproduce |
+| `experiments/extract_phase0_archive_evidence.py` | author-specified; implemented with Claude Code (revision) | outputs cross-checked against retained manifests; make reproduce |
 | `experiments/fetch_babilong_json_source.py` | author-written (committed 2026-08-14, 8d955ea) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/fetch_babilong_official_source.py` | author-written (committed 2026-08-14, 8d955ea) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/freeze_babilong_around7b_extension.py` | author-written (committed 2026-08-15, 73e78ac) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/generate_ascent_schematic_variants.py` | author-written (committed 2026-08-15, 2e11a19) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/plot_ascent_method.py` | author-written (committed 2026-09-20, 0b99b3d) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/plot_latest_factorial_boundaries.py` | author-written (committed 2026-09-20, 0b99b3d) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
-| `experiments/plot_manuscript_evidence.py` | author-written; revision edits drafted by Claude Code (committed 2026-09-20, 0b99b3d) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
+| `experiments/plot_manuscript_evidence.py` | author-written; revision edits implemented with Claude Code (committed 2026-09-20, 0b99b3d) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/plot_neural_networks_graphical_abstract.py` | author-written (committed 2026-09-20, 0b99b3d) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/plot_qwen_primary_evidence.py` | author-written (committed 2026-08-15, 2e11a19) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/prepare_babilong_bge_cache.py` | author-written (committed 2026-08-14, 78ab8d1) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
@@ -2536,21 +2536,21 @@ Files: 2775 (2761 rows; each figure is one row across its formats). author-writt
 | `experiments/prepare_noisy_composition_sum_candidate.py` | author-written (committed 2026-08-15, b181347) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/prepare_noisy_composition_sum_replay.py` | author-written (committed 2026-08-15, b3fa398) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/profile_babilong_flops.py` | author-written (committed 2026-08-14, e49eae9) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
-| `experiments/record_run_environment.py` | drafted by Claude Code from the author's specification (revision) | outputs cross-checked against retained manifests; make reproduce |
-| `experiments/record_zenodo_doi.py` | drafted by Claude Code from the author's specification (revision) | outputs cross-checked against retained manifests; make reproduce |
-| `experiments/render_appendix_tables.py` | drafted by Claude Code from the author's specification (revision) | make reproduce (byte-identical tables, recomputed analyses) |
+| `experiments/record_run_environment.py` | author-specified; implemented with Claude Code (revision) | outputs cross-checked against retained manifests; make reproduce |
+| `experiments/record_zenodo_doi.py` | author-specified; implemented with Claude Code (revision) | outputs cross-checked against retained manifests; make reproduce |
+| `experiments/render_appendix_tables.py` | author-specified; implemented with Claude Code (revision) | make reproduce (byte-identical tables, recomputed analyses) |
 | `experiments/render_cross_task_table.py` | author-written (committed 2026-09-20, 0b99b3d) | make reproduce (byte-identical tables, recomputed analyses) |
 | `experiments/render_paper_additional_tables.py` | author-written (committed 2026-08-15, 98462d9) | make reproduce (byte-identical tables, recomputed analyses) |
 | `experiments/render_paper_qwen_confirmation_table.py` | author-written (committed 2026-08-15, f457fa5) | make reproduce (byte-identical tables, recomputed analyses) |
-| `experiments/render_theory_evidence_map.py` | author-written; revision edits drafted by Claude Code (committed 2026-09-20, c84f587) | make reproduce (byte-identical tables, recomputed analyses) |
-| `experiments/reproduce_all_tables.py` | drafted by Claude Code from the author's specification (revision) | make reproduce (byte-identical tables, recomputed analyses) |
-| `experiments/run_babilong_prompt.py` | author-written; revision edits drafted by Claude Code (committed 2026-08-14, d53b21f) | hash-verified inputs and weights; fail-closed validation; outputs reproduced across instances |
+| `experiments/render_theory_evidence_map.py` | author-written; revision edits implemented with Claude Code (committed 2026-09-20, c84f587) | make reproduce (byte-identical tables, recomputed analyses) |
+| `experiments/reproduce_all_tables.py` | author-specified; implemented with Claude Code (revision) | make reproduce (byte-identical tables, recomputed analyses) |
+| `experiments/run_babilong_prompt.py` | author-written; revision edits implemented with Claude Code (committed 2026-08-14, d53b21f) | hash-verified inputs and weights; fail-closed validation; outputs reproduced across instances |
 | `experiments/run_babilong_qrag_reader.py` | author-written (committed 2026-08-15, 525e724) | hash-verified inputs and weights; fail-closed validation; outputs reproduced across instances |
 | `experiments/run_babilong_qrag_retrieval.py` | author-written (committed 2026-08-15, a98253f) | hash-verified inputs and weights; fail-closed validation; outputs reproduced across instances |
 | `experiments/run_babilong_qwen_factorial_replication.py` | author-written (committed 2026-08-15, c9af942) | hash-verified inputs and weights; fail-closed validation; outputs reproduced across instances |
 | `experiments/run_composition_factorial.py` | author-written (committed 2026-08-13, f20ca52) | hash-verified inputs and weights; fail-closed validation; outputs reproduced across instances |
-| `experiments/run_crossarch_reproduction.sh` | drafted by Claude Code from the author's specification (revision) | environment snapshots before and after; SHA256SUMS of outputs |
-| `experiments/run_generic_writer_ablation.sh` | drafted by Claude Code from the author's specification (revision) | environment snapshots before and after; SHA256SUMS of outputs |
+| `experiments/run_crossarch_reproduction.sh` | author-specified; implemented with Claude Code (revision) | environment snapshots before and after; SHA256SUMS of outputs |
+| `experiments/run_generic_writer_ablation.sh` | author-specified; implemented with Claude Code (revision) | environment snapshots before and after; SHA256SUMS of outputs |
 | `experiments/run_latent_replay_factorial.py` | author-written (committed 2026-08-13, 44212a6) | hash-verified inputs and weights; fail-closed validation; outputs reproduced across instances |
 | `experiments/run_natural_repeat.py` | author-written (committed 2026-08-13, 9a9aa5d) | hash-verified inputs and weights; fail-closed validation; outputs reproduced across instances |
 | `experiments/run_noisy_composition_candidate.py` | author-written (committed 2026-08-15, 95764cf) | hash-verified inputs and weights; fail-closed validation; outputs reproduced across instances |
@@ -2566,10 +2566,10 @@ Files: 2775 (2761 rows; each figure is one row across its formats). author-writt
 | `experiments/run_ruler_qa_evidence.py` | author-written (committed 2026-08-14, 80037a1) | hash-verified inputs and weights; fail-closed validation; outputs reproduced across instances |
 | `experiments/run_stage_a.py` | author-written (committed 2026-08-13, e333c13) | hash-verified inputs and weights; fail-closed validation; outputs reproduced across instances |
 | `experiments/run_stage_b_endpoint.py` | author-written (committed 2026-08-13, e333c13) | hash-verified inputs and weights; fail-closed validation; outputs reproduced across instances |
-| `experiments/run_target_blindness_audit.sh` | drafted by Claude Code from the author's specification (revision) | environment snapshots before and after; SHA256SUMS of outputs |
+| `experiments/run_target_blindness_audit.sh` | author-specified; implemented with Claude Code (revision) | environment snapshots before and after; SHA256SUMS of outputs |
 | `experiments/verify_babilong_cross_node_replication.py` | author-written (committed 2026-08-15, cc1b118) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
 | `experiments/verify_reproduction_package.py` | author-written (committed 2026-08-14, ffe6c78) | audited outputs (audit_manuscript_consistency.py, audit_paper_claims.py) |
-| `paper/CHANGELOG_REVISION1.md` | drafted by Claude Code from the author's specification (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
+| `paper/CHANGELOG_REVISION1.md` | author-specified; implemented with Claude Code (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
 | `paper/data/evidence/around7b_panel.csv` | generated by experiments/export_manuscript_evidence.py | compared with the analysis records by audit_manuscript_consistency.py |
 | `paper/data/evidence/evidence_profile.json` | generated by experiments/export_manuscript_evidence.py | compared with the analysis records by audit_manuscript_consistency.py |
 | `paper/data/evidence/factorial_panel.csv` | generated by experiments/export_manuscript_evidence.py | compared with the analysis records by audit_manuscript_consistency.py |
@@ -2613,7 +2613,7 @@ Files: 2775 (2761 rows; each figure is one row across its formats). author-writt
 | `reports/GITLEAKS_RELEASE_TREE_UNFILTERED.json` | generated by gitleaks | re-run on every release build |
 | `reports/NODE_IDENTITY_EVIDENCE_2026-09-20.json` | generated by experiments/extract_phase0_archive_evidence.py | regenerable by the named script |
 | `reports/PANEL_POWER_ANALYSIS.json` | generated by experiments/analyze_panel_power.py | regenerable by the named script |
-| `reports/PHASE0_OPEN_QUESTIONS_RESOLVED.md` | drafted by Claude Code from the author's specification (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
+| `reports/PHASE0_OPEN_QUESTIONS_RESOLVED.md` | author-specified; implemented with Claude Code (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
 | `reports/PREREGISTRATION_TIMELINE.json` | generated by experiments/build_preregistration_timeline.py | regenerable by the named script |
 | `reports/RELEASE_TREE_INTEGRITY.txt` | generated by experiments/build_release_tree.py | regenerable by the named script |
 | `reports/THIRD_NODE_AUDIT_ROW_DIFF_2026-09-20.json` | generated by experiments/compare_third_node_audit.py | regenerable by the named script |
@@ -2649,9 +2649,9 @@ Files: 2775 (2761 rows; each figure is one row across its formats). author-writt
 | `reports/phase0_archive_evidence/node3/OS_RELEASE.txt` | generated by experiments/extract_phase0_archive_evidence.py | archive member hashes recorded |
 | `reports/phase0_archive_evidence/node3/UNAME.txt` | generated by experiments/extract_phase0_archive_evidence.py | archive member hashes recorded |
 | `reports/row_audits/FACTORIAL_TRANSITION_ROW_AUDIT_13824.csv` | generated by experiments/analyze_noisy_composition_candidate.py --emit-row-audit | byte-identical regeneration by make reproduce |
-| `reproduction/DETERMINISM_POLICY.md` | drafted by Claude Code from the author's specification (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
+| `reproduction/DETERMINISM_POLICY.md` | author-specified; implemented with Claude Code (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
 | `reproduction/README.md` | author-written (committed 2026-08-14, ffe6c78) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
-| `reproduction/REPRODUCE.md` | drafted by Claude Code from the author's specification (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
+| `reproduction/REPRODUCE.md` | author-specified; implemented with Claude Code (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
 | `reproduction/commands.md` | author-written (committed 2026-08-14, ffe6c78) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
 | `reproduction/core_manifest.json` | generated file | see VERIFICATION.md |
 | `reproduction/environment.json` | generated file | see VERIFICATION.md |
@@ -2702,19 +2702,19 @@ Files: 2775 (2761 rows; each figure is one row across its formats). author-writt
 | `reproduction/environment_captures/node2_2026-08-15/VENV_3_PIP_FREEZE.txt` | extracted from the frozen instance archives | SHA256SUMS.txt beside the files; archives hashed in reports/NODE_IDENTITY_EVIDENCE_2026-09-20.json |
 | `reproduction/environment_captures/node2_2026-08-15/VENV_3_PYTHON.txt` | extracted from the frozen instance archives | SHA256SUMS.txt beside the files; archives hashed in reports/NODE_IDENTITY_EVIDENCE_2026-09-20.json |
 | `reproduction/requirements-core.txt` | author-written (committed 2026-08-14, ffe6c78) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
-| `reproduction/requirements-reproduce.txt` | drafted by Claude Code from the author's specification (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
-| `tests/conftest.py` | drafted by Claude Code from the author's specification (revision) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
+| `reproduction/requirements-reproduce.txt` | author-specified; implemented with Claude Code (revision) | every cited path and hash resolves in this repository; numbers cross-checked by make reproduce |
+| `tests/conftest.py` | author-specified; implemented with Claude Code (revision) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
 | `tests/test_analyze_babilong_around7b_extension.py` | author-written (committed 2026-08-15, 73e78ac) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
 | `tests/test_around7b_checkpoint_audit.py` | author-written (committed 2026-08-15, bc2efb8) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
-| `tests/test_audit_manuscript_consistency.py` | author-written; revision edits drafted by Claude Code (committed 2026-09-20, 69e16a0) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
-| `tests/test_audit_paper_claims.py` | author-written; revision edits drafted by Claude Code (committed 2026-08-15, 98462d9) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
+| `tests/test_audit_manuscript_consistency.py` | author-written; revision edits implemented with Claude Code (committed 2026-09-20, 69e16a0) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
+| `tests/test_audit_paper_claims.py` | author-written; revision edits implemented with Claude Code (committed 2026-08-15, 98462d9) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
 | `tests/test_babilong_around7b_confirmatory.py` | author-written (committed 2026-08-15, 65e1491) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
 | `tests/test_babilong_around7b_design.py` | author-written (committed 2026-08-15, 860e9f1) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
-| `tests/test_babilong_canonical_coscale_16k_confirmation.py` | author-written; revision edits drafted by Claude Code (committed 2026-08-15, 4fd25e9) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
+| `tests/test_babilong_canonical_coscale_16k_confirmation.py` | author-written; revision edits implemented with Claude Code (committed 2026-08-15, 4fd25e9) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
 | `tests/test_babilong_canonical_coscale_analysis.py` | author-written (committed 2026-08-15, 4fd25e9) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
 | `tests/test_babilong_canonical_coscale_development.py` | author-written (committed 2026-08-15, e5a9ac9) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
 | `tests/test_babilong_canonical_event_diagnostic.py` | author-written (committed 2026-08-15, 4c71d56) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
-| `tests/test_babilong_canonical_semantic_holdout_config.py` | author-written; revision edits drafted by Claude Code (committed 2026-08-15, b7480e6) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
+| `tests/test_babilong_canonical_semantic_holdout_config.py` | author-written; revision edits implemented with Claude Code (committed 2026-08-15, b7480e6) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
 | `tests/test_babilong_certified_controls.py` | author-written (committed 2026-08-14, ab4222a) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
 | `tests/test_babilong_certified_factorial.py` | author-written (committed 2026-08-14, ab4222a) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
 | `tests/test_babilong_certified_factorial_analysis.py` | author-written (committed 2026-08-14, c4f7f30) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
@@ -2762,13 +2762,13 @@ Files: 2775 (2761 rows; each figure is one row across its formats). author-writt
 | `tests/test_model_provenance.py` | author-written (committed 2026-08-13, f9587c0) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
 | `tests/test_natural_repeat.py` | author-written (committed 2026-08-13, 9a9aa5d) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
 | `tests/test_noisy_composition_factorial.py` | author-written (committed 2026-08-15, c0e2114) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
-| `tests/test_overwrite_address_value.py` | author-written; revision edits drafted by Claude Code (committed 2026-08-14, 1bd917e) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
-| `tests/test_overwrite_affine_binding.py` | author-written; revision edits drafted by Claude Code (committed 2026-08-14, 61b8f94) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
+| `tests/test_overwrite_address_value.py` | author-written; revision edits implemented with Claude Code (committed 2026-08-14, 1bd917e) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
+| `tests/test_overwrite_affine_binding.py` | author-written; revision edits implemented with Claude Code (committed 2026-08-14, 61b8f94) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
 | `tests/test_probe_state_accounting.py` | author-written (committed 2026-08-14, ec4694d) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
-| `tests/test_qwen2_replay.py` | author-written; revision edits drafted by Claude Code (committed 2026-08-14, 2afeaec) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
+| `tests/test_qwen2_replay.py` | author-written; revision edits implemented with Claude Code (committed 2026-08-14, 2afeaec) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
 | `tests/test_render_cross_task_table.py` | author-written (committed 2026-09-20, 69e16a0) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
 | `tests/test_render_paper_additional_tables.py` | author-written (committed 2026-08-15, 98462d9) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
-| `tests/test_render_theory_evidence_map.py` | author-written; revision edits drafted by Claude Code (committed 2026-09-20, 69e16a0) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
+| `tests/test_render_theory_evidence_map.py` | author-written; revision edits implemented with Claude Code (committed 2026-09-20, 69e16a0) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
 | `tests/test_ruler_aggregation_memory.py` | author-written (committed 2026-08-14, a386ec0) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
 | `tests/test_ruler_foundation_headroom.py` | author-written (committed 2026-08-14, 9ae7f6e) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
 | `tests/test_ruler_full_context_data_audit.py` | author-written (committed 2026-08-14, b940362) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
@@ -2782,5 +2782,5 @@ Files: 2775 (2761 rows; each figure is one row across its formats). author-writt
 | `tests/test_scale_curve_analysis.py` | author-written (committed 2026-08-13, b11cd36) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
 | `tests/test_state_accounting.py` | author-written (committed 2026-08-14, ec4694d) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
 | `tests/test_static_replay_control.py` | author-written (committed 2026-08-14, 2ae9b3e) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
-| `tests/test_target_blindness.py` | drafted by Claude Code from the author's specification (revision) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
+| `tests/test_target_blindness.py` | author-specified; implemented with Claude Code (revision) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
 | `tests/test_verify_babilong_cross_node_replication.py` | author-written (committed 2026-08-15, cc1b118) | executed (reports/FRESH_CLONE_REPRODUCTION_TRANSCRIPT.txt) |
