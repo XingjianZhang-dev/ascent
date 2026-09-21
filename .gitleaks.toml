@@ -1,0 +1,21 @@
+# gitleaks configuration for the ASCENT release tree.
+# The default rules flag 64-character SHA-256 digests and 40-character git/Hugging Face
+# commit hashes stored in JSON fields whose names contain "key" or "revision"
+# (e.g. "target_key_sha256", "niah_multikey_1", "tokenizer_revision"). These are content
+# hashes of data files and pinned model revisions, not credentials. Only those field
+# names are allowlisted; every other rule runs unchanged. The unfiltered scan is kept as
+# reports/GITLEAKS_RELEASE_TREE_UNFILTERED.json for inspection.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "SHA-256 digests and pinned commit hashes in provenance fields"
+regexTarget = "line"
+paths = [
+  '''reports/GITLEAKS_.*\.json''',
+]
+regexes = [
+  '''[a-z0-9_]*key[a-z0-9_]*(_sha256)?"\s*:\s*"[0-9a-f]{64}"''',
+  '''niah_multikey_[0-9]+"\s*:\s*"[0-9a-f]{64}"''',
+  '''[a-z_]*revision"\s*:\s*"[0-9a-f]{40}"''',
+]
