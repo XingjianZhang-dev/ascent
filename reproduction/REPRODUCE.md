@@ -5,6 +5,7 @@ Three levels, in increasing cost. Level 1 needs no GPU and no downloads.
 ## Level 1 — every reported number from the released records (CPU, seconds)
 
 ```sh
+# Python 3.10 or newer (exact NumPy/SciPy pins on 3.12+)
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r reproduction/requirements-reproduce.txt      # numpy, scipy
 make reproduce                                               # prints every number; non-zero exit on mismatch

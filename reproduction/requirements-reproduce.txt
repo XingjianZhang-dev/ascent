@@ -1,3 +1,9 @@
-numpy==2.3.2
-scipy==1.18.0
+# Exact versions used for the byte-identical table regeneration (Python 3.12+).
+numpy==2.3.2; python_version >= "3.12"
+scipy==1.18.0; python_version >= "3.12"
+# Python 3.10-3.11: the exact pins above are not published for these interpreters;
+# the latest compatible releases reproduce the same tables and analyses (make reproduce
+# compares floats to 1e-9 for the SciPy Student-t critical value and tables byte for byte).
+numpy>=1.26,<3; python_version < "3.12"
+scipy>=1.11,<2; python_version < "3.12"
 pytest==8.4.2

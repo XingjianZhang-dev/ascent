@@ -15,6 +15,8 @@ reader-by-state interaction.
 
 ## Quick verification (CPU, ~10 seconds, no model weights)
 
+Requires Python 3.10 or newer. The exact NumPy/SciPy pins apply on Python 3.12+; on 3.10–3.11 the requirements file selects the latest compatible releases, and the same checks pass (tested on 3.10–3.13 on Linux and on 3.12 on macOS).
+
 ```sh
 git clone https://github.com/XingjianZhang-dev/ascent.git && cd ascent
 python3 -m venv .venv && source .venv/bin/activate

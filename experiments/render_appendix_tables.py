@@ -98,7 +98,8 @@ def smollm2_factorials(out_dir: Path | None = None) -> str:
         for key, label in readers:
             cells = [a["cells"][key][str(k)]["absolute_gain"] for k in slots]
             diag = {("135M", slots[0]), ("360M", slots[1]), ("1.7B", slots[2])}
-            row = " & ".join(f"{ci(c, 4)}{'$\\star$' if (label, k) in diag else ''}" for c, k in zip(cells, slots))
+            star = "$\\star$"
+            row = " & ".join(ci(c, 4) + (star if (label, k) in diag else "") for c, k in zip(cells, slots))
             lines.append(f"{study if first else ''} & {label} & {row} \\\\")
             first = False
         lines.append(r"\midrule")
@@ -152,7 +153,8 @@ def model_revisions() -> str:
     for (repo, rev), (n, b) in sorted(revs.items()):
         shards = str(n) if n else "--"
         size = f"{b:,}" if b else "--"
-        lines.append(f"\\texttt{{{repo.replace('_', r'\_')}}} & \\texttt{{{rev[:12]}}} & {shards} & {size} \\\\")
+        repo_tex = repo.replace("_", r"\_")
+        lines.append(f"\\texttt{{{repo_tex}}} & \\texttt{{{rev[:12]}}} & {shards} & {size} \\\\")
     lines += [r"\bottomrule", r"\end{tabular}"]
     return "\n".join(lines) + "\n"
 
