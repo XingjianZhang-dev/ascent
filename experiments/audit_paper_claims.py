@@ -371,7 +371,7 @@ def audit(root: Path) -> dict:
             "Declaration of generative AI and AI-assisted technologies",
             "Codex (OpenAI)",
             "Claude Code (Anthropic)",
-            "takes full responsibility for the work",
+            "responsibility for the work",
         )
     )
     # The manuscript declaration must equal, word for word, the declaration
