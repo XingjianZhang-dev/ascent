@@ -182,7 +182,7 @@ def main() -> None:
         if (DEV / "docs" / name).is_file():
             shutil.copy2(DEV / "docs" / name, target / "docs" / name)
     for item in PAPER_COPY:
-        counts[item] = copy_tree(DEV / item, target / item, skip_file=(lambda q: "concepts" in q.parts) if item.endswith("figures") else None)
+        counts[item] = copy_tree(DEV / item, target / item, skip_file=(lambda q: "concepts" in q.parts or q.name.endswith(("_preview.png", "_grayscale.png"))) if item.endswith("figures") else None)
     # the revision changelog is cited by the response letter as paper/CHANGELOG_REVISION1.md
     shutil.copy2(DEV / "paper/CHANGELOG_REVISION1.md", target / "paper/CHANGELOG_REVISION1.md")
     counts["paper/CHANGELOG_REVISION1.md"] = 1
