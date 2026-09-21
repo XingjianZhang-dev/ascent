@@ -2682,3 +2682,24 @@
   `paper/generated/generic_writer_ablation*.tex` are generated from the record
   and compared by `make reproduce`). Phase 2D (non-templated benchmark) was
   not attempted and is not mentioned in the manuscript.
+
+## 2026-09-20 — Array revision 1: rounding convention made uniform
+
+- The manuscript rounds every reported statistic half up on its exact decimal
+  value (`render_paper_additional_tables.decimal`). `reproduce_all_tables.py`,
+  `render_appendix_tables.py`, `plot_manuscript_evidence.py`,
+  `analyze_panel_power.py` and the cross-architecture check in
+  `audit_manuscript_consistency.py` used Python `f"{x:.Nf}"`, which rounds the
+  binary double (half to even when the tie is exactly representable). All five
+  now use the half-up rule. Values on a decimal tie whose printed form changed:
+  Granite-3.3-8B gain 137/160 = 0.85625, printed 85.62 by `make reproduce`
+  and in `VERIFICATION.md` §2, now 85.63 as in the manuscript; A100
+  semantic-holdout 3B ten-panel mean 645/8 = 80.625 and its second increment
+  3.625, previously 80.62 and 3.62 in §8, `VERIFICATION.md` §5 and the Phase 2A
+  report, now 80.63 and 3.63 (the ledger entry above keeps the earlier
+  digits); SmolLM2 certified-factorial appendix cells .44375/.69375/.94375/
+  .40625/.65625/.90625, previously .4437/.6937/.9437/.4062/.6562/.9062, now
+  .4438/.6938/.9438/.4063/.6563/.9063; Fig. 2 labels 77.25 and 26.25,
+  previously 77.2 and 26.2, now 77.3 and 26.3. No underlying value changed.
+  Appendix D (`analyze_generic_writer_ablation.py`) was left as generated;
+  its nine tie values are listed in `VERIFICATION.md` §2.

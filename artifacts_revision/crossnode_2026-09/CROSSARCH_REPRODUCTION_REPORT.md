@@ -99,9 +99,9 @@ is compared with the retained Blackwell records in
 | Cells by single-panel shift | 20 unchanged; 23 by 1.25 pts; 11 by 2.50; 3 by 3.75; 3 by 5.00 (four rows of eighty) |
 | Largest single-panel shifts | semantic holdout panel 4, 0.5B (+5.00); official 16K panel 2, 3B (+5.00); official 16K panel 9, 3B (−5.00) |
 | Ten-panel means, official 16K | 10.50/78.88/82.63 → 9.75/78.88/83.25 points |
-| Ten-panel means, semantic holdout | 3.50/77.25/80.75 → 4.50/77.00/80.62 points |
+| Ten-panel means, semantic holdout | 3.50/77.25/80.75 → 4.50/77.00/80.63 points |
 | Largest ten-panel-mean shift | 1.00 point, inside every reported interval half-width (1.66–3.70) |
-| Registered contrasts on the A100 | all pass; second official increment 4.38 pts (p_Holm = 0.0028); semantic 3.62 pts (p_Holm = 0.022) |
+| Registered contrasts on the A100 | all pass; second official increment 4.38 pts (p_Holm = 0.0028); semantic 3.63 pts (p_Holm = 0.022) |
 
 Single panels can move by several rows on a different architecture; the
 reported quantities are ten-panel means and their intervals, and those are

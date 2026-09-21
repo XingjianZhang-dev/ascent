@@ -25,6 +25,7 @@ from __future__ import annotations
 import argparse
 import glob
 import json
+from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -35,8 +36,13 @@ def load(path: str) -> dict:
 
 
 def d(value: float, places: int = 3) -> str:
-    """Manuscript style: leading zero dropped for magnitudes below one."""
-    text = f"{value:.{places}f}"
+    """Manuscript style: round half up on the decimal value, leading zero dropped below one.
+
+    Same rule as ``decimal()`` in render_paper_additional_tables.py. Panel means are exact
+    decimals (e.g. .44375 for a 5-panel mean of 80-row accuracies), so ``f"{value:.4f}"``,
+    which rounds the binary double, would print .4437 where the manuscript convention gives .4438.
+    """
+    text = str(Decimal(f"{value:.12f}").quantize(Decimal(1).scaleb(-places), rounding=ROUND_HALF_UP))
     if text.startswith("0."):
         return text[1:]
     if text.startswith("-0."):

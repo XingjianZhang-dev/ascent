@@ -419,9 +419,10 @@ def audit_revision1_claims(root: Path, failures: list[str]) -> int:
     fourth = load(root / "artifacts/around7b_formal/analysis.json")["qwen_fourth_scale"]["gain_increment"]
     from decimal import ROUND_HALF_UP, Decimal
 
-    def pts(value: float) -> str:
-        # panel means are exact decimals (multiples of 1/800); round the exact value half-up
-        return str(Decimal(repr(round(abs(100 * value), 8))).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP))
+    def pts(value: float, places: int = 2) -> str:
+        # panel means are exact decimals (multiples of 1/800); round the exact value half-up, as the
+        # table renderers and reproduce_all_tables.py do (85.625 -> 85.63, 80.625 -> 80.63, 3.625 -> 3.63)
+        return str(Decimal(repr(round(abs(100 * value), 8))).quantize(Decimal(1).scaleb(-places), rounding=ROUND_HALF_UP))
 
     expected = f"$-{pts(fourth['mean'])}$ points [$-{pts(fourth['ci95_low'])}$, $-{pts(fourth['ci95_high'])}$]"
     expect("main", main, expected)
@@ -456,19 +457,19 @@ def audit_revision1_claims(root: Path, failures: list[str]) -> int:
     changed_a = sum(c["rows_with_changed_score"]["ascent"] for c in full["cells"])
     unchanged_cells = sum(1 for c in full["cells"] if abs(c["gain_shift"]) < 1e-12)
     expect("main", main, f"{changed} of {2 * full['rows_total']:,} scored outputs changed ({changed_f} Foundation,\n{changed_a} \\ascent{{}})")
-    expect("main", main, f"up to {full['max_abs_gain_shift_points']:.2f} accuracy points")
+    expect("main", main, f"up to {pts(full['max_abs_gain_shift_points'] / 100)} accuracy points")
     if unchanged_cells != 20:
         failures.append(f"unchanged-cell count is {unchanged_cells}, manuscript says twenty")
     stats = full["study_statistics"]
     def trio(study: str, key: str) -> str:
-        return "/".join(f"{100 * v:.2f}" for v in stats[study][key].values())
+        return "/".join(pts(v) for v in stats[study][key].values())
     expect("main", main, f"official 16K: {trio('official16k', 'endpoint_gain_reference')} $\\to$ {trio('official16k', 'endpoint_gain_a100')} points")
     expect("main", main, f"semantic holdout: {trio('semantic_holdout', 'endpoint_gain_reference')} $\\to$ {trio('semantic_holdout', 'endpoint_gain_a100')}")
     mean_shift = max(abs(stats[s_]["endpoint_gain_a100"][e] - stats[s_]["endpoint_gain_reference"][e]) for s_ in stats for e in stats[s_]["endpoint_gain_reference"])
-    expect("main", main, f"moved by at most\n{100 * mean_shift:.2f} point")
+    expect("main", main, f"moved by at most\n{pts(mean_shift)} point")
     off2 = stats["official16k"]["adjacent_contrasts_a100"][1]; sem2 = stats["semantic_holdout"]["adjacent_contrasts_a100"][1]
-    expect("main", main, f"second official increment {100 * off2['increment']:.2f} points,\n$p_{{\\mathrm{{Holm}}}}={off2['p_holm']:.4f}$")
-    expect("main", main, f"semantic holdout {100 * sem2['increment']:.2f} points,\n$p_{{\\mathrm{{Holm}}}}={sem2['p_holm']:.3f}$")
+    expect("main", main, f"second official increment {pts(off2['increment'])} points,\n$p_{{\\mathrm{{Holm}}}}={off2['p_holm']:.4f}$")
+    expect("main", main, f"semantic holdout {pts(sem2['increment'])} points,\n$p_{{\\mathrm{{Holm}}}}={sem2['p_holm']:.3f}$")
     if not all(c["passes"] for s_ in stats for c in stats[s_]["adjacent_contrasts_a100"]):
         failures.append("a registered contrast fails on the A100 rerun; manuscript says all pass")
     if cross["all_binary64_identical"] or cross["all_scientific_fields_and_predictions_equal"]:

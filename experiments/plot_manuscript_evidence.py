@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -28,6 +29,15 @@ MUTED = "#66727B"
 POINT = "#8E9AA3"
 GRID = "#DCE3E8"
 PALE_BLUE = "#EAF4FA"
+
+
+def fmt(value: float, places: int) -> str:
+    """Manuscript rounding rule (round half up on the decimal value), as in the table renderers.
+
+    Panel means are exact decimals, so ties occur at the one-decimal figure labels (77.25 -> 77.3,
+    26.25 -> 26.3); ``f"{value:.1f}"`` rounds the binary double half to even and would print 77.2.
+    """
+    return str(Decimal(f"{value:.12f}").quantize(Decimal(1).scaleb(-places), rounding=ROUND_HALF_UP))
 
 
 def parse_args() -> argparse.Namespace:
@@ -108,7 +118,7 @@ def plot_primary(frame: pd.DataFrame, output: Path, helpers: dict) -> None:
                     zorder=4)
         for xx, mean in zip(x, means):
             dy = -14 if mean > 70 else (11 if mean >= 0 else 12)
-            ax.annotate(f"{mean:.1f}", (xx, mean), xytext=(0, dy),
+            ax.annotate(fmt(mean, 1), (xx, mean), xytext=(0, dy),
                         textcoords="offset points", ha="center", va="center",
                         color=color, fontsize=7.2, fontweight="bold",
                         bbox={"boxstyle": "round,pad=0.12", "fc": "white",
@@ -172,7 +182,7 @@ def plot_factorial(frame: pd.DataFrame, intervals: pd.DataFrame,
             markerfacecolor=ORANGE, markeredgecolor=NAVY,
             label="Co-scaled", zorder=5)
     for xx, value in zip(x, diagonal):
-        ax.annotate(f"{value:.2f}", (xx, value), xytext=(0, 8),
+        ax.annotate(fmt(value, 2), (xx, value), xytext=(0, 8),
                     textcoords="offset points", ha="center", fontsize=7.2,
                     fontweight="bold", color=NAVY)
     ax.set_xticks(x, models)
@@ -200,7 +210,7 @@ def plot_factorial(frame: pd.DataFrame, intervals: pd.DataFrame,
         forest.errorbar(mean, yy, xerr=[[mean - low], [high - mean]], fmt=marker,
                         color=color, markerfacecolor="white", markeredgewidth=1.1,
                         markersize=5.2, elinewidth=1.25, capsize=2.3, zorder=3)
-        forest.annotate(f"{mean:.2f}", (high, yy), xytext=(5, 0),
+        forest.annotate(fmt(mean, 2), (high, yy), xytext=(5, 0),
                         textcoords="offset points", va="center", ha="left",
                         fontsize=6.7, color=color, fontweight="bold")
     forest.axvline(0, color=INK, linewidth=0.8, linestyle=(0, (3, 2)))
@@ -231,7 +241,7 @@ def plot_breadth(frame: pd.DataFrame, output: Path, helpers: dict) -> None:
         ax.errorbar(mean, yy, xerr=[[mean - low], [high - mean]], fmt=marker,
                     color=color, markerfacecolor="white", markeredgewidth=1.2,
                     markersize=5.8, elinewidth=1.4, capsize=2.6, zorder=4)
-        ax.annotate(f"{mean:.1f}  [{low:.1f}, {high:.1f}]", (high, yy),
+        ax.annotate(f"{fmt(mean, 1)}  [{fmt(low, 1)}, {fmt(high, 1)}]", (high, yy),
                     xytext=(6, 0), textcoords="offset points", ha="left",
                     va="center", fontsize=7.0, color=color, fontweight="bold")
     ax.axvline(0, color=INK, linewidth=0.8, linestyle=(0, (3, 2)))

@@ -288,10 +288,10 @@ bit-identically. Across all sixty official-16K and semantic-holdout cells
 21 \ascent{}); twenty cells were unchanged, and single 80-row panels moved by
 up to 5.00 accuracy points (four rows). The ten-panel means moved by at most
 1.00 point (official 16K: 10.50/78.88/82.63 $\to$ 9.75/78.88/83.25 points;
-semantic holdout: 3.50/77.25/80.75 $\to$ 4.50/77.00/80.62), inside every
+semantic holdout: 3.50/77.25/80.75 $\to$ 4.50/77.00/80.63), inside every
 reported interval half-width (1.66--3.70 points), and every registered
 directional contrast still passes (second official increment 4.38 points,
-$p_{\mathrm{Holm}}=0.0028$; semantic holdout 3.62 points,
+$p_{\mathrm{Holm}}=0.0028$; semantic holdout 3.63 points,
 $p_{\mathrm{Holm}}=0.022$). On factorial panels 2 and 3, one to two of 256
 argmax candidates per arm flipped and the panel NLL gains moved by
 approximately 0.01 nats against a reported half-width of 0.16 nats. Stored

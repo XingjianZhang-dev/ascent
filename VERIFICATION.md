@@ -46,7 +46,7 @@ The transcript of this command from a fresh clone is
 | Official 16K accuracy curve 10.50 → 78.88 → 82.63 pts; increments 68.38 (p_Holm = 3.43e-11) and 3.75 (p_Holm = 0.0255); Table 2 intervals | `artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/analysis.json` | `…/canonical/{0p5b,1p5b,3b}/canonical_16k_confirmation_panel_{1..10}.json` (+ `raw/3b/` control); manifest `…/SHA256SUMS.txt` (41 files) | `analyze_babilong_canonical_coscale_16k_confirmation` |
 | Semantic holdout 3.50 → 77.25 → 80.75 pts; increments 73.75 (1.65e-13) and 3.50 (0.02897) | `artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/analysis.json` | `…/{0p5b,1p5b,3b}/canonical_train_8k_semantic_panel_{1..10}.json`; manifest `…/SHA256SUMS` (31 files) | `analyze_babilong_canonical_semantic_holdout` |
 | Factorial gains .388 → 2.099 → 7.406 nats; increments 1.711 [1.540, 1.882], 5.307 [5.053, 5.561]; interactions .781 [.539, 1.023], .968 [.671, 1.264]; 13,824 row checks | `artifacts/sum_numeric_candidate/confirmation_analysis.json` | `artifacts/sum_numeric_candidate/confirmation/{node1,node2}/rounds_{2,3,5}_sum_numeric_candidate_panel_{2..10}_<endpoint>.json` (81 files) | `analyze_noisy_composition_candidate --phase confirmation` |
-| Around-7B gains: Qwen2.5-7B 66.75, Mistral-7B 80.75, Falcon3-7B 80.88, Granite-3.3-8B 85.62, Qwen3-8B 72.00 [67.7, 76.3]; 3B→7B increment −15.88 [−20.55, −11.20] | `artifacts/around7b_formal/analysis.json` | `artifacts/around7b_formal/<model>/canonical_slots_4/…` (70 files) plus the frozen 3B root `artifacts/frozen_qwen2p5_3b_16k/`; manifests `artifacts/around7b_formal/*.sha256` | `analyze_babilong_around7b_extension` |
+| Around-7B gains: Qwen2.5-7B 66.75, Mistral-7B 80.75, Falcon3-7B 80.88, Granite-3.3-8B 85.63, Qwen3-8B 72.00 [67.7, 76.3]; 3B→7B increment −15.88 [−20.55, −11.20] | `artifacts/around7b_formal/analysis.json` | `artifacts/around7b_formal/<model>/canonical_slots_4/…` (70 files) plus the frozen 3B root `artifacts/frozen_qwen2p5_3b_16k/`; manifests `artifacts/around7b_formal/*.sha256` | `analyze_babilong_around7b_extension` |
 | Systems / FLOPs table | `artifacts/remote_results/babilong_4k_systems/analysis.json`, `artifacts/remote_results/flops_e49eae9/analysis.json` | `…/babilong_4k_systems_ef2322d.tar.gz`, `…/flops_e49eae9/` | `render_paper_additional_tables` |
 | Cross-task (RULER) table | `artifacts/remote_results/{cwe_confirm_c749f24,qwen_cwe_confirm_cd8352f}/analysis.json`; NIAH archives | archives named in `paper/README.md` | `render_cross_task_table` |
 | Power / MDE appendix; statistical-consistency table | `reports/PANEL_POWER_ANALYSIS.json` | `paper/data/evidence/{primary_panel,factorial_panel,interaction_intervals}.csv` | `analyze_panel_power.py` |
@@ -55,6 +55,23 @@ The transcript of this command from a fresh clone is
 | Cross-architecture sensitivity (this revision) | `artifacts_revision/crossnode_2026-09/CROSSARCH_COMPARISON.json` | `artifacts_revision/crossnode_2026-09/{factorial,official16k}/` | `compare_crossarch_reproduction.py` |
 | Per-row target-blindness records (this revision) | `artifacts_revision/target_blindness_2026-09/TARGET_BLINDNESS_AUDIT.json` | `artifacts_revision/target_blindness_2026-09/{official16k,semantic_holdout}/` | see §6 |
 | Schema-blind writer ablation (this revision, Appendix D) | `artifacts_revision/schema_blind_2026-09/GENERIC_WRITER_ABLATION.json` | `artifacts_revision/schema_blind_2026-09/<condition>/` | `analyze_generic_writer_ablation.py` |
+
+**Rounding convention.** Every reported number is the exact decimal value of
+the panel statistic rounded half up at the printed precision
+(`Decimal(...).quantize(..., ROUND_HALF_UP)` in `render_paper_additional_tables.py`,
+`render_appendix_tables.py`, `analyze_panel_power.py`, `plot_manuscript_evidence.py`
+and `reproduce_all_tables.py`). Ten-panel means of 80-row accuracies are multiples
+of 1/800, so exact ties occur: the Granite-3.3-8B gain is 137/160 = 0.85625 and
+is reported as 85.63; the A100 semantic-holdout 3B mean 645/8 = 80.625 as 80.63;
+its second increment 3.625 as 3.63. Python's `f"{x:.2f}"` rounds the binary
+double half to even and prints 85.62 for the same value; it is not used for any
+reported number, with one exception: the schema-blind ablation table and
+paragraph of Appendix D (`analyze_generic_writer_ablation.py`) print with
+`f"{x:.2f}"`, and nine of their values are ties (0.125, 1.125, 5.625, 16.125,
+18.625, −11.375, −11.625, 88.625, 96.375 points), which appear there as 0.12,
+1.12, 5.62, 16.12, 18.62, −11.37, −11.62, 88.62, 96.37. Under the half-up rule
+each would end in 3 or 8; the exact values are in
+`GENERIC_WRITER_ABLATION.json`.
 
 ## 3. The 13,824 row checks are a design property, not an empirical finding
 
@@ -130,11 +147,11 @@ two pre-registered factorial cells (Phase 2A):
 - **Single 80-row panels moved by up to 5.00 points** (four rows of eighty).
 - **Ten-panel means moved by at most 1.00 point** (official 16K
   10.50/78.88/82.63 → 9.75/78.88/83.25; semantic holdout 3.50/77.25/80.75 →
-  4.50/77.00/80.62), inside every reported interval half-width (1.66–3.70
+  4.50/77.00/80.63), inside every reported interval half-width (1.66–3.70
   points).
 - **Every registered directional contrast still passes on the A100**
   (second official increment 4.38 points, p_Holm = 0.0028; semantic holdout
-  3.62 points, p_Holm = 0.022).
+  3.63 points, p_Holm = 0.022).
 - On the two factorial cells, 1–2 of 256 argmax candidates per arm flipped
   and the panel NLL gains moved by 0.008 and 0.011 nats against a reported
   half-width of 0.160 nats.

@@ -30,6 +30,7 @@ import argparse
 import csv
 import hashlib
 import json
+from decimal import ROUND_HALF_UP, Decimal
 import math
 from collections import defaultdict
 from pathlib import Path
@@ -225,13 +226,18 @@ def analyze_factorial(cells: dict[tuple[str, int], list[float]], reported: dict[
     }
 
 
+def fmt(value: float, places: int) -> str:
+    """Manuscript rounding rule: round half up on the decimal value (same as the table renderers)."""
+    return str(Decimal(f"{value:.12f}").quantize(Decimal(1).scaleb(-places), rounding=ROUND_HALF_UP))
+
+
 def latex_escape(text: str) -> str:
     return text.replace("%", "\\%").replace("&", "\\&").replace("_", "\\_").replace(" -> ", " $\\to$ ")
 
 
 def sci(p: float) -> str:
     if p >= 1e-3:
-        return f"{p:.4f}"
+        return fmt(p, 4)
     mantissa, exponent = f"{p:.2e}".split("e")
     return f"${mantissa}\\times10^{{{int(exponent)}}}$"
 
@@ -247,14 +253,14 @@ def render_power_table(primary: list[dict[str, Any]], factorial: dict[str, Any])
     for study in primary:
         for c in study["adjacent_increments"]:
             lines.append(
-                f"{latex_escape(study['study'])} & {latex_escape(c['contrast'])} & {c['mean_points']:.2f} pts & {c['se_points']:.2f} & "
-                f"{c['t']:.2f} & {sci(c['one_sided_p_raw'])} & {c['mde_points_at_alpha_smallest_power_target']:.2f} pts & {c['achieved_power_at_alpha_smallest']:.2f} \\\\"
+                f"{latex_escape(study['study'])} & {latex_escape(c['contrast'])} & {fmt(c['mean_points'], 2)} pts & {fmt(c['se_points'], 2)} & "
+                f"{fmt(c['t'], 2)} & {sci(c['one_sided_p_raw'])} & {fmt(c['mde_points_at_alpha_smallest_power_target'], 2)} pts & {fmt(c['achieved_power_at_alpha_smallest'], 2)} \\\\"
             )
     lines.append("\\midrule")
     for e in factorial["estimands"]:
         lines.append(
-            f"Factorial & {latex_escape(e['estimand'])} & {e['mean']:.3f} nats & {e['se']:.3f} & {e['t']:.2f} & {sci(e['one_sided_p_raw'])} & "
-            f"{e['mde_nats_at_bonferroni_power_target']:.3f} nats & {e['achieved_power_at_bonferroni']:.2f} \\\\"
+            f"Factorial & {latex_escape(e['estimand'])} & {fmt(e['mean'], 3)} nats & {fmt(e['se'], 3)} & {fmt(e['t'], 2)} & {sci(e['one_sided_p_raw'])} & "
+            f"{fmt(e['mde_nats_at_bonferroni_power_target'], 3)} nats & {fmt(e['achieved_power_at_bonferroni'], 2)} \\\\"
         )
     lines += ["\\bottomrule", "\\end{tabular}"]
     return "\n".join(lines) + "\n"
@@ -271,17 +277,17 @@ def render_consistency_table(primary: list[dict[str, Any]], factorial: dict[str,
     ]
     for c in official["adjacent_increments"]:
         lines.append(
-            f"Official 16K {latex_escape(c['contrast'])} increment & {c['mean_points']:.2f} pts, $p_{{\\mathrm{{Holm}}}}$={sci(c['one_sided_p_holm'])} & "
-            f"{c['se_points']:.2f} pts & {c['t']:.2f} & {c['df']} \\\\"
+            f"Official 16K {latex_escape(c['contrast'])} increment & {fmt(c['mean_points'], 2)} pts, $p_{{\\mathrm{{Holm}}}}$={sci(c['one_sided_p_holm'])} & "
+            f"{fmt(c['se_points'], 2)} pts & {fmt(c['t'], 2)} & {c['df']} \\\\"
         )
     for scale, e in official["endpoints"].items():
         lines.append(
-            f"Official 16K {scale} endpoint gain & {e['mean']:.4f} [{e['ci95_low']:.4f}, {e['ci95_high']:.4f}] & {e['se']:.4f} & {e['t']:.2f} & {e['df']} \\\\"
+            f"Official 16K {scale} endpoint gain & {fmt(e['mean'], 4)} [{fmt(e['ci95_low'], 4)}, {fmt(e['ci95_high'], 4)}] & {fmt(e['se'], 4)} & {fmt(e['t'], 2)} & {e['df']} \\\\"
         )
     for name in ("Diagonal: 1.5B to 3B", "Interaction: 1.5B to 3B", "Diagonal: 3B to 7B", "Interaction: 3B to 7B"):
         e = next(x for x in factorial["estimands"] if x["estimand"] == name)
         lines.append(
-            f"Factorial {latex_escape(name)} & {e['mean']:.3f} [{e['bonferroni_ci_low']:.3f}, {e['bonferroni_ci_high']:.3f}] (Bonf.) & {e['se']:.3f} & {e['t']:.2f} & {e['df']} \\\\"
+            f"Factorial {latex_escape(name)} & {fmt(e['mean'], 3)} [{fmt(e['bonferroni_ci_low'], 3)}, {fmt(e['bonferroni_ci_high'], 3)}] (Bonf.) & {fmt(e['se'], 3)} & {fmt(e['t'], 2)} & {e['df']} \\\\"
         )
     lines += ["\\bottomrule", "\\end{tabular}"]
     return "\n".join(lines) + "\n"
@@ -332,10 +338,10 @@ def main() -> None:
         "sanity": sanity,
         "headline": (
             "The official-16K design is well powered for the first adjacent increment and underpowered for the second: "
-            f"at the registered one-sided level {official['family']['smallest_step_alpha']:.3f} with 80% power the minimum detectable increment is "
-            f"{second['mde_points_at_alpha_smallest_power_target']:.2f} points (using the second contrast's SE), so the observed "
-            f"{second['mean_points']:.2f}-point 1.5B->3B increment was detected at {second['achieved_power_at_alpha_smallest']:.2f} power "
-            f"and is significant but marginal (p_Holm = {second['one_sided_p_holm']:.4f})."
+            f"at the registered one-sided level {fmt(official['family']['smallest_step_alpha'], 3)} with 80% power the minimum detectable increment is "
+            f"{fmt(second['mde_points_at_alpha_smallest_power_target'], 2)} points (using the second contrast's SE), so the observed "
+            f"{fmt(second['mean_points'], 2)}-point 1.5B->3B increment was detected at {fmt(second['achieved_power_at_alpha_smallest'], 2)} power "
+            f"and is significant but marginal (p_Holm = {fmt(second['one_sided_p_holm'], 4)})."
         ),
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)

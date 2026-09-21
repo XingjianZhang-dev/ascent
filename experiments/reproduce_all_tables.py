@@ -22,11 +22,26 @@ import json
 import subprocess
 import sys
 import tempfile
+from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 PY = sys.executable
+
+
+
+def fmt(value: float, places: int) -> str:
+    """Manuscript rounding rule: round half up on the decimal value.
+
+    Identical to ``decimal()`` in ``render_paper_additional_tables.py`` and ``d()`` in
+    ``render_appendix_tables.py``. Panel means are exact decimals (multiples of 1/800 for
+    ten 80-row panels), so ties such as 85.625 occur; Python's ``f"{x:.2f}"`` rounds the
+    binary double (85.625 is exactly representable and rounds half to even → 85.62), whereas
+    the manuscript reports 85.63. Every printed number below therefore uses this helper.
+    """
+    return str(Decimal(f"{value:.12f}").quantize(Decimal(1).scaleb(-places), rounding=ROUND_HALF_UP))
+
 
 OFFICIAL = "artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9"
 SEMANTIC = "artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6"
@@ -239,15 +254,15 @@ def main() -> int:
             a = recomputed[key]
             for ep, res in a["endpoint_results"].items():
                 g = res["primary"]["gain"]
-                print(f"  {study} {ep}: gain {100*g['mean']:.2f} pts [{g['ci95_low']:.4f}, {g['ci95_high']:.4f}]")
+                print(f"  {study} {ep}: gain {fmt(100*g['mean'], 2)} pts [{fmt(g['ci95_low'], 4)}, {fmt(g['ci95_high'], 4)}]")
             for c in a["adjacent_scale_contrasts"]:
                 print(f"  {study} adjacent increment {c.get('lower_endpoint', '')}->{c.get('upper_endpoint', '')}: "
-                      f"{100*c['gain_increment']['mean']:.2f} pts, p_Holm = {c['one_sided_p_holm']:.4g}")
+                      f"{fmt(100*c['gain_increment']['mean'], 2)} pts, p_Holm = {c['one_sided_p_holm']:.4g}")
         f = recomputed["factorial"]
         for name, e in f["estimands"].items():
             b = f["supplementary_bonferroni_familywise_estimands"].get(name, {})
-            print(f"  Factorial {name}: {e['mean']:.3f} nats [{e['ci95_low']:.3f}, {e['ci95_high']:.3f}]"
-                  + (f"; Bonferroni [{b['ci95_low']:.3f}, {b['ci95_high']:.3f}]" if b else ""))
+            print(f"  Factorial {name}: {fmt(e['mean'], 3)} nats [{fmt(e['ci95_low'], 3)}, {fmt(e['ci95_high'], 3)}]"
+                  + (f"; Bonferroni [{fmt(b['ci95_low'], 3)}, {fmt(b['ci95_high'], 3)}]" if b else ""))
         prov = f["provenance"]
         row_checks = sum(v for c in prov["nonredundant_rows_by_endpoint_and_transition"].values() for v in c.values())
         # The retained record's key ``exact_posterior_strictly_improves_every_transition_every_panel`` asserts that
@@ -266,7 +281,7 @@ def main() -> int:
         for ep, res in a7.get("endpoint_results", {}).items():
             g = res["primary"]["gain"] if "primary" in res else res.get("gain", {})
             if g:
-                print(f"  Around-7B {ep}: gain {100*g['mean']:.2f} pts [{100*g['ci95_low']:.1f}, {100*g['ci95_high']:.1f}]")
+                print(f"  Around-7B {ep}: gain {fmt(100*g['mean'], 2)} pts [{fmt(100*g['ci95_low'], 1)}, {fmt(100*g['ci95_high'], 1)}]")
 
     print("== Result ==")
     if failures:
