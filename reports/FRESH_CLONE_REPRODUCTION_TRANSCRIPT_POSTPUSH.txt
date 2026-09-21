@@ -1,5 +1,5 @@
-# Fresh-clone reproduction transcript (post-push): git clone https://github.com/XingjianZhang-dev/ascent.git at commit a38cf13c8d9ecedb292e5ffaa8a823adce86b830
-# 2026-09-21T00:44:28Z  host: Darwin 25.5.0 arm64  python: Python 3.12.9
+# Fresh-clone reproduction transcript (post-push): git clone https://github.com/XingjianZhang-dev/ascent.git at commit f7e2d02ebee367c69cdf5cbae26a1ad24d5a6d6c
+# 2026-09-21T01:19:52Z  host: Darwin 25.5.0 arm64  python: Python 3.12.9
 $ python3 -m venv .venv && source .venv/bin/activate && pip install -r reproduction/requirements-reproduce.txt
 
 numpy==2.3.2
@@ -61,11 +61,14 @@ python3 experiments/reproduce_all_tables.py
   Around-7B qwen2p5-7b-instruct: gain 66.75 pts [62.9, 70.6]
   Around-7B mistral-7b-instruct-v0p3: gain 80.75 pts [77.3, 84.2]
   Around-7B falcon3-7b-instruct: gain 80.88 pts [77.3, 84.4]
-  Around-7B granite-3p3-8b-instruct: gain 85.62 pts [83.1, 88.1]
+  Around-7B granite-3p3-8b-instruct: gain 85.63 pts [83.1, 88.1]
   Around-7B qwen3-8b-nonthinking: gain 72.00 pts [67.7, 76.3]
 == Result ==
-ALL REPORTED NUMBERS REPRODUCED (recomputed outputs in /var/folders/4m/lp403snj48xg_jyprkcy6x_c0000gn/T/ascent_reproduce_xfrvveuy)
-exit=0
+ALL REPORTED NUMBERS REPRODUCED (recomputed outputs in /var/folders/4m/lp403snj48xg_jyprkcy6x_c0000gn/T/ascent_reproduce_qczslsji)
+exit status: 0
 $ make test
-228 passed, 21 skipped, 12 warnings in 1.51s
-exit=0
+SKIPPED [1] tests/conftest.py:52: benchmark row bodies are not redistributed (data/babilong_qwen_qa78_8k_nonredundant/headroom_development.jsonl); rebuild with the construction scripts
+SKIPPED [1] tests/conftest.py:58: optional GPU-stack dependency 'torch' is not installed (reproduction/requirements-core.txt)
+SKIPPED [3] tests/test_target_blindness.py:15: benchmark row bodies are not redistributed; rebuild the panels with experiments/prepare_babilong_panel.py
+228 passed, 21 skipped, 12 warnings in 1.48s
+exit status: 0
