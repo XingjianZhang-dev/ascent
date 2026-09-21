@@ -1,11 +1,40 @@
-# Fresh-clone reproduction transcript (post-push, Linux aarch64 — Apple-silicon host, python:3.11-slim container): git clone https://github.com/XingjianZhang-dev/ascent.git at commit 217e14f8a11a8bda12bc6d4e88f60c565e3c15cf
-# 2026-09-21T05:17:15Z  host: Linux 6.10.14-linuxkit aarch64 (Debian, python:3.11-slim container)  python: Python 3.11.16
-$ python3 -m venv .venv && source .venv/bin/activate && pip install -r reproduction/requirements-reproduce.txt
-
-
-numpy==2.4.6
+# Fresh-clone reproduction transcript (Linux x86_64, AMD EPYC 7513 (Zen 3, no AVX-512), Python 3.12.3 from /venv/py3123, exact pins): run at commit 852ef6e on 2026-09-21, before the column-wise CSV comparison was introduced (the byte-for-byte check passed on this CPU).
+# x86-64 fresh-clone reproduction transcript: git clone https://github.com/XingjianZhang-dev/ascent.git at commit 852ef6ef5a2545198486c94fe0f16447bb7b4e9a
+# 2026-09-21T05:22:31Z
+$ uname -a
+Linux 067dc8350c5b 6.8.0-51-generic #52~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Mon Dec  9 15:00:52 UTC 2 x86_64 x86_64 x86_64 GNU/Linux
+$ lscpu
+Architecture:                         x86_64
+CPU op-mode(s):                       32-bit, 64-bit
+Address sizes:                        48 bits physical, 48 bits virtual
+Byte Order:                           Little Endian
+CPU(s):                               128
+On-line CPU(s) list:                  0-127
+Vendor ID:                            AuthenticAMD
+Model name:                           AMD EPYC 7513 32-Core Processor
+CPU family:                           25
+Model:                                1
+Thread(s) per core:                   2
+Core(s) per socket:                   32
+Socket(s):                            2
+Stepping:                             1
+BogoMIPS:                             5190.21
+Flags:                                fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 invpcid cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local user_shstk clzero irperf xsaveerptr rdpru wbnoinvd amd_ppin brs arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload vgif v_spec_ctrl umip pku ospke vaes vpclmulqdq rdpid overflow_recov succor smca debug_swap
+Virtualization:                       AMD-V
+L1d cache:                            2 MiB (64 instances)
+L1i cache:                            2 MiB (64 instances)
+L2 cache:                             32 MiB (64 instances)
+$ /venv/py3123/bin/python -m venv .venv && source .venv/bin/activate && python --version
+Python 3.12.3
+$ pip install -r reproduction/requirements-reproduce.txt
+$ pip freeze
+iniconfig==2.3.0
+numpy==2.3.2
+packaging==26.3
+pluggy==1.6.0
+Pygments==2.21.0
 pytest==8.4.2
-scipy==1.17.1
+scipy==1.18.0
 $ make reproduce
 python3 experiments/reproduce_all_tables.py
 == 1. SHA-256 manifests of the result trees ==
@@ -36,7 +65,7 @@ python3 experiments/reproduce_all_tables.py
   [ok] paper/generated/model_revisions.tex byte-identical
   [ok] paper/generated/generic_writer_ablation.tex byte-identical
   [ok] paper/generated/generic_writer_ablation_text.tex byte-identical
-  [ok] reports/PANEL_POWER_ANALYSIS.json: max |float diff| = 8.882e-16
+  [ok] reports/PANEL_POWER_ANALYSIS.json: max |float diff| = 0.000e+00
   [ok] reports/row_audits/FACTORIAL_TRANSITION_ROW_AUDIT_13824.csv byte-identical
 == 4. Every reported number, from the recomputed analyses ==
   Official 16K qwen2p5-0p5b-instruct: gain 10.50 pts [0.0680, 0.1420]
@@ -65,11 +94,11 @@ python3 experiments/reproduce_all_tables.py
   Around-7B granite-3p3-8b-instruct: gain 85.63 pts [83.1, 88.1]
   Around-7B qwen3-8b-nonthinking: gain 72.00 pts [67.7, 76.3]
 == Result ==
-ALL REPORTED NUMBERS REPRODUCED (recomputed outputs in /tmp/ascent_reproduce_04w9mavv)
+ALL REPORTED NUMBERS REPRODUCED (recomputed outputs in /tmp/ascent_reproduce_gukhck8p)
 exit status: 0
 $ make test
 SKIPPED [1] tests/conftest.py:52: benchmark row bodies are not redistributed (data/babilong_qwen_qa78_8k_nonredundant/headroom_development.jsonl); rebuild with the construction scripts
 SKIPPED [1] tests/conftest.py:58: optional GPU-stack dependency 'torch' is not installed (reproduction/requirements-core.txt)
 SKIPPED [3] tests/test_target_blindness.py:15: benchmark row bodies are not redistributed; rebuild the panels with experiments/prepare_babilong_panel.py
-228 passed, 21 skipped, 12 warnings in 0.98s
+228 passed, 21 skipped, 12 warnings in 2.10s
 exit status: 0

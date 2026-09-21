@@ -29,8 +29,17 @@ differences are ≈1.7e-12 in confidence-interval endpoints, from the SciPy
 version's Student-t critical value; the ledger records the same effect),
 (3) re-renders all eight generated manuscript tables and compares them byte
 for byte with `paper/generated/`, (4) regenerates the power analysis and the
-13,824-line transition audit and compares them, and (5) prints every reported
-number. It exits non-zero on any mismatch. Expected final line:
+13,824-line transition audit and compares them — the power-analysis JSON as in
+(2); the audit CSV column-wise, with the header, the row count and every
+non-float column (identifiers, retained observations, flags) exact and the
+float columns to an absolute tolerance of 1e-12 — and (5) prints every
+reported number. It exits non-zero on any mismatch. The audit CSV is not
+compared byte for byte because NumPy dispatches different SIMD kernels on
+different CPUs (AVX-512 versus AVX2 or NEON), which moves the last bit of some
+exp/log results: on an AVX-512 Xeon, 351 of the 13,824 rows differ from the
+committed file by at most 2.2e-16 in float columns only, and no reported
+number changes. This is the same point as §4: bit-exactness is a
+matched-hardware property. Expected final line:
 
 ```
 ALL REPORTED NUMBERS REPRODUCED

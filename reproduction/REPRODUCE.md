@@ -15,8 +15,10 @@ make test                                                    # unit tests; GPU-o
 `experiments/reproduce_all_tables.py` re-verifies the SHA-256 manifests,
 recomputes the four authoritative analysis files from the per-row records,
 re-renders every generated manuscript table byte for byte, regenerates the
-power analysis and the 13,824-row transition audit, and prints every reported
-number. `VERIFICATION.md` §2 maps each value to its records and command.
+power analysis and the 13,824-row transition audit (compared column-wise:
+structure and non-float columns exact, float columns to 1e-12, since NumPy's
+SIMD dispatch differs across CPUs), and prints every reported number.
+`VERIFICATION.md` §2 maps each value to its records and command.
 
 ## Level 2 — re-running any experimental cell on a GPU
 

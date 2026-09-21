@@ -9,7 +9,10 @@ that only absorbs the ~1e-12 difference between SciPy versions in the Student-t
 critical value, which the ledger documents), (3) re-renders every generated
 manuscript table and compares it byte for byte with ``paper/generated/``,
 (4) regenerates the power analysis and the 13,824-row transition audit and
-compares them, and (5) prints every reported number at manuscript precision.
+compares them (the audit CSV column-wise: header, row count and every non-float
+column exact, float columns to an absolute tolerance of 1e-12, because NumPy's
+SIMD dispatch differs between CPUs and moves the last bit of some exp/log
+results), and (5) prints every reported number at manuscript precision.
 It exits non-zero on any mismatch. Nothing under ``artifacts/`` is written.
 """
 
@@ -91,6 +94,74 @@ def verify_manifest(manifest: Path, base: Path) -> tuple[int, list[str]]:
         if sha256_file(target) != digest.strip():
             failures.append(f"hash mismatch: {name}")
     return checked, failures
+
+
+CSV_FLOAT_TOLERANCE = 1e-12
+
+
+def _is_float_column(values: list[str]) -> bool:
+    """A column is compared numerically when every non-empty retained value parses as a float
+    and at least one is written with a decimal point, an exponent, or as nan/inf. Integer-like
+    and text columns (ids, counts, flags, retained-observation strings) are compared exactly."""
+    seen_float_form = False
+    for value in values:
+        if value == "":
+            continue
+        try:
+            float(value)
+        except ValueError:
+            return False
+        if any(ch in value for ch in ".eE") or value.strip().lower().lstrip("+-") in {"nan", "inf"}:
+            seen_float_form = True
+    return seen_float_form
+
+
+def compare_csv(retained_path: Path, recomputed_path: Path, tolerance: float = CSV_FLOAT_TOLERANCE) -> tuple[float, list[str]]:
+    """Column-wise comparison of two CSV files.
+
+    Header (names and order) and row count must be identical; every non-float column must be
+    identical as text; float columns must agree to ``tolerance`` (absolute; nan equals nan).
+    Returns (max absolute float difference, problems). Any problem means the files differ.
+    """
+    import csv
+
+    with retained_path.open(newline="") as fh:
+        retained = list(csv.reader(fh))
+    with recomputed_path.open(newline="") as fh:
+        recomputed = list(csv.reader(fh))
+    problems: list[str] = []
+    worst = 0.0
+    if not retained or not recomputed:
+        return worst, ["empty CSV"]
+    if retained[0] != recomputed[0]:
+        return worst, [f"header differs: {retained[0][:8]} vs {recomputed[0][:8]}"]
+    if len(retained) != len(recomputed):
+        return worst, [f"row count differs: {len(retained) - 1} vs {len(recomputed) - 1}"]
+    header = retained[0]
+    float_columns = {j for j in range(len(header)) if _is_float_column([row[j] for row in retained[1:] if j < len(row)])}
+    for i, (a, b) in enumerate(zip(retained[1:], recomputed[1:]), start=1):
+        if len(a) != len(b):
+            problems.append(f"row {i}: field count differs")
+            continue
+        for j, (x, y) in enumerate(zip(a, b)):
+            if j in float_columns:
+                try:
+                    fx, fy = float(x), float(y)
+                except ValueError:
+                    problems.append(f"row {i} column {header[j]}: non-numeric value {y!r}")
+                    continue
+                if fx != fx and fy != fy:  # both nan
+                    continue
+                diff = abs(fx - fy)
+                if not diff <= tolerance:
+                    problems.append(f"row {i} column {header[j]}: {x} vs {y}")
+                worst = max(worst, diff if diff == diff else float("inf"))
+            elif x != y:
+                problems.append(f"row {i} column {header[j]}: {x!r} vs {y!r}")
+        if len(problems) > 50:
+            problems.append("... further differences omitted")
+            break
+    return worst, problems
 
 
 def compare_json(retained: Any, recomputed: Any, path: str = "") -> tuple[float, list[str]]:
@@ -242,11 +313,11 @@ def main() -> int:
         worst, problems = compare_json(json.loads((ROOT / retained_path).read_text()), json.loads((tmp / name).read_text()))
         print(f"  [{'ok' if not problems else 'FAIL'}] {retained_path}: max |float diff| = {worst:.3e}")
         failures += [f"{name}: {p}" for p in problems[:5]]
-    audit_same = sha256_file(tmp / "FACTORIAL_TRANSITION_ROW_AUDIT_13824.csv") == sha256_file(
-        ROOT / "reports/row_audits/FACTORIAL_TRANSITION_ROW_AUDIT_13824.csv")
-    print(f"  [{'ok' if audit_same else 'FAIL'}] reports/row_audits/FACTORIAL_TRANSITION_ROW_AUDIT_13824.csv byte-identical")
-    if not audit_same:
-        failures.append("13,824-row audit CSV differs")
+    worst, problems = compare_csv(ROOT / "reports/row_audits/FACTORIAL_TRANSITION_ROW_AUDIT_13824.csv",
+                                  tmp / "FACTORIAL_TRANSITION_ROW_AUDIT_13824.csv")
+    print(f"  [{'ok' if not problems else 'FAIL'}] reports/row_audits/FACTORIAL_TRANSITION_ROW_AUDIT_13824.csv: "
+          f"header, row count and non-float columns identical; max |float diff| = {worst:.3e} (tolerance {CSV_FLOAT_TOLERANCE:.0e})")
+    failures += [f"13,824-row audit CSV: {p}" for p in problems[:5]]
 
     print("== 4. Every reported number, from the recomputed analyses ==")
     if all(k in recomputed for k in ("official_16k", "semantic_holdout", "factorial", "around7b")):
