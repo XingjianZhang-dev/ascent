@@ -23,8 +23,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PLACEHOLDER = "10.5281/zenodo.<version-id>"
 FILES = [
     "paper/main.tex",
-    "paper/submission/COVER_LETTER_R1.tex",
-    "paper/submission/RESPONSE_TO_REVIEWERS_R1.md",
+    "paper/submission/COVER_LETTER_Revision.tex",
+    "paper/submission/RESPONSE_TO_REVIEWERS_Revision.md",
     "paper/submission/SUBMISSION_METADATA_R1.md",
     "release_docs/README.md",
     "release_docs/VERIFICATION.md",
@@ -52,7 +52,7 @@ def main() -> None:
     print(
         "\nnext:\n"
         "  (cd paper && tectonic --keep-logs --keep-intermediates --outdir build main.tex)\n"
-        "  (cd paper/submission && tectonic --outdir . COVER_LETTER_R1.tex && pandoc RESPONSE_TO_REVIEWERS_R1.md -o RESPONSE_TO_REVIEWERS_R1.pdf --pdf-engine=tectonic)\n"
+        "  (cd paper/submission && tectonic --outdir . COVER_LETTER_Revision.tex && pandoc RESPONSE_TO_REVIEWERS_Revision.md -o RESPONSE_TO_REVIEWERS_Revision.pdf --pdf-engine=tectonic)\n"
         "  .venv/bin/python -m experiments.audit_manuscript_consistency --root . && .venv/bin/python -m experiments.audit_paper_claims --root .\n"
         "  git commit -am 'Record the Zenodo version DOI'\n"
         "  python experiments/build_release_tree.py && python experiments/build_ai_assistance_table.py && python experiments/build_release_tree.py\n"
