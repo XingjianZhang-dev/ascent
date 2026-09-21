@@ -1,0 +1,71 @@
+# Fresh-clone reproduction transcript (pre-push): local clone of release/ascent at commit 22e5f9c14344c6f17d16ad8a61b75b4dff57580f
+# 2026-09-21T00:25:30Z  host: Darwin 25.5.0 arm64  python: Python 3.12.9
+$ python3 -m venv .venv && source .venv/bin/activate && pip install -r reproduction/requirements-reproduce.txt
+
+numpy==2.3.2
+pytest==8.4.2
+scipy==1.18.0
+$ make reproduce
+python3 experiments/reproduce_all_tables.py
+== 1. SHA-256 manifests of the result trees ==
+  [ok] artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/SHA256SUMS.txt: 41 files verified
+  [ok] artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/SHA256SUMS: 31 files verified
+  [ok] artifacts/around7b_formal/node1-completed-canonical.sha256: 20 files verified
+  [ok] artifacts/around7b_formal/node1-raw4.sha256: 10 files verified
+  [ok] artifacts/around7b_formal/node2-completed-falcon-fixed.sha256: 20 files verified
+  [ok] artifacts/around7b_formal/node2-granite.sha256: 10 files verified
+== 2. Recompute the authoritative analysis JSONs from per-row records ==
+  [ok] official_16k: max |float diff| = 1.863e-12 vs artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/analysis.json
+  [ok] semantic_holdout: max |float diff| = 1.698e-12 vs artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/analysis.json
+  [ok] factorial: max |float diff| = 0.000e+00 vs artifacts/sum_numeric_candidate/confirmation_analysis.json
+  [ok] around7b: max |float diff| = 1.718e-12 vs artifacts/around7b_formal/analysis.json
+== 3. Re-render the manuscript tables and compare byte for byte ==
+  [ok] paper/generated/qwen_confirmations.tex byte-identical
+  [ok] paper/generated/scale_interaction_confirmation.tex byte-identical
+  [ok] paper/generated/around7b_results.tex byte-identical
+  [ok] paper/generated/systems_results.tex byte-identical
+  [ok] paper/generated/theory_evidence_map.tex byte-identical
+  [ok] paper/generated/cross_task_confirmations.tex byte-identical
+  [ok] paper/generated/panel_power.tex byte-identical
+  [ok] paper/generated/statistical_consistency.tex byte-identical
+  [ok] paper/generated/factorial_cells.tex byte-identical
+  [ok] paper/generated/babilong_4k_8k_results.tex byte-identical
+  [ok] paper/generated/smollm2_factorials.tex byte-identical
+  [ok] paper/generated/smollm2_factorial_contrasts.tex byte-identical
+  [ok] paper/generated/model_revisions.tex byte-identical
+  [ok] paper/generated/generic_writer_ablation.tex byte-identical
+  [ok] paper/generated/generic_writer_ablation_text.tex byte-identical
+  [ok] reports/PANEL_POWER_ANALYSIS.json: max |float diff| = 0.000e+00
+  [ok] reports/row_audits/FACTORIAL_TRANSITION_ROW_AUDIT_13824.csv byte-identical
+== 4. Every reported number, from the recomputed analyses ==
+  Official 16K qwen2p5-0p5b-instruct: gain 10.50 pts [0.0680, 0.1420]
+  Official 16K qwen2p5-1p5b-instruct: gain 78.88 pts [0.7616, 0.8159]
+  Official 16K qwen2p5-3b-instruct: gain 82.63 pts [0.8097, 0.8428]
+  Official 16K adjacent increment qwen2p5-0p5b-instruct->qwen2p5-1p5b-instruct: 68.38 pts, p_Holm = 3.431e-11
+  Official 16K adjacent increment qwen2p5-1p5b-instruct->qwen2p5-3b-instruct: 3.75 pts, p_Holm = 0.0255
+  Semantic holdout qwen2p5-0p5b-instruct: gain 3.50 pts [0.0065, 0.0635]
+  Semantic holdout qwen2p5-1p5b-instruct: gain 77.25 pts [0.7419, 0.8031]
+  Semantic holdout qwen2p5-3b-instruct: gain 80.75 pts [0.7668, 0.8482]
+  Semantic holdout adjacent increment qwen2p5-0p5b-instruct->qwen2p5-1p5b-instruct: 73.75 pts, p_Holm = 1.652e-13
+  Semantic holdout adjacent increment qwen2p5-1p5b-instruct->qwen2p5-3b-instruct: 3.50 pts, p_Holm = 0.02897
+  Factorial 7b_k5_minus_k3_gain: 1.456 nats [1.210, 1.702]; Bonferroni [1.064, 1.848]
+  Factorial first_diagonal_gain_increment: 1.711 nats [1.604, 1.819]; Bonferroni [1.540, 1.882]
+  Factorial first_model_by_state_interaction: 0.781 nats [0.629, 0.933]; Bonferroni [0.539, 1.023]
+  Factorial gain_qwen2p5-1p5b-instruct_k2: 0.388 nats [0.340, 0.437]; Bonferroni [0.311, 0.465]
+  Factorial gain_qwen2p5-3b-instruct_k3: 2.099 nats [2.004, 2.194]; Bonferroni [1.948, 2.251]
+  Factorial gain_qwen2p5-7b-instruct_k5: 7.406 nats [7.246, 7.566]; Bonferroni [7.151, 7.661]
+  Factorial second_diagonal_gain_increment: 5.307 nats [5.148, 5.466]; Bonferroni [5.053, 5.561]
+  Factorial second_model_by_state_interaction: 0.968 nats [0.782, 1.154]; Bonferroni [0.671, 1.264]
+  Factorial row checks: 13824 (every_transition_changes_every_row=True, exact_posterior_strictly_improves_every_transition_every_panel=True)
+  Around-7B qwen2p5-7b-instruct: gain 66.75 pts [62.9, 70.6]
+  Around-7B mistral-7b-instruct-v0p3: gain 80.75 pts [77.3, 84.2]
+  Around-7B falcon3-7b-instruct: gain 80.88 pts [77.3, 84.4]
+  Around-7B granite-3p3-8b-instruct: gain 85.62 pts [83.1, 88.1]
+  Around-7B qwen3-8b-nonthinking: gain 72.00 pts [67.7, 76.3]
+== Result ==
+ALL REPORTED NUMBERS REPRODUCED (recomputed outputs in /var/folders/4m/lp403snj48xg_jyprkcy6x_c0000gn/T/ascent_reproduce_akuy7d7m)
+exit=0
+$ make test
+SKIPPED [3] tests/test_target_blindness.py:15: benchmark row bodies are not redistributed; rebuild the panels with experiments/prepare_babilong_panel.py
+228 passed, 21 skipped, 12 warnings in 1.47s
+exit=0
