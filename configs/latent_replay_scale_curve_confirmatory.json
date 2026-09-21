@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "experiment": "latent_replay_three_scale_three_seed_confirmation",
+  "status": "preregistered_before_all_scale_curve_seed_access",
+  "registration_note": "The interface was frozen from the independent Stage-B confirmation. No depth, replay-mode, prompt, or strength selection is permitted on these seeds.",
+  "seeds": [20260831, 20260832, 20260833],
+  "num_labels": 16,
+  "crossover_probability": 0.18,
+  "fixed_rounds": 1,
+  "rich_rounds": 4,
+  "relative_injection_depth": 0.25,
+  "replay_mode": "map_full_sequence",
+  "calibration_episodes": 2048,
+  "test_episodes": 8192,
+  "batch_size": 64,
+  "candidate_texts": [" A", " B", " C", " D", " E", " F", " G", " H", " I", " J", " K", " L", " M", " N", " O", " P"],
+  "codebook_template": "A retrieved memory states that the hidden value label is{candidate}",
+  "text_replay_template": "A retrieved memory states that the hidden value label is{candidate}. {query}",
+  "query_template": "Episode query. Key {key}. The hidden value label is",
+  "endpoints": [
+    {
+      "name": "pythia-410m",
+      "repo_id": "EleutherAI/pythia-410m",
+      "revision": "bba6a464f54bbf08fc174cfb351d9794d58af21d",
+      "model_parameters": 405334016
+    },
+    {
+      "name": "pythia-1.4b",
+      "repo_id": "EleutherAI/pythia-1.4b",
+      "revision": "9cc5c8c8148a4e0115d9e29c6b4f21124cfe748a",
+      "model_parameters": 1400000000
+    },
+    {
+      "name": "pythia-2.8b",
+      "repo_id": "EleutherAI/pythia-2.8b",
+      "revision": "dbe7ae300a54abcdc475a33907b3dff81d25709f",
+      "model_parameters": 2800000000
+    }
+  ],
+  "primary_estimand": "seed-clustered OLS slope of rich-signal gain on natural-log model parameters",
+  "primary_pass_rule": "three-seed t_0.975_df2 lower confidence bound strictly greater than zero",
+  "secondary_pass_rules": [
+    "each seed-specific rich-gain slope is positive",
+    "both adjacent foundation-by-signal interactions have three-seed clustered lower bounds greater than zero",
+    "all endpoint cells use identical labels, full noisy signals, and query inputs within each seed",
+    "all runs use one clean identical source commit with no posthoc overrides"
+  ],
+  "projection_seed_note": "No learned or random projection exists in this latent codebook interface; the three registered data-generation seeds are the independent replication clusters.",
+  "promotion_blockers_after_scale_curve": [
+    "clean_exact_kv_capacity_pressure_tasks",
+    "fpvm_v1_external_validity",
+    "overwrite_and_composition",
+    "natural_text_and_long_context"
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_official_ruler_qa2_hotpot_qwen2p5_16k_full_document_factorial_development",
+  "status": "development_full_document_3x3_final_audit_passed_frozen_before_any_seed387803_model_score",
+  "architecture": "query_conditioned_complete_documents_plus_qwen2_latent_replay",
+  "state_serialization": "full_documents",
+  "state_tokenization": "Each document is tokenized independently and followed by the independently tokenized fixed double-newline delimiter before token-id concatenation. This constructively prevents BPE boundary changes when a new document is appended.",
+  "task_name": "qa_2",
+  "data_seed": 387803,
+  "task_sha256": "0fe214ad0c7d2e85fbad5162aeaac2844e4fbb5331ddb8b485d79289a2f510c1",
+  "data_generator_commit": "c3f5e3b4f87f97e048793bb510a3a6b19a46bf3a",
+  "data_generator_file_sha256": "f00c0b59cf8698e90831c2c4f40f2a30f2469534c27455808c717281d0",
+  "source_dataset_sha256": "e3da074df24e8369009918aa5cdbdd254dadcde4c63f7569d36afd6f2268caa8",
+  "samples_per_task": 60,
+  "calibration_samples": 20,
+  "test_samples": 40,
+  "query_context_tokens": 32768,
+  "bm25_seed_documents": 2,
+  "relative_injection_depth": 0.875,
+  "fusion_grid_size": 21,
+  "epsilon": 1e-12,
+  "redesign_rationale": "The frozen 38/69/92 sketch-state panel proved a reliable 3B latent gain but also a generic irrelevant-prefix effect and negative global interaction. This independent redesign does not tune that seed: it uses the proposition's alpha=1 width-linear law and complete retrieved documents so every registered state contains all selected multi-hop evidence before any seed-387803 model score.",
+  "reader_contract": "The reader sees only the official prompt and question, never the answer or support labels. Deterministic BM25 seeds and exact title links produce one nested document order; complete documents are append-only across states.",
+  "dual_path_contract": "The identical charged complete-document state feeds a compact evidence distribution and Qwen2 latent replay at the previously registered relative depth 0.875. A sample-clustered safe simplex includes exact Foundation and opens only for a positive paired 95% calibration LCB.",
+  "memory_states": [
+    {
+      "name": "graph_small",
+      "documents": 2,
+      "replay_tokens": 512
+    },
+    {
+      "name": "graph_mid",
+      "documents": 3,
+      "replay_tokens": 878
+    },
+    {
+      "name": "graph_large",
+      "documents": 4,
+      "replay_tokens": 1170
+    }
+  ],
+  "state_budget_rule": {
+    "formula": "B_s = round_half_up(512 * d_s / 896), alpha=1, giving 512/878/1170",
+    "selection": "B0=512 is a fixed power-of-two complete-state page; after constructive per-document tokenization, the final score-free seed-387803 audit verified that actual two/three/four-document states need at most 449/734/918 Qwen tokens, so no selected graph document is truncated.",
+    "charged_bytes": "actual replay tokens * (2 * hidden_size bfloat16 bytes + 8 int64 token-id bytes)",
+    "maximum_budget_charged_bytes": [921600, 2704240, 4801680],
+    "maximum_budget_bytes_per_parameter": [0.0018654633046526986, 0.0017517749190979835, 0.001555986844026371],
+    "score_free_mean_actual_bytes_per_parameter": [0.0008775936093372656, 0.0007195977458101816, 0.0006540464358052729],
+    "score_free_fixed_small_state_bytes_per_parameter": [0.0008775936093372656, 0.0004805742431815501, 0.0003203293713656569],
+    "relative_cost_gate": "Both maximum-budget and observed actual co-scaled bytes per parameter, plus fixed-small-state bytes per parameter, must strictly decrease."
+  },
+  "score_free_data_audit": {
+    "rows": 60,
+    "document_count_range": [93, 113],
+    "graph_prefix_change_rows_vs_query_only": {
+      "top_2": 0,
+      "top_3": 33,
+      "top_4": 34
+    },
+    "complete_rankings_sha256": "4f92240fc77c675592bbe2d00259dddf81e797da4cb913dac6489a1817641f0d",
+    "full_document_byte_ranges": {
+      "graph_small": [446, 2226],
+      "graph_mid": [587, 2938],
+      "graph_large": [967, 3947]
+    },
+    "full_document_token_ranges": {
+      "graph_small": [134, 449],
+      "graph_mid": [160, 734],
+      "graph_large": [268, 918]
+    },
+    "mean_full_document_tokens": [240.86666666666667, 360.6666666666667, 491.8],
+    "maximum_foundation_prompt_tokens": 15975,
+    "maximum_compact_prompt_tokens_over_all_controls": 1156,
+    "graph_state_token_ids_sha256": {
+      "graph_small": "1aabffdf64079ca735e1cd163c8d746a7547fc9cdc5287550fbf0816ad34260b",
+      "graph_mid": "a8f747eb5d0d3c867d0f997a702957563fa145951e3a686d31927e7b442c1699",
+      "graph_large": "23e3ad30ad3d2309f575e811ac2373ac45dae8e2850e4a79744d85487e3f9319"
+    },
+    "graph_state_hashes_identical_on_all_three_foundation_tokenizers": true,
+    "all_states_complete_exact_prefix_nested_and_native": true
+  },
+  "primary_estimand": "paired per-example Foundation minus effective dual-path ASCENT answer NLL on 40 untouched test rows",
+  "factorial_estimand": "Adjacent and global Foundation-by-state interactions from the complete 3x3 panel, each requiring a positive paired 95% LCB",
+  "controls": {
+    "foundation": "unchanged complete official 16K prompt",
+    "fixed": "complete graph_small state on every Foundation",
+    "memory_only_scaling": "all three complete graph states on every Foundation",
+    "query_only": "co-scale-matched complete BM25 documents without graph expansion",
+    "irrelevant": "co-scale-matched complete bottom-ranked documents",
+    "path_ablations": "certified-only and latent-only NLL saved before fusion"
+  },
+  "development_success_rule": {
+    "co_scaled_gain": "Every diagonal safe gate opens and every endpoint NLL-gain LCB is positive.",
+    "scale_complementarity": "Both adjacent diagonal-gain LCBs and log-parameter slope LCB are positive.",
+    "foundation_state_interaction": "Both adjacent factorial-interaction LCBs and global interaction LCB are positive.",
+    "fixed_control": "Co-scaled beats complete Graph Small at 1.5B and 3B with positive LCBs.",
+    "retrieval_controls": "Graph beats query-only at 3B and irrelevant at every endpoint with positive LCBs.",
+    "dual_path": "A diagonal gate selects certified weight somewhere and latent weight somewhere.",
+    "systems": "All exact hash/commit/clean-tree/native/no-label/shared-state/prefix/cross-Foundation identity and decreasing-relative-state gates pass."
+  },
+  "promotion_rule": "Only development_pass=true authorizes official generation and three new confirmation seeds. Seed 387803 cannot be tuned into confirmation.",
+  "failure_rule": "Any missed gate is retained as failure; later mechanisms require untouched data and may not reuse this panel for selection.",
+  "ceiling_policy": "Continuous answer NLL is primary. Later accuracy will report absolute gain and frozen remaining-error elimination; perfect ASCENT is 100% error elimination, never a demand above 1.0.",
+  "endpoints": [
+    {
+      "name": "qwen2p5-0p5b-instruct",
+      "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "model_parameters": 494032768,
+      "hidden_size": 896,
+      "scale_state": "graph_small",
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 988097824,
+        "sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe"
+      }
+    },
+    {
+      "name": "qwen2p5-1p5b-instruct",
+      "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "model_parameters": 1543714304,
+      "hidden_size": 1536,
+      "scale_state": "graph_mid",
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 3087467144,
+        "sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+      }
+    },
+    {
+      "name": "qwen2p5-3b-instruct",
+      "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+      "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "model_parameters": 3085938688,
+      "hidden_size": 2048,
+      "scale_state": "graph_large",
+      "model_artifacts": [
+        {
+          "path": "model-00001-of-00002.safetensors",
+          "bytes": 3968658944,
+          "sha256": "67347b23fb4165b652eb6611f5e1f2a06dfcddba8e909df1b2b0b1857bee06c2"
+        },
+        {
+          "path": "model-00002-of-00002.safetensors",
+          "bytes": 2203268048,
+          "sha256": "a40d941d0e7e0b966ad8b62bb6d6b7c88cce1299197b599d9d0a4ce59aabfc1d"
+        }
+      ]
+    }
+  ]
+}

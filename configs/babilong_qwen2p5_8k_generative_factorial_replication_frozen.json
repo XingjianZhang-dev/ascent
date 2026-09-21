@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_qwen2p5_8k_generative_factorial_replication",
+  "status": "prospective_qwen_same_task_factorial_before_any_babilong_decoder_score",
+  "seed": 20260814,
+  "architecture": "qwen2",
+  "official_repository": "https://github.com/booydar/babilong",
+  "official_repository_commit": "7a6efee29f5cac03c3c410e6799c80fd2ffe3610",
+  "official_dataset": "RMT-team/babilong-1k-samples",
+  "official_dataset_revision": "fc4d1a584dfc498c37578753bee4cdd91b987ae2",
+  "dataset_config": "8k",
+  "tasks": ["qa1", "qa2", "qa3"],
+  "panels": [
+    "generative_focused_confirmation_panel_1",
+    "generative_focused_confirmation_panel_2",
+    "generative_focused_confirmation_panel_3",
+    "generative_focused_confirmation_panel_4",
+    "generative_focused_confirmation_panel_5",
+    "generative_focused_confirmation_panel_6",
+    "generative_focused_confirmation_panel_7",
+    "generative_focused_confirmation_panel_8",
+    "generative_focused_confirmation_panel_9",
+    "generative_focused_confirmation_panel_10"
+  ],
+  "panel_sha256_by_name": {
+    "generative_focused_confirmation_panel_1": "e5509f805d8e1c8ffc14a3dcc3ef4f02cbd2d2e69549a0179e0d83d8095aebb2",
+    "generative_focused_confirmation_panel_2": "402819c0550ca08518e8830e580b3c1f1cd61831dc73f165ce7c5bb0119df51e",
+    "generative_focused_confirmation_panel_3": "81a4f14636b85cd5f35e7695432df13283115eb2012652ccd0d71da488e0eb20",
+    "generative_focused_confirmation_panel_4": "a882262160fbcb7bf6842d7af080b66c1f350301996c327b00d15f62708fb05d",
+    "generative_focused_confirmation_panel_5": "5f1f0e54777e04cd31772fdce20fd75b1de3c6a30cf997d7eb32561419688b79",
+    "generative_focused_confirmation_panel_6": "a47f58456ec1c893883982034d17be767f9522bba6f0741ed740b816f4739194",
+    "generative_focused_confirmation_panel_7": "6f365cffd1a7297bb51ab33d3dcf7600390cb1f349d53d4ec576f5cf29c22515",
+    "generative_focused_confirmation_panel_8": "a7f518d77e8c8f005099c5c4712bf813c3119805ef704ea57f405952afa5fc93",
+    "generative_focused_confirmation_panel_9": "d65619489fc2e61a97a897c3c5dbab00450e1c00781280e1069b3807b7745de0",
+    "generative_focused_confirmation_panel_10": "4ee68b6aad34c08b2459727ff6cb9e55354fb9c7c8c7a1b20cc5f427921dca10"
+  },
+  "evaluation_samples": 120,
+  "history_slots": 256,
+  "context_tokens": 8192,
+  "max_new_tokens": 8,
+  "allowed_decode_orders": ["foundation_first"],
+  "factorial_design": {
+    "path": "configs/babilong_qwen2p5_8k_generative_factorial_replication_design.json",
+    "sha256": "05feab75b99d5c68cb32fd4c825c4562605d7e4861557e8dcdcca0736f88edaa"
+  },
+  "source_panel_config": {
+    "path": "configs/babilong_smollm2_8k_generative_focused_confirmation_frozen.json",
+    "sha256": "ab8b7eb4f281599b9eb6bb50a42fc97adba4e23afcb7168bcb3d26cbe9cd8b29"
+  },
+  "retrieval_protocol_sha256": "336fc97cdea8527e05c2daff0dec95a54b10f68e46fb452f7bb2c8fb2853ea41",
+  "conditions": {
+    "generative_slots_1": {
+      "memory_source": "relevant",
+      "state_fact_slots_by_endpoint": {
+        "qwen2p5-0p5b-instruct": 1,
+        "qwen2p5-1p5b-instruct": 1,
+        "qwen2p5-3b-instruct": 1
+      }
+    },
+    "generative_slots_2": {
+      "memory_source": "relevant",
+      "state_fact_slots_by_endpoint": {
+        "qwen2p5-0p5b-instruct": 2,
+        "qwen2p5-1p5b-instruct": 2,
+        "qwen2p5-3b-instruct": 2
+      }
+    },
+    "generative_slots_3": {
+      "memory_source": "relevant",
+      "state_fact_slots_by_endpoint": {
+        "qwen2p5-0p5b-instruct": 3,
+        "qwen2p5-1p5b-instruct": 3,
+        "qwen2p5-3b-instruct": 3
+      }
+    }
+  },
+  "endpoints": [
+    {
+      "name": "qwen2p5-0p5b-instruct",
+      "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "model_parameters": 494032768,
+      "hidden_size": 896,
+      "state_fact_slots": 1,
+      "batch_size": 2,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 988097824,
+        "sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe"
+      }
+    },
+    {
+      "name": "qwen2p5-1p5b-instruct",
+      "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "model_parameters": 1543714304,
+      "hidden_size": 1536,
+      "state_fact_slots": 2,
+      "batch_size": 1,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 3087467144,
+        "sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+      }
+    },
+    {
+      "name": "qwen2p5-3b-instruct",
+      "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+      "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "model_parameters": 3085938688,
+      "hidden_size": 2048,
+      "state_fact_slots": 3,
+      "batch_size": 1,
+      "model_artifacts": [
+        {
+          "path": "model-00001-of-00002.safetensors",
+          "bytes": 3968658944,
+          "sha256": "67347b23fb4165b652eb6611f5e1f2a06dfcddba8e909df1b2b0b1857bee06c2"
+        },
+        {
+          "path": "model-00002-of-00002.safetensors",
+          "bytes": 2203268048,
+          "sha256": "a40d941d0e7e0b966ad8b62bb6d6b7c88cce1299197b599d9d0a4ce59aabfc1d"
+        }
+      ]
+    }
+  ],
+  "primary_gate": "All provenance/alignment/Foundation-invariance checks pass and all six registered two-sided 95% lower confidence bounds are strictly positive.",
+  "familywise_gate": "All six Bonferroni simultaneous one-sided 95% familywise lower bounds are strictly positive using frozen t(9)=2.9333240883739897.",
+  "interpretation": "Prospectively frozen same-task Qwen2.5 replication of the complete generative model-by-state factorial. It cannot alter any SmolLM2 result."
+}

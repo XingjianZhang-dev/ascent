@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "experiment": "binding_dependent_ordered_affine_overwrite_development",
+  "status": "frozen_before_any_ordered_affine_overwrite_score",
+  "registration_note": "This is a new task and read contract, not tuning of the failed value-only or separated-address interfaces. Two distinct post-training random keys each have obsolete and current values. The exact certified address decoder binds each queried key to its latest version; the expressive path must compute the noncommutative target 2*v1+v2 from role-specific posterior-mean replay. Stored event order is randomized. Shuffled role binding and unmasked obsolete history are frozen structural ablations. Paired NLL in nats is the sole primary performance metric, so accuracy saturation cannot censor the estimand.",
+  "seed": 20261031,
+  "num_values": 8,
+  "crossover_probability": 0.18,
+  "fixed_rounds": 1,
+  "rich_rounds": 4,
+  "relative_injection_depth": 0.25,
+  "calibration_episodes": 512,
+  "test_episodes": 4096,
+  "batch_size": 32,
+  "value_texts": [" 0", " 1", " 2", " 3", " 4", " 5", " 6", " 7"],
+  "answer_texts": [" 0", " 1", " 2", " 3", " 4", " 5", " 6", " 7", " 8", " 9", " 10", " 11", " 12", " 13", " 14", " 15", " 16", " 17", " 18", " 19", " 20", " 21"],
+  "first_old_codebook_template": "Obsolete value for the first addressed record is{value}.",
+  "first_current_codebook_template": "Current value for the first addressed record is{value}.",
+  "second_old_codebook_template": "Obsolete value for the second addressed record is{value}.",
+  "second_current_codebook_template": "Current value for the second addressed record is{value}.",
+  "query_template": "The first query key is {first_key}. The second query key is {second_key}. Retrieve both latest values. Compute two times the first value plus the second value. The answer is",
+  "address_decoder": "exact_key_match_then_latest_version",
+  "target_function": "2 * first_current + second_current",
+  "endpoints": [
+    {
+      "name": "pythia-410m",
+      "repo_id": "EleutherAI/pythia-410m",
+      "revision": "bba6a464f54bbf08fc174cfb351d9794d58af21d",
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 1621370224,
+        "sha256": "1c88b0bf18293fae0e09c1d978b14b1adb08cb6a83154463133982fe460fcea4"
+      }
+    },
+    {
+      "name": "pythia-2.8b",
+      "repo_id": "EleutherAI/pythia-2.8b",
+      "revision": "dbe7ae300a54abcdc475a33907b3dff81d25709f",
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 5550463728,
+        "sha256": "462f2b960062159c3779eb1cfe5829783ea72da66b020bcbabf86bc6dd33063c"
+      }
+    }
+  ],
+  "primary_estimand": "[(large_rich_gain-large_fixed_gain)-(small_rich_gain-small_fixed_gain)] in paired NLL nats",
+  "success_rule": "All invariants pass; all four ASCENT gain LCBs and both within-endpoint fixed-to-rich expansion LCBs are positive; the primary foundation-by-signal interaction LCB is positive; at both endpoints rich latest-only replay beats rich unmasked history and rich shuffled role binding with positive paired LCBs.",
+  "failure_rule": "Any failed gate ends this frozen task/interface without seed, depth, round, target-function, prompt, or template tuning. Only a full development pass authorizes entirely new untouched confirmation seeds.",
+  "ceiling_policy": "Accuracy is diagnostic only and is not a promotion metric. The continuous paired NLL estimand is preregistered and cannot require accuracy above 1.0.",
+  "interpretation": "A development-only factorial test of whether a larger frozen foundation extracts more marginal value from the same nested ASCENT signal expansion when overwrite retrieval, address-value binding, and noncommutative composition are all necessary."
+}

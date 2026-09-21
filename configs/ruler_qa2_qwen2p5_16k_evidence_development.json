@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_official_ruler_qa2_hotpot_qwen2p5_16k_evidence_development",
+  "status": "development_design_frozen_before_any_ascent_qa_score",
+  "task_name": "qa_2",
+  "task_sha256": "7c46359f17dbddb236ac97a779a51c46bda0074346d70d0b4913cace4e9dfca1",
+  "samples_per_task": 60,
+  "calibration_samples": 20,
+  "test_samples": 40,
+  "query_context_tokens": 32768,
+  "max_new_tokens": 32,
+  "fixed_documents": 1,
+  "bm25_seed_documents": 2,
+  "reader_contract": "The reader receives only the original prompt and final question. It never receives the answer or HotpotQA support labels. It seeds deterministic BM25 retrieval and expands exact document-title links. Evidence is replayed after the unchanged full 16K prompt.",
+  "nested_scale_rule": "The graph-ranked document list is a strict prefix schedule of 2, 3, and 4 documents as model parameters increase. Fixed ASCENT always receives one graph-ranked document.",
+  "primary_estimand": "paired per-example Foundation minus scale-ASCENT teacher-forced answer NLL",
+  "official_secondary_metric": "NVIDIA RULER string_match_part under greedy decoding",
+  "ceiling_aware_secondary_estimand": {
+    "status": "frozen_before_any_ascent_qa_score",
+    "formula": "(ASCENT_accuracy - Foundation_accuracy) / (1 - Foundation_accuracy)",
+    "interpretation": "fraction of Foundation's remaining error eliminated; a perfect ASCENT endpoint equals 1.0 and is not required to exceed the accuracy ceiling",
+    "undefined_case": "If Foundation itself equals 1.0, the task has no measurable accuracy headroom and the endpoint is labeled saturated rather than failed."
+  },
+  "controls": {
+    "fixed": "one graph-ranked document at every model scale",
+    "query_only": "the scale-matched number of deterministic BM25 documents without title-graph expansion",
+    "irrelevant": "the scale-matched number of bottom-ranked documents outside the BM25/title frontier whenever possible"
+  },
+  "safe_gate": "Each evidence path is enabled only if its paired calibration NLL gain has a positive normal-approximation 95% lower confidence bound. A closed gate exactly copies Foundation official predictions while retaining path NLL for diagnosis.",
+  "development_success_rule": {
+    "scale_gain": "The paired scale-ASCENT NLL-gain 95% LCB is positive at every endpoint.",
+    "scale_complementarity": "Both adjacent differences in paired scale-ASCENT NLL gain and the per-example slope on log model parameters have positive 95% LCBs.",
+    "fixed_control": "Scale ASCENT beats Fixed ASCENT in paired NLL at 1.5B and 3B with positive 95% LCBs.",
+    "retrieval_control": "Graph Scale beats query-only BM25 at 3B with a positive paired NLL 95% LCB.",
+    "irrelevant_control": "Graph Scale beats the same-count irrelevant replay at every endpoint with positive paired NLL 95% LCBs.",
+    "systems": "All prompts remain native and untruncated, hashes/commit/clean-tree invariants pass, scale document prefixes are nested, and raw persistent-state bytes per model parameter strictly decrease.",
+    "accuracy": "Report absolute official gain and frozen remaining-error elimination together. Accuracy saturation cannot fail the continuous primary gate or demand accuracy above 1.0."
+  },
+  "promotion_rule": "This single frozen panel is development only. Only a complete pass may authorize three untouched official HotpotQA task seeds and a preregistered confirmatory analyzer; partial success cannot be tuned on this panel and called confirmation.",
+  "failure_rule": "Any missed primary/control/system gate is retained as a development failure. Accuracy saturation is labeled ceiling-limited, not a reversal, and does not permit post-score metric substitution.",
+  "endpoints": [
+    {
+      "name": "qwen2p5-0p5b-instruct",
+      "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "model_parameters": 494032768,
+      "scale_documents": 2,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 988097824,
+        "sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe"
+      }
+    },
+    {
+      "name": "qwen2p5-1p5b-instruct",
+      "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "model_parameters": 1543714304,
+      "scale_documents": 3,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 3087467144,
+        "sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+      }
+    },
+    {
+      "name": "qwen2p5-3b-instruct",
+      "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+      "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "model_parameters": 3085938688,
+      "scale_documents": 4,
+      "model_artifacts": [
+        {
+          "path": "model-00001-of-00002.safetensors",
+          "bytes": 3968658944,
+          "sha256": "67347b23fb4165b652eb6611f5e1f2a06dfcddba8e909df1b2b0b1857bee06c2"
+        },
+        {
+          "path": "model-00002-of-00002.safetensors",
+          "bytes": 2203268048,
+          "sha256": "a40d941d0e7e0b966ad8b62bb6d6b7c88cce1299197b599d9d0a4ce59aabfc1d"
+        }
+      ]
+    }
+  ]
+}

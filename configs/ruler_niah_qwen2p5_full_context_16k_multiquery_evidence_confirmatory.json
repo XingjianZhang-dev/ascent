@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_ruler_niah_qwen2p5_full_context_16k_multiquery_evidence_confirmatory",
+  "status": "confirmatory_full_context_16k_multiquery_evidence_frozen_before_execution",
+  "architecture": "qwen2",
+  "prompt_mode": "chat",
+  "reader": "niah",
+  "task_name": "niah_multiquery",
+  "output_separator": ", ",
+  "decode_strategy": "multi_digit_probe_greedy",
+  "constrained_digit_count": 7,
+  "constrained_value_count": 4,
+  "data_seeds": [371101, 371202, 371303],
+  "data_generator_commit": "c3f5e3b4f87f97e048793bb510a3a6b19a46bf3a",
+  "data_corpus_sha256": "58e352531a80cef2d22c205dbebfbfd64a8afe55a32434de845f200718756c65",
+  "samples_per_task": 60,
+  "evaluation_samples": 60,
+  "calibration_samples_per_task": 20,
+  "test_samples_per_task": 40,
+  "memory_slots": 256,
+  "query_context_tokens": 16384,
+  "relative_injection_depth": 0.875,
+  "fusion_grid_size": 21,
+  "epsilon": 1e-12,
+  "max_new_tokens": 48,
+  "task_sha256_by_seed": {
+    "371101": "f09f15b745dd8b04e5c2ec8f217d63afb09b39241271a1342e280477f79238ff",
+    "371202": "079c71c3c0510003211d343f73874e95803d1ceaaba0ba151a5bd2777d78bf76",
+    "371303": "12b6e87f42db56512dd7682e171fb98730bf5682e44cae4886b5b4001938df21"
+  },
+  "probe_task_name": "niah_single_1",
+  "probe_task_sha256": "bc32e86b422134ed3137c2a5768a505cf685d61f2c29e3f191ca04e598ebff8e",
+  "probe_training_samples": 2048,
+  "probe_training_fraction": 0.9,
+  "probe_seed": 20260814,
+  "probe_encoding_batch_size": 256,
+  "probe_epochs": 20,
+  "probe_batch_size": 4096,
+  "probe_learning_rate": 0.01,
+  "probe_weight_decay": 0.0001,
+  "probe_digit_class_weight": 2.0,
+  "probe_evidence_min_digit_accuracy": 0.99,
+  "evidence_fusion_invariant": "Foundation uses frozen repetition-free greedy decoding. ASCENT retains the complete Foundation prediction and appends only completed seven-digit runs decoded in query order from the latent state by the independently trained linear head. It cannot remove a correct Foundation value; incomplete runs are discarded.",
+  "state_budget_rule": {
+    "formula": "B_s = round_half_up(82 * (N_s / 494032768)^0.051)",
+    "rounding": "floor(x + 0.5)",
+    "replay_tokens": [82, 87, 90],
+    "relative_cost": "B_s/N_s decreases approximately as N_s^-0.949"
+  },
+  "endpoints": [
+    {
+      "name": "qwen2p5-0p5b-instruct",
+      "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "model_parameters": 494032768,
+      "scale_replay_tokens": 82,
+      "model_artifact": {"path": "model.safetensors", "bytes": 988097824, "sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe"}
+    },
+    {
+      "name": "qwen2p5-1p5b-instruct",
+      "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "model_parameters": 1543714304,
+      "scale_replay_tokens": 87,
+      "model_artifact": {"path": "model.safetensors", "bytes": 3087467144, "sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"}
+    },
+    {
+      "name": "qwen2p5-3b-instruct",
+      "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+      "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "model_parameters": 3085938688,
+      "scale_replay_tokens": 90,
+      "model_artifacts": [
+        {"path": "model-00001-of-00002.safetensors", "bytes": 3968658944, "sha256": "67347b23fb4165b652eb6611f5e1f2a06dfcddba8e909df1b2b0b1857bee06c2"},
+        {"path": "model-00002-of-00002.safetensors", "bytes": 2203268048, "sha256": "a40d941d0e7e0b966ad8b62bb6d6b7c88cce1299197b599d9d0a4ce59aabfc1d"}
+      ]
+    }
+  ],
+  "primary_metric": "Seed-clustered NVIDIA RULER string_match_all gain for four ordered answers under full-context greedy plus latent evidence",
+  "confirmation_gate": "Every seed must have positive gain at every endpoint and positive adjacent gain differences. Across the three equally weighted seeds, both adjacent differences and the gain slope on natural-log parameter count must have t(2) 95% lower confidence bounds above zero. No gate is changed after scores are accessed.",
+  "interpretation": "This is the untouched confirmation of the 16K full-context multiquery development curve. Further task families, BABILong, a second architecture, controls, and systems optimization remain mandatory. FPVM excluded."
+}

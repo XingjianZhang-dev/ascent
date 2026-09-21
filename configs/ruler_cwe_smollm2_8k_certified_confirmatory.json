@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_ruler_cwe_smollm2_8k_certified_confirmatory",
+  "status": "confirmatory_three_seed_panel_frozen_before_any_confirmation_model_score",
+  "architecture": "llama",
+  "official_repository": "NVIDIA/RULER",
+  "data_generator_commit": "c3f5e3b4f87f97e048793bb510a3a6b19a46bf3a",
+  "official_lfs_asset": {
+    "path": "scripts/data/synthetic/json/english_words.json",
+    "bytes": 8564991,
+    "sha256": "affcd6d45fdf3cc843d585c99c97ad615094e760e6c4756b654bab6c73bc2eca"
+  },
+  "reader": "common_top10",
+  "task_name": "cwe",
+  "task_category": "aggregation",
+  "official_metric": "string_match_all",
+  "seed": 20260814,
+  "data_seeds": [382101, 382202, 382303],
+  "evaluation_samples": 60,
+  "evaluation_samples_per_seed": 60,
+  "data_generation_max_seq_length": 8000,
+  "query_context_tokens": 8192,
+  "native_context_tokens": 8192,
+  "max_new_tokens": 120,
+  "memory_slots": 512,
+  "task_sha256_by_seed": {
+    "382101": "eaea849fadee495ca8d06d52f86f6418502447a2ea828dc5d7e26f4ded7178c8",
+    "382202": "1b5221180468e40cc096b9e32a89e376398b550ac34af279e63a2f6d77238887",
+    "382303": "3f263649c56850bc7dddc319141910391c8fccf44ad1887aa832fe1f8335b167"
+  },
+  "task_path_by_seed": {
+    "382101": "data/ruler_cwe_confirm_seed382101_8k_safe/cwe/validation.jsonl",
+    "382202": "data/ruler_cwe_confirm_seed382202_8k_safe/cwe/validation.jsonl",
+    "382303": "data/ruler_cwe_confirm_seed382303_8k_safe/cwe/validation.jsonl"
+  },
+  "pre_score_parser_audit": {
+    "exact_top10_sets_by_seed": {
+      "382101": 60,
+      "382202": 60,
+      "382303": 60
+    },
+    "all_rows_exact": true,
+    "unique_entries_range_all_seeds": [277, 298],
+    "persistent_payload_bytes_range_all_seeds": [6375, 6876],
+    "frozen_memory_slot_bound": 512
+  },
+  "pre_score_length_audit": {
+    "maximum_chat_prompt_tokens_all_seeds_all_endpoints": 7910,
+    "maximum_prompt_plus_generation_tokens": 8030,
+    "native_context_tokens": 8192,
+    "all_180_rows_all_three_tokenizers_safe": true
+  },
+  "fixed_state_word_slots": 3,
+  "state_word_slots_by_endpoint": {
+    "smollm2-135m-instruct": 3,
+    "smollm2-360m-instruct": 5,
+    "smollm2-1p7b-instruct": 10
+  },
+  "state_budget_rule": {
+    "formula": "K_s = min(10, ceil(3 * d_s / 576))",
+    "alpha": 1.0,
+    "rounding": "ceil",
+    "cap": 10,
+    "hidden_sizes": [576, 960, 2048],
+    "certified_word_slots": [3, 5, 10],
+    "interpretation": "The exact causal counter is fixed; only the certified evidence refinement grows. The cap is the official ten-reference target count. Total external-state bytes divided by model parameters must strictly decrease."
+  },
+  "causal_memory_invariant": "Only numbered list items between the official CWE context marker and held-out final question are counted. Multiword items remain atomic. The outputs field is used solely for a post-read set audit and scoring. Exceeding 512 unique items is a hard failure.",
+  "certified_fusion_invariant": "ASCENT appends only target-blind top-frequency items decoded from the bounded causal counter to the exact frozen Foundation output. The Foundation text is retained byte-for-byte, so certified evidence cannot remove an already correct reference.",
+  "measurement_boundary": "Foundation is one exact greedy full-context decode. Fixed and scale ASCENT scores append certified counter evidence without a second neural decode. Counter time/state and model decode time/memory are reported separately.",
+  "endpoints": [
+    {
+      "name": "smollm2-135m-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+      "model_parameters": 134515008,
+      "hidden_size": 576,
+      "batch_size": 4,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 269060552,
+        "sha256": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c"
+      }
+    },
+    {
+      "name": "smollm2-360m-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+      "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+      "model_parameters": 361821120,
+      "hidden_size": 960,
+      "batch_size": 2,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 723674912,
+        "sha256": "e6bffe7435d7ddc10fd3b9a9efd429dafbacb1cb17015fb5562664e7532bf86e"
+      }
+    },
+    {
+      "name": "smollm2-1p7b-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "model_parameters": 1711376384,
+      "hidden_size": 2048,
+      "batch_size": 1,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 3422777952,
+        "sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+      }
+    }
+  ],
+  "original_absolute_gain_confirmation_gate": "Every endpoint gain must have a positive seed-clustered t(2) lower bound; both paired adjacent gain differences and the log-parameter slope must have positive t(2) lower bounds; every seed must have positive endpoint gains and positive adjacent differences; no scale ASCENT regression is allowed; scale expansion must beat fixed three-word evidence at 360M and 1.7B; exact parser, provenance, clean-tree, native-length, and strictly decreasing relative-state-cost gates must pass.",
+  "ceiling_aware_secondary_estimand": {
+    "formula": "(scale_ascent_accuracy - foundation_accuracy) / (1 - foundation_accuracy)",
+    "name": "fraction_of_foundation_remaining_error_eliminated",
+    "status": "frozen_secondary_before_any_confirmation_model_score",
+    "gate": "Both paired adjacent differences must have positive three-seed t(2) lower bounds. If Foundation is already perfect, the cell is undefined and must be reported rather than imputed.",
+    "rationale": "Absolute accuracy gain is right-censored when scale ASCENT reaches 1.0; a perfect arm cannot demonstrate an impossible score above 1.0."
+  },
+  "interpretation": "Confirmatory test on three entirely new official CWE data seeds. FPVM is excluded by user direction. The original absolute-gain gate and the pre-score ceiling-aware secondary are both reported without substituting one for the other after results are observed."
+}

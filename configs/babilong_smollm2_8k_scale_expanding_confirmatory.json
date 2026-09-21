@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_smollm2_8k_scale_expanding_confirmatory",
+  "status": "confirmatory_frozen_after_development_gate_before_any_confirmation_score",
+  "seed": 20260814,
+  "official_repository": "https://github.com/booydar/babilong",
+  "official_repository_commit": "7a6efee29f5cac03c3c410e6799c80fd2ffe3610",
+  "official_dataset": "RMT-team/babilong-1k-samples",
+  "official_dataset_revision": "fc4d1a584dfc498c37578753bee4cdd91b987ae2",
+  "dataset_config": "8k",
+  "tasks": ["qa1", "qa2", "qa3"],
+  "supporting_facts_by_task": {"qa1": 1, "qa2": 2, "qa3": 3},
+  "official_parquet_sha256": {
+    "qa1": "aa77f2270acefcd508c067dd572678c38219fc6b1c68e74ce8f2e2a3d68227a0",
+    "qa2": "7182e37288dabfaa9f50ceb68ff34801a16f218a767e253094dbc80f4afd3dec",
+    "qa3": "e6decd76a62a04b6f64f72a481038148baec5377541a25e290b75a28ab0053c9"
+  },
+  "panels": ["confirmation_seed_1", "confirmation_seed_2", "confirmation_seed_3"],
+  "panel_sha256_by_name": {
+    "confirmation_seed_1": "8ecf029a5eeabc82fa98a1b8ad11d0d98e5b27d215402233f32041dd6dc32308",
+    "confirmation_seed_2": "6619303189e108a1067bb7c4ceb3c0c5d7ad229addc5ed5ec197400f7db6e65f",
+    "confirmation_seed_3": "910ee8b76ab2a24993dec1e06387e2bbb40ae29bb6a48c0e6879217f359dd822"
+  },
+  "manifest_sha256": "d497239bc18d5f4120000d92829be15705a1dbae703e8efff8ad93163d4458dd",
+  "source_jsonl_sha256": {
+    "qa1": "dc652614def019462314092251218388e3be5a48e73c42ace70b1309fb9d8f61",
+    "qa2": "c879f0b4b4fd6e3d601b0700c87a52d37e8a717cdc063d4cd966f7c4cea32b88",
+    "qa3": "a621dc3048405ba4323b02a5d6ff2caae71a14dd33aab08cc08f9fccf1c01ce9"
+  },
+  "split_rule": "Sort each task by SHA-256 of canonical source row. Development used positions 0:20. These untouched panels use positions 20:60, 60:100, and 100:140, respectively. Panels are disjoint fixed blocks, not stochastic generation seeds.",
+  "evaluation_samples": 120,
+  "history_slots": 256,
+  "context_tokens": 8192,
+  "max_new_tokens": 8,
+  "memory_selection": "Unchanged after 8K development: retain the most recent K query-relevant causal facts, where K grows 1, 2, 3 with model scale. Neither question parsing nor retrieval accesses the target answer.",
+  "schedule_design_invariant": "The 1/2/3 fact-slot scale schedule and all prompts, decoding, models, and task balance are identical to frozen 8K development commit e159aa3; no confirmation prediction was accessed before this config was committed.",
+  "endpoints": [
+    {
+      "name": "smollm2-135m-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+      "model_parameters": 134515008,
+      "hidden_size": 576,
+      "state_fact_slots": 1,
+      "batch_size": 8,
+      "model_artifact": {"path": "model.safetensors", "bytes": 269060552, "sha256": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c"}
+    },
+    {
+      "name": "smollm2-360m-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+      "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+      "model_parameters": 361821120,
+      "hidden_size": 960,
+      "state_fact_slots": 2,
+      "batch_size": 4,
+      "model_artifact": {"path": "model.safetensors", "bytes": 723674912, "sha256": "e6bffe7435d7ddc10fd3b9a9efd429dafbacb1cb17015fb5562664e7532bf86e"}
+    },
+    {
+      "name": "smollm2-1p7b-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "model_parameters": 1711376384,
+      "hidden_size": 2048,
+      "state_fact_slots": 3,
+      "batch_size": 2,
+      "model_artifact": {"path": "model.safetensors", "bytes": 3422777952, "sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"}
+    }
+  ],
+  "primary_metric": "Exact extracted-location accuracy; ASCENT-minus-Foundation paired gain, task-balanced over official BABILong QA1/QA2/QA3 8K.",
+  "truncation_disclosure": "The frozen tokenizer cap is 8192 input tokens. Report per-arm maximum token length and the number of prompts at the cap; do not describe capped Foundation inputs as untruncated full 8K context.",
+  "confirmation_gate": "Across the three fixed disjoint panels, every endpoint mean gain, both adjacent mean gain increments, and their panel-level t(2) 95% lower bounds must be positive. Report regressions, task-stratified results, and cap-hit counts. Failure stops claim expansion.",
+  "interpretation": "Untouched longer-context confirmation for scale-expanding ASCENT on the official SmolLM2 family. FPVM excluded."
+}

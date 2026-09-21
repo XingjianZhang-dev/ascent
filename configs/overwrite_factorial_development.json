@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment": "versioned_overwrite_latent_replay_development",
+  "status": "development_before_overwrite_confirmation",
+  "seed": 20260921,
+  "num_labels": 16,
+  "crossover_probability": 0.18,
+  "fixed_rounds": 1,
+  "rich_rounds": 4,
+  "relative_injection_depth": 0.25,
+  "calibration_episodes": 2048,
+  "test_episodes": 8192,
+  "batch_size": 64,
+  "candidate_texts": [" A", " B", " C", " D", " E", " F", " G", " H", " I", " J", " K", " L", " M", " N", " O", " P"],
+  "old_codebook_template": "An obsolete earlier memory said that the value label was{value}.",
+  "new_codebook_template": "A later overwrite set the current value label to{value}.",
+  "query_template": "Episode query {key}. The earlier value was overwritten. The current value label is",
+  "text_replay_template": "An obsolete earlier memory said that the value label was{old}. A later overwrite set the current value label to{new}. {query}",
+  "endpoints": [
+    {
+      "name": "pythia-410m",
+      "repo_id": "EleutherAI/pythia-410m",
+      "revision": "bba6a464f54bbf08fc174cfb351d9794d58af21d"
+    },
+    {
+      "name": "pythia-2.8b",
+      "repo_id": "EleutherAI/pythia-2.8b",
+      "revision": "dbe7ae300a54abcdc475a33907b3dff81d25709f"
+    }
+  ],
+  "interpretation": "Both obsolete and current noisy signals persist, but the target is always the later version. Clean-KV text and zero-NLL oracle controls remain stronger storage boundaries."
+}

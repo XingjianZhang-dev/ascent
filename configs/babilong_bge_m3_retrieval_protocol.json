@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "experiment": "babilong_8k_bge_m3_hybrid_rerank_cache",
+  "status": "retrieval_protocol_frozen_before_any_cache_generation_or_model_score",
+  "seed": 20260814,
+  "official_babilong_repository": "https://github.com/booydar/babilong",
+  "official_babilong_commit": "7a6efee29f5cac03c3c410e6799c80fd2ffe3610",
+  "official_dataset": "RMT-team/babilong-1k-samples",
+  "official_dataset_revision": "fc4d1a584dfc498c37578753bee4cdd91b987ae2",
+  "dataset_config": "8k",
+  "allowed_data_sha256": [
+    "540a41004bfb59d763d2e2e173b0909f153418f729a8a419424cb2d7f92f262f",
+    "dea69dbd409f4f1dc01068da99114fa3bfe5d6caf2d32e72c39e3a43b9752b85",
+    "2902dbf7993438a249e5212a09d5eb9a02c3f17e18613319ee3375f7fa957bf5",
+    "705cc7d28ff041719ea66b8d7e27f3182d05f60325da47a52d3dae12dfb05492"
+  ],
+  "split_rule": "Development is the already frozen 8K positions 0:20 per task. If its gate passes, untouched neural-control panels use stable-hash positions 260:300, 300:340, and 340:380 per task. No cache or decoder score from the three control panels may be accessed before the development decision and final evaluation config freeze.",
+  "embedding_model": {
+    "repo_id": "BAAI/bge-m3",
+    "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+    "official_model_card": "https://huggingface.co/BAAI/bge-m3",
+    "model_artifact": {
+      "path": "pytorch_model.bin",
+      "bytes": 2271145830,
+      "sha256": "b5e0ce3470abf5ef3831aa1bd5553b486803e83251590ab7ff35a117cf6aad38"
+    }
+  },
+  "reranker_model": {
+    "repo_id": "BAAI/bge-reranker-v2-m3",
+    "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+    "official_model_card": "https://huggingface.co/BAAI/bge-reranker-v2-m3",
+    "model_artifact": {
+      "path": "model.safetensors",
+      "bytes": 2271071852,
+      "sha256": "d9e3e081faff1eefb84019509b2f5558fd74c1a05a2c7db22f74174fcedb5286"
+    }
+  },
+  "passage_split": "Generic punctuation-boundary sentences with character positions; no BABILong entity, object, location, event, answer, or target vocabulary is used.",
+  "retrieval_algorithm": "At each of three target-blind hops, compute normalized BGE-M3 CLS dense scores and generic BM25 scores over every sentence. Fuse the two complete rankings with reciprocal-rank fusion, k=60. Cross-encode the top 32 unselected candidates with the official bge-reranker-v2-m3, choose the highest reranker score with frozen RRF/recency tie breaks, append that passage to the query, and repeat. Return the selected passages chronologically to the decoder.",
+  "embedding_dimensions": 1024,
+  "passage_max_tokens": 256,
+  "reranker_max_tokens": 512,
+  "candidate_count": 32,
+  "output_passages": 3,
+  "rrf_constant": 60,
+  "embedding_batch_size": 128,
+  "reranker_batch_size": 32,
+  "index_accounting": "Per-row lower bound equals raw input UTF-8 bytes plus sentence_count * 1024 * 2 float16 dense-index bytes. BM25/sparse structures, model weights, transient activations, and reranker compute are additional and must be reported separately rather than hidden.",
+  "same_byte_raw_control": "Use the same query-blind BABILong event detector as ASCENT, but store exact raw event strings in a FIFO under each sample's exact ASCENT semantic write-payload byte budget. At read time use the frozen task-agnostic lexical chain to expose the same 1/2/3 slots. Report actual utilization; never credit unused bytes as stored state.",
+  "development_gate": "On the 60-row development panel, structured ASCENT gain must remain strictly increasing and ASCENT accuracy must exceed both BGE-M3 hybrid+rereanking and the same-byte raw FIFO at every endpoint. Only then may cache generation and decoder evaluation proceed on the three untouched control panels without algorithm changes.",
+  "confirmation_gate": "Across three untouched panels, the task-balanced ASCENT accuracy advantage over both controls must have positive panel-t 95% lower bounds at every endpoint; ASCENT gains must be strictly monotone in every panel with both adjacent increment lower bounds positive. Report all task strata, cache support recall, state bytes, latency, cap hits, regressions, and provenance."
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_qwen2p5_3b_resolved_event_diagnostic",
+  "status": "posthoc_interface_diagnostic_from_raw_fact_failure_no_promotion",
+  "seed": 20260814,
+  "tasks": ["qa1", "qa2", "qa3"],
+  "panels": [
+    "generative_focused_confirmation_panel_1",
+    "generative_focused_confirmation_panel_2",
+    "generative_focused_confirmation_panel_3",
+    "generative_focused_confirmation_panel_4",
+    "generative_focused_confirmation_panel_5",
+    "generative_focused_confirmation_panel_6",
+    "generative_focused_confirmation_panel_7",
+    "generative_focused_confirmation_panel_8",
+    "generative_focused_confirmation_panel_9",
+    "generative_focused_confirmation_panel_10"
+  ],
+  "panel_sha256_by_name": {
+    "generative_focused_confirmation_panel_1": "e5509f805d8e1c8ffc14a3dcc3ef4f02cbd2d2e69549a0179e0d83d8095aebb2",
+    "generative_focused_confirmation_panel_2": "402819c0550ca08518e8830e580b3c1f1cd61831dc73f165ce7c5bb0119df51e",
+    "generative_focused_confirmation_panel_3": "81a4f14636b85cd5f35e7695432df13283115eb2012652ccd0d71da488e0eb20",
+    "generative_focused_confirmation_panel_4": "a882262160fbcb7bf6842d7af080b66c1f350301996c327b00d15f62708fb05d",
+    "generative_focused_confirmation_panel_5": "5f1f0e54777e04cd31772fdce20fd75b1de3c6a30cf997d7eb32561419688b79",
+    "generative_focused_confirmation_panel_6": "a47f58456ec1c893883982034d17be767f9522bba6f0741ed740b816f4739194",
+    "generative_focused_confirmation_panel_7": "6f365cffd1a7297bb51ab33d3dcf7600390cb1f349d53d4ec576f5cf29c22515",
+    "generative_focused_confirmation_panel_8": "a7f518d77e8c8f005099c5c4712bf813c3119805ef704ea57f405952afa5fc93",
+    "generative_focused_confirmation_panel_9": "d65619489fc2e61a97a897c3c5dbab00450e1c00781280e1069b3807b7745de0",
+    "generative_focused_confirmation_panel_10": "4ee68b6aad34c08b2459727ff6cb9e55354fb9c7c8c7a1b20cc5f427921dca10"
+  },
+  "evaluation_samples": 120,
+  "history_slots": 256,
+  "context_tokens": 8192,
+  "max_new_tokens": 8,
+  "allowed_decode_orders": ["foundation_first"],
+  "conditions": {
+    "resolved_slots_3": {
+      "memory_source": "relevant",
+      "memory_representation": "resolved_event_facts",
+      "state_fact_slots_by_endpoint": {
+        "qwen2p5-3b-instruct": 3
+      }
+    }
+  },
+  "endpoints": [
+    {
+      "name": "qwen2p5-3b-instruct",
+      "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+      "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "model_parameters": 3085938688,
+      "hidden_size": 2048,
+      "state_fact_slots": 3,
+      "batch_size": 1,
+      "model_artifacts": [
+        {
+          "path": "model-00001-of-00002.safetensors",
+          "bytes": 3968658944,
+          "sha256": "67347b23fb4165b652eb6611f5e1f2a06dfcddba8e909df1b2b0b1857bee06c2"
+        },
+        {
+          "path": "model-00002-of-00002.safetensors",
+          "bytes": 2203268048,
+          "sha256": "a40d941d0e7e0b966ad8b62bb6d6b7c88cce1299197b599d9d0a4ce59aabfc1d"
+        }
+      ]
+    }
+  ],
+  "diagnostic_question": "Does stream-causal resolution of the word 'there' remove the isolated Qwen2.5-3B QA3 three-slot readout regression?",
+  "promotion": false,
+  "next_step_if_positive": "Freeze the representation, ceiling-aware remaining-error estimand, and newly generated untouched BABILong panels before confirmation."
+}

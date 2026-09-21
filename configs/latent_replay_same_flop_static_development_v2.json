@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_latent_replay_same_flop_static_development_v2",
+  "status": "stronger_static_adapter_development_frozen_after_v1_pass_before_v2_score",
+  "seed": 20260831,
+  "v1_disclosure": "V1 used 64 steps at learning rate 0.05 and passed, but selected the final iterate. V2 uses 128 steps at 0.01, evaluates the full calibration set after every epoch, and selects the lowest-calibration-NLL static checkpoint. The seed remains development-only; no confirmatory seed has been accessed.",
+  "num_labels": 16,
+  "crossover_probability": 0.18,
+  "fixed_rounds": 1,
+  "rich_rounds": 4,
+  "relative_injection_depth": 0.25,
+  "replay_mode": "map_full_sequence",
+  "calibration_episodes": 1024,
+  "test_episodes": 4096,
+  "batch_size": 32,
+  "static_adapter_steps": 128,
+  "static_adapter_batch_size": 32,
+  "static_adapter_learning_rate": 0.01,
+  "candidate_texts": [" A", " B", " C", " D", " E", " F", " G", " H", " I", " J", " K", " L", " M", " N", " O", " P"],
+  "codebook_template": "A retrieved memory states that the hidden value label is{candidate}",
+  "text_replay_template": "A retrieved memory states that the hidden value label is{candidate}. {query}",
+  "query_template": "Episode query. Key {key}. The hidden value label is",
+  "static_adapter_definition": "Freeze the foundation and optimize one shared replay block on calibration episodes only. The block is identical for every episode and receives no noisy observation, episodic value, key-specific parameter, target, or test label. Select the checkpoint with minimum full-calibration NLL. At inference it has the same token count, hidden width, injection layer, frozen suffix, candidate head, and mixture gate as dynamic ASCENT replay.",
+  "same_flop_boundary": "The registered inference-FLOP claim covers the replay_from_hidden frozen suffix and candidate projection. Training cost, dynamic memory decoding, persistent bytes, and transient activations are reported separately.",
+  "endpoints": [
+    {"name": "pythia-410m", "repo_id": "EleutherAI/pythia-410m", "revision": "bba6a464f54bbf08fc174cfb351d9794d58af21d", "model_parameters": 405334016, "model_artifact": {"path": "model.safetensors", "bytes": 1621370224, "sha256": "1c88b0bf18293fae0e09c1d978b14b1adb08cb6a83154463133982fe460fcea4"}},
+    {"name": "pythia-2.8b", "repo_id": "EleutherAI/pythia-2.8b", "revision": "dbe7ae300a54abcdc475a33907b3dff81d25709f", "model_parameters": 2800000000, "model_artifact": {"path": "model.safetensors", "bytes": 5550463728, "sha256": "462f2b960062159c3779eb1cfe5829783ea72da66b020bcbabf86bc6dd33063c"}}
+  ],
+  "development_gate": "At both endpoints, the paired 95% lower confidence bound of rich dynamic ASCENT fused NLL improvement over the best-checkpoint static adapter must be positive. The rich dynamic foundation-by-scale gain interaction must remain positive. Exact replay-token-count, injection-layer, frozen-suffix, clean-commit, model-hash, label, signal, and query-input gates must pass.",
+  "confirmation_rule": "If V2 passes, freeze three new untouched seeds and the complete V2 optimization/evaluation protocol before accessing any confirmation score.",
+  "interpretation": "Stronger same-inference-FLOP static-adapter development control. FPVM excluded."
+}

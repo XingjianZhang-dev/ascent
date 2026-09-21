@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_official_ruler_qa2_hotpot_qwen2p5_16k_dual_path_factorial_development",
+  "status": "development_3x3_factorial_frozen_before_any_seed386803_model_score",
+  "architecture": "query_conditioned_compact_evidence_plus_qwen2_latent_replay",
+  "task_name": "qa_2",
+  "data_seed": 386803,
+  "task_sha256": "57e26bdba9f922fa34cc4abafad01fc90771ea1f0dbfae5c95a9aa7c458ac706",
+  "data_generator_commit": "c3f5e3b4f87f97e048793bb510a3a6b19a46bf3a",
+  "data_generator_file_sha256": "f00c0b59cf8698e90831c2c4f40f2a30f2469534c27455808c717281d0",
+  "source_dataset_sha256": "e3da074df24e8369009918aa5cdbdd254dadcde4c63f7569d36afd6f2268caa8",
+  "samples_per_task": 60,
+  "calibration_samples": 20,
+  "test_samples": 40,
+  "query_context_tokens": 32768,
+  "bm25_seed_documents": 2,
+  "relative_injection_depth": 0.875,
+  "fusion_grid_size": 21,
+  "epsilon": 1e-12,
+  "reader_contract": "The query-conditioned reader sees only the official input and question. It never receives the answer or HotpotQA support labels. Each document sketch is computed independently as title plus the highest query/title-overlap sentence, preserving exact append-only prefixes.",
+  "dual_path_contract": "The identical charged state feeds (1) a compact evidence prompt and (2) Qwen2 latent replay at relative depth 0.875. A sample-clustered calibration simplex always includes the exact Foundation corner and is enabled only when its 95% paired lower confidence bound is positive.",
+  "memory_states": [
+    {
+      "name": "graph_small",
+      "documents": 2,
+      "replay_tokens": 38
+    },
+    {
+      "name": "graph_mid",
+      "documents": 3,
+      "replay_tokens": 69
+    },
+    {
+      "name": "graph_large",
+      "documents": 4,
+      "replay_tokens": 92
+    }
+  ],
+  "state_budget_rule": {
+    "origin": "The 38/69/92 Qwen2.5 replay-token law and relative depth 0.875 were registered and executed on official RULER multiquery before the HotpotQA dual-path seed existed; they are reused without HotpotQA strength or depth search.",
+    "charged_bytes": "replay_tokens * (2 * hidden_size bfloat16 bytes + 8 int64 token-id bytes)",
+    "co_scaled_charged_bytes": [68400, 212520, 377568],
+    "co_scaled_bytes_per_parameter": [0.00013845235464219247, 0.0001376679606124839, 0.0001223511022653215],
+    "fixed_small_state_bytes_per_parameter": [0.00013845235464219247, 0.00007581713772861432, 0.00005053632484871974],
+    "relative_cost_gate": "Both co-scaled and fixed-small-state bytes per model parameter must strictly decrease at both adjacent transitions."
+  },
+  "score_free_data_audit": {
+    "rows": 60,
+    "document_count_range": [96, 116],
+    "graph_prefix_change_rows_vs_query_only": {
+      "top_2": 0,
+      "top_3": 31,
+      "top_4": 32
+    },
+    "complete_rankings_sha256": "d98ad33d3acb377eae13af79c6f5173ce11f7398b65fee75bc46c4d3e3565038",
+    "sketch_byte_ranges": {
+      "graph_small": [162, 588],
+      "graph_mid": [294, 804],
+      "graph_large": [362, 1024]
+    },
+    "all_sketches_byte_prefix_nested": true
+  },
+  "primary_estimand": "paired per-example Foundation minus effective dual-path ASCENT answer NLL on the 40 untouched test rows",
+  "factorial_estimand": "For each adjacent Foundation and memory transition, [(large Foundation gain from memory expansion) - (small Foundation gain from the same memory expansion)] with a paired 95% LCB above zero.",
+  "controls": {
+    "foundation": "complete unchanged official 16K prompt",
+    "fixed": "graph_small state evaluated on every Foundation",
+    "memory_only_scaling": "graph_small, graph_mid, and graph_large each evaluated on every Foundation, forming a complete 3x3 factorial panel",
+    "query_only": "co-scale-matched BM25 sketches without title-graph expansion",
+    "irrelevant": "co-scale-matched bottom-ranked sketches outside the seed/title frontier whenever possible",
+    "path_ablations": "certified-only and latent-only NLL are saved before safe fusion"
+  },
+  "development_success_rule": {
+    "co_scaled_gain": "All three co-scaled safe gates open and all paired NLL-gain 95% LCBs are positive.",
+    "scale_complementarity": "Both adjacent co-scaled gain-difference LCBs and the per-example log-parameter slope LCB are positive.",
+    "foundation_state_interaction": "Both adjacent 2x2 factorial interaction LCBs and the global small-large interaction LCB are positive.",
+    "fixed_control": "Co-scaled ASCENT beats graph_small Fixed at 1.5B and 3B with positive LCBs.",
+    "retrieval_controls": "Graph beats query-only BM25 at 3B and beats irrelevant state at every endpoint with positive LCBs.",
+    "dual_path": "At least one co-scaled gate selects nonzero certified weight and at least one selects nonzero latent weight.",
+    "systems": "Task/config/model/commit/clean-tree/native-context/no-label-reader/shared-state/exact-prefix/cross-foundation-token-identity and both relative-state gates all pass."
+  },
+  "promotion_rule": "Only development_pass=true from the frozen analyzer authorizes official autoregressive decoding on this seed and three entirely new official HotpotQA confirmation seeds. No partial gate pass authorizes tuning on seed 386803.",
+  "failure_rule": "Any missed gate is retained as a development failure. The next design, if any, must be independently motivated and use untouched data; the observed seed cannot be tuned into confirmation.",
+  "ceiling_policy": "Continuous answer NLL is primary and has no 100% accuracy ceiling. Any later official accuracy is reported with absolute gain and prospectively frozen remaining-error elimination; perfect ASCENT means 100% of remaining Foundation error removed, never a requirement above 1.0.",
+  "endpoints": [
+    {
+      "name": "qwen2p5-0p5b-instruct",
+      "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "model_parameters": 494032768,
+      "hidden_size": 896,
+      "scale_state": "graph_small",
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 988097824,
+        "sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe"
+      }
+    },
+    {
+      "name": "qwen2p5-1p5b-instruct",
+      "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "model_parameters": 1543714304,
+      "hidden_size": 1536,
+      "scale_state": "graph_mid",
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 3087467144,
+        "sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+      }
+    },
+    {
+      "name": "qwen2p5-3b-instruct",
+      "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+      "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "model_parameters": 3085938688,
+      "hidden_size": 2048,
+      "scale_state": "graph_large",
+      "model_artifacts": [
+        {
+          "path": "model-00001-of-00002.safetensors",
+          "bytes": 3968658944,
+          "sha256": "67347b23fb4165b652eb6611f5e1f2a06dfcddba8e909df1b2b0b1857bee06c2"
+        },
+        {
+          "path": "model-00002-of-00002.safetensors",
+          "bytes": 2203268048,
+          "sha256": "a40d941d0e7e0b966ad8b62bb6d6b7c88cce1299197b599d9d0a4ce59aabfc1d"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_natural_repeat_1p4b_interpolation",
+  "status": "post_confirmation_interpolation_diagnostic",
+  "event_offset": 6000,
+  "calibration_events": 2048,
+  "test_events": 8192,
+  "key_length": 4,
+  "context_length": 128,
+  "maximum_source_tokens": 16,
+  "fixed_source_tokens": 4,
+  "min_distance": 128,
+  "memory_slots": 4096,
+  "relative_injection_depth": 0.25,
+  "fusion_grid_size": 21,
+  "epsilon": 1e-12,
+  "datasets": {
+    "wikitext103": {
+      "filename": "wikitext103_test_neox.bin",
+      "dtype": "uint16",
+      "sha256": "e557c96d4c368a7c8cb60c01de14076e20dc425556d853cbbb9f45b0593698c2"
+    },
+    "pg19": {
+      "filename": "pg19_test_neox.bin",
+      "dtype": "uint16",
+      "sha256": "95c3e1602cdbcf395cfca03f4783637af09c93ccb709ebf52d42391495948e4b"
+    }
+  },
+  "endpoints": [
+    {
+      "name": "pythia-1.4b",
+      "repo_id": "EleutherAI/pythia-1.4b",
+      "revision": "9cc5c8c8148a4e0115d9e29c6b4f21124cfe748a",
+      "scale_source_tokens": 8,
+      "batch_size": 24
+    }
+  ],
+  "active_comparators": [
+    "frozen_foundation",
+    "matched_raw_exact_retrieval",
+    "ascent_fixed",
+    "ascent_scale",
+    "certified_only_ablation",
+    "latent_only_ablation"
+  ],
+  "interpretation": "The main two-endpoint confirmation was already observed before freezing this middle-scale interpolation. It is diagnostic evidence only and does not replace the preregistered primary test. FPVM is excluded by user scope."
+}

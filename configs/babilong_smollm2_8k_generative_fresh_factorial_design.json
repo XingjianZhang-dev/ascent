@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "status": "frozen_before_any_fresh_panel_decoder_score",
+  "objective": "Test whether larger frozen language models extract a statistically increasing benefit from larger ASCENT state on five untouched official BABILong QA1-QA3 panels.",
+  "panel_selection": {
+    "ordering": "ascending SHA-256 of canonical official rows",
+    "starts": [380, 420, 460, 500, 540],
+    "rows_per_task": 40,
+    "tasks": ["qa1", "qa2", "qa3"],
+    "selection_uses_model_scores": false
+  },
+  "factorial": {
+    "models": [
+      "smollm2-135m-instruct",
+      "smollm2-360m-instruct",
+      "smollm2-1p7b-instruct"
+    ],
+    "state_fact_slots": [1, 2, 3],
+    "cells": 9,
+    "panels_per_cell": 5,
+    "runs": 45,
+    "readout": "foundation_generation"
+  },
+  "primary_analysis": {
+    "unit": "panel",
+    "interval": "two-sided Student-t 95% interval over five untouched panels (df=4)",
+    "registered_interactions": [
+      "(360M slots2-slots1) - (135M slots2-slots1)",
+      "(1.7B slots3-slots2) - (360M slots3-slots2)"
+    ],
+    "coscale_excess": "co-scaled gain increment minus memory-only gain increment at the lower model",
+    "gate": "All provenance/alignment checks pass; both diagonal gain-increment LCBs, both registered model-by-state interaction LCBs, and both co-scale-excess LCBs are strictly positive."
+  },
+  "supporting_analysis": {
+    "unit": "panel",
+    "interval": "two-sided Student-t 95% interval over the three previous plus five fresh panels (df=7)",
+    "gate": "The same six lower bounds are strictly positive in the combined eight-panel analysis.",
+    "role": "supporting replication; it cannot replace failure of the fresh-only primary gate"
+  },
+  "stopping_rule": "Run all 45 cells and report every primary/supporting estimand without panel or task deletion.",
+  "promotion_rule": "Do not claim generative scale complementarity unless the fresh-only primary gate passes. Do not claim evidence far beyond TNNLS unless both fresh-only and combined gates pass and an independent task or model family also confirms the final protocol."
+}

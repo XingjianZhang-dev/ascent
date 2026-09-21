@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_ruler_fwe_smollm2_8k_certified_development",
+  "status": "development_context_repair_frozen_after_4k_saturation_failure_before_any_8k_model_score",
+  "architecture": "llama",
+  "official_repository": "NVIDIA/RULER",
+  "data_generator_commit": "c3f5e3b4f87f97e048793bb510a3a6b19a46bf3a",
+  "task_name": "fwe",
+  "task_category": "aggregation",
+  "official_metric": "string_match_all",
+  "seed": 378803,
+  "evaluation_samples": 60,
+  "query_context_tokens": 8192,
+  "max_new_tokens": 50,
+  "memory_slots": 256,
+  "task_sha256": "85c810123dec8732cd0cf9cb4e53716cdfa7abd973a798561fb8d01117969b3e",
+  "task_path": "data/ruler_fwe_dev_seed378803_8k/fwe/validation.jsonl",
+  "fixed_state_word_slots": 1,
+  "state_word_slots_by_endpoint": {
+    "smollm2-135m-instruct": 1,
+    "smollm2-360m-instruct": 2,
+    "smollm2-1p7b-instruct": 3
+  },
+  "state_budget_rule": {
+    "formula": "K_s = min(3, ceil((d_s / 576)^0.75))",
+    "alpha": 0.75,
+    "rounding": "ceil",
+    "cap": 3,
+    "hidden_sizes": [576, 960, 2048],
+    "certified_word_slots": [1, 2, 3],
+    "interpretation": "The exact causal counter is fixed; only the certified evidence refinement grows. Total external-state bytes divided by model parameters must strictly decrease."
+  },
+  "redesign_rationale": "The frozen 4K development curve rose from 135M to 360M but fell at 1.7B because the 1.7B Foundation already reached .7056. This repair changes only official context length from 4K to the models' native 8K maximum and uses a new data seed; the parser, 1/2/3 state law, model ladder, metric, fusion, and gates are unchanged.",
+  "causal_memory_invariant": "Only six-letter coded tokens between the official FWE context marker and the held-out final question are counted. The official outputs field is used solely for a post-read parser audit and scoring. Exceeding 256 unique codes is a hard failure.",
+  "certified_fusion_invariant": "ASCENT appends only target-blind top-frequency words decoded from the bounded causal counter to the exact frozen Foundation output. The Foundation text is retained byte-for-byte, so certified evidence cannot remove an already correct reference.",
+  "measurement_boundary": "Foundation is one exact greedy full-context decode. Fixed and scale ASCENT scores append certified counter evidence without a second neural decode. Counter time/state and model decode time/memory are reported separately.",
+  "endpoints": [
+    {
+      "name": "smollm2-135m-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+      "model_parameters": 134515008,
+      "hidden_size": 576,
+      "batch_size": 4,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 269060552,
+        "sha256": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c"
+      }
+    },
+    {
+      "name": "smollm2-360m-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+      "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+      "model_parameters": 361821120,
+      "hidden_size": 960,
+      "batch_size": 2,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 723674912,
+        "sha256": "e6bffe7435d7ddc10fd3b9a9efd429dafbacb1cb17015fb5562664e7532bf86e"
+      }
+    },
+    {
+      "name": "smollm2-1p7b-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "model_parameters": 1711376384,
+      "hidden_size": 2048,
+      "batch_size": 1,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 3422777952,
+        "sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+      }
+    }
+  ],
+  "development_gate": "Every scale ASCENT gain and both adjacent gain differences must be positive; no scale ASCENT regression is allowed; scale expansion must beat fixed one-word evidence at 360M and 1.7B; exact parser, provenance, clean-tree, and strictly decreasing relative-state-cost gates must pass. A pass authorizes only three entirely new official-data confirmation seeds.",
+  "interpretation": "Development-only 8K difficulty repair for RULER's official aggregation category after a transparently retained 4K saturation failure. FPVM is excluded by user direction."
+}

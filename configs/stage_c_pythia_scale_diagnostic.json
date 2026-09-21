@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "experiment": "stage_c_pythia_certified_scale_diagnostic",
+  "status": "development_diagnostic_not_confirmatory_preregistration",
+  "reason": "created after the 410M diagnostic but before the 1.4B and 2.8B endpoint diagnostics",
+  "seed": 20260814,
+  "num_labels": 16,
+  "crossover_probability": 0.18,
+  "calibration_episodes": 4096,
+  "test_episodes": 16384,
+  "batch_size": 64,
+  "candidate_texts": [" A", " B", " C", " D", " E", " F", " G", " H", " I", " J", " K", " L", " M", " N", " O", " P"],
+  "query_template": "Episode query. Key {key}. The hidden value label is",
+  "endpoints": [
+    {
+      "name": "pythia-410m",
+      "repo_id": "EleutherAI/pythia-410m",
+      "revision": "bba6a464f54bbf08fc174cfb351d9794d58af21d",
+      "model_parameters": 410000000,
+      "model_width": 1024,
+      "fixed_rounds": 1,
+      "scale_rounds": 1
+    },
+    {
+      "name": "pythia-1.4b",
+      "repo_id": "EleutherAI/pythia-1.4b",
+      "revision": "9cc5c8c8148a4e0115d9e29c6b4f21124cfe748a",
+      "model_parameters": 1400000000,
+      "model_width": 2048,
+      "fixed_rounds": 1,
+      "scale_rounds": 2
+    },
+    {
+      "name": "pythia-2.8b",
+      "repo_id": "EleutherAI/pythia-2.8b",
+      "revision": "dbe7ae300a54abcdc475a33907b3dff81d25709f",
+      "model_parameters": 2800000000,
+      "model_width": 2560,
+      "fixed_rounds": 1,
+      "scale_rounds": 4
+    }
+  ],
+  "required_but_not_yet_implemented_arms": [
+    "matched_raw_exact_storage_same_total_bytes_under_capacity_pressure",
+    "fpvm_v1_fixed_state",
+    "latent_replay",
+    "foundation_state_factorial_interaction"
+  ]
+}

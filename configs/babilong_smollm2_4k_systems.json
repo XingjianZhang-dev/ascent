@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_smollm2_4k_systems",
+  "status": "systems_protocol_frozen_before_any_instrumented_systems_run",
+  "seed": 20260814,
+  "official_dataset": "RMT-team/babilong-1k-samples",
+  "dataset_config": "4k",
+  "panel_sha256": "44364cafaa775271bd6a6b84828e5ff096c322508551a3ade0e6a852398de0ba",
+  "evaluation_samples": 120,
+  "history_slots": 256,
+  "context_tokens": 8192,
+  "max_new_tokens": 8,
+  "systems_warmup_samples": 8,
+  "allowed_decode_orders": ["foundation_first", "ascent_first"],
+  "measured_repetitions_per_order": 3,
+  "conditions": {
+    "scale_relevant": {
+      "memory_source": "relevant",
+      "state_fact_slots_by_endpoint": {
+        "smollm2-135m-instruct": 1,
+        "smollm2-360m-instruct": 2,
+        "smollm2-1p7b-instruct": 3
+      }
+    }
+  },
+  "measurement_protocol": "Each fresh process verifies the exact model artifact and loads the frozen model, warms both arms on the same first eight samples, empties the CUDA allocator cache and resets peak statistics before each measured arm, synchronizes CUDA around timing, and runs all 120 rows. Three fresh processes use each arm order. Report retrieval CPU time separately, total and incremental peak allocated CUDA bytes, prompt/generation tokens, samples/s, and prompt tokens/s.",
+  "state_accounting": "Causal write-state payload is fixed across endpoints and measured from the bounded world state. Query-conditioned read-state payload grows with registered 1/2/3 fact slots and is measured from actual UTF-8 evidence plus 24 bytes metadata per slot. Report both separately and together; do not call fixed write-state growth.",
+  "endpoints": [
+    {
+      "name": "smollm2-135m-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+      "model_parameters": 134515008,
+      "hidden_size": 576,
+      "state_fact_slots": 1,
+      "batch_size": 8,
+      "model_artifact": {"path": "model.safetensors", "bytes": 269060552, "sha256": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c"}
+    },
+    {
+      "name": "smollm2-360m-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+      "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+      "model_parameters": 361821120,
+      "hidden_size": 960,
+      "state_fact_slots": 2,
+      "batch_size": 4,
+      "model_artifact": {"path": "model.safetensors", "bytes": 723674912, "sha256": "e6bffe7435d7ddc10fd3b9a9efd429dafbacb1cb17015fb5562664e7532bf86e"}
+    },
+    {
+      "name": "smollm2-1p7b-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "model_parameters": 1711376384,
+      "hidden_size": 2048,
+      "state_fact_slots": 3,
+      "batch_size": 2,
+      "model_artifact": {"path": "model.safetensors", "bytes": 3422777952, "sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"}
+    }
+  ],
+  "systems_gate": "All six repetitions per endpoint must reproduce accuracy exactly. Order-stratified timing medians must agree in direction. Retrieval must be below one millisecond per sample, total external-state/model-byte ratio must strictly decrease with scale, and measured ASCENT decode latency and CUDA peak must be practically bounded relative to full-context Foundation. Report token-volume advantage separately from architectural overhead."
+}

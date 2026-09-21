@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_qa78_certified_factorial_smollm2_8k",
+  "status": "prospective_certified_factorial_frozen_before_any_factorial_score",
+  "seed": 20260815,
+  "official_repository": "https://github.com/booydar/babilong",
+  "official_repository_commit": "7a6efee29f5cac03c3c410e6799c80fd2ffe3610",
+  "official_babi_archive_sha256": "50e529ad9c7144a2b176802f7496f5878d53b4e95d93cb0de957517fa84b09b2",
+  "official_babi_split": "tasks_1-20_v1-2/en-10k test",
+  "official_babi_source_sha256": {
+    "qa7": "a74d1f2b91329b2bae814d41cdac2fbdfdf0328562b7d8afa9a0fa576d461e27",
+    "qa8": "362a653c821a580fa315a85243b4f03bfa06fa7e0269b6f8e596f8fe6911646a"
+  },
+  "public_noise_dataset": "RMT-team/babilong",
+  "public_noise_dataset_revision": "ee0d588794c7ac098062ee0d247c733d62e94fe2",
+  "public_noise_source_sha256": {
+    "qa7_8k": "b1d525140599ab3fb2456375ae4d1c774e9030a2b86fe5e1d28e3b0e55fec8de",
+    "qa8_8k": "f425902655120f1b00f7f1281f8f50d37af42b32b0014732b841e46e8a6cc3a2"
+  },
+  "tasks": [
+    "qa7",
+    "qa8"
+  ],
+  "selection_rule": "Using only retained event streams, assign public bAbI questions with at least two relevant events to needs-medium-state when the one-slot and two-slot projections differ, needs-large-state when the two-slot and full projections differ, or multi-event-general. Within each task/category, sort by target-excluded canonical-row SHA-256 and allocate fixed 4/4/8 quotas per panel. Model scores and reference-answer values do not enter selection.",
+  "derivation_rule": "Remove recognized bAbI events from 192 unique released BABILong 8K backgrounds, then inject each selected public bAbI episode's complete chronological fact stream at even sentence quantiles. Reference targets never enter state construction, placement, or panel selection.",
+  "manifest_sha256": "d278e183104f401bd3e9fd0ecdbd7b7f1a930d05a8bb7c28534eac8d7adfba83",
+  "fresh_confirmation_source": {
+    "official_babi_split": "tasks_1-20_v1-2/en-10k train",
+    "official_babi_source_sha256": {
+      "qa7": "4a2508733bef9b38cfce4b3108a91b83cdee378de4a7370e4d32fea2dacd3b7d",
+      "qa8": "9518da2d3aa5d98bec33335e0d5ba3a22c2bd1929ee679085d37eb50a7652e4a"
+    },
+    "manifest_sha256": "81d2b7988953bb6de2a7d6d670a6fb2117d9e486e2ac7209f1e39df3be647c61",
+    "reason": "The original five confirmation panels were invalidated immediately when an automatic 8192-token total-context warning exposed that generation tokens had not been reserved. Fresh panels use different public bAbI episodes and were frozen before any fresh-confirmation score."
+  },
+  "certified_confirmation_source": {
+    "official_babi_split": "tasks_1-20_v1-2/en-10k train",
+    "official_babi_source_sha256": {
+      "qa7": "4a2508733bef9b38cfce4b3108a91b83cdee378de4a7370e4d32fea2dacd3b7d",
+      "qa8": "9518da2d3aa5d98bec33335e0d5ba3a22c2bd1929ee679085d37eb50a7652e4a"
+    },
+    "selection_panel_offset": 5,
+    "manifest_sha256": "96b89ca335789be8fe4f33fc1a7b8723974732fe52a4ab05a58e3f749c5fd5b4",
+    "reason": "These 160 public source questions are disjoint from all development and expressive-path confirmation questions and were frozen before any certified-path confirmation score."
+  },
+  "panel_sha256_by_name": {
+    "structured_development": "ba83d290f246714eece524fb55be5adc932b843562724294ab31b95f7daa6ad1",
+    "structured_certified_confirmation_1": "34734fe445b5365e9983d2b11dca3ef14352f3a5a65dac015f3b90721d25e5f3",
+    "structured_certified_confirmation_2": "c9b0ddd956bdeccab22f7818dcd64e54d8364e49791eccd69b2f230d8688f46e",
+    "structured_certified_confirmation_3": "c7a9618e97e711ef3bed6c02a833806a57b44d51a3fea753b0bd0edafc95001a",
+    "structured_certified_confirmation_4": "71e92b20b7f62031bfc530345ab82bbd5afdc0d2f1660249ab429c6e6888c6eb",
+    "structured_certified_confirmation_5": "f3f6983ae19ff5dcc4e0dbcefd2a3d62199fa1573c5cd2b0f96697feb11e9fa5"
+  },
+  "evaluation_samples": 32,
+  "rows_per_task": 16,
+  "rows_per_task_by_refinement_category": {
+    "needs_medium_state": 4,
+    "needs_large_state": 4,
+    "multi_event_general": 8
+  },
+  "history_slots": 256,
+  "context_tokens": 8192,
+  "max_new_tokens": 12,
+  "memory_selection": "Retain the most recent K query-relevant ownership-changing events and replay that suffix into a canonical inventory/count state. K grows 1, 2, 8 with Foundation scale; every larger state contains every smaller retained event plus earlier causal events.",
+  "scale_law": {
+    "state_fact_slots": [
+      1,
+      2,
+      8
+    ],
+    "slots_per_model_parameter": [
+      7.434114712315224e-09,
+      5.527593303563927e-09,
+      4.674599973911993e-09
+    ],
+    "strictly_decreasing_relative_state": true
+  },
+  "conditions": {
+    "certified_slots_1": {
+      "memory_source": "relevant",
+      "memory_representation": "structured_inventory",
+      "neutral_answer_format": true,
+      "readout_path": "certified_evidence",
+      "state_fact_slots_by_endpoint": {
+        "smollm2-135m": 1,
+        "smollm2-360m-node2": 1,
+        "smollm2-1p7b": 1
+      }
+    },
+    "certified_slots_2": {
+      "memory_source": "relevant",
+      "memory_representation": "structured_inventory",
+      "neutral_answer_format": true,
+      "readout_path": "certified_evidence",
+      "state_fact_slots_by_endpoint": {
+        "smollm2-135m": 2,
+        "smollm2-360m-node2": 2,
+        "smollm2-1p7b": 2
+      }
+    },
+    "certified_slots_8": {
+      "memory_source": "relevant",
+      "memory_representation": "structured_inventory",
+      "neutral_answer_format": true,
+      "readout_path": "certified_evidence",
+      "state_fact_slots_by_endpoint": {
+        "smollm2-135m": 8,
+        "smollm2-360m-node2": 8,
+        "smollm2-1p7b": 8
+      }
+    }
+  },
+  "endpoints": [
+    {
+      "name": "smollm2-135m",
+      "repo_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+      "model_parameters": 134515008,
+      "hidden_size": 576,
+      "state_fact_slots": 1,
+      "batch_size": 8,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 269060552,
+        "sha256": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c"
+      }
+    },
+    {
+      "name": "smollm2-360m-node2",
+      "repo_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+      "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+      "model_parameters": 361821120,
+      "hidden_size": 960,
+      "state_fact_slots": 2,
+      "batch_size": 4,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 723674912,
+        "sha256": "e6bffe7435d7ddc10fd3b9a9efd429dafbacb1cb17015fb5562664e7532bf86e"
+      }
+    },
+    {
+      "name": "smollm2-1p7b",
+      "repo_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "model_parameters": 1711376384,
+      "hidden_size": 2048,
+      "state_fact_slots": 8,
+      "batch_size": 2,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 3422777952,
+        "sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+      }
+    }
+  ],
+  "absolute_metric": "Exact task-balanced accuracy and paired ASCENT-minus-Foundation gain; every scale must retain a positive absolute gain.",
+  "primary_scaling_estimand": "Remaining-error elimination = (ASCENT accuracy - Foundation accuracy) / (1 - Foundation accuracy). This ceiling-aware estimand must increase with scale; absolute accuracy and gain remain co-primary reported quantities and are never described as exceeding 100%.",
+  "certified_readout": "For QA7/QA8 the registered target-blind ownership-state projection induces a deterministic posterior, so the certified evidence path returns its task-relevant count/inventory state directly. Foundation generation remains unchanged. The failed expressive language-model readout is retained as a separate interface boundary and is not promoted as certified evidence.",
+  "development_gate": "Parser/provenance pass, positive absolute gain at every endpoint, strictly increasing remaining-error elimination at both adjacent scales, and a positive log-parameter slope for remaining-error elimination. Development cannot count as confirmation.",
+  "confirmation_gate": "Across five untouched panels, all endpoint absolute-gain Student-t 95% lower bounds are positive; every panel's remaining-error-elimination curve is strictly increasing; both adjacent remaining-error-elimination increments and its log-parameter slope have positive two-sided panel-clustered Student-t 95% lower bounds (df=4).",
+  "frozen_controls_after_primary_confirmation": [
+    "one retained relevant event at every model scale",
+    "scale-matched irrelevant events",
+    "byte-matched raw event FIFO",
+    "generic lexical BM25 retrieval"
+  ],
+  "truncation_disclosure": "The 8192-token total context reserves 12 tokens for generation, so prompt input is capped at 8180 tokens. Left truncation removes the earliest background tokens while preserving the terminal question and answer boundary. Report truncation side, maximum prompt tokens, and count at the 8180-token input cap for each arm and endpoint.",
+  "interpretation": "Mechanism-matched public causal aggregation test of the proposal's preregistered certified evidence path. Earlier free-generation and expressive structured-readout developments remain stable failed interface boundaries and are not reused as certified confirmation. FPVM excluded.",
+  "factorial_source_config": {
+    "path": "configs/babilong_qa78_structured_smollm2_8k_frozen.json",
+    "sha256": "7d3f2a5591342ca9156d4ac7eda0fa618a326a4213cdaecdb0d54e2fe3bc64b5"
+  },
+  "factorial_design": {
+    "foundation_endpoints": [
+      "smollm2-135m",
+      "smollm2-360m-node2",
+      "smollm2-1p7b"
+    ],
+    "state_fact_slots": [
+      1,
+      2,
+      8
+    ],
+    "cells": 9,
+    "panels_per_cell": 5,
+    "estimand": "For each state size, compare ASCENT accuracy and ASCENT-minus-Foundation gain across model endpoints; then compare the registered co-scaled diagonal against fixed-state rows. Report the full matrix even if the foundation-by-state interaction is null or negative.",
+    "gate": "All provenance and Foundation-prediction equality checks pass; the co-scaled diagonal has positive adjacent gain increments; and any claim that larger models extract more value from the same state requires a positive panel-clustered interaction lower bound."
+  }
+}

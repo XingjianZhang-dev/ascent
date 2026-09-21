@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_smollm2_4k_robustness_confirmatory",
+  "status": "robustness_frozen_before_any_robustness_panel_model_score",
+  "seed": 20260814,
+  "official_repository": "https://github.com/booydar/babilong",
+  "official_repository_commit": "7a6efee29f5cac03c3c410e6799c80fd2ffe3610",
+  "official_dataset": "RMT-team/babilong-1k-samples",
+  "dataset_config": "4k",
+  "tasks": ["qa1", "qa2", "qa3"],
+  "panels": ["robustness_panel_1", "robustness_panel_2", "robustness_panel_3"],
+  "panel_sha256_by_name": {
+    "robustness_panel_1": "44364cafaa775271bd6a6b84828e5ff096c322508551a3ade0e6a852398de0ba",
+    "robustness_panel_2": "f769b2d3ea0e8a40fdcbcfc962f1e3a50abf40378ee7efeb1414a03e33d2cf67",
+    "robustness_panel_3": "e89047798b592e91047adc3230c1c86335e8176eeaf36db5bf49902646841c27"
+  },
+  "manifest_sha256": "271de5eb8f7979f6eca8e82cb3dcd3ccc1cda0f520855ec74b8f4f4a76f43adb",
+  "split_rule": "Sort each official task by source-row SHA-256. These untouched controls use positions 140:180, 180:220, and 220:260, disjoint from development and primary confirmation positions 0:140.",
+  "evaluation_samples": 120,
+  "history_slots": 256,
+  "context_tokens": 8192,
+  "max_new_tokens": 8,
+  "conditions": {
+    "scale_relevant": {
+      "memory_source": "relevant",
+      "state_fact_slots_by_endpoint": {
+        "smollm2-135m-instruct": 1,
+        "smollm2-360m-instruct": 2,
+        "smollm2-1p7b-instruct": 3
+      }
+    },
+    "fixed_relevant": {
+      "memory_source": "relevant",
+      "state_fact_slots_by_endpoint": {
+        "smollm2-135m-instruct": 1,
+        "smollm2-360m-instruct": 1,
+        "smollm2-1p7b-instruct": 1
+      }
+    },
+    "scale_irrelevant": {
+      "memory_source": "irrelevant",
+      "state_fact_slots_by_endpoint": {
+        "smollm2-135m-instruct": 1,
+        "smollm2-360m-instruct": 2,
+        "smollm2-1p7b-instruct": 3
+      }
+    },
+    "scale_corrupted": {
+      "memory_source": "corrupted",
+      "state_fact_slots_by_endpoint": {
+        "smollm2-135m-instruct": 1,
+        "smollm2-360m-instruct": 2,
+        "smollm2-1p7b-instruct": 3
+      },
+      "corruption": "Cycle every retained location bathroom->kitchen->bedroom->garden->hallway->office->bathroom; people, objects, event order, and slot count are unchanged."
+    }
+  },
+  "irrelevant_control": "Use the most recent non-support facts whose people and objects are absent from the relevant support trajectory; pad empty slots with a fixed target-free sentence. Selection never accesses the target.",
+  "endpoints": [
+    {
+      "name": "smollm2-135m-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+      "model_parameters": 134515008,
+      "hidden_size": 576,
+      "state_fact_slots": 1,
+      "batch_size": 8,
+      "model_artifact": {"path": "model.safetensors", "bytes": 269060552, "sha256": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c"}
+    },
+    {
+      "name": "smollm2-360m-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+      "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+      "model_parameters": 361821120,
+      "hidden_size": 960,
+      "state_fact_slots": 2,
+      "batch_size": 4,
+      "model_artifact": {"path": "model.safetensors", "bytes": 723674912, "sha256": "e6bffe7435d7ddc10fd3b9a9efd429dafbacb1cb17015fb5562664e7532bf86e"}
+    },
+    {
+      "name": "smollm2-1p7b-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "model_parameters": 1711376384,
+      "hidden_size": 2048,
+      "state_fact_slots": 3,
+      "batch_size": 2,
+      "model_artifact": {"path": "model.safetensors", "bytes": 3422777952, "sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"}
+    }
+  ],
+  "primary_robustness_estimands": [
+    "Panel-clustered difference between each adjacent gain increment under scale_relevant and fixed_relevant.",
+    "Within-endpoint panel-clustered ASCENT accuracy advantage of scale_relevant over scale_irrelevant.",
+    "Within-endpoint panel-clustered ASCENT accuracy advantage of scale_relevant over scale_corrupted."
+  ],
+  "robustness_gate": "Scale-relevant must replicate strict monotonicity. Its two adjacent gain increments must exceed fixed-state increments with positive panel-level 95% lower bounds. Relevant ASCENT accuracy must exceed both irrelevant and corrupted accuracy at all endpoints with positive panel-level lower bounds. Failures are reported and stop the corresponding causal claim.",
+  "interpretation": "Untouched causal controls for the confirmed BABILong scale-expansion result. FPVM excluded."
+}

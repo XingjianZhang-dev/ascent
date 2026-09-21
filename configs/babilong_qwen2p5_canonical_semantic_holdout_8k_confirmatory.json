@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_qwen2p5_canonical_semantic_holdout_8k_confirmation",
+  "status": "prospective_semantic_holdout_frozen_before_any_split_decoder_score",
+  "frozen_utc": "2026-08-15T02:02:00+08:00",
+  "seed": 20260815,
+  "tasks": ["qa2", "qa3"],
+  "panels": [
+    "canonical_train_8k_semantic_panel_1",
+    "canonical_train_8k_semantic_panel_2",
+    "canonical_train_8k_semantic_panel_3",
+    "canonical_train_8k_semantic_panel_4",
+    "canonical_train_8k_semantic_panel_5",
+    "canonical_train_8k_semantic_panel_6",
+    "canonical_train_8k_semantic_panel_7",
+    "canonical_train_8k_semantic_panel_8",
+    "canonical_train_8k_semantic_panel_9",
+    "canonical_train_8k_semantic_panel_10"
+  ],
+  "panel_sha256_by_name": {
+    "canonical_train_8k_semantic_panel_1": "093c7d54888de367ae403ba1f2023b83ccc63d7f4b9d34d0172821a938f78ae2",
+    "canonical_train_8k_semantic_panel_2": "078c9c1bd34b31a08ef5c4e44bf74e3889c8905d5691208c2491a2a61cd92a75",
+    "canonical_train_8k_semantic_panel_3": "4801c92b4d42d6b99ac75c5e698931dd4f04bb5960334f247a8ba172dada34cc",
+    "canonical_train_8k_semantic_panel_4": "62eed79533908991209dbe31d50d4ee1fb1be18935c2e0cd82bdd1348bf68ec3",
+    "canonical_train_8k_semantic_panel_5": "a6a95925fdd8ae71d67f06540d91035994272afc4a0a54d2f9a5a58e1e0a6b8b",
+    "canonical_train_8k_semantic_panel_6": "55126f096365fbbc41f1d443d0696ceaf24ce53c376232b980156b75a05d31e9",
+    "canonical_train_8k_semantic_panel_7": "e80b942d44285e736a5851960678cb1e6da67dc92de7b0b8984117bace13c7ab",
+    "canonical_train_8k_semantic_panel_8": "36bb4d4911432e4779450f4b6b8c033c6db52fe27427ae07ec039b7e6a81014d",
+    "canonical_train_8k_semantic_panel_9": "3f843f05a1730e37f84884f87bfe7c7ef004c516e0d62a014d8fe30b04547b7f",
+    "canonical_train_8k_semantic_panel_10": "e2c994db0a14b87d520f4075a59b72c881c43e27060e0f67bd99771446ea354d"
+  },
+  "panel_manifest": {
+    "path": "data/babilong_train_8k_semantic_holdout_confirmation/MANIFEST.json",
+    "sha256": "c99f1ec1d886dab7520ecaf9a3d037d26f3fa5709bca0f06b38345a2cf32f80d"
+  },
+  "source": {
+    "repository": "RMT-team/babilong-train-5k-samples",
+    "revision": "b3513ef7c25c54ce706054530d47668c532019d6",
+    "dataset_config": "8k",
+    "qa2_json_sha256": "f1af2a9d35a928a2ad928151a77c097f61dfe75abc3175f816f80888d537d560",
+    "qa3_json_sha256": "a17135285c5bb2e91b075ebd20c10c3f0798abd0c642a03bd97d7858b1054efc",
+    "scope_guardrail": "This public split was generated for training long-context systems. Neither frozen Qwen2.5 nor ASCENT was trained or tuned on it, but it is reported only as an independent-semantic stress confirmation, not as an official BABILong test score or a fair Q-RAG test comparison."
+  },
+  "independence_scope": {
+    "decoder_scores": "No decoder score on any selected public training-generation row was visible at freeze.",
+    "semantic_overlap_with_full_official_8k_test_pool": 0,
+    "selection_rule": "Exclude candidates whose task, normalized question, and target-blind parsed event sequence match the full pinned official 8K QA2/QA3 test pool; then take ten disjoint 40-row-per-task blocks in SHA-256 canonical-row order.",
+    "score_or_target_used_for_selection": false,
+    "current_16k_confirmation_visibility": "Partial official 16K context-instantiation scores were visible, but they reuse official test semantics and no public training-generation score. This semantic holdout was frozen as a distinct supportive family before any of its outcomes."
+  },
+  "evaluation_samples": 80,
+  "history_slots": 256,
+  "context_tokens": 8192,
+  "max_new_tokens": 8,
+  "allowed_decode_orders": ["foundation_first"],
+  "conditions": {
+    "canonical_coscale": {
+      "memory_source": "relevant",
+      "memory_representation": "canonical_event_facts",
+      "state_fact_slots_by_endpoint": {
+        "qwen2p5-0p5b-instruct": 1,
+        "qwen2p5-1p5b-instruct": 2,
+        "qwen2p5-3b-instruct": 3
+      }
+    }
+  },
+  "endpoints": [
+    {
+      "name": "qwen2p5-0p5b-instruct",
+      "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "model_parameters": 494032768,
+      "hidden_size": 896,
+      "state_fact_slots": 1,
+      "batch_size": 2,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 988097824,
+        "sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe"
+      }
+    },
+    {
+      "name": "qwen2p5-1p5b-instruct",
+      "repo_id": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "model_parameters": 1543714304,
+      "hidden_size": 1536,
+      "state_fact_slots": 2,
+      "batch_size": 1,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 3087467144,
+        "sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee"
+      }
+    },
+    {
+      "name": "qwen2p5-3b-instruct",
+      "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+      "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "model_parameters": 3085938688,
+      "hidden_size": 2048,
+      "state_fact_slots": 3,
+      "batch_size": 1,
+      "model_artifacts": [
+        {
+          "path": "model-00001-of-00002.safetensors",
+          "bytes": 3968658944,
+          "sha256": "67347b23fb4165b652eb6611f5e1f2a06dfcddba8e909df1b2b0b1857bee06c2"
+        },
+        {
+          "path": "model-00002-of-00002.safetensors",
+          "bytes": 2203268048,
+          "sha256": "a40d941d0e7e0b966ad8b62bb6d6b7c88cce1299197b599d9d0a4ce59aabfc1d"
+        }
+      ]
+    }
+  ],
+  "primary_analysis": {
+    "estimand": "Panel-clustered change in task-balanced ASCENT-minus-Foundation absolute gain between adjacent co-scaled endpoints on semantic-holdout QA2+QA3.",
+    "test": "One-sided paired t-test over ten panel-level gain differences; report two-sided 95% Student-t confidence intervals.",
+    "multiplicity": "Holm correction at family-wise alpha 0.05 across the two directional adjacent contrasts.",
+    "gate": "Both adjacent means positive and both Holm-adjusted one-sided p-values below 0.05, with every panel and task retained."
+  },
+  "secondary_analysis": {
+    "remaining_error_elimination": "Descriptive only, frozen before scores.",
+    "by_task": "QA2 and QA3 effect sizes and intervals without changing the pooled primary gate.",
+    "failure_accounting": "Retain every invalid output and regression."
+  },
+  "decision_rule": "Retain unchanged whether it passes or fails; never relabel this public training-generation split as an official test benchmark."
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_ruler_niah_scale_factorial_confirmatory",
+  "status": "preregistered_before_any_factorial_endpoint_execution",
+  "official_generator": "NVIDIA RULER scripts/data/prepare.py synthetic NIAH",
+  "generator_random_seed": 161803,
+  "dataset_manifest_sha256": null,
+  "samples_per_task": 100,
+  "calibration_samples_per_task": 20,
+  "test_samples_per_task": 80,
+  "memory_slots": 256,
+  "query_context_tokens": 128,
+  "fixed_replay_tokens": 16,
+  "relative_injection_depth": 0.25,
+  "fusion_grid_size": 21,
+  "epsilon": 1e-12,
+  "tasks": [
+    "niah_single_1",
+    "niah_single_2",
+    "niah_single_3",
+    "niah_multikey_1",
+    "niah_multikey_2",
+    "niah_multikey_3",
+    "niah_multiquery"
+  ],
+  "task_sha256": {
+    "niah_single_1": "a0ba2a898b7ef49ba6a476ed135cc216d5412039ee8c526460c0ba563cc90c5a",
+    "niah_single_2": "3f25859cc2af887ab16e016027ff0d4b2cc8234930675238e41f1516ab32af0f",
+    "niah_single_3": "5a59d61d17cafe676dc46a4a4b60e825d50b6c0a15d6e9b3ecd7b73c27b0ca9f",
+    "niah_multikey_1": "ade65448ce1a170c1a301b5dad59ed0529d2176b5dbdc4ec16d69979e1aa5103",
+    "niah_multikey_2": "2047f4a709362692ddd05715d9d4fa2b6fa63898b95fe08bc698816abb33c2e9",
+    "niah_multikey_3": "7d3d36629867a8d62006a552253ab7f5bac7a08dece9f6abb0ea9475f4044fa3",
+    "niah_multiquery": "1218dc10326105732077cf4ebdad3b091fa0539f6d37581c54b21843255a35e2"
+  },
+  "endpoints": [
+    {
+      "name": "pythia-410m",
+      "repo_id": "EleutherAI/pythia-410m",
+      "revision": "bba6a464f54bbf08fc174cfb351d9794d58af21d",
+      "scale_replay_tokens": 64
+    },
+    {
+      "name": "pythia-2.8b",
+      "repo_id": "EleutherAI/pythia-2.8b",
+      "revision": "dbe7ae300a54abcdc475a33907b3dff81d25709f",
+      "scale_replay_tokens": 64
+    }
+  ],
+  "primary_gates": {
+    "same_memory_treatments": "Both endpoints use exactly 16-token Fixed and 64-token Rich replay.",
+    "rich_minus_fixed_each_task_endpoint": "Sample-weighted paired normal and bootstrap 95% CI lower bounds > 0.",
+    "model_by_memory_interaction_each_task": "[(Rich-Fixed)_2.8B - (Rich-Fixed)_410M] paired normal and bootstrap 95% CI lower bounds > 0.",
+    "macro_interaction": "Equal-task hierarchical sample-bootstrap 95% CI lower bound > 0.",
+    "metric_scope": "Teacher-forced answer-token NLL; exact raw parser and official generation are separate boundaries."
+  },
+  "interpretation": "This is the decisive memory-by-foundation factorial. A positive interaction cannot be explained by allocating more replay tokens only to the larger endpoint. FPVM is excluded by user scope."
+}

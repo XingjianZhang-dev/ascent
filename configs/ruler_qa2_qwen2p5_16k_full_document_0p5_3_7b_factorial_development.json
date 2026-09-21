@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_official_ruler_qa2_hotpot_qwen2p5_16k_full_document_0p5_3_7b_factorial_development",
+  "status": "development_0p5_3_7b_final_audit_passed_frozen_before_any_seed388803_model_score",
+  "architecture": "query_conditioned_complete_documents_plus_qwen2_latent_replay",
+  "state_serialization": "full_documents",
+  "state_tokenization": "Each document is tokenized independently and followed by the independently tokenized fixed double-newline delimiter before token-id concatenation. This constructively prevents BPE boundary changes when a new document is appended.",
+  "task_name": "qa_2",
+  "data_seed": 388803,
+  "task_sha256": "5ac6fa1e9e9e055a03ab34f4ca22eed1b090743f8b32e5448e5411ee79298dfc",
+  "data_generator_commit": "c3f5e3b4f87f97e048793bb510a3a6b19a46bf3a",
+  "data_generator_file_sha256": "f00c0b59cf8698e90831c2c4f40f2a30f2469534c27455808c717281d0",
+  "source_dataset_sha256": "e3da074df24e8369009918aa5cdbdd254dadcde4c63f7569d36afd6f2268caa8",
+  "samples_per_task": 60,
+  "calibration_samples": 20,
+  "test_samples": 40,
+  "query_context_tokens": 32768,
+  "bm25_seed_documents": 2,
+  "relative_injection_depth": 0.875,
+  "fusion_grid_size": 21,
+  "epsilon": 1e-12,
+  "redesign_rationale": "The untouched seed-387803 0.5B/1.5B/3B complete-state panel established a positive global Foundation-by-state interaction and strong 0.5B/3B gains, but the 1.5B safety gate closed. This separately generated untouched seed tests whether the middle result is checkpoint-local by extending the same Qwen2.5 family to 7B. It supplements and never replaces the retained 1.5B failure.",
+  "reader_contract": "The reader sees only the official prompt and question, never the answer or support labels. Deterministic BM25 seeds and exact title links produce one nested document order; complete documents are append-only across states.",
+  "dual_path_contract": "The identical charged complete-document state feeds a compact evidence distribution and Qwen2 latent replay at relative depth 0.875. A sample-clustered safe simplex includes exact Foundation and opens only for a positive paired 95% calibration LCB.",
+  "memory_states": [
+    {"name": "graph_small", "documents": 2, "replay_tokens": 512},
+    {"name": "graph_mid", "documents": 3, "replay_tokens": 774},
+    {"name": "graph_large", "documents": 4, "replay_tokens": 1024}
+  ],
+  "state_budget_rule": {
+    "formula": "B_s = round_half_up(512 * (d_s / 896)^0.5), giving 512/774/1024 for hidden widths 896/2048/3584",
+    "selection": "A prospectively fixed width-sublinear law grows absolute ASCENT capacity at every endpoint while targeting decreasing capacity bytes per Foundation parameter. The final score-free audit must show all selected documents are complete; otherwise this design fails before scoring.",
+    "charged_bytes": "actual replay tokens * (hidden_size * 2 bfloat16 bytes + 8 int64 token-id bytes)",
+    "maximum_budget_charged_bytes": [921600, 3176496, 7348224],
+    "maximum_budget_bytes_per_parameter": [0.0018654633046526986, 0.0010293451429712916, 0.0009648889211295412],
+    "observed_mean_co_scaled_state_tokens": [240.11666666666667, 368.75, 498.3333333333333],
+    "observed_mean_co_scaled_charged_bytes_per_parameter": [0.0008748609971, 0.0004904018365, 0.0004695667113],
+    "observed_mean_fixed_small_state_charged_bytes_per_parameter": [0.0008748609971, 0.0003193319439, 0.0002262557729],
+    "relative_cost_gate": "Maximum-budget, observed actual co-scaled, and fixed-small-state bytes per parameter must each strictly decrease. Absolute co-scaled state capacity must strictly increase."
+  },
+  "score_free_data_audit": {
+    "status": "passed_before_any_seed388803_model_score",
+    "answer_outputs_must_not_be_read": true,
+    "support_labels_must_not_be_read": true,
+    "foundation_prompt_max_tokens": 16353,
+    "documents_per_sample_range": [95, 125],
+    "state_token_ranges": {
+      "graph_small": [135, 449],
+      "graph_mid": [161, 733],
+      "graph_large": [267, 917]
+    },
+    "all_selected_documents_complete": true,
+    "all_state_tokens_within_budget": true,
+    "graph_mid_changes_selection_vs_graph_small_rows": 31,
+    "graph_large_changes_selection_vs_graph_mid_rows": 32,
+    "shared_document_ranking_sha256": "44846e96db3a73d4fa60df1eafe7e75f27760425f6ac1b8eb01988be16cc4e87",
+    "cross_tokenizer_graph_token_sha256": {
+      "graph_small": "483542d52b02b71959d13e3012a77bb226087f2e640bf2b72847978de663810d",
+      "graph_mid": "dd51ebf1f41d46291200a064ab12f9a8e6f4b5642b01b56611229bf7603f25e4",
+      "graph_large": "b5c879e153d2aede3e363154e193be26c59243da65ec766ef4c4259417a0d22c"
+    },
+    "cross_tokenizer_graph_tokens_identical": true
+  },
+  "primary_estimand": "paired per-example Foundation minus effective dual-path ASCENT answer NLL on 40 untouched test rows",
+  "factorial_estimand": "Adjacent and global Foundation-by-state interactions from the complete 3x3 panel, each requiring a positive paired 95% LCB",
+  "controls": {
+    "foundation": "unchanged complete official 16K prompt",
+    "fixed": "complete graph_small state on every Foundation",
+    "memory_only_scaling": "all three complete graph states on every Foundation",
+    "query_only": "co-scale-matched complete BM25 documents without graph expansion",
+    "irrelevant": "co-scale-matched complete bottom-ranked documents",
+    "path_ablations": "certified-only and latent-only NLL saved before fusion"
+  },
+  "development_success_rule": {
+    "co_scaled_gain": "Every diagonal safe gate opens and every endpoint NLL-gain LCB is positive.",
+    "scale_complementarity": "Both adjacent diagonal-gain LCBs and the log-parameter slope LCB are positive.",
+    "foundation_state_interaction": "Both adjacent factorial-interaction LCBs and the global interaction LCB are positive.",
+    "fixed_control": "Co-scaled beats complete Graph Small at 3B and 7B with positive LCBs.",
+    "retrieval_controls": "Graph beats query-only at 7B and irrelevant at every endpoint with positive LCBs.",
+    "dual_path": "A diagonal gate selects certified weight somewhere and latent weight somewhere.",
+    "systems": "All exact hash/commit/clean-tree/native/no-label/shared-state/prefix/cross-Foundation identity, increasing absolute capacity, and decreasing-relative-state gates pass."
+  },
+  "promotion_rule": "Only development_pass=true authorizes official generation and three new confirmation seeds. Seed 388803 cannot be tuned into confirmation.",
+  "failure_rule": "Any missed gate is retained as failure; seed 387803 and its 1.5B failure remain in all reports regardless of this extension.",
+  "ceiling_policy": "Continuous answer NLL is primary. Later accuracy reports absolute gain and prospectively frozen remaining-error elimination; perfect ASCENT is 100% error elimination, never a demand above 1.0. A perfect Foundation cell is saturated/undefined rather than failed.",
+  "endpoints": [
+    {
+      "name": "qwen2p5-0p5b-instruct",
+      "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "model_parameters": 494032768,
+      "hidden_size": 896,
+      "scale_state": "graph_small",
+      "model_artifact": {"path": "model.safetensors", "bytes": 988097824, "sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe"}
+    },
+    {
+      "name": "qwen2p5-3b-instruct",
+      "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+      "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "model_parameters": 3085938688,
+      "hidden_size": 2048,
+      "scale_state": "graph_mid",
+      "model_artifacts": [
+        {"path": "model-00001-of-00002.safetensors", "bytes": 3968658944, "sha256": "67347b23fb4165b652eb6611f5e1f2a06dfcddba8e909df1b2b0b1857bee06c2"},
+        {"path": "model-00002-of-00002.safetensors", "bytes": 2203268048, "sha256": "a40d941d0e7e0b966ad8b62bb6d6b7c88cce1299197b599d9d0a4ce59aabfc1d"}
+      ]
+    },
+    {
+      "name": "qwen2p5-7b-instruct",
+      "repo_id": "Qwen/Qwen2.5-7B-Instruct",
+      "source": "ModelScope official Qwen namespace",
+      "revision": "master snapshot retrieved 2026-08-14; content locked by per-shard SHA-256",
+      "model_parameters": 7615616512,
+      "hidden_size": 3584,
+      "scale_state": "graph_large",
+      "model_index_tensor_payload_bytes": 15231233024,
+      "model_artifacts": [
+        {"path": "model-00001-of-00004.safetensors", "bytes": 3945441440, "sha256": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7"},
+        {"path": "model-00002-of-00004.safetensors", "bytes": 3864726352, "sha256": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185"},
+        {"path": "model-00003-of-00004.safetensors", "bytes": 3864726424, "sha256": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5"},
+        {"path": "model-00004-of-00004.safetensors", "bytes": 3556377672, "sha256": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd"}
+      ],
+      "artifact_integrity": "339/339 indexed tensors present exactly once; summed tensor payload bytes equal model index metadata total_size"
+    }
+  ]
+}

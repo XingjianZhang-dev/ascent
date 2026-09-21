@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_smollm2_4k_scale_expanding_development",
+  "status": "development_frozen_before_any_babilong_model_score",
+  "seed": 20260814,
+  "official_repository": "https://github.com/booydar/babilong",
+  "official_repository_commit": "7a6efee29f5cac03c3c410e6799c80fd2ffe3610",
+  "official_dataset": "RMT-team/babilong-1k-samples",
+  "dataset_config": "4k",
+  "tasks": ["qa1", "qa2", "qa3"],
+  "supporting_facts_by_task": {"qa1": 1, "qa2": 2, "qa3": 3},
+  "panel": "development",
+  "panel_sha256": "2bbfeb2f17d5290ba0832a7d9e47adf17889b4828437e80c599bb83f5d6aeb1e",
+  "manifest_sha256": "9a026a96cf649be1f5e5c69df721f1e8aaf077b439dae77eebec81eadd9452ba",
+  "source_jsonl_sha256": {
+    "qa1": "b9d38c2701f9e446cd193f36449361a0ec8a0b3e770ad446b4975f7e3772cedf",
+    "qa2": "9f0c2ed3f4f142f50055adffd5f42525004fb8596e36f37422e5638d751d311b",
+    "qa3": "fc9426a6404ab0ddf27abdb984349239b00c57c8bcb3956332df8552c43b0af8"
+  },
+  "split_rule": "Sort each task by SHA-256 of canonical source row; development uses positions 0:20 and confirmation panels use untouched positions 20:60, 60:100, and 100:140.",
+  "evaluation_samples": 60,
+  "history_slots": 256,
+  "context_tokens": 8192,
+  "max_new_tokens": 8,
+  "memory_selection": "Retain the most recent K query-relevant causal facts, where K grows 1, 2, 3 with model scale. Neither question parsing nor retrieval accesses the target answer.",
+  "endpoints": [
+    {
+      "name": "smollm2-135m-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+      "model_parameters": 134515008,
+      "hidden_size": 576,
+      "state_fact_slots": 1,
+      "batch_size": 8,
+      "model_artifact": {"path": "model.safetensors", "bytes": 269060552, "sha256": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c"}
+    },
+    {
+      "name": "smollm2-360m-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+      "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+      "model_parameters": 361821120,
+      "hidden_size": 960,
+      "state_fact_slots": 2,
+      "batch_size": 4,
+      "model_artifact": {"path": "model.safetensors", "bytes": 723674912, "sha256": "e6bffe7435d7ddc10fd3b9a9efd429dafbacb1cb17015fb5562664e7532bf86e"}
+    },
+    {
+      "name": "smollm2-1p7b-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "model_parameters": 1711376384,
+      "hidden_size": 2048,
+      "state_fact_slots": 3,
+      "batch_size": 2,
+      "model_artifact": {"path": "model.safetensors", "bytes": 3422777952, "sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"}
+    }
+  ],
+  "primary_metric": "Exact extracted-location accuracy; ASCENT-minus-Foundation paired gain, task-balanced over official BABILong QA1/QA2/QA3 4K.",
+  "development_gate": "Every endpoint gain and both adjacent gain differences must be positive. A pass can only justify running the three untouched confirmation panels; it is not confirmatory evidence.",
+  "interpretation": "Structurally different compositional-memory development test for scale-expanding ASCENT on the official SmolLM2 family. FPVM excluded."
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_ruler_niah_4k_confirmatory",
+  "status": "preregistered_before_independent_seed_execution",
+  "official_generator": "NVIDIA RULER scripts/data/prepare.py synthetic NIAH",
+  "generator_random_seed": 271828,
+  "dataset_manifest_sha256": null,
+  "samples_per_task": 100,
+  "calibration_samples_per_task": 20,
+  "test_samples_per_task": 80,
+  "memory_slots": 256,
+  "query_context_tokens": 128,
+  "fixed_replay_tokens": 16,
+  "relative_injection_depth": 0.25,
+  "fusion_grid_size": 21,
+  "epsilon": 1e-12,
+  "tasks": [
+    "niah_single_1",
+    "niah_single_2",
+    "niah_single_3",
+    "niah_multikey_1",
+    "niah_multikey_2",
+    "niah_multikey_3",
+    "niah_multiquery"
+  ],
+  "task_sha256": {
+    "niah_single_1": "a45b90afcc6dd08fe739aa345348c4c5cd390be1f9f42d0a2d493c313ee22481",
+    "niah_single_2": "7cc86854c24c688fbb57e73944abef9a4ed0340985f56b469103a506a156762e",
+    "niah_single_3": "15307a40740a4a9151eb2be6a8305652a571814ec7dd4f175adb7c6091dea9b8",
+    "niah_multikey_1": "0917bf79f9fcc2cd5653806ac686a998e7f64140643ae0558094017a510f0b21",
+    "niah_multikey_2": "9d9426b32775af85ff1ea4e3c47bbba2663cb95a8fab1e13ef5573228d497c25",
+    "niah_multikey_3": "61be6a5a237611bd3d00daa0713867a7567dcd0cd0b6e021b57579dd040324da",
+    "niah_multiquery": "04e5522ae2b258ea7e8313301d501b5fc751a1df0cf9530bb2ae85093787441e"
+  },
+  "endpoints": [
+    {
+      "name": "pythia-410m",
+      "repo_id": "EleutherAI/pythia-410m",
+      "revision": "bba6a464f54bbf08fc174cfb351d9794d58af21d",
+      "scale_replay_tokens": 16
+    },
+    {
+      "name": "pythia-2.8b",
+      "repo_id": "EleutherAI/pythia-2.8b",
+      "revision": "dbe7ae300a54abcdc475a33907b3dff81d25709f",
+      "scale_replay_tokens": 64
+    }
+  ],
+  "primary_gates": {
+    "latent_only_scale_each_task_endpoint": "paired answer-token NLL gain 95% CI lower bound > 0",
+    "large_endpoint_scale_minus_fixed_each_task": "paired answer-token NLL gain 95% CI lower bound > 0",
+    "matched_raw_boundary": "exact parser accuracy reported and never claimed as beaten",
+    "metric_scope": "teacher-forced answer-token NLL; official autoregressive exact match remains pending"
+  },
+  "interpretation": "This dataset was generated after development with an independent seed and its hashes were frozen before neural execution. FPVM is excluded by user scope."
+}

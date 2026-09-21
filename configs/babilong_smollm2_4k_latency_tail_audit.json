@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_smollm2_4k_latency_tail_audit",
+  "status": "latency_tail_audit_frozen_before_any_audit_run",
+  "seed": 20260814,
+  "official_dataset": "RMT-team/babilong-1k-samples",
+  "dataset_config": "4k",
+  "panel_sha256": "44364cafaa775271bd6a6b84828e5ff096c322508551a3ade0e6a852398de0ba",
+  "evaluation_samples": 120,
+  "history_slots": 256,
+  "context_tokens": 8192,
+  "max_new_tokens": 8,
+  "systems_warmup_samples": 8,
+  "allowed_decode_orders": ["foundation_first", "ascent_first"],
+  "audit_repetitions_per_order": 3,
+  "conditions": {
+    "scale_relevant": {
+      "memory_source": "relevant",
+      "state_fact_slots_by_endpoint": {
+        "smollm2-360m-instruct": 2
+      }
+    }
+  },
+  "prior_result_retained": {
+    "reference_commit": "ef2322d093679b3b3bbb1f1ed3f090c7ae046424",
+    "reference_archive_sha256": "e110b963d095b47e94388e37a30b675a45391fe6050480bf235a22d7da4f2995",
+    "reference_repetitions": 6,
+    "reference_retrieval_microseconds_per_sample": [
+      953.3630528797706,
+      1075.12486865744,
+      951.7187679496905,
+      954.6623836892346,
+      949.3675005311767,
+      948.8524364617964
+    ],
+    "reference_strict_every_run_below_1ms_gate": false
+  },
+  "endpoint": {
+    "name": "smollm2-360m-instruct",
+    "repo_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+    "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+    "model_parameters": 361821120,
+    "hidden_size": 960,
+    "state_fact_slots": 2,
+    "batch_size": 4,
+    "model_artifact": {
+      "path": "model.safetensors",
+      "bytes": 723674912,
+      "sha256": "e6bffe7435d7ddc10fd3b9a9efd429dafbacb1cb17015fb5562664e7532bf86e"
+    }
+  },
+  "endpoints": [
+    {
+      "name": "smollm2-360m-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+      "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+      "model_parameters": 361821120,
+      "hidden_size": 960,
+      "state_fact_slots": 2,
+      "batch_size": 4,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 723674912,
+        "sha256": "e6bffe7435d7ddc10fd3b9a9efd429dafbacb1cb17015fb5562664e7532bf86e"
+      }
+    }
+  ],
+  "audit_protocol": "On the original second GPU node, run six additional fresh processes: three per decode order. Each process verifies the frozen artifact and panel, loads the model, warms both arms on eight rows, and evaluates all 120 rows. Preserve the prior 1.075 ms observation. Report all twelve old-plus-new retrieval measurements, prediction equality, decode ratios, and CUDA peaks.",
+  "audit_gate": "All six new runs must reproduce predictions and accuracy exactly. Report the new maximum, median, and count above 1 ms without replacing the original strict gate. The audit supports an isolated-tail interpretation only if at most one of all twelve measurements exceeds 1 ms and the combined median remains below 1 ms.",
+  "interpretation": "A frozen independent repeat of the single strict latency-tail miss. It cannot retroactively turn the original every-run gate into a pass."
+}

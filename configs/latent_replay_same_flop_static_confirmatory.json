@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_latent_replay_same_flop_static_confirmatory",
+  "status": "three_seed_confirmation_frozen_before_any_registered_seed_score",
+  "seed": 20260941,
+  "seeds": [20260941, 20260951, 20260961],
+  "development_config": "configs/latent_replay_same_flop_static_development_v2.json",
+  "development_decision": "V2 passed at both endpoints with positive paired dynamic-over-static lower bounds and a positive dynamic scale-interaction lower bound. No registered confirmation seed was accessed during V1/V2 tuning.",
+  "num_labels": 16,
+  "crossover_probability": 0.18,
+  "fixed_rounds": 1,
+  "rich_rounds": 4,
+  "relative_injection_depth": 0.25,
+  "replay_mode": "map_full_sequence",
+  "calibration_episodes": 2048,
+  "test_episodes": 8192,
+  "batch_size": 32,
+  "static_adapter_steps": 128,
+  "static_adapter_batch_size": 32,
+  "static_adapter_learning_rate": 0.01,
+  "candidate_texts": [" A", " B", " C", " D", " E", " F", " G", " H", " I", " J", " K", " L", " M", " N", " O", " P"],
+  "codebook_template": "A retrieved memory states that the hidden value label is{candidate}",
+  "text_replay_template": "A retrieved memory states that the hidden value label is{candidate}. {query}",
+  "query_template": "Episode query. Key {key}. The hidden value label is",
+  "static_adapter_definition": "Freeze the foundation and optimize one episode-invariant replay block on calibration episodes only, selecting the minimum full-calibration-NLL checkpoint. The block receives no episodic signal or test target. Its inference replay token count, width, injection layer, frozen suffix, candidate projection, and mixture-gate protocol exactly match dynamic ASCENT.",
+  "same_flop_boundary": "Inference-FLOP equality covers replay_from_hidden plus the candidate projection. Offline static training, dynamic memory decoding, parameter/state bytes, and transient memory are separately reported.",
+  "endpoints": [
+    {"name": "pythia-410m", "repo_id": "EleutherAI/pythia-410m", "revision": "bba6a464f54bbf08fc174cfb351d9794d58af21d", "model_parameters": 405334016, "model_artifact": {"path": "model.safetensors", "bytes": 1621370224, "sha256": "1c88b0bf18293fae0e09c1d978b14b1adb08cb6a83154463133982fe460fcea4"}},
+    {"name": "pythia-2.8b", "repo_id": "EleutherAI/pythia-2.8b", "revision": "dbe7ae300a54abcdc475a33907b3dff81d25709f", "model_parameters": 2800000000, "model_artifact": {"path": "model.safetensors", "bytes": 5550463728, "sha256": "462f2b960062159c3779eb1cfe5829783ea72da66b020bcbabf86bc6dd33063c"}}
+  ],
+  "confirmation_gates": [
+    "Every seed-endpoint paired 95% lower bound for dynamic rich ASCENT over the static adapter is positive",
+    "At each endpoint, the seed-clustered t(2) 95% lower bound for dynamic rich ASCENT over the static adapter is positive",
+    "The seed-clustered t(2) 95% lower bound for the large-minus-small dynamic rich gain is positive",
+    "Every seed has exact replay-token-count, injection-layer, frozen-suffix, config, model-hash, label, signal, query-input, clean-commit, and test-label gates"
+  ],
+  "interpretation": "Confirmatory same-inference-FLOP static-adapter control for ASCENT latent replay. FPVM excluded."
+}

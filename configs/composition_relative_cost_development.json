@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "experiment": "two_fact_addition_relative_cost_coscale_development",
+  "status": "development_redesign_after_one_two_four_adjacent_failure",
+  "seed": 20260901,
+  "num_values": 8,
+  "num_answers": 15,
+  "crossover_probability": 0.18,
+  "fixed_rounds": 1,
+  "rich_rounds": 4,
+  "maximum_rounds": 4,
+  "relative_injection_depth": 0.25,
+  "calibration_episodes": 2048,
+  "test_episodes": 8192,
+  "batch_size": 64,
+  "value_texts": [" 0", " 1", " 2", " 3", " 4", " 5", " 6", " 7"],
+  "answer_texts": [" 0", " 1", " 2", " 3", " 4", " 5", " 6", " 7", " 8", " 9", " 10", " 11", " 12", " 13", " 14"],
+  "first_codebook_template": "A retrieved memory states that the first addend is{value}.",
+  "second_codebook_template": "A retrieved memory states that the second addend is{value}.",
+  "query_template": "Episode query {key}. Add the two stored nonnegative integers. Their sum is",
+  "text_replay_template": "A retrieved memory states that the first addend is{first}. A retrieved memory states that the second addend is{second}. {query}",
+  "state_budget_rule": {"formula": "R_s = round_half_up(R0 * (N_s / N0)^alpha)", "R0_rounds_per_fact": 2, "N0_parameters": 405334016, "alpha": 0.4, "rounding": "floor(x + 0.5)", "registered_rounds": [2, 3, 4], "relative_cost": "R_s/N_s decreases at both adjacent transitions"},
+  "endpoints": [
+    {"name": "pythia-410m", "repo_id": "EleutherAI/pythia-410m", "revision": "bba6a464f54bbf08fc174cfb351d9794d58af21d", "model_parameters": 405334016, "scale_rounds": 2, "model_artifact": {"path": "model.safetensors", "bytes": 1621370224, "sha256": "1c88b0bf18293fae0e09c1d978b14b1adb08cb6a83154463133982fe460fcea4"}},
+    {"name": "pythia-1b", "repo_id": "EleutherAI/pythia-1b", "revision": "c0fea4b917615c60370c0aeb76877f18fef30ab3", "model_parameters": 1000000000, "scale_rounds": 3, "model_artifact": {"path": "pytorch_model.bin", "bytes": 2090751965, "sha256": "d2523eec75f5c1236ed7787bde500935c1f87874119c528cedc9f445476d38c2"}},
+    {"name": "pythia-2.8b", "repo_id": "EleutherAI/pythia-2.8b", "revision": "dbe7ae300a54abcdc475a33907b3dff81d25709f", "model_parameters": 2800000000, "scale_rounds": 4, "model_artifact": {"path": "model.safetensors", "bytes": 5550463728, "sha256": "462f2b960062159c3779eb1cfe5829783ea72da66b020bcbabf86bc6dd33063c"}}
+  ],
+  "primary_gate": "All endpoint gain LCB95 values, both adjacent gain-difference LCB95 values, and the gain-on-log-parameter slope LCB95 must exceed zero under normal and bootstrap intervals.",
+  "strong_raw_boundary": "Clean-KV text and zero-NLL clean-KV oracle are reported; ASCENT does not claim exact raw-storage superiority."
+}

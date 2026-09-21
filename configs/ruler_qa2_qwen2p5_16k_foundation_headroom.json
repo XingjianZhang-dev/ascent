@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "experiment": "official_ruler_qa2_hotpot_qwen2p5_16k_foundation_headroom",
+  "status": "foundation_only_headroom_frozen_before_any_qa_model_score",
+  "selection_basis": "NVIDIA RULER defines QA over SQuAD or HotpotQA and documents that its default short-context tasks can approach saturation. HotpotQA was selected before any QA model score because it adds the missing realistic multi-hop QA category and is structurally less likely to saturate than single-step multikey extraction.",
+  "task_name": "qa_2",
+  "official_metric": "string_match_part",
+  "prompt_mode": "chat",
+  "data_seed": 385803,
+  "data_generator_commit": "c3f5e3b4f87f97e048793bb510a3a6b19a46bf3a",
+  "data_generator_file": {
+    "path": "scripts/data/synthetic/qa.py",
+    "sha256": "f00c0b59cf8698e90831c2c4f40f2a30f2469534c27455808c717281d0"
+  },
+  "source_dataset": {
+    "name": "HotpotQA distractor validation v1",
+    "official_primary_url": "http://curtis.ml.cmu.edu/datasets/hotpot/hotpot_dev_distractor_v1.json",
+    "nvidia_fallback_url": "https://huggingface.co/datasets/namlh2004/hotpotqa/resolve/7e54db4656209750ff487f6fdf8e39a66dba136b/hotpot_dev_distractor_v1.json",
+    "bytes": 61065698,
+    "sha256": "e3da074df24e8369009918aa5cdbdd254dadcde4c63f7569d36afd6f2268caa8",
+    "records": 7405
+  },
+  "generation_contract": {
+    "dataset": "hotpotqa",
+    "max_seq_length": 16000,
+    "tokens_to_generate": 32,
+    "num_samples": 60,
+    "template": "NVIDIA TASKS['qa']['template'] + TASKS['qa']['answer_prefix']",
+    "tokenizer_type": "hf",
+    "tokenizer_path": "Qwen/Qwen2.5-0.5B-Instruct pinned below"
+  },
+  "task_sha256": "7c46359f17dbddb236ac97a779a51c46bda0074346d70d0b4913cace4e9dfca1",
+  "samples_per_task": 60,
+  "evaluation_samples": 60,
+  "query_context_tokens": 32768,
+  "max_new_tokens": 32,
+  "headroom_minimum_score": 0.10,
+  "headroom_maximum_score": 0.85,
+  "data_audit": {
+    "unique_indices": 60,
+    "unique_inputs": 60,
+    "outputs_per_row": 1,
+    "empty_outputs": 0,
+    "answer_prefix": " Answer:",
+    "generator_token_range": [13010, 15976],
+    "qwen_chat_prompt_token_range": [13007, 15973],
+    "native_context_limit": 32768,
+    "truncated_rows": 0,
+    "yes_no_answers": 10,
+    "non_yes_no_answers_present_verbatim_in_context": 50
+  },
+  "endpoints": [
+    {
+      "name": "qwen2p5-0p5b-instruct",
+      "repo_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "model_parameters": 494032768,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 988097824,
+        "sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe"
+      }
+    }
+  ],
+  "success_rule": "The official Foundation-only string_match_part score must lie inclusively between 0.10 and 0.85, all 60 prompts must remain native and untruncated, and all task/config/model/source/commit/clean-tree invariants must pass. Only then may an ASCENT QA architecture and multi-scale gate be designed without seeing any ASCENT QA score.",
+  "failure_rule": "A score below 0.10 marks the task or decoding protocol too hard/invalid; a score above 0.85 marks it saturated. Either outcome stops this QA candidate without trying ASCENT, changing the task seed, shortening the context, or substituting SQuAD after the score.",
+  "interpretation": "Prospective task-selection screen only. It is not an ASCENT experiment and cannot be reported as an ASCENT gain."
+}

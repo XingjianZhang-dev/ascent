@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_ruler_vt_scale_factorial_confirmatory",
+  "status": "confirmatory_frozen_before_seed223607_model_evaluation",
+  "data_seed": 223607,
+  "reader": "vt",
+  "output_separator": " ",
+  "samples_per_task": 100,
+  "calibration_samples_per_task": 20,
+  "test_samples_per_task": 80,
+  "memory_slots": 256,
+  "query_context_tokens": 192,
+  "fixed_replay_tokens": 16,
+  "relative_injection_depth": 0.875,
+  "fusion_grid_size": 21,
+  "epsilon": 1e-12,
+  "tasks": ["vt"],
+  "task_sha256": {
+    "vt": "7d8e975f6c9a7b08f457f2bcedfe38f8e2b977c27e7f3f0d5b2bac8f1a6f8088"
+  },
+  "endpoints": [
+    {"name": "pythia-410m", "repo_id": "EleutherAI/pythia-410m", "revision": "bba6a464f54bbf08fc174cfb351d9794d58af21d", "scale_replay_tokens": 64},
+    {"name": "pythia-2.8b", "repo_id": "EleutherAI/pythia-2.8b", "revision": "dbe7ae300a54abcdc475a33907b3dff81d25709f", "scale_replay_tokens": 64}
+  ],
+  "primary_gate": "Both endpoint Rich64-Fixed16 effects and their model-by-memory interaction must have normal and 20000-replicate bootstrap 95% confidence lower bounds above zero.",
+  "metric_boundary": "Teacher-forced answer-token NLL diagnostic; official autoregressive RULER accuracy remains pending.",
+  "interpretation": "Independent untouched confirmation of the frozen development design. FPVM excluded."
+}

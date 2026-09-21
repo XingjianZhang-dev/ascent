@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "status": "frozen_before_any_focused_confirmation_decoder_score",
+  "objective": "Independently confirm the two marginal estimands from the untouched five-panel factorial with maximum remaining disjoint official BABILong QA1-QA3 panels.",
+  "panel_selection": {
+    "ordering": "ascending SHA-256 of canonical official rows",
+    "starts": [580, 620, 660, 700, 740, 780, 820, 860, 900, 940],
+    "rows_per_task": 40,
+    "tasks": ["qa1", "qa2", "qa3"],
+    "selection_uses_model_scores": false
+  },
+  "focused_cells": [
+    ["smollm2-135m-instruct", 2],
+    ["smollm2-360m-instruct", 2],
+    ["smollm2-360m-instruct", 3],
+    ["smollm2-1p7b-instruct", 2],
+    ["smollm2-1p7b-instruct", 3]
+  ],
+  "runs": 50,
+  "primary_analysis": {
+    "unit": "panel",
+    "interval": "two-sided Student-t 95% interval over ten untouched panels (df=9)",
+    "estimands": {
+      "first_coscale_excess": "gain(360M, slots2) - gain(135M, slots2)",
+      "second_registered_interaction": "[ASCENT(1.7B, slots3)-ASCENT(1.7B, slots2)] - [ASCENT(360M, slots3)-ASCENT(360M, slots2)]",
+      "upper_diagonal_gain_increment": "gain(1.7B, slots3) - gain(360M, slots2)",
+      "upper_coscale_excess": "gain(1.7B, slots3) - gain(360M, slots3)"
+    },
+    "gate": "All provenance/alignment checks pass and all four two-sided 95% lower confidence bounds are strictly positive."
+  },
+  "stopping_rule": "Run all 50 focused cells and report every panel and estimand without panel, task, prediction, or outlier deletion.",
+  "interpretation_rule": "This is a prospective independent confirmation of the two marginal estimands, not a retroactive pass of the failed five-panel primary gate. The earlier five-panel outcome remains reported unchanged.",
+  "promotion_rule": "Promotion requires the focused primary gate plus an independent model or task family; statistical significance alone is not described as far beyond TNNLS."
+}

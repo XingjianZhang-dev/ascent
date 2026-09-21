@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_ruler_vt_high_power_replication_seed282843",
+  "status": "confirmatory_replication_frozen_before_model_evaluation",
+  "data_seed": 282843,
+  "reader": "vt",
+  "output_separator": " ",
+  "samples_per_task": 200,
+  "calibration_samples_per_task": 20,
+  "test_samples_per_task": 180,
+  "memory_slots": 256,
+  "query_context_tokens": 192,
+  "fixed_replay_tokens": 16,
+  "relative_injection_depth": 0.875,
+  "fusion_grid_size": 21,
+  "epsilon": 1e-12,
+  "tasks": ["vt"],
+  "task_sha256": {"vt": "d0504c366575d2be598bbc182de4b1843d0fa49b5d6f9111d5fe9cd766b45222"},
+  "endpoints": [
+    {"name": "pythia-410m", "repo_id": "EleutherAI/pythia-410m", "revision": "bba6a464f54bbf08fc174cfb351d9794d58af21d", "scale_replay_tokens": 64},
+    {"name": "pythia-2.8b", "repo_id": "EleutherAI/pythia-2.8b", "revision": "dbe7ae300a54abcdc475a33907b3dff81d25709f", "scale_replay_tokens": 64}
+  ],
+  "panel_gate": "Report every seed. Across seed223607 and the three new replication seeds, require a positive equal-seed interaction with hierarchical bootstrap LCB95 above zero; also require both endpoint memory-effect LCB95 values above zero.",
+  "metric_boundary": "Teacher-forced answer-token NLL diagnostic; official autoregressive RULER accuracy remains pending.",
+  "interpretation": "Frozen high-power replication panel; identical design across seeds and model scales. FPVM excluded."
+}

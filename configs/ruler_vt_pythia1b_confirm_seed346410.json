@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_ruler_vt_pythia1b_coscale_confirm_seed346410",
+  "status": "confirmatory_frozen_before_correct_pythia1b_development_result",
+  "execution_condition": "Run only if the locked seed314159 development analysis passes every endpoint, adjacent-difference, and slope gate.",
+  "data_seed": 346410,
+  "reader": "vt",
+  "output_separator": " ",
+  "replay_token_selection": "prefix",
+  "samples_per_task": 200,
+  "calibration_samples_per_task": 40,
+  "test_samples_per_task": 160,
+  "memory_slots": 256,
+  "query_context_tokens": 192,
+  "fixed_replay_tokens": 12,
+  "relative_injection_depth": 0.875,
+  "fusion_grid_size": 21,
+  "epsilon": 1e-12,
+  "state_budget_rule": {"B0_replay_tokens": 12, "d0": 1024, "alpha": 1.0, "rounding": "exact_integer_for_registered_widths"},
+  "tasks": ["vt"],
+  "task_sha256": {"vt": "9e4d49812c2a8b0233420266e8a849bae8cfe9e085da29045494ce572a3c41b9"},
+  "endpoints": [
+    {"name": "pythia-410m", "repo_id": "EleutherAI/pythia-410m", "revision": "bba6a464f54bbf08fc174cfb351d9794d58af21d", "model_parameters": 405334016, "model_width": 1024, "scale_replay_tokens": 12, "model_artifact": {"path": "model.safetensors", "bytes": 1621370224, "sha256": "1c88b0bf18293fae0e09c1d978b14b1adb08cb6a83154463133982fe460fcea4"}},
+    {"name": "pythia-1b", "repo_id": "EleutherAI/pythia-1b", "revision": "c0fea4b917615c60370c0aeb76877f18fef30ab3", "model_parameters": 1000000000, "model_width": 2048, "scale_replay_tokens": 24, "model_artifact": {"path": "pytorch_model.bin", "bytes": 2090751965, "sha256": "d2523eec75f5c1236ed7787bde500935c1f87874119c528cedc9f445476d38c2"}},
+    {"name": "pythia-2.8b", "repo_id": "EleutherAI/pythia-2.8b", "revision": "dbe7ae300a54abcdc475a33907b3dff81d25709f", "model_parameters": 2800000000, "model_width": 2560, "scale_replay_tokens": 30, "model_artifact": {"path": "model.safetensors", "bytes": 5550463728, "sha256": "462f2b960062159c3779eb1cfe5829783ea72da66b020bcbabf86bc6dd33063c"}}
+  ],
+  "seed_gate": "All endpoint gain LCB95 values, both paired adjacent gain-difference LCB95 values, and the paired sample-slope LCB95 must exceed zero under normal and bootstrap intervals.",
+  "panel_gate": "Across all three untouched seeds, the equal-seed t(2) LCB95 of the slope and both adjacent differences must exceed zero; every seed slope and adjacent difference must be positive.",
+  "metric_boundary": "Teacher-forced answer-token NLL diagnostic; official autoregressive RULER accuracy remains pending.",
+  "interpretation": "Frozen alternative-middle confirmation. No endpoint-specific tuning; FPVM excluded."
+}

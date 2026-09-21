@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "experiment": "versioned_overwrite_posterior_mean_replay_development",
+  "status": "substantive_redesign_frozen_before_any_posterior_mean_score",
+  "registration_note": "The previous latest-only argmax interface remains a replicated negative boundary. This new development screen changes the representation, not the seed or success threshold after scoring: it preserves the exact current-version posterior as a posterior-weighted latent codebook mean instead of prematurely collapsing it to one MAP label. Unmasked/reversed history and the old argmax read remain ablations.",
+  "seed": 20261011,
+  "num_labels": 16,
+  "crossover_probability": 0.18,
+  "fixed_rounds": 1,
+  "rich_rounds": 4,
+  "latent_replay_mode": "posterior_mean",
+  "relative_injection_depth": 0.25,
+  "calibration_episodes": 2048,
+  "test_episodes": 8192,
+  "batch_size": 64,
+  "candidate_texts": [" A", " B", " C", " D", " E", " F", " G", " H", " I", " J", " K", " L", " M", " N", " O", " P"],
+  "old_codebook_template": "An obsolete earlier memory said that the value label was{value}.",
+  "new_codebook_template": "A later overwrite set the current value label to{value}.",
+  "query_template": "Episode query {key}. The earlier value was overwritten. The current value label is",
+  "text_replay_template": "An obsolete earlier memory said that the value label was{old}. A later overwrite set the current value label to{new}. {query}",
+  "endpoints": [
+    {
+      "name": "pythia-410m",
+      "repo_id": "EleutherAI/pythia-410m",
+      "revision": "bba6a464f54bbf08fc174cfb351d9794d58af21d",
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 1621370224,
+        "sha256": "1c88b0bf18293fae0e09c1d978b14b1adb08cb6a83154463133982fe460fcea4"
+      }
+    },
+    {
+      "name": "pythia-2.8b",
+      "repo_id": "EleutherAI/pythia-2.8b",
+      "revision": "dbe7ae300a54abcdc475a33907b3dff81d25709f",
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 5550463728,
+        "sha256": "462f2b960062159c3779eb1cfe5829783ea72da66b020bcbabf86bc6dd33063c"
+      }
+    }
+  ],
+  "primary_estimand": "(large_rich_gain-large_fixed_gain)-(small_rich_gain-small_fixed_gain)",
+  "success_rule": "paired 95pct lower confidence bound greater than zero",
+  "failure_rule": "paired 95pct upper confidence bound less than zero",
+  "development_decision": "A positive point estimate and positive lower bound authorize an untouched replication seed. A non-positive point estimate or upper bound below zero ends this redesign without depth/round/template tuning.",
+  "interpretation": "Development-only test of whether preserving posterior uncertainty through the latest-version latent replay resolves the old argmax overwrite boundary. Clean exact-KV remains an unbeatable raw-storage oracle and is not the target claim."
+}

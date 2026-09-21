@@ -1,0 +1,324 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_around7b_16k_extension",
+  "status": "prospective_around7b_extension_frozen_before_any_new_endpoint_decoder_score",
+  "frozen_utc": "2026-08-15T03:52:00+08:00",
+  "seed": 20260815,
+  "tasks": [
+    "qa2",
+    "qa3"
+  ],
+  "panels": [
+    "canonical_16k_confirmation_panel_1",
+    "canonical_16k_confirmation_panel_2",
+    "canonical_16k_confirmation_panel_3",
+    "canonical_16k_confirmation_panel_4",
+    "canonical_16k_confirmation_panel_5",
+    "canonical_16k_confirmation_panel_6",
+    "canonical_16k_confirmation_panel_7",
+    "canonical_16k_confirmation_panel_8",
+    "canonical_16k_confirmation_panel_9",
+    "canonical_16k_confirmation_panel_10"
+  ],
+  "panel_sha256_by_name": {
+    "canonical_16k_confirmation_panel_1": "f9aa249c3a149e62d782e15c748056e9f30ff8a5ddf6d9783f24e4f2d021f327",
+    "canonical_16k_confirmation_panel_2": "f2d091141b5ac6a66ea33b55b3a2b91de5f3ed40b22ded3c0b411dc337a9bd06",
+    "canonical_16k_confirmation_panel_3": "5807b9c03736341c8a57eda24f6e85a6eb0bef11887da4fee66bb652663487ed",
+    "canonical_16k_confirmation_panel_4": "90c22f819099ae8e5fc89883383da38aefd7e805f039a19c7b00ea513182beab",
+    "canonical_16k_confirmation_panel_5": "620e519cb57e5dc25a4e29c2960c7e8832892629895bef094a6656a9619f4051",
+    "canonical_16k_confirmation_panel_6": "6fa9ab3e920d3b9d1db71850f6f844d6e622269e1bb608216677077cbf096444",
+    "canonical_16k_confirmation_panel_7": "e5ffd3995f587fa6640acf26fb27418388cd456b515db3c8743725a541252ab2",
+    "canonical_16k_confirmation_panel_8": "4ee234a77cb5afefbf2293cc907b8f09a5fa2f838e852e89a4d41e4cd92b226a",
+    "canonical_16k_confirmation_panel_9": "0a2aa219a2a6cf8cc1f9578f2d682b8def4912fa9e72116830915e64677f7c5f",
+    "canonical_16k_confirmation_panel_10": "43f56066225ad0a2d3c631096b3730d287470dc8f82b6d8a7afa8c51614e1d0e"
+  },
+  "panel_manifest": {
+    "path": "data/babilong_16k_canonical_confirmation/MANIFEST.json",
+    "sha256": "0a09e957d34ea83ce82891d2f632e584b36a38b7247dfb9354a94947f1a13d0f"
+  },
+  "official_source": {
+    "repository": "RMT-team/babilong-1k-samples",
+    "revision": "fc4d1a584dfc498c37578753bee4cdd91b987ae2",
+    "dataset_config": "16k",
+    "qa2_parquet_sha256": "7337912491e85f723bc305be1e0315f7bdc5f63425e32ad158c3ea3bbd9d2c04",
+    "qa3_parquet_sha256": "84db62a627c50cf33bed43f5e2f6c09f716bf4c15be54a62395f7accc18539f3"
+  },
+  "evaluation_samples": 80,
+  "history_slots": 256,
+  "context_tokens": 16384,
+  "max_new_tokens": 8,
+  "allowed_decode_orders": [
+    "foundation_first"
+  ],
+  "conditions": {
+    "canonical_slots_4": {
+      "memory_source": "relevant",
+      "memory_representation": "canonical_event_facts",
+      "state_fact_slots_by_endpoint": {
+        "qwen2p5-7b-instruct": 4,
+        "mistral-7b-instruct-v0p3": 4,
+        "falcon3-7b-instruct": 4,
+        "granite-3p3-8b-instruct": 4,
+        "qwen3-8b-nonthinking": 4
+      }
+    },
+    "canonical_fixed_slots_3": {
+      "memory_source": "relevant",
+      "memory_representation": "canonical_event_facts",
+      "state_fact_slots_by_endpoint": {
+        "qwen2p5-7b-instruct": 3
+      }
+    },
+    "raw_slots_4": {
+      "memory_source": "relevant",
+      "memory_representation": "event_facts",
+      "state_fact_slots_by_endpoint": {
+        "qwen2p5-7b-instruct": 4
+      }
+    }
+  },
+  "endpoints": [
+    {
+      "name": "qwen2p5-7b-instruct",
+      "repo_id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+      "model_parameters": 7615616512,
+      "model_type": "qwen2",
+      "architecture": "Qwen2ForCausalLM",
+      "native_context_tokens": 32768,
+      "state_fact_slots": 4,
+      "batch_size": 1,
+      "model_artifacts": [
+        {
+          "path": "model-00001-of-00004.safetensors",
+          "bytes": 3945441440,
+          "sha256": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7"
+        },
+        {
+          "path": "model-00002-of-00004.safetensors",
+          "bytes": 3864726352,
+          "sha256": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185"
+        },
+        {
+          "path": "model-00003-of-00004.safetensors",
+          "bytes": 3864726424,
+          "sha256": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5"
+        },
+        {
+          "path": "model-00004-of-00004.safetensors",
+          "bytes": 3556377672,
+          "sha256": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd"
+        }
+      ],
+      "checkpoint_audit_sha256": "89afcbe5c8bb753f2f10a4832f2f9b31b1828a30b80b83014d00bab62c95748f",
+      "chat_template_probe_sha256": "401cf7b8cd12b2bb44ce3357e1d27b0349a59dd7e5d24b90947127ef7ddfeca3"
+    },
+    {
+      "name": "mistral-7b-instruct-v0p3",
+      "repo_id": "mistralai/Mistral-7B-Instruct-v0.3",
+      "revision": "c170c708c41dac9275d15a8fff4eca08d52bab71",
+      "model_parameters": 7248023552,
+      "model_type": "mistral",
+      "architecture": "MistralForCausalLM",
+      "native_context_tokens": 32768,
+      "state_fact_slots": 4,
+      "batch_size": 1,
+      "model_artifacts": [
+        {
+          "path": "model-00001-of-00003.safetensors",
+          "bytes": 4949453792,
+          "sha256": "ce6fb6f6f4d0183f4813cbf4ece24109da629a08d4210da46f77e1d8b0bd5c19"
+        },
+        {
+          "path": "model-00002-of-00003.safetensors",
+          "bytes": 4999819336,
+          "sha256": "8c0e72f148366b6a3709e002a98706a33d31aec8515090c856c95b2044f92ae0"
+        },
+        {
+          "path": "model-00003-of-00003.safetensors",
+          "bytes": 4546807800,
+          "sha256": "905dd405363e43d95779c1c1155a2dbfd36155914ae95dbd934e12e490cfb4ca"
+        }
+      ],
+      "checkpoint_audit_sha256": "1613d8d5b2b009f51dfb0cddbf850df0bd73098968277b4a16e2189de82341c1",
+      "chat_template_probe_sha256": "e94a86cc0620587b9016586200d6e5137ea23730a775bc175ef9d7d6f412b50e"
+    },
+    {
+      "name": "falcon3-7b-instruct",
+      "repo_id": "tiiuae/Falcon3-7B-Instruct",
+      "revision": "1e57a0ecd176c7c139f289c60a74e57f887c3dfb",
+      "model_parameters": 7455550464,
+      "model_type": "llama",
+      "architecture": "LlamaForCausalLM",
+      "native_context_tokens": 32768,
+      "state_fact_slots": 4,
+      "batch_size": 1,
+      "model_artifacts": [
+        {
+          "path": "model-00001-of-00004.safetensors",
+          "bytes": 4938900432,
+          "sha256": "07e279c8c6075600e5dc795364efff8897de0f0c22a1d2d8db79a70adf8edb3f"
+        },
+        {
+          "path": "model-00002-of-00004.safetensors",
+          "bytes": 4942085160,
+          "sha256": "c5d6600f34e9972eed3201425ba75c2d58f574655f373ea8b86ddfa37d391f2a"
+        },
+        {
+          "path": "model-00003-of-00004.safetensors",
+          "bytes": 4224838512,
+          "sha256": "a96480584a0b5bd09c556e53d952146008bb423e5e12ea9bbd0b60d62f9a2f72"
+        },
+        {
+          "path": "model-00004-of-00004.safetensors",
+          "bytes": 805306496,
+          "sha256": "0b84ea911989e21ebf4ac05018171f73016d8ae72b7904e89289be0b4672a403"
+        }
+      ],
+      "checkpoint_audit_sha256": "cde3b64195dce1e2e50e4c673ce398eb0b6a3215e7bb50ea64e04f566e30478c",
+      "chat_template_probe_sha256": "cbc9210264166dff3c850bd42bb73bdbdfd9894eb8089ee802c1c0397e6e4300"
+    },
+    {
+      "name": "granite-3p3-8b-instruct",
+      "repo_id": "ibm-granite/granite-3.3-8b-instruct",
+      "revision": "51dd4bc2ade4059a6bd87649d68aa11e4fb2529b",
+      "model_parameters": 8170864640,
+      "model_type": "granite",
+      "architecture": "GraniteForCausalLM",
+      "native_context_tokens": 131072,
+      "state_fact_slots": 4,
+      "batch_size": 1,
+      "model_artifacts": [
+        {
+          "path": "model-00001-of-00004.safetensors",
+          "bytes": 4974694288,
+          "sha256": "b309f7b9e116fafc27c1100629bfcccbcebdab18a4bf7df7accfa728260dc57e"
+        },
+        {
+          "path": "model-00002-of-00004.safetensors",
+          "bytes": 4991447808,
+          "sha256": "f2e40f157f0139e4b67bbaa4b10efa351162c062771cb543b143c6916a687266"
+        },
+        {
+          "path": "model-00003-of-00004.safetensors",
+          "bytes": 4970460032,
+          "sha256": "5cf5203a027b7055c995a9d4bdb3a4c9dd44849ae6c9eefa6a16852a816bea76"
+        },
+        {
+          "path": "model-00004-of-00004.safetensors",
+          "bytes": 1405169256,
+          "sha256": "76ac0c0dbd790a1e003d2fc098a297bfe82a422c129046e9d4e67e6ed3d820f0"
+        }
+      ],
+      "checkpoint_audit_sha256": "6f1766c62bad4be68111e7d5ba330b1e6d3799360ce000734958bd6e80fe54bc",
+      "chat_template_probe_sha256": "12298379ddefda1ce0f07daa6d1a2ee728d4aa3e3a60d77bbd5cdf602701323c",
+      "system_prompt": "Knowledge Cutoff Date: April 2024.\nToday's Date: August 15, 2026.\nYou are Granite, developed by IBM. You are a helpful AI assistant."
+    },
+    {
+      "name": "qwen3-8b-nonthinking",
+      "repo_id": "Qwen/Qwen3-8B",
+      "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "model_parameters": 8190735360,
+      "model_type": "qwen3",
+      "architecture": "Qwen3ForCausalLM",
+      "native_context_tokens": 40960,
+      "state_fact_slots": 4,
+      "batch_size": 1,
+      "model_artifacts": [
+        {
+          "path": "model-00001-of-00005.safetensors",
+          "bytes": 3996250744,
+          "sha256": "31d6a825ae35f11fb85b195b4c42c146c051e446433125a215336abdf95cbf5f"
+        },
+        {
+          "path": "model-00002-of-00005.safetensors",
+          "bytes": 3993160032,
+          "sha256": "5991236cea6fe21f3d43cab0f0e84448734fbbe0789816202989f2ddc9d18282"
+        },
+        {
+          "path": "model-00003-of-00005.safetensors",
+          "bytes": 3959604768,
+          "sha256": "c5185c4794be2d8a9784d5753c9922db38df478ce11f9ed0b415b7304d896836"
+        },
+        {
+          "path": "model-00004-of-00005.safetensors",
+          "bytes": 3187841392,
+          "sha256": "b5ee7de71fbf17db3d5704e0c8f2bc7d005ca9e1d7ca2aeb19827b0cfcaa917a"
+        },
+        {
+          "path": "model-00005-of-00005.safetensors",
+          "bytes": 1244659840,
+          "sha256": "20c2d6366ab85c90786ccdd829cd2b9e7d30ef3b2ebbb998280e7e4014b542ff"
+        }
+      ],
+      "checkpoint_audit_sha256": "7948cfa72d3133ae891e6c17877ae6e6d3ad019e46fa827d741d4e52066c05f6",
+      "chat_template_probe_sha256": "2a20d1ec850572cf53ad6931851232b69982a76295c4f7355e46a7cef867254a",
+      "chat_template_kwargs": {
+        "enable_thinking": false
+      }
+    }
+  ],
+  "prospective_design": {
+    "path": "configs/babilong_around7b_16k_extension_design.json",
+    "sha256": "e070ebd87a9fc6d89605d324db5ca2c3f842c4ae9500f8801f6f051c734a9c69",
+    "score_visibility": {
+      "new_endpoints": "No decoder score from any endpoint in this roster has been observed on the registered BABILong panels.",
+      "existing_qwen_curve": "The frozen 0.5B/1.5B/3B Qwen2.5 scores are known and retained; the Qwen2.5-7B result is a prospective endpoint extension, not a new independent three-point confirmation."
+    }
+  },
+  "source_protocol": {
+    "path": "configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json",
+    "sha256": "6116b2bb882b680f7ed0eab0a7ed84f93844d71a6c7cfb30bc5acf84be425045",
+    "frozen_qwen_3b_analysis_sha256": "e7c44309f8df1247ec3945be39e0e44d0d9263ae7b7c195323ae35f26e401b1c"
+  },
+  "checkpoint_audits": [
+    {
+      "model": "falcon3-7b-instruct",
+      "path": "artifacts/around7b_scorefree_audits/falcon3-7b-node2.json",
+      "sha256": "cde3b64195dce1e2e50e4c673ce398eb0b6a3215e7bb50ea64e04f566e30478c"
+    },
+    {
+      "model": "granite-3p3-8b-instruct",
+      "path": "artifacts/around7b_scorefree_audits/granite-8b-node2.json",
+      "sha256": "6f1766c62bad4be68111e7d5ba330b1e6d3799360ce000734958bd6e80fe54bc"
+    },
+    {
+      "model": "mistral-7b-instruct-v0p3",
+      "path": "artifacts/around7b_scorefree_audits/mistral-7b-node1.json",
+      "sha256": "1613d8d5b2b009f51dfb0cddbf850df0bd73098968277b4a16e2189de82341c1"
+    },
+    {
+      "model": "qwen2p5-7b-instruct",
+      "path": "artifacts/around7b_scorefree_audits/qwen2p5-7b-node1.json",
+      "sha256": "89afcbe5c8bb753f2f10a4832f2f9b31b1828a30b80b83014d00bab62c95748f"
+    },
+    {
+      "model": "qwen3-8b-nonthinking",
+      "path": "artifacts/around7b_scorefree_audits/qwen3-8b-node1.json",
+      "sha256": "7948cfa72d3133ae891e6c17877ae6e6d3ad019e46fa827d741d4e52066c05f6"
+    }
+  ],
+  "runtime_dependencies": {
+    "transformers": "4.57.6",
+    "tokenizers": "0.22.2",
+    "sentencepiece": "0.2.2",
+    "safetensors": "0.8.0"
+  },
+  "primary_analysis": {
+    "qwen_fourth_scale": "Paired panel-cluster change in absolute ASCENT-minus-Foundation gain from the frozen Qwen2.5-3B/3-slot endpoint to Qwen2.5-7B/4-slot; one-sided paired Student-t test over ten panels and a two-sided 95% interval.",
+    "around7b_robustness": "For each of the five frozen models, paired panel-cluster ASCENT-minus-Foundation gain under canonical four-slot state; one-sided tests are Holm-corrected as one five-model family.",
+    "gate": "The same-family Qwen fourth-scale extension and all five around-7B/8B gains are reported regardless of sign. No model, task, panel, invalid output, or regression may be removed."
+  },
+  "secondary_analysis": {
+    "qwen_slots4_minus_slots3": "Paired panel-level accuracy difference isolating the additional state slot at Qwen2.5-7B.",
+    "qwen_canonical_minus_raw": "Paired panel-level accuracy difference isolating representation at Qwen2.5-7B.",
+    "by_task": "QA2 and QA3 endpoint accuracy and gains, descriptive with two-sided intervals.",
+    "failure_audit": "Any negative or zero result triggers prompt-template, native-context, truncation, parser, weight-hash, batch-determinism, and cross-node checks before interpretation."
+  },
+  "execution_authorization": {
+    "authorized": true,
+    "basis": "All five score-free checkpoint/template audits passed before any new endpoint score.",
+    "cross_node_qwen_requirement": "The first Qwen2.5-7B formal panel must reproduce exactly on both physical nodes before the remaining panels execute."
+  },
+  "retention_rule": "Report every frozen model, panel, task, invalid output, and regression regardless of sign."
+}

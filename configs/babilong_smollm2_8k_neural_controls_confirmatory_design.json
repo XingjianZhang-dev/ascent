@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_smollm2_8k_neural_controls_confirmatory_design",
+  "status": "confirmatory_design_frozen_before_any_confirmation_cache_generation_or_decoder_score",
+  "development_decision_commit": "0a797ac",
+  "seed": 20260814,
+  "official_babilong_repository_commit": "7a6efee29f5cac03c3c410e6799c80fd2ffe3610",
+  "official_dataset_revision": "fc4d1a584dfc498c37578753bee4cdd91b987ae2",
+  "dataset_config": "8k",
+  "tasks": ["qa1", "qa2", "qa3"],
+  "panels": [
+    {
+      "name": "neural_control_panel_1",
+      "stable_hash_positions_by_task": "260:300",
+      "rows": 120,
+      "sha256": "dea69dbd409f4f1dc01068da99114fa3bfe5d6caf2d32e72c39e3a43b9752b85"
+    },
+    {
+      "name": "neural_control_panel_2",
+      "stable_hash_positions_by_task": "300:340",
+      "rows": 120,
+      "sha256": "2902dbf7993438a249e5212a09d5eb9a02c3f17e18613319ee3375f7fa957bf5"
+    },
+    {
+      "name": "neural_control_panel_3",
+      "stable_hash_positions_by_task": "340:380",
+      "rows": 120,
+      "sha256": "705cc7d28ff041719ea66b8d7e27f3182d05f60325da47a52d3dae12dfb05492"
+    }
+  ],
+  "panel_manifest_sha256": "67a2ac4b400dbc2beb43936b4f685a6244c421095141bb095fd7d851acb7a905",
+  "retrieval_protocol": {
+    "path": "configs/babilong_bge_m3_retrieval_protocol.json",
+    "sha256": "336fc97cdea8527e05c2daff0dec95a54b10f68e46fb452f7bb2c8fb2853ea41",
+    "algorithm_changes_after_development": "forbidden"
+  },
+  "conditions": {
+    "scale_relevant": "ASCENT query-blind causal write state with 1/2/3 query-conditioned read facts",
+    "scale_matched_raw": "Exact raw event FIFO under each sample's exact ASCENT semantic write-byte budget, with 1/2/3 read passages",
+    "scale_bge_m3": "Frozen full-corpus BGE-M3 dense plus generic BM25 RRF plus official bge-reranker-v2-m3, with 1/2/3 read passages"
+  },
+  "endpoints": [
+    {
+      "name": "smollm2-135m-instruct",
+      "model_parameters": 134515008,
+      "state_fact_slots": 1,
+      "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac"
+    },
+    {
+      "name": "smollm2-360m-instruct",
+      "model_parameters": 361821120,
+      "state_fact_slots": 2,
+      "revision": "a10cc1512eabd3dde888204e902eca88bddb4951"
+    },
+    {
+      "name": "smollm2-1p7b-instruct",
+      "model_parameters": 1711376384,
+      "state_fact_slots": 3,
+      "revision": "31b70e2e869a7173562077fd711b654946d38674"
+    }
+  ],
+  "decoder_protocol": {
+    "context_tokens": 8192,
+    "max_new_tokens": 8,
+    "history_slots": 256,
+    "prompt_and_extraction_changes_after_development": "forbidden",
+    "cache_binding": "After deterministic cache generation, attach only file SHA-256 values to the executable config. Do not inspect confirmation recall or run a decoder before that hash-binding commit."
+  },
+  "primary_gates": {
+    "ascent_monotone_every_panel": true,
+    "both_adjacent_ascent_gain_increment_panel_t_95_lcbs_positive": true,
+    "ascent_advantage_over_each_control_at_each_endpoint_panel_t_95_lcb_positive": true,
+    "all_provenance_and_parser_gates": true
+  },
+  "reporting": [
+    "task-stratified accuracy and paired gains",
+    "all regressions and cap hits",
+    "support recall after all decoder scores are frozen",
+    "write and read state bytes",
+    "retrieval and decoder latency",
+    "model and cache hashes"
+  ],
+  "interpretation": "Three untouched confirmatory panels for ASCENT scale complementarity against a current strong neural retriever and an exact-byte raw-memory control. FPVM excluded."
+}

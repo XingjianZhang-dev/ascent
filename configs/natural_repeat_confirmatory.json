@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_natural_repeat_confirmatory",
+  "status": "preregistered_before_confirmatory_execution",
+  "event_offset": 6000,
+  "calibration_events": 2048,
+  "test_events": 8192,
+  "key_length": 4,
+  "context_length": 128,
+  "maximum_source_tokens": 16,
+  "fixed_source_tokens": 4,
+  "min_distance": 128,
+  "memory_slots": 4096,
+  "relative_injection_depth": 0.25,
+  "fusion_grid_size": 21,
+  "epsilon": 1e-12,
+  "datasets": {
+    "wikitext103": {
+      "filename": "wikitext103_test_neox.bin",
+      "dtype": "uint16",
+      "sha256": "e557c96d4c368a7c8cb60c01de14076e20dc425556d853cbbb9f45b0593698c2"
+    },
+    "pg19": {
+      "filename": "pg19_test_neox.bin",
+      "dtype": "uint16",
+      "sha256": "95c3e1602cdbcf395cfca03f4783637af09c93ccb709ebf52d42391495948e4b"
+    }
+  },
+  "endpoints": [
+    {
+      "name": "pythia-410m",
+      "repo_id": "EleutherAI/pythia-410m",
+      "revision": "bba6a464f54bbf08fc174cfb351d9794d58af21d",
+      "scale_source_tokens": 4,
+      "batch_size": 32
+    },
+    {
+      "name": "pythia-2.8b",
+      "repo_id": "EleutherAI/pythia-2.8b",
+      "revision": "dbe7ae300a54abcdc475a33907b3dff81d25709f",
+      "scale_source_tokens": 16,
+      "batch_size": 16
+    }
+  ],
+  "primary_gates": {
+    "ascent_scale_gain_each_dataset_endpoint": "paired 95% CI lower bound > 0",
+    "large_model_scale_minus_fixed_each_dataset": "paired 95% CI lower bound > 0",
+    "gate_selection": "calibration only; exact registered 21-point simplex grid; positive calibration LCB required",
+    "confirmation_partition": "skip the first 6000 eligible hits; development used hits 0 through 5119"
+  },
+  "active_comparators": [
+    "frozen_foundation",
+    "matched_raw_exact_retrieval",
+    "ascent_fixed",
+    "ascent_scale",
+    "certified_only_ablation",
+    "latent_only_ablation"
+  ],
+  "interpretation": "No parameters may be changed after execution. FPVM is excluded by user scope. A positive result establishes bounded natural-text memory benefit and a storage-breadth interaction, not superiority to a clean oracle or monotone total gain with model size."
+}

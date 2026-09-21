@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_smollm2_8k_neural_controls_development",
+  "status": "development_controls_frozen_before_any_decoder_score",
+  "seed": 20260814,
+  "official_repository": "https://github.com/booydar/babilong",
+  "official_repository_commit": "7a6efee29f5cac03c3c410e6799c80fd2ffe3610",
+  "official_dataset": "RMT-team/babilong-1k-samples",
+  "official_dataset_revision": "fc4d1a584dfc498c37578753bee4cdd91b987ae2",
+  "dataset_config": "8k",
+  "tasks": ["qa1", "qa2", "qa3"],
+  "panel": "development",
+  "panel_sha256": "540a41004bfb59d763d2e2e173b0909f153418f729a8a419424cb2d7f92f262f",
+  "evaluation_samples": 60,
+  "history_slots": 256,
+  "context_tokens": 8192,
+  "max_new_tokens": 8,
+  "retrieval_protocol": {
+    "path": "configs/babilong_bge_m3_retrieval_protocol.json",
+    "sha256": "336fc97cdea8527e05c2daff0dec95a54b10f68e46fb452f7bb2c8fb2853ea41"
+  },
+  "conditions": {
+    "scale_relevant": {
+      "memory_source": "relevant",
+      "state_fact_slots_by_endpoint": {
+        "smollm2-135m-instruct": 1,
+        "smollm2-360m-instruct": 2,
+        "smollm2-1p7b-instruct": 3
+      }
+    },
+    "scale_matched_raw": {
+      "memory_source": "matched_raw_event_fifo",
+      "state_fact_slots_by_endpoint": {
+        "smollm2-135m-instruct": 1,
+        "smollm2-360m-instruct": 2,
+        "smollm2-1p7b-instruct": 3
+      }
+    },
+    "scale_bge_m3": {
+      "memory_source": "bge_m3_hybrid_rerank",
+      "state_fact_slots_by_endpoint": {
+        "smollm2-135m-instruct": 1,
+        "smollm2-360m-instruct": 2,
+        "smollm2-1p7b-instruct": 3
+      },
+      "retrieval_cache_by_panel": {
+        "development": {
+          "path": "/root/autodl-tmp/ascent-results/bge_cache_development/development.json",
+          "sha256": "0a6087844862bfb14266943f1245ce24486b89194f6bc6ddaec0300b04c45f01"
+        }
+      }
+    }
+  },
+  "endpoints": [
+    {
+      "name": "smollm2-135m-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+      "model_parameters": 134515008,
+      "hidden_size": 576,
+      "state_fact_slots": 1,
+      "batch_size": 8,
+      "model_artifact": {"path": "model.safetensors", "bytes": 269060552, "sha256": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c"}
+    },
+    {
+      "name": "smollm2-360m-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+      "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+      "model_parameters": 361821120,
+      "hidden_size": 960,
+      "state_fact_slots": 2,
+      "batch_size": 4,
+      "model_artifact": {"path": "model.safetensors", "bytes": 723674912, "sha256": "e6bffe7435d7ddc10fd3b9a9efd429dafbacb1cb17015fb5562664e7532bf86e"}
+    },
+    {
+      "name": "smollm2-1p7b-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "model_parameters": 1711376384,
+      "hidden_size": 2048,
+      "state_fact_slots": 3,
+      "batch_size": 2,
+      "model_artifact": {"path": "model.safetensors", "bytes": 3422777952, "sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"}
+    }
+  ],
+  "development_gate": "ASCENT accuracy must be strictly increasing with endpoint size and exceed both BGE-M3 hybrid+rereanking and byte-matched raw FIFO at every endpoint. Only a pass permits untouched neural-control confirmation cache generation.",
+  "support_recall_audit": "Report exact parser-derived support-event recall for the BGE cache at 1/2/3 passages. This diagnostic cannot change the already frozen retrieval algorithm.",
+  "state_fairness": "All arms expose 1/2/3 read items. The raw FIFO has the exact per-sample ASCENT semantic write-byte budget. BGE indexes the full corpus and reports raw text plus float16 dense vectors as a lower bound.",
+  "interpretation": "Development-only strong neural retrieval and exact-byte control for ASCENT scale complementarity. FPVM excluded."
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "experiment": "versioned_overwrite_address_value_separation_development",
+  "status": "mechanism_redesign_frozen_before_any_address_value_score",
+  "registration_note": "After latest-only argmax and posterior-mean value-only reads both produced replicated negative scale interactions, this screen changes the architecture rather than tuning those interfaces. Each episode has target and distractor keys, each with obsolete and current versions. The primary replay contains only both current events; actual-key address latents and posterior-mean value latents are explicitly bound, with randomized event order. Unmasked four-event history and shuffled address-value binding are frozen ablations.",
+  "seed": 20261021,
+  "num_labels": 16,
+  "crossover_probability": 0.18,
+  "fixed_rounds": 1,
+  "rich_rounds": 4,
+  "relative_injection_depth": 0.25,
+  "calibration_episodes": 512,
+  "test_episodes": 4096,
+  "batch_size": 32,
+  "candidate_texts": [" A", " B", " C", " D", " E", " F", " G", " H", " I", " J", " K", " L", " M", " N", " O", " P"],
+  "old_value_template": "Version one obsolete value label is{value}.",
+  "current_value_template": "Version two current value label is{value}.",
+  "address_template": "Memory address {key}. Version {version}.",
+  "address_pooling": "mean_valid_tokens",
+  "address_replay_tokens_per_event": 1,
+  "query_template": "Episode query address {key}. Retrieve its latest version. The current value label is",
+  "endpoints": [
+    {
+      "name": "pythia-410m",
+      "repo_id": "EleutherAI/pythia-410m",
+      "revision": "bba6a464f54bbf08fc174cfb351d9794d58af21d",
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 1621370224,
+        "sha256": "1c88b0bf18293fae0e09c1d978b14b1adb08cb6a83154463133982fe460fcea4"
+      }
+    },
+    {
+      "name": "pythia-2.8b",
+      "repo_id": "EleutherAI/pythia-2.8b",
+      "revision": "dbe7ae300a54abcdc475a33907b3dff81d25709f",
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 5550463728,
+        "sha256": "462f2b960062159c3779eb1cfe5829783ea72da66b020bcbabf86bc6dd33063c"
+      }
+    }
+  ],
+  "primary_estimand": "(large_rich_gain-large_fixed_gain)-(small_rich_gain-small_fixed_gain)",
+  "success_rule": "The paired 95pct lower confidence bound of the primary interaction is above zero; all four within-endpoint gain lower bounds are above zero; rich latest-only replay beats both unmasked history and shuffled address-value binding at both endpoints with positive lower bounds; all config/seed/query/signal/address-order/model/clean-tree/latest-version invariants pass.",
+  "failure_rule": "A non-positive interaction point estimate, a non-positive interaction lower bound, or failure of either structural ablation ends this architecture without depth/round/template tuning. Only a full pass authorizes a new untouched confirmation seed.",
+  "interpretation": "Development-only test of a separated version-address/value architecture under a fixed target-plus-distractor overwrite distribution. Clean exact-KV remains the raw-storage oracle and is not the target claim."
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_smollm2_8k_cross_node_replication",
+  "status": "cross_node_replication_frozen_before_any_replication_decoder_score",
+  "seed": 20260814,
+  "official_repository": "https://github.com/booydar/babilong",
+  "official_repository_commit": "7a6efee29f5cac03c3c410e6799c80fd2ffe3610",
+  "official_dataset": "RMT-team/babilong-1k-samples",
+  "official_dataset_revision": "fc4d1a584dfc498c37578753bee4cdd91b987ae2",
+  "dataset_config": "8k",
+  "tasks": ["qa1", "qa2", "qa3"],
+  "panels": ["neural_control_panel_1", "neural_control_panel_2", "neural_control_panel_3"],
+  "panel_sha256_by_name": {
+    "neural_control_panel_1": "dea69dbd409f4f1dc01068da99114fa3bfe5d6caf2d32e72c39e3a43b9752b85",
+    "neural_control_panel_2": "2902dbf7993438a249e5212a09d5eb9a02c3f17e18613319ee3375f7fa957bf5",
+    "neural_control_panel_3": "705cc7d28ff041719ea66b8d7e27f3182d05f60325da47a52d3dae12dfb05492"
+  },
+  "evaluation_samples": 120,
+  "history_slots": 256,
+  "context_tokens": 8192,
+  "max_new_tokens": 8,
+  "conditions": {
+    "scale_relevant": {
+      "memory_source": "relevant",
+      "state_fact_slots_by_endpoint": {
+        "smollm2-360m-instruct": 2
+      }
+    }
+  },
+  "endpoints": [
+    {
+      "name": "smollm2-360m-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+      "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+      "model_parameters": 361821120,
+      "hidden_size": 960,
+      "state_fact_slots": 2,
+      "batch_size": 4,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 723674912,
+        "sha256": "e6bffe7435d7ddc10fd3b9a9efd429dafbacb1cb17015fb5562664e7532bf86e"
+      }
+    }
+  ],
+  "reference_execution": {
+    "node_role": "original_second_gpu_node",
+    "config_sha256": "d6987b5780b12ee4e39666536805c133408c6055a2defee57bbda080196c405c",
+    "result_archive_sha256": "17f9fda974f75daf3f6ed555c2bf6ade8d420f4c14a2b92c77f45c2ee9ca2192"
+  },
+  "replication_protocol": "Run the same frozen 360M model artifact, three frozen official panels, scale-relevant memory, greedy decoder, and batch size on the first physical GPU node, where this endpoint was not executed for the reference confirmation. No scores, prompts, rows, or decoding parameters may change.",
+  "replication_gate": "All provenance checks must pass; each panel must reproduce the reference Foundation and ASCENT accuracy, gain, wins, regressions, row order, normalized predictions, retained facts, and token counts exactly. Timing is reported but is not an equality gate.",
+  "interpretation": "A cross-node implementation reproducibility audit of the already-confirmed middle scale. It is not a new statistical panel and is not counted as an additional independent data seed."
+}

@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_qwen2p5_qa78_8k_headroom_factorial",
+  "status": "prospective_qwen_qa78_headroom_factorial_frozen_before_any_qwen_qa78_decoder_score",
+  "frozen_at": "2026-08-15T05:26:00+08:00",
+  "seed": 20260815,
+  "official_repository": "https://github.com/booydar/babilong",
+  "official_repository_commit": "7a6efee29f5cac03c3c410e6799c80fd2ffe3610",
+  "official_babi_archive_sha256": "50e529ad9c7144a2b176802f7496f5878d53b4e95d93cb0de957517fa84b09b2",
+  "public_noise_dataset": "RMT-team/babilong",
+  "public_noise_dataset_revision": "ee0d588794c7ac098062ee0d247c733d62e94fe2",
+  "tasks": [
+    "qa7",
+    "qa8"
+  ],
+  "data_scope": {
+    "development_manifest_sha256": "d278e183104f401bd3e9fd0ecdbd7b7f1a930d05a8bb7c28534eac8d7adfba83",
+    "confirmation_manifest_sha256": "81d2b7988953bb6de2a7d6d670a6fb2117d9e486e2ac7209f1e39df3be647c61",
+    "qwen_score_blindness": "Every retained panel was selected and frozen for the earlier SmolLM2 study. No Qwen endpoint has been scored on these QA7/QA8 rows in this project before this design freeze. Earlier SmolLM2 scores cannot be relabeled as Qwen evidence.",
+    "no_deletion": "All rows, tasks, panels, predictions, invalid outputs, and regressions are retained."
+  },
+  "panel_sha256_by_name": {
+    "structured_development": "ba83d290f246714eece524fb55be5adc932b843562724294ab31b95f7daa6ad1",
+    "structured_fresh_confirmation_1": "d983fc08c38ff73c0d77f6120c80a4f19f985c70df475f15445bb3e620da4434",
+    "structured_fresh_confirmation_2": "e63aa15786183384d3aeeeea63f3238afdf9dacbf0fb89bd6a05b476bb2cec99",
+    "structured_fresh_confirmation_3": "ecaa802e324f6d2c601fb7d7dd2b6cd82400e14d896b617dee4b74847d7ff218",
+    "structured_fresh_confirmation_4": "6c1d769d23c33b5332c63621ab6537b6e2f58db7b1f689f21c48e41502af8937",
+    "structured_fresh_confirmation_5": "565a2c145859d67de5ea66467272d659e2d7a5cf20af3e0b2a57d00d4d13f93e"
+  },
+  "evaluation_samples": 32,
+  "rows_per_task": 16,
+  "history_slots": 256,
+  "context_tokens": 8192,
+  "max_new_tokens": 12,
+  "memory_selection": "For the queried person, retain the most recent K target-blind ownership-changing events and replay that nested suffix into a canonical inventory/count state. State-8 contains every State-4 event plus four earlier events.",
+  "scale_law": {
+    "co_scaled_endpoints": [
+      "qwen2p5-3b-instruct@state4",
+      "qwen2p5-7b-instruct@state8"
+    ],
+    "state_fact_slots": [
+      4,
+      8
+    ],
+    "slots_per_model_parameter": [
+      1.2962020326438838e-09,
+      1.050473062475549e-09
+    ],
+    "strictly_decreasing_relative_state": true
+  },
+  "conditions": {
+    "state4": {
+      "memory_source": "relevant",
+      "memory_representation": "structured_inventory",
+      "neutral_answer_format": true,
+      "readout_path": "foundation_generation",
+      "state_fact_slots_by_endpoint": {
+        "qwen2p5-3b-instruct": 4,
+        "qwen2p5-7b-instruct": 4
+      }
+    },
+    "state8": {
+      "memory_source": "relevant",
+      "memory_representation": "structured_inventory",
+      "neutral_answer_format": true,
+      "readout_path": "foundation_generation",
+      "state_fact_slots_by_endpoint": {
+        "qwen2p5-3b-instruct": 8,
+        "qwen2p5-7b-instruct": 8
+      }
+    }
+  },
+  "endpoints": [
+    {
+      "name": "qwen2p5-3b-instruct",
+      "repo_id": "Qwen/Qwen2.5-3B-Instruct",
+      "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "model_parameters": 3085938688,
+      "model_type": "qwen2",
+      "architecture": "Qwen2ForCausalLM",
+      "native_context_tokens": 32768,
+      "state_fact_slots": 4,
+      "batch_size": 1,
+      "model_artifacts": [
+        {
+          "path": "model-00001-of-00002.safetensors",
+          "bytes": 3968658944,
+          "sha256": "67347b23fb4165b652eb6611f5e1f2a06dfcddba8e909df1b2b0b1857bee06c2"
+        },
+        {
+          "path": "model-00002-of-00002.safetensors",
+          "bytes": 2203268048,
+          "sha256": "a40d941d0e7e0b966ad8b62bb6d6b7c88cce1299197b599d9d0a4ce59aabfc1d"
+        }
+      ]
+    },
+    {
+      "name": "qwen2p5-7b-instruct",
+      "repo_id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+      "model_parameters": 7615616512,
+      "model_type": "qwen2",
+      "architecture": "Qwen2ForCausalLM",
+      "native_context_tokens": 32768,
+      "state_fact_slots": 8,
+      "batch_size": 1,
+      "model_artifacts": [
+        {
+          "path": "model-00001-of-00004.safetensors",
+          "bytes": 3945441440,
+          "sha256": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7"
+        },
+        {
+          "path": "model-00002-of-00004.safetensors",
+          "bytes": 3864726352,
+          "sha256": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185"
+        },
+        {
+          "path": "model-00003-of-00004.safetensors",
+          "bytes": 3864726424,
+          "sha256": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5"
+        },
+        {
+          "path": "model-00004-of-00004.safetensors",
+          "bytes": 3556377672,
+          "sha256": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd"
+        }
+      ]
+    }
+  ],
+  "runtime_dependencies": {
+    "transformers": "4.57.6",
+    "tokenizers": "0.22.2",
+    "sentencepiece": "0.2.2",
+    "safetensors": "0.8.0"
+  },
+  "allowed_decode_orders": [
+    "foundation_first"
+  ],
+  "primary_estimands": {
+    "co_scaled_gain_increment": "gain(qwen2p5-7b-instruct,state8) - gain(qwen2p5-3b-instruct,state4)",
+    "co_scaled_remaining_error_increment": "RWE(qwen2p5-7b-instruct,state8) - RWE(qwen2p5-3b-instruct,state4)",
+    "model_by_state_interaction": "[gain(7B,state8)-gain(7B,state4)] - [gain(3B,state8)-gain(3B,state4)]",
+    "large_model_state_expansion": "gain(qwen2p5-7b-instruct,state8) - gain(qwen2p5-7b-instruct,state4)"
+  },
+  "development_gate": "All provenance and Foundation-invariance checks pass; every cell has positive gain; co-scaled gain and remaining-error increments, the model-by-state interaction, and the 7B state-expansion contrast are all strictly positive. Failure forbids confirmation and forbids tuning the 4/8 state law on these rows.",
+  "confirmation_gate": "Across all five fixed panels, panel-clustered two-sided t(4) 95% lower bounds are positive for every cell gain, the co-scaled gain increment, the co-scaled remaining-error increment, the model-by-state interaction, and the 7B state-expansion contrast. All provenance, row-alignment, Foundation-invariance, task-retention, invalid-output, and regression-retention checks must pass.",
+  "interpretation": "A neural generative headroom test. The target-blind state projection supplies a canonical inventory/count prompt, but Qwen must generate and is scored on the public QA7/QA8 answer; this is not the deterministic certified-evidence arm.",
+  "paper_rule": "A failed frozen gate remains visible and is never repaired by deleting panels, tasks, predictions, invalid outputs, or regressions."
+}

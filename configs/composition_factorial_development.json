@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "experiment": "two_fact_addition_latent_replay_development",
+  "status": "development_before_composition_interface_selection",
+  "seed": 20260901,
+  "num_values": 8,
+  "num_answers": 15,
+  "crossover_probability": 0.18,
+  "fixed_rounds": 1,
+  "rich_rounds": 4,
+  "relative_injection_depth": 0.25,
+  "calibration_episodes": 2048,
+  "test_episodes": 8192,
+  "batch_size": 64,
+  "value_texts": [" 0", " 1", " 2", " 3", " 4", " 5", " 6", " 7"],
+  "answer_texts": [" 0", " 1", " 2", " 3", " 4", " 5", " 6", " 7", " 8", " 9", " 10", " 11", " 12", " 13", " 14"],
+  "first_codebook_template": "A retrieved memory states that the first addend is{value}.",
+  "second_codebook_template": "A retrieved memory states that the second addend is{value}.",
+  "query_template": "Episode query {key}. Add the two stored nonnegative integers. Their sum is",
+  "text_replay_template": "A retrieved memory states that the first addend is{first}. A retrieved memory states that the second addend is{second}. {query}",
+  "endpoints": [
+    {
+      "name": "pythia-410m",
+      "repo_id": "EleutherAI/pythia-410m",
+      "revision": "bba6a464f54bbf08fc174cfb351d9794d58af21d"
+    },
+    {
+      "name": "pythia-2.8b",
+      "repo_id": "EleutherAI/pythia-2.8b",
+      "revision": "dbe7ae300a54abcdc475a33907b3dff81d25709f"
+    }
+  ],
+  "interpretation": "This development task tests composition from two fresh facts. Clean exact-KV oracle NLL is zero and cannot be beaten; clean-KV text replay measures frozen-foundation arithmetic use, not an oracle storage advantage."
+}

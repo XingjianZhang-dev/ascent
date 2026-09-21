@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "experiment": "two_fact_addition_latent_replay_stage_b_confirmation",
+  "status": "preregistered_after_development_before_confirmatory_seed_access",
+  "registration_note": "The task, rho=0.25, two role-specific full-sequence MAP latents, prompts, and controls were frozen after development seed 20260901. Seed 20260911 is untouched and may not be used for interface selection.",
+  "seed": 20260911,
+  "num_values": 8,
+  "num_answers": 15,
+  "crossover_probability": 0.18,
+  "fixed_rounds": 1,
+  "rich_rounds": 4,
+  "relative_injection_depth": 0.25,
+  "calibration_episodes": 4096,
+  "test_episodes": 16384,
+  "batch_size": 64,
+  "value_texts": [" 0", " 1", " 2", " 3", " 4", " 5", " 6", " 7"],
+  "answer_texts": [" 0", " 1", " 2", " 3", " 4", " 5", " 6", " 7", " 8", " 9", " 10", " 11", " 12", " 13", " 14"],
+  "first_codebook_template": "A retrieved memory states that the first addend is{value}.",
+  "second_codebook_template": "A retrieved memory states that the second addend is{value}.",
+  "query_template": "Episode query {key}. Add the two stored nonnegative integers. Their sum is",
+  "text_replay_template": "A retrieved memory states that the first addend is{first}. A retrieved memory states that the second addend is{second}. {query}",
+  "endpoints": [
+    {
+      "name": "pythia-410m",
+      "repo_id": "EleutherAI/pythia-410m",
+      "revision": "bba6a464f54bbf08fc174cfb351d9794d58af21d"
+    },
+    {
+      "name": "pythia-2.8b",
+      "repo_id": "EleutherAI/pythia-2.8b",
+      "revision": "dbe7ae300a54abcdc475a33907b3dff81d25709f"
+    }
+  ],
+  "primary_estimand": "(large_rich_gain-large_fixed_gain)-(small_rich_gain-small_fixed_gain)",
+  "primary_pass_rule": "paired 95pct normal lower confidence bound strictly greater than zero",
+  "strong_raw_boundary": "report paired ASCENT-rich advantage over clean-KV text replay and the zero-NLL clean-KV oracle; do not require or imply oracle superiority",
+  "promotion_rule": "composition interaction and all four memory-gain LCBs must pass; strong-raw superiority is reported separately and cannot be relabeled"
+}

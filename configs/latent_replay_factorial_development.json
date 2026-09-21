@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment": "latent_replay_foundation_by_signal_factorial",
+  "status": "development_diagnostic_not_confirmatory_preregistration",
+  "seed": 20260815,
+  "num_labels": 16,
+  "crossover_probability": 0.18,
+  "fixed_rounds": 1,
+  "rich_rounds": 4,
+  "relative_injection_depth": 0.5,
+  "replay_mode": "posterior_mean_last",
+  "calibration_episodes": 2048,
+  "test_episodes": 8192,
+  "batch_size": 64,
+  "candidate_texts": [" A", " B", " C", " D", " E", " F", " G", " H", " I", " J", " K", " L", " M", " N", " O", " P"],
+  "codebook_template": "A retrieved memory states that the hidden value label is{candidate}",
+  "text_replay_template": "A retrieved memory states that the hidden value label is{candidate}. {query}",
+  "query_template": "Episode query. Key {key}. The hidden value label is",
+  "endpoints": [
+    {
+      "name": "pythia-410m",
+      "repo_id": "EleutherAI/pythia-410m",
+      "revision": "bba6a464f54bbf08fc174cfb351d9794d58af21d"
+    },
+    {
+      "name": "pythia-2.8b",
+      "repo_id": "EleutherAI/pythia-2.8b",
+      "revision": "dbe7ae300a54abcdc475a33907b3dff81d25709f"
+    }
+  ],
+  "interpretation": "The same noisy signal is used at both foundations. Persistent state bytes are signal bits; model-width replay activations are transient and reported separately. A positive cross-endpoint difference-in-differences is required before confirmatory registration."
+}

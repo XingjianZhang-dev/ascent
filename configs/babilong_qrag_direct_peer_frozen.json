@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_qrag_direct_peer_comparison",
+  "status": "prospective_before_any_qrag_score_on_ascent_focused_panels",
+  "purpose": "Run a direct current peer on the exact frozen BABILong panels and Qwen2.5 readers used by ASCENT. This comparison is retained regardless of outcome and does not alter the ASCENT primary gate.",
+  "frozen_utc": "2026-08-14T16:15:00+00:00",
+  "source_panel_config": {
+    "path": "configs/babilong_qwen2p5_8k_generative_factorial_replication_frozen.json",
+    "sha256": "2e569aaee0df840ef581ace1e0fa33eb2da508e7d6d62d94677a1478ce8c133f",
+    "executed_commit": "c9af9422c9df033ce81ea07edb0cb4f30733e0a0"
+  },
+  "qrag_code": {
+    "repository": "https://github.com/griver/Q-RAG.git",
+    "commit": "42358d78ac491843763b90677f07237471c97086",
+    "license": "CC-BY-4.0"
+  },
+  "qrag_base_embedder": {
+    "repo_id": "facebook/contriever",
+    "revision": "2bd46a25019aeea091fd42d1f0fd4801675cf699",
+    "reason": "The released checkpoint config names revision 'main'. This immutable commit was resolved and frozen before any Q-RAG score was produced on the ASCENT panels."
+  },
+  "qrag_checkpoints": {
+    "qa2": {
+      "repo_id": "Q-RAG/qrag-ft-contriever-on-babilong_qa2",
+      "revision": "b51e2b25d45cca1070ef759ade392f86cc5b593a",
+      "config_sha256": "ac8b77d57e0a80b0c627141aca6bf878c5bfaa74e2819d17b58bc6e782510a51",
+      "model_path": "model_best.pt",
+      "model_bytes": 3936641879,
+      "model_sha256": "71a6358ef268dafd8896f1d81b63e9c03b285472066aad1b726475a2827dacbf"
+    },
+    "qa3": {
+      "repo_id": "Q-RAG/qrag-ft-contriever-on-babilong_qa3",
+      "revision": "d750d58316b67e2696ed7923523995b1e77f3f90",
+      "config_sha256": "a1ecdb8459af267907bb624a83eba66cbe260118bb87123ee84b97c3021df292",
+      "model_path": "model_best.pt",
+      "model_bytes": 3936641879,
+      "model_sha256": "23bb4be52c8e2fc9824b61f7e7c1732630c5b84bdb91297c3dd524fd22fe92de"
+    }
+  },
+  "evaluation": {
+    "tasks": [
+      "qa2",
+      "qa3"
+    ],
+    "panels": [
+      "generative_focused_confirmation_panel_1",
+      "generative_focused_confirmation_panel_2",
+      "generative_focused_confirmation_panel_3",
+      "generative_focused_confirmation_panel_4",
+      "generative_focused_confirmation_panel_5",
+      "generative_focused_confirmation_panel_6",
+      "generative_focused_confirmation_panel_7",
+      "generative_focused_confirmation_panel_8",
+      "generative_focused_confirmation_panel_9",
+      "generative_focused_confirmation_panel_10"
+    ],
+    "rows_per_task_per_panel": 40,
+    "retrieval_rows": 800,
+    "reader_endpoints": [
+      "qwen2p5-0p5b-instruct",
+      "qwen2p5-1p5b-instruct",
+      "qwen2p5-3b-instruct"
+    ],
+    "reader_generations": 2400,
+    "chunking": {
+      "unit": "sentence",
+      "regex": "(?<=[.!?])\\s+|(?<=\\n\\n)",
+      "drop_empty": true,
+      "preserve_document_order": true,
+      "rationale": "Matches the sentence-chunk interface used to train the released Q-RAG BABILong checkpoints."
+    },
+    "retrieval": {
+      "max_steps": 6,
+      "random": false,
+      "qvalue_filter": true,
+      "stopping_threshold": 0.5,
+      "sort_selected_chunks_by_document_index": true
+    },
+    "reader": {
+      "prompt_and_decode": "exactly reuse the frozen Qwen BABILong generation and normalization path",
+      "foundation_predictions_must_match": true,
+      "no_reader_finetuning": true
+    }
+  },
+  "analysis": {
+    "cluster_unit": "panel",
+    "confidence": 0.95,
+    "degrees_of_freedom": 9,
+    "report_every_task_model_cell": true,
+    "primary_comparisons": [
+      "Q-RAG minus Foundation accuracy on QA2+QA3 for each reader endpoint",
+      "co-scaled ASCENT minus Q-RAG accuracy on QA2+QA3 for each reader endpoint",
+      "difference in adjacent reader-scale gains for ASCENT and Q-RAG"
+    ],
+    "peer_superiority_rule": "two-sided panel-t 95% lower confidence bound of ASCENT minus Q-RAG is greater than zero",
+    "peer_noninferiority_margin": 0.05,
+    "peer_noninferiority_rule": "two-sided panel-t 95% lower confidence bound of ASCENT minus Q-RAG is greater than -0.05",
+    "mandatory_reporting": [
+      "paired panel means and confidence intervals",
+      "all regressions and per-task boundaries",
+      "task-specific training advantage of Q-RAG",
+      "checkpoint bytes and measured retrieval/readout latency",
+      "published-code deviations required only for data adaptation"
+    ]
+  },
+  "immutability": {
+    "no_threshold_tuning": true,
+    "no_panel_deletion": true,
+    "no_task_deletion": true,
+    "no_checkpoint_substitution": true,
+    "retain_failure": true,
+    "does_not_redefine_ascent_primary_claim": true
+  }
+}

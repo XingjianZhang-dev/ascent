@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_qa78_smollm2_8k_aggregation",
+  "status": "prospective_frozen_before_any_qa7_qa8_model_score",
+  "seed": 20260814,
+  "official_repository": "https://github.com/booydar/babilong",
+  "official_dataset": "RMT-team/babilong",
+  "official_dataset_revision": "ee0d588794c7ac098062ee0d247c733d62e94fe2",
+  "dataset_config": "8k",
+  "tasks": ["qa7", "qa8"],
+  "official_supporting_fact_ranges": {"qa7": [1, 10], "qa8": [1, 8]},
+  "audited_source_sha256": {
+    "qa7": "b1d525140599ab3fb2456375ae4d1c774e9030a2b86fe5e1d28e3b0e55fec8de",
+    "qa8": "f425902655120f1b00f7f1281f8f50d37af42b32b0014732b841e46e8a6cc3a2"
+  },
+  "source_rows_per_task": 100,
+  "split_rule": "Sort each task by SHA-256 of its canonical source row. Development uses positions 0:20; three untouched confirmations use 20:40, 40:60, and 60:80. Positions 80:100 remain unused.",
+  "manifest_sha256": "782e8aa74f180d9b427560f4f1a39e360fb7424c55bfff808dac6ce27528c674",
+  "panel_sha256_by_name": {
+    "aggregation_development": "1fa8ea11e8655c841c9eacc76257abdcaa2e2ed1cbd94f60746bc7f88e68c4c0",
+    "aggregation_confirmation_1": "e4153ddc7d90f84c56d58f39679cc958d819719b907322c9cf17e13be0c1dfb3",
+    "aggregation_confirmation_2": "794493f1f4755fd564cd4ef3162fad8787fa783d3e578dfbc0df8824c447b67e",
+    "aggregation_confirmation_3": "eb8836fb1d72c378b9634f7eb0b7c3364f216c4599d5d22bcae1b0064deee0b7"
+  },
+  "evaluation_samples": 40,
+  "history_slots": 256,
+  "context_tokens": 8192,
+  "max_new_tokens": 12,
+  "memory_selection": "For the queried person, retain the most recent K ownership-changing events, including pickup, drop, give, hand, and pass. K grows 1, 2, 6 with Foundation scale. Writes and retrieval never inspect the reference target.",
+  "scale_law": {
+    "state_fact_slots": [1, 2, 6],
+    "slots_per_model_parameter": [7.434114712315224e-09, 5.527593303563927e-09, 3.505949980433994e-09],
+    "strictly_decreasing_relative_state": true
+  },
+  "conditions": {
+    "primary_relevant": {"memory_source": "relevant"},
+    "fixed_one_slot": {
+      "memory_source": "relevant",
+      "state_fact_slots_by_endpoint": {
+        "smollm2-135m": 1,
+        "smollm2-360m-node2": 1,
+        "smollm2-1p7b": 1
+      }
+    },
+    "irrelevant": {"memory_source": "irrelevant"},
+    "matched_raw_event_fifo": {"memory_source": "matched_raw_event_fifo"},
+    "generic_bm25": {"memory_source": "generic_bm25"}
+  },
+  "endpoints": [
+    {
+      "name": "smollm2-135m",
+      "repo_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+      "model_parameters": 134515008,
+      "hidden_size": 576,
+      "state_fact_slots": 1,
+      "batch_size": 8,
+      "model_artifact": {"path": "model.safetensors", "bytes": 269060552, "sha256": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c"}
+    },
+    {
+      "name": "smollm2-360m-node2",
+      "repo_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+      "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+      "model_parameters": 361821120,
+      "hidden_size": 960,
+      "state_fact_slots": 2,
+      "batch_size": 4,
+      "model_artifact": {"path": "model.safetensors", "bytes": 723674912, "sha256": "e6bffe7435d7ddc10fd3b9a9efd429dafbacb1cb17015fb5562664e7532bf86e"}
+    },
+    {
+      "name": "smollm2-1p7b",
+      "repo_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "model_parameters": 1711376384,
+      "hidden_size": 2048,
+      "state_fact_slots": 6,
+      "batch_size": 2,
+      "model_artifact": {"path": "model.safetensors", "bytes": 3422777952, "sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"}
+    }
+  ],
+  "primary_metric": "Exact task-balanced accuracy and paired ASCENT-minus-Foundation gain over official BABILong QA7/QA8.",
+  "ceiling_aware_secondary_metric": "Remaining-error elimination (ASCENT minus Foundation) divided by (1 minus Foundation), reported with the absolute gain and never used to claim accuracy above 100%.",
+  "development_gate": "Parser accuracy and provenance must pass; every diagonal absolute gain, both adjacent gain increments, and the log-parameter gain slope must be strictly positive. Development is not confirmatory evidence.",
+  "confirmation_gate": "Across all three untouched panels: every panel is strictly monotone; all three mean gains, both adjacent mean increments, and the log-parameter slope have positive two-sided 95% panel-clustered Student-t lower bounds (df=2).",
+  "frozen_controls_after_primary_confirmation": [
+    "one relevant fact slot at every model scale",
+    "scale-matched irrelevant events",
+    "byte-matched raw event FIFO",
+    "generic lexical BM25 retrieval"
+  ],
+  "truncation_disclosure": "Report per-arm maximum token length and number of prompts at the 8192-token cap; do not describe capped Foundation inputs as untruncated full 8K context.",
+  "interpretation": "Prospective mechanism-matched aggregation test. QA4/QA5 were rejected before scoring because their audited one-fact semantics cannot test expanding nonredundant state. FPVM excluded."
+}

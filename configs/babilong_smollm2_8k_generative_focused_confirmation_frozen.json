@@ -1,0 +1,296 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_smollm2_8k_generative_focused_confirmation",
+  "status": "prospective_focused_ten_panel_confirmation_before_any_decoder_score",
+  "seed": 20260814,
+  "official_repository": "https://github.com/booydar/babilong",
+  "official_repository_commit": "7a6efee29f5cac03c3c410e6799c80fd2ffe3610",
+  "official_dataset": "RMT-team/babilong-1k-samples",
+  "official_dataset_revision": "fc4d1a584dfc498c37578753bee4cdd91b987ae2",
+  "dataset_config": "8k",
+  "tasks": [
+    "qa1",
+    "qa2",
+    "qa3"
+  ],
+  "panels": [
+    "generative_focused_confirmation_panel_1",
+    "generative_focused_confirmation_panel_2",
+    "generative_focused_confirmation_panel_3",
+    "generative_focused_confirmation_panel_4",
+    "generative_focused_confirmation_panel_5",
+    "generative_focused_confirmation_panel_6",
+    "generative_focused_confirmation_panel_7",
+    "generative_focused_confirmation_panel_8",
+    "generative_focused_confirmation_panel_9",
+    "generative_focused_confirmation_panel_10"
+  ],
+  "panel_sha256_by_name": {
+    "generative_focused_confirmation_panel_1": "e5509f805d8e1c8ffc14a3dcc3ef4f02cbd2d2e69549a0179e0d83d8095aebb2",
+    "generative_focused_confirmation_panel_2": "402819c0550ca08518e8830e580b3c1f1cd61831dc73f165ce7c5bb0119df51e",
+    "generative_focused_confirmation_panel_3": "81a4f14636b85cd5f35e7695432df13283115eb2012652ccd0d71da488e0eb20",
+    "generative_focused_confirmation_panel_4": "a882262160fbcb7bf6842d7af080b66c1f350301996c327b00d15f62708fb05d",
+    "generative_focused_confirmation_panel_5": "5f1f0e54777e04cd31772fdce20fd75b1de3c6a30cf997d7eb32561419688b79",
+    "generative_focused_confirmation_panel_6": "a47f58456ec1c893883982034d17be767f9522bba6f0741ed740b816f4739194",
+    "generative_focused_confirmation_panel_7": "6f365cffd1a7297bb51ab33d3dcf7600390cb1f349d53d4ec576f5cf29c22515",
+    "generative_focused_confirmation_panel_8": "a7f518d77e8c8f005099c5c4712bf813c3119805ef704ea57f405952afa5fc93",
+    "generative_focused_confirmation_panel_9": "d65619489fc2e61a97a897c3c5dbab00450e1c00781280e1069b3807b7745de0",
+    "generative_focused_confirmation_panel_10": "4ee68b6aad34c08b2459727ff6cb9e55354fb9c7c8c7a1b20cc5f427921dca10"
+  },
+  "evaluation_samples": 120,
+  "history_slots": 256,
+  "context_tokens": 8192,
+  "max_new_tokens": 8,
+  "confirmatory_design_sha256": "2a267d018ac998b8d1695755448ac54bc870dbe40b17c5b10c87089f092b08df",
+  "retrieval_protocol_sha256": "336fc97cdea8527e05c2daff0dec95a54b10f68e46fb452f7bb2c8fb2853ea41",
+  "conditions": {
+    "generative_slots_2": {
+      "memory_source": "relevant",
+      "state_fact_slots_by_endpoint": {
+        "smollm2-135m-instruct": 2,
+        "smollm2-360m-instruct": 2,
+        "smollm2-1p7b-instruct": 2
+      }
+    },
+    "generative_slots_3": {
+      "memory_source": "relevant",
+      "state_fact_slots_by_endpoint": {
+        "smollm2-135m-instruct": 3,
+        "smollm2-360m-instruct": 3,
+        "smollm2-1p7b-instruct": 3
+      }
+    }
+  },
+  "endpoints": [
+    {
+      "name": "smollm2-135m-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+      "model_parameters": 134515008,
+      "hidden_size": 576,
+      "state_fact_slots": 1,
+      "batch_size": 8,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 269060552,
+        "sha256": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c"
+      }
+    },
+    {
+      "name": "smollm2-360m-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+      "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+      "model_parameters": 361821120,
+      "hidden_size": 960,
+      "state_fact_slots": 2,
+      "batch_size": 4,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 723674912,
+        "sha256": "e6bffe7435d7ddc10fd3b9a9efd429dafbacb1cb17015fb5562664e7532bf86e"
+      }
+    },
+    {
+      "name": "smollm2-1p7b-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "model_parameters": 1711376384,
+      "hidden_size": 2048,
+      "state_fact_slots": 3,
+      "batch_size": 2,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 3422777952,
+        "sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+      }
+    }
+  ],
+  "primary_estimands": {
+    "unit": "panel",
+    "interval": "two-sided Student-t 95% interval over ten untouched panels (df=9)",
+    "estimands": {
+      "first_coscale_excess": "gain(360M, slots2) - gain(135M, slots2)",
+      "second_registered_interaction": "[ASCENT(1.7B, slots3)-ASCENT(1.7B, slots2)] - [ASCENT(360M, slots3)-ASCENT(360M, slots2)]",
+      "upper_diagonal_gain_increment": "gain(1.7B, slots3) - gain(360M, slots2)",
+      "upper_coscale_excess": "gain(1.7B, slots3) - gain(360M, slots3)"
+    },
+    "gate": "All provenance/alignment checks pass and all four two-sided 95% lower confidence bounds are strictly positive."
+  },
+  "confirmation_gate": "All provenance/alignment checks pass and all four two-sided 95% lower confidence bounds are strictly positive.",
+  "post_score_audit": "Only after all decoder scores are frozen, compute BGE support recall at 1/2/3 passages and report it without tuning.",
+  "interpretation": "Post-confirmation full factorial on the already frozen untouched QA1/QA2/QA3 panels. It tests whether the positive co-scaled curve reflects actual model-dependent use of ASCENT state rather than certified state size alone.",
+  "factorial_source_config": {
+    "path": "configs/babilong_smollm2_8k_generative_factorial_frozen.json",
+    "sha256": "5085ca195269ae38830d8967cd0e0ae3a308764b1a83cd03266229343fc546a6"
+  },
+  "factorial_design": {
+    "foundation_endpoints": [
+      "smollm2-135m-instruct",
+      "smollm2-360m-instruct",
+      "smollm2-1p7b-instruct"
+    ],
+    "state_fact_slots": [
+      1,
+      2,
+      3
+    ],
+    "cells": 9,
+    "panels_per_cell": 3,
+    "readout": "foundation_generation",
+    "estimand": "Exact generative ASCENT accuracy in all nine model-by-state cells; state main effects, fixed-state model effects, model-by-state interactions, and co-scaled improvement beyond memory-only scaling.",
+    "gate": "All provenance and Foundation-invariance checks pass; the co-scaled diagonal has positive adjacent gain lower bounds; and both adjacent model-by-state interaction lower bounds are positive for the matched 1-to-2 and 2-to-3 state expansions."
+  },
+  "official_source": {
+    "repository": "RMT-team/babilong-1k-samples",
+    "repository_type": "dataset",
+    "revision": "fc4d1a584dfc498c37578753bee4cdd91b987ae2",
+    "dataset_config": "8k",
+    "files": [
+      {
+        "task": "qa1",
+        "repository_path": "8k/qa1-00000-of-00001.parquet",
+        "downloaded_sha256": "aa77f2270acefcd508c067dd572678c38219fc6b1c68e74ce8f2e2a3d68227a0",
+        "jsonl_path": "qa1.jsonl",
+        "jsonl_sha256": "884c8795fc4f09d449fc4c36d7765a1ba891630bd17c3fd1dfcf9af00044ca06",
+        "rows": 1000
+      },
+      {
+        "task": "qa2",
+        "repository_path": "8k/qa2-00000-of-00001.parquet",
+        "downloaded_sha256": "7182e37288dabfaa9f50ceb68ff34801a16f218a767e253094dbc80f4afd3dec",
+        "jsonl_path": "qa2.jsonl",
+        "jsonl_sha256": "8bf6eda46fb1d0e2473baf84a5f74b0dea3ea3f47e0872040ba8efdb5590410c",
+        "rows": 999
+      },
+      {
+        "task": "qa3",
+        "repository_path": "8k/qa3-00000-of-00001.parquet",
+        "downloaded_sha256": "e6decd76a62a04b6f64f72a481038148baec5377541a25e290b75a28ab0053c9",
+        "jsonl_path": "qa3.jsonl",
+        "jsonl_sha256": "ffbf59a581f4eca286dfefac991918276f4ce23ae65e441239e6b1c751d01a47",
+        "rows": 999
+      }
+    ]
+  },
+  "fresh_factorial_design": {
+    "schema_version": 1,
+    "status": "frozen_before_any_fresh_panel_decoder_score",
+    "objective": "Test whether larger frozen language models extract a statistically increasing benefit from larger ASCENT state on five untouched official BABILong QA1-QA3 panels.",
+    "panel_selection": {
+      "ordering": "ascending SHA-256 of canonical official rows",
+      "starts": [
+        380,
+        420,
+        460,
+        500,
+        540
+      ],
+      "rows_per_task": 40,
+      "tasks": [
+        "qa1",
+        "qa2",
+        "qa3"
+      ],
+      "selection_uses_model_scores": false
+    },
+    "factorial": {
+      "models": [
+        "smollm2-135m-instruct",
+        "smollm2-360m-instruct",
+        "smollm2-1p7b-instruct"
+      ],
+      "state_fact_slots": [
+        1,
+        2,
+        3
+      ],
+      "cells": 9,
+      "panels_per_cell": 5,
+      "runs": 45,
+      "readout": "foundation_generation"
+    },
+    "primary_analysis": {
+      "unit": "panel",
+      "interval": "two-sided Student-t 95% interval over five untouched panels (df=4)",
+      "registered_interactions": [
+        "(360M slots2-slots1) - (135M slots2-slots1)",
+        "(1.7B slots3-slots2) - (360M slots3-slots2)"
+      ],
+      "coscale_excess": "co-scaled gain increment minus memory-only gain increment at the lower model",
+      "gate": "All provenance/alignment checks pass; both diagonal gain-increment LCBs, both registered model-by-state interaction LCBs, and both co-scale-excess LCBs are strictly positive."
+    },
+    "supporting_analysis": {
+      "unit": "panel",
+      "interval": "two-sided Student-t 95% interval over the three previous plus five fresh panels (df=7)",
+      "gate": "The same six lower bounds are strictly positive in the combined eight-panel analysis.",
+      "role": "supporting replication; it cannot replace failure of the fresh-only primary gate"
+    },
+    "stopping_rule": "Run all 45 cells and report every primary/supporting estimand without panel or task deletion.",
+    "promotion_rule": "Do not claim generative scale complementarity unless the fresh-only primary gate passes. Do not claim evidence far beyond TNNLS unless both fresh-only and combined gates pass and an independent task or model family also confirms the final protocol."
+  },
+  "supporting_combined_gate": "The same six lower bounds are strictly positive in the combined eight-panel analysis.",
+  "focused_confirmation_design": {
+    "schema_version": 1,
+    "status": "frozen_before_any_focused_confirmation_decoder_score",
+    "objective": "Independently confirm the two marginal estimands from the untouched five-panel factorial with maximum remaining disjoint official BABILong QA1-QA3 panels.",
+    "panel_selection": {
+      "ordering": "ascending SHA-256 of canonical official rows",
+      "starts": [
+        580,
+        620,
+        660,
+        700,
+        740,
+        780,
+        820,
+        860,
+        900,
+        940
+      ],
+      "rows_per_task": 40,
+      "tasks": [
+        "qa1",
+        "qa2",
+        "qa3"
+      ],
+      "selection_uses_model_scores": false
+    },
+    "focused_cells": [
+      [
+        "smollm2-135m-instruct",
+        2
+      ],
+      [
+        "smollm2-360m-instruct",
+        2
+      ],
+      [
+        "smollm2-360m-instruct",
+        3
+      ],
+      [
+        "smollm2-1p7b-instruct",
+        2
+      ],
+      [
+        "smollm2-1p7b-instruct",
+        3
+      ]
+    ],
+    "runs": 50,
+    "primary_analysis": {
+      "unit": "panel",
+      "interval": "two-sided Student-t 95% interval over ten untouched panels (df=9)",
+      "estimands": {
+        "first_coscale_excess": "gain(360M, slots2) - gain(135M, slots2)",
+        "second_registered_interaction": "[ASCENT(1.7B, slots3)-ASCENT(1.7B, slots2)] - [ASCENT(360M, slots3)-ASCENT(360M, slots2)]",
+        "upper_diagonal_gain_increment": "gain(1.7B, slots3) - gain(360M, slots2)",
+        "upper_coscale_excess": "gain(1.7B, slots3) - gain(360M, slots3)"
+      },
+      "gate": "All provenance/alignment checks pass and all four two-sided 95% lower confidence bounds are strictly positive."
+    },
+    "stopping_rule": "Run all 50 focused cells and report every panel and estimand without panel, task, prediction, or outlier deletion.",
+    "interpretation_rule": "This is a prospective independent confirmation of the two marginal estimands, not a retroactive pass of the failed five-panel primary gate. The earlier five-panel outcome remains reported unchanged.",
+    "promotion_rule": "Promotion requires the focused primary gate plus an independent model or task family; statistical significance alone is not described as far beyond TNNLS."
+  }
+}

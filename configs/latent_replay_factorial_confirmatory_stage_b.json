@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "experiment": "latent_replay_foundation_by_signal_factorial_stage_b_confirmation",
+  "status": "preregistered_before_confirmatory_seed_access",
+  "registration_note": "rho=0.25 and map_full_sequence were selected after a symmetric post-hoc interface audit at seed 20260815; this new seed is the first confirmatory replication and may not be used for further interface selection",
+  "seed": 20260821,
+  "num_labels": 16,
+  "crossover_probability": 0.18,
+  "fixed_rounds": 1,
+  "rich_rounds": 4,
+  "relative_injection_depth": 0.25,
+  "replay_mode": "map_full_sequence",
+  "calibration_episodes": 4096,
+  "test_episodes": 16384,
+  "batch_size": 64,
+  "candidate_texts": [" A", " B", " C", " D", " E", " F", " G", " H", " I", " J", " K", " L", " M", " N", " O", " P"],
+  "codebook_template": "A retrieved memory states that the hidden value label is{candidate}",
+  "text_replay_template": "A retrieved memory states that the hidden value label is{candidate}. {query}",
+  "query_template": "Episode query. Key {key}. The hidden value label is",
+  "endpoints": [
+    {
+      "name": "pythia-410m",
+      "repo_id": "EleutherAI/pythia-410m",
+      "revision": "bba6a464f54bbf08fc174cfb351d9794d58af21d"
+    },
+    {
+      "name": "pythia-2.8b",
+      "repo_id": "EleutherAI/pythia-2.8b",
+      "revision": "dbe7ae300a54abcdc475a33907b3dff81d25709f"
+    }
+  ],
+  "primary_estimand": "(large_rich_gain-large_fixed_gain)-(small_rich_gain-small_fixed_gain)",
+  "primary_pass_rule": "paired_95pct_normal_LCB_strictly_greater_than_zero",
+  "secondary_pass_rules": [
+    "all four cross-fitted memory gains have paired 95pct LCB greater than zero",
+    "same labels, full noisy signal, and query input hashes at both endpoints",
+    "clean identical source commit at both endpoints"
+  ],
+  "stage_b_promotion_blockers_after_this_test": [
+    "clean_exact_kv_capacity_pressure_tasks",
+    "fpvm_v1_fixed_state",
+    "overwrite_and_composition",
+    "three_seed_scale_curve"
+  ]
+}

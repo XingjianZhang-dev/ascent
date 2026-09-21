@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "experiment": "ascent_babilong_smollm2_8k_generative_factorial",
+  "status": "prospective_generative_factorial_frozen_before_any_factorial_decoder_score",
+  "seed": 20260814,
+  "official_repository": "https://github.com/booydar/babilong",
+  "official_repository_commit": "7a6efee29f5cac03c3c410e6799c80fd2ffe3610",
+  "official_dataset": "RMT-team/babilong-1k-samples",
+  "official_dataset_revision": "fc4d1a584dfc498c37578753bee4cdd91b987ae2",
+  "dataset_config": "8k",
+  "tasks": [
+    "qa1",
+    "qa2",
+    "qa3"
+  ],
+  "panels": [
+    "neural_control_panel_1",
+    "neural_control_panel_2",
+    "neural_control_panel_3"
+  ],
+  "panel_sha256_by_name": {
+    "neural_control_panel_1": "dea69dbd409f4f1dc01068da99114fa3bfe5d6caf2d32e72c39e3a43b9752b85",
+    "neural_control_panel_2": "2902dbf7993438a249e5212a09d5eb9a02c3f17e18613319ee3375f7fa957bf5",
+    "neural_control_panel_3": "705cc7d28ff041719ea66b8d7e27f3182d05f60325da47a52d3dae12dfb05492"
+  },
+  "evaluation_samples": 120,
+  "history_slots": 256,
+  "context_tokens": 8192,
+  "max_new_tokens": 8,
+  "confirmatory_design_sha256": "b290d207e7b61e3dbb02ce4efdf5e22061a7f5e8fe1c4fd9500e0399ae912bb2",
+  "retrieval_protocol_sha256": "336fc97cdea8527e05c2daff0dec95a54b10f68e46fb452f7bb2c8fb2853ea41",
+  "conditions": {
+    "generative_slots_1": {
+      "memory_source": "relevant",
+      "state_fact_slots_by_endpoint": {
+        "smollm2-135m-instruct": 1,
+        "smollm2-360m-instruct": 1,
+        "smollm2-1p7b-instruct": 1
+      }
+    },
+    "generative_slots_2": {
+      "memory_source": "relevant",
+      "state_fact_slots_by_endpoint": {
+        "smollm2-135m-instruct": 2,
+        "smollm2-360m-instruct": 2,
+        "smollm2-1p7b-instruct": 2
+      }
+    },
+    "generative_slots_3": {
+      "memory_source": "relevant",
+      "state_fact_slots_by_endpoint": {
+        "smollm2-135m-instruct": 3,
+        "smollm2-360m-instruct": 3,
+        "smollm2-1p7b-instruct": 3
+      }
+    }
+  },
+  "endpoints": [
+    {
+      "name": "smollm2-135m-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+      "model_parameters": 134515008,
+      "hidden_size": 576,
+      "state_fact_slots": 1,
+      "batch_size": 8,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 269060552,
+        "sha256": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c"
+      }
+    },
+    {
+      "name": "smollm2-360m-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+      "revision": "a10cc1512eabd3dde888204e902eca88bddb4951",
+      "model_parameters": 361821120,
+      "hidden_size": 960,
+      "state_fact_slots": 2,
+      "batch_size": 4,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 723674912,
+        "sha256": "e6bffe7435d7ddc10fd3b9a9efd429dafbacb1cb17015fb5562664e7532bf86e"
+      }
+    },
+    {
+      "name": "smollm2-1p7b-instruct",
+      "repo_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "model_parameters": 1711376384,
+      "hidden_size": 2048,
+      "state_fact_slots": 3,
+      "batch_size": 2,
+      "model_artifact": {
+        "path": "model.safetensors",
+        "bytes": 3422777952,
+        "sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+      }
+    }
+  ],
+  "primary_estimands": "Panel-clustered ASCENT gain increments over model scale and ASCENT accuracy advantages over both frozen controls at every endpoint.",
+  "confirmation_gate": "ASCENT must be strictly monotone in every panel; both adjacent gain-increment panel-t 95% lower bounds and every endpoint-by-control advantage panel-t 95% lower bound must be positive; all provenance gates must pass.",
+  "post_score_audit": "Only after all decoder scores are frozen, compute BGE support recall at 1/2/3 passages and report it without tuning.",
+  "interpretation": "Post-confirmation full factorial on the already frozen untouched QA1/QA2/QA3 panels. It tests whether the positive co-scaled curve reflects actual model-dependent use of ASCENT state rather than certified state size alone.",
+  "factorial_source_config": {
+    "path": "configs/babilong_smollm2_8k_neural_controls_confirmatory.json",
+    "sha256": "d6987b5780b12ee4e39666536805c133408c6055a2defee57bbda080196c405c"
+  },
+  "factorial_design": {
+    "foundation_endpoints": [
+      "smollm2-135m-instruct",
+      "smollm2-360m-instruct",
+      "smollm2-1p7b-instruct"
+    ],
+    "state_fact_slots": [
+      1,
+      2,
+      3
+    ],
+    "cells": 9,
+    "panels_per_cell": 3,
+    "readout": "foundation_generation",
+    "estimand": "Exact generative ASCENT accuracy in all nine model-by-state cells; state main effects, fixed-state model effects, model-by-state interactions, and co-scaled improvement beyond memory-only scaling.",
+    "gate": "All provenance and Foundation-invariance checks pass; the co-scaled diagonal has positive adjacent gain lower bounds; and both adjacent model-by-state interaction lower bounds are positive for the matched 1-to-2 and 2-to-3 state expansions."
+  }
+}

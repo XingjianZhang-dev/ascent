@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "status": "frozen_before_any_qwen_babilong_decoder_score",
+  "objective": "Replicate the complete BABILong generative model-by-state factorial on a distinct Qwen2.5 architecture family without changing tasks, panels, prompts, parser, state sizes, decoding, or estimands.",
+  "relationship_to_prior_evidence": {
+    "smollm2_five_panel_primary": "Retained unchanged, including its two marginal lower-confidence-bound misses.",
+    "smollm2_ten_panel_focused_confirmation": "Retained unchanged. The same ten panels are reused here to obtain paired cross-architecture evidence; no Qwen BABILong decoder score existed when this design was frozen.",
+    "role": "Independent model-family replication on the same official task interface, not a replacement or relabeling of any prior outcome."
+  },
+  "panel_selection": {
+    "ordering": "ascending SHA-256 of canonical official rows",
+    "starts": [580, 620, 660, 700, 740, 780, 820, 860, 900, 940],
+    "rows_per_task": 40,
+    "tasks": ["qa1", "qa2", "qa3"],
+    "selection_uses_qwen_model_scores": false
+  },
+  "factorial": {
+    "models": [
+      "qwen2p5-0p5b-instruct",
+      "qwen2p5-1p5b-instruct",
+      "qwen2p5-3b-instruct"
+    ],
+    "state_fact_slots": [1, 2, 3],
+    "cells": 9,
+    "panels_per_cell": 10,
+    "runs": 90,
+    "readout": "foundation_generation"
+  },
+  "primary_analysis": {
+    "unit": "panel",
+    "interval": "two-sided Student-t 95% interval over ten panels (df=9)",
+    "registered_interactions": [
+      "[ASCENT(1.5B, slots2)-ASCENT(1.5B, slots1)] - [ASCENT(0.5B, slots2)-ASCENT(0.5B, slots1)]",
+      "[ASCENT(3B, slots3)-ASCENT(3B, slots2)] - [ASCENT(1.5B, slots3)-ASCENT(1.5B, slots2)]"
+    ],
+    "diagonal_gain_increments": [
+      "gain(1.5B, slots2) - gain(0.5B, slots1)",
+      "gain(3B, slots3) - gain(1.5B, slots2)"
+    ],
+    "coscale_excess": "Each diagonal gain increment minus the state-only gain increment at the lower model.",
+    "gate": "All provenance/alignment/Foundation-invariance checks pass and all six registered two-sided 95% lower confidence bounds are strictly positive."
+  },
+  "familywise_directional_audit": {
+    "method": "Bonferroni simultaneous one-sided 95% familywise lower bounds over the six preregistered positive estimands",
+    "critical_value_df9_m6": 2.9333240883739897,
+    "role": "A separately frozen stringent robustness gate; it cannot rescue failure of an individual two-sided interval."
+  },
+  "stopping_rule": "Run all 90 cells and report every panel, task, prediction, estimand, and failed gate without panel, task, prediction, or outlier deletion.",
+  "no_tuning_rule": "Use the existing target-blind BABILong parser, exact 1/2/3 fact-slot states, prompts, greedy decoding, eight-token generation cap, official panel hashes, and Qwen model revisions without score-driven changes.",
+  "promotion_rule": "Same-task cross-architecture generative replication passes only if the primary gate and the familywise directional audit both pass. A ceiling is reported with remaining-error elimination but cannot replace the frozen absolute-gain estimands."
+}

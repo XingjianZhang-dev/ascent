@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "suite": "EleutherAI/Pythia standard (non-deduped) step143000",
+  "audit_date": "2026-08-13",
+  "source_policy": "Every scale must resolve to the official EleutherAI step143000 branch target. Runtime artifacts must record the loaded weight filename, byte count, and SHA-256.",
+  "official_documentation": "https://github.com/EleutherAI/pythia",
+  "endpoints": [
+    {
+      "name": "pythia-410m",
+      "repo_id": "EleutherAI/pythia-410m",
+      "branch": "step143000",
+      "branch_target": "bba6a464f54bbf08fc174cfb351d9794d58af21d",
+      "loaded_artifact": "model.safetensors",
+      "artifact_bytes": 1621370224,
+      "artifact_sha256": "1c88b0bf18293fae0e09c1d978b14b1adb08cb6a83154463133982fe460fcea4"
+    },
+    {
+      "name": "pythia-1b",
+      "repo_id": "EleutherAI/pythia-1b",
+      "branch": "step143000",
+      "branch_target": "c0fea4b917615c60370c0aeb76877f18fef30ab3",
+      "loaded_artifact": "pytorch_model.bin",
+      "artifact_bytes": 2090751965,
+      "artifact_sha256": "d2523eec75f5c1236ed7787bde500935c1f87874119c528cedc9f445476d38c2",
+      "status": "download_and_diagnostic_pending"
+    },
+    {
+      "name": "pythia-1.4b",
+      "repo_id": "EleutherAI/pythia-1.4b",
+      "branch": "step143000",
+      "branch_target": "9cc5c8c8148a4e0115d9e29c6b4f21124cfe748a",
+      "loaded_artifact": "pytorch_model.bin",
+      "artifact_bytes": 2930076797,
+      "artifact_sha256": "056766b124a4ac70afcc722084d7c2b6cab80581e0d066709d72ae5c1a8640d8"
+    },
+    {
+      "name": "pythia-2.8b",
+      "repo_id": "EleutherAI/pythia-2.8b",
+      "branch": "step143000",
+      "branch_target": "dbe7ae300a54abcdc475a33907b3dff81d25709f",
+      "loaded_artifact": "model.safetensors",
+      "artifact_bytes": 5550463728,
+      "artifact_sha256": "462f2b960062159c3779eb1cfe5829783ea72da66b020bcbabf86bc6dd33063c"
+    }
+  ],
+  "format_audit": {
+    "pythia_410m_main_vs_step143000": {
+      "main_parameter_dtype": "float16",
+      "step143000_parameter_dtype": "float32",
+      "runtime_dtype": "bfloat16",
+      "comparison": "Representative samples from the embedding, output head, layers 0/12/23, and final layer norm become byte-identical after the runner's bfloat16 cast (maximum absolute difference 0). The larger branch artifact is a precision-format difference, not different runtime weights."
+    },
+    "pythia_2p8b_main_safetensors": {
+      "tensor_entries": 484,
+      "parameter_entries": 388,
+      "extra_nonparameter_entries": 96,
+      "extra_entries_description": "Per-layer attention bias and masked-bias buffers"
+    },
+    "pythia_2p8b_step143000_safetensors": {
+      "tensor_entries": 388,
+      "parameter_entries": 388,
+      "extra_nonparameter_entries": 0
+    },
+    "comparison": "All common tensor names, dtypes, shapes, and offsets match. Representative byte samples from embeddings, output head, layers 0/15/31, and final layer norm match exactly. The file-size difference is explained by stripped attention buffers, not a different parameter-scale architecture."
+  },
+  "quarantined_revision": {
+    "name": "pythia-1b",
+    "revision": "020ae513de5de3be91892686de3b799a1496357e",
+    "reason": "The alternative-middle diagnostic initially referenced an older commit rather than the official step143000 branch target. Its incomplete download was stopped before any experiment ran and is excluded from all evidence."
+  }
+}
