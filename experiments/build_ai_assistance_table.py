@@ -45,7 +45,7 @@ DECLARATION = (
 )
 
 SUMMARY = (
-    "The author wrote the paper and the code. The method, the experiment runners, the analyses, the "
+    "The submitted manuscript and the code that produced its results were written by the author. The method, the experiment runners, the analyses, the "
     "tests and the frozen configurations were committed between 2026-08-14 and 2026-08-23 "
     "(`docs/DEV_HISTORY_LOG.txt`), every configuration was frozen before any score was inspected "
     "(`PREREGISTRATION_TIMELINE.md`), and every result record carries the commit of the runner that "
@@ -69,7 +69,12 @@ EVIDENCE = (
     "- **Code.** {author_code_files} author-written code files ({author_code_lines:,} lines: all of `ascent/` except "
     "`ascent/target_blindness.py`, every experiment runner, every analysis script of the original submission, "
     "the tests) are listed below with the date and commit at which each was first added to the development "
-    "repository, all before the revision began on 2026-09-20 (`docs/DEV_HISTORY_LOG.txt`). The revision added "
+    "repository (`docs/DEV_HISTORY_LOG.txt`). Across all author-written rows, {early} files were first committed "
+    "between 2026-08-13 and 2026-08-15 and {late} on 2026-09-20 (in commit `0b99b3d`, which records the state "
+    "submitted on 2026-08-23, or in the revision commits that followed); of those {late}, {in_backup} are present in "
+    "the frozen 2026-08-23 backup (SHA-256 431049c38a3c91e7b0fb1f8a3d5a52484aeae609a81a12af0c9c5272a5e00821) and "
+    "{after_backup} are submission-audit scripts and reports created after that snapshot and before the revision "
+    "session began at 16:00 EDT on 2026-09-20, as their file dates show. The revision added "
     "{claude_code_files} support scripts ({claude_code_lines:,} lines: audit, comparison, instrumentation, analysis and "
     "release tooling, author-specified and implemented with Claude Code) and edited 14 pre-existing code files by +395/−45 lines "
     "against their 2026-08-23 archive copies (`experiments/run_babilong_prompt.py`: +83/−7 for the audit label, "
@@ -77,7 +82,7 @@ EVIDENCE = (
     "- **Results.** Every reported number is the output of the author-written runners on the frozen "
     "configurations; the records embed the runner's git commit, the configuration SHA-256 and the weight-shard "
     "hashes, and `make reproduce` recomputes every number from them.\n"
-    "- **Manuscript.** The submitted manuscript (2026-08-23; git `0b99b3d`, 4,681 body words) is the author's "
+    "- **Manuscript.** The manuscript submitted on 2026-08-23 (source recorded in git commit `0b99b3d`; 4,681 body words) is the author's "
     "text; the revision's latexdiff against it adds 1,305 words and deletes 355 (Section 8, Appendices A–E, the "
     "scope statements), so about three quarters of the revised text is the submitted text unchanged. The added "
     "passages were specified by the author and worded with Claude Code, then reviewed and edited by the author.\n"
@@ -151,14 +156,30 @@ def is_hand_written(rel: str) -> bool:
     return p.suffix in HAND_SUFFIXES
 
 
-def first_commit(dev: Path) -> str:
-    """Date and short hash of the commit that first added the file to the development repository."""
+BACKUP_SNAPSHOT = "the frozen 2026-08-23 backup"
+SNAPSHOT_NOTE: dict[str, int] = {"in_backup": 0, "after_backup": 0, "early": 0}
+
+
+def first_commit(dev: Path, index: dict[str, str]) -> str:
+    """Evidence clause: the commit that first added the file to the development repository, and for
+    files first committed on 2026-09-20 (commit 0b99b3d records the 2026-08-23 submission state; the
+    later revision commits follow) whether the file is present in the frozen 2026-08-23 backup."""
     out = subprocess.run(["git", "log", "--diff-filter=A", "--follow", "--format=%h %ad", "--date=short", "--", str(dev.relative_to(DEV))],
                          cwd=DEV, capture_output=True, text=True).stdout.strip().splitlines()
     if not out:
         return ""
     short, date = out[-1].split()
-    return f" (committed {date}, {short})"
+    if date < "2026-09-20":
+        SNAPSHOT_NOTE["early"] += 1
+        return f" (committed {date}, {short})"
+    key = str(dev.relative_to(DEV))
+    if key in index:
+        SNAPSHOT_NOTE["in_backup"] += 1
+        edited = "" if hashlib.sha256(dev.read_bytes()).hexdigest() == index[key] or dev.stat().st_mtime >= SESSION_START else ", edited before the revision"
+        return f" (present in {BACKUP_SNAPSHOT}{edited}; first committed to git {date}, {short})"
+    SNAPSHOT_NOTE["after_backup"] += 1
+    created = datetime.fromtimestamp(dev.stat().st_mtime).strftime("%Y-%m-%d %H:%M")
+    return f" (not in {BACKUP_SNAPSHOT}; file dated {created} EDT, before the revision session; first committed to git {date}, {short})"
 
 
 def hand_written_class(rel: str, index: dict[str, str]) -> str:
@@ -170,11 +191,11 @@ def hand_written_class(rel: str, index: dict[str, str]) -> str:
     mtime = dev.stat().st_mtime if exists else 0
     prose = Path(rel).suffix in {".md", ".cff", ".tex"} or rel.endswith("PREREGISTRATION.json")
     if exists and mtime < SESSION_START:
-        return (AUTHOR_PROSE if prose else AUTHOR_CODE) + first_commit(dev)
+        return (AUTHOR_PROSE if prose else AUTHOR_CODE) + first_commit(dev, index)
     if exists and key in index:
         if hashlib.sha256(dev.read_bytes()).hexdigest() == index[key]:
-            return (AUTHOR_PROSE if prose else AUTHOR_CODE) + first_commit(dev)
-        return AUTHOR_REV + first_commit(dev)
+            return (AUTHOR_PROSE if prose else AUTHOR_CODE) + first_commit(dev, index)
+        return AUTHOR_REV + first_commit(dev, index)
     return CLAUDE
 
 
@@ -209,6 +230,19 @@ class Resolver:
         scored = sorted(((sum(1 for k in keys if f'"{k}"' in t or f"'{k}'" in t), n) for n, t in pool.items()), reverse=True)
         return scored[0][1] if scored and scored[0][0] >= threshold else None
 
+    def resolve_record(self, rel: str) -> str | None:
+        """Runner for one record, resolved from the record's own top-level schema."""
+        try:
+            data = json.loads((self.tree / rel).read_text())
+        except Exception:
+            return None
+        if not isinstance(data, dict) or not isinstance(data.get("experiment"), str):
+            return None
+        key = ("schema:" + ",".join(sorted(data.keys())), "runner")   # records with the same schema share a runner
+        if key not in self._cache:
+            self._cache[key] = self._best(set(data.keys()), self.runners, 8)
+        return self._cache[key]
+
     def resolve(self, rel: str, kind: str) -> str | None:
         key = (self.dir_key(rel), kind)
         if key in self._cache:
@@ -225,20 +259,15 @@ class Resolver:
         self._cache[key] = result
         return result
 
-    def freeze_commit(self, rel: str) -> tuple[str | None, list[str]]:
-        """The commit that added a configuration, and any prepare/freeze script committed with it."""
+    def freeze_commit(self, rel: str) -> tuple[str | None, str]:
+        """The commit and date at which a configuration was added (PREREGISTRATION_TIMELINE.json)."""
         if not hasattr(self, "_timeline"):
             path = self.tree / "reports/PREREGISTRATION_TIMELINE.json"
             self._timeline = {c["config"]: c for c in json.loads(path.read_text())["configs"]} if path.is_file() else {}
-            self._commit_files: dict[str, list[str]] = {}
         entry = self._timeline.get(rel)
         if not entry:
-            return None, []
-        commit = entry["added_commit"]
-        if commit not in self._commit_files:
-            out = subprocess.run(["git", "show", "--name-only", "--format=", commit], cwd=DEV, capture_output=True, text=True)
-            self._commit_files[commit] = [f.split("/")[-1] for f in out.stdout.split() if f.startswith("experiments/") and f.split("/")[-1].startswith(("prepare_", "freeze_", "fetch_", "profile_"))]
-        return commit[:7], self._commit_files[commit]
+            return None, ""
+        return entry["added_commit"][:7], entry["added_author_date"][:10]
 
     def script_mentioning(self, needle: str, prefixes: tuple[str, ...]) -> str | None:
         hits = [n for n, t in self.all_scripts.items() if n.startswith(prefixes) and needle in t]
@@ -267,8 +296,11 @@ def generated_class(rel: str, resolver: Resolver) -> tuple[str, str]:
             return gen("analyze_target_blindness_audit.py"), "recomputed from the released row records"
         if name == "GENERIC_WRITER_ABLATION.json":
             return gen("analyze_generic_writer_ablation.py"), "recomputed by make reproduce"
+        if "config" in p.parts and top == "artifacts_revision":
+            note = " (re-pin of configs/babilong_bge_m3_retrieval_protocol.json to the 16K panels)" if "bge_m3" in name else ""
+            return CLAUDE + note, "committed before execution (PREREGISTRATION.json beside it); SHA-256 recorded in every result record"
         if low.endswith(".run.json"):
-            return "config copy written by experiments/run_generic_writer_ablation.sh", "SHA-256 recorded in every result record"
+            return "run-time copy of config/" + name.replace(".run.json", ".json") + " written by experiments/run_generic_writer_ablation.sh", "SHA-256 recorded in every result record"
         if p.suffix == ".log" or "logs" in p.parts:
             return "runner log (same runner as the records beside it)", "retained as written"
         if p.suffix in {".gz", ".tgz"} or ".part" in name:
@@ -281,15 +313,13 @@ def generated_class(rel: str, resolver: Resolver) -> tuple[str, str]:
         if "analysis" in low:
             script = resolver.resolve(rel, "analysis")
             return (gen(script) if script else "analysis output of the study's analyze_* script (docs/EXPERIMENT_LEDGER.md)"), "recomputed from the per-row records (make reproduce for the four reported analyses)"
-        script = resolver.resolve(rel, "runner")
+        script = resolver.resolve_record(rel) or resolver.resolve(rel, "runner")
         if script:
             return gen(script) + " on the frozen configuration", "config, panel and weight-shard SHA-256 recorded in the record; manifests re-verified"
         return "frozen-runner output (family in docs/EXPERIMENT_LEDGER.md)", "manifests re-verified (reports/RELEASE_TREE_INTEGRITY.txt)"
     if top == "configs":
-        commit, scripts = resolver.freeze_commit(rel)
-        if scripts:
-            return gen(scripts[0]) + f" (freeze commit {commit})", "SHA-256 recorded in every result record; PREREGISTRATION_TIMELINE.md"
-        return f"author-written frozen configuration (freeze commit {commit})" if commit else "author-written frozen configuration", "SHA-256 recorded in every result record; PREREGISTRATION_TIMELINE.md"
+        commit, date = resolver.freeze_commit(rel)
+        return (f"author-written frozen configuration (freeze commit {commit}, {date})" if commit else "author-written frozen configuration"), "SHA-256 recorded in every result record; PREREGISTRATION_TIMELINE.md"
     if top == "data":
         if name.endswith((".ids.json", ".sha256.json")):
             return gen("build_release_tree.py"), "row identifiers and hashes of the withheld panel file"
@@ -402,7 +432,9 @@ def main() -> None:
         "",
         "> " + DECLARATION,
         "",
-        EVIDENCE.format(author_code_files=code_counts["author"][0], author_code_lines=code_counts["author"][1],
+        EVIDENCE.format(early=SNAPSHOT_NOTE["early"], late=SNAPSHOT_NOTE["in_backup"] + SNAPSHOT_NOTE["after_backup"],
+                        in_backup=SNAPSHOT_NOTE["in_backup"], after_backup=SNAPSHOT_NOTE["after_backup"],
+                        author_code_files=code_counts["author"][0], author_code_lines=code_counts["author"][1],
                         claude_code_files=code_counts["claude"][0], claude_code_lines=code_counts["claude"][1],
                         total_code_lines=total_code_lines, rev_author_lines=code_counts["rev"][1] - 395,
                         author_share=100 * (code_counts["author"][1] + code_counts["rev"][1] - 395) / total_code_lines,
