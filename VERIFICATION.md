@@ -59,19 +59,15 @@ The transcript of this command from a fresh clone is
 **Rounding convention.** Every reported number is the exact decimal value of
 the panel statistic rounded half up at the printed precision
 (`Decimal(...).quantize(..., ROUND_HALF_UP)` in `render_paper_additional_tables.py`,
-`render_appendix_tables.py`, `analyze_panel_power.py`, `plot_manuscript_evidence.py`
-and `reproduce_all_tables.py`). Ten-panel means of 80-row accuracies are multiples
-of 1/800, so exact ties occur: the Granite-3.3-8B gain is 137/160 = 0.85625 and
-is reported as 85.63; the A100 semantic-holdout 3B mean 645/8 = 80.625 as 80.63;
-its second increment 3.625 as 3.63. Python's `f"{x:.2f}"` rounds the binary
-double half to even and prints 85.62 for the same value; it is not used for any
-reported number, with one exception: the schema-blind ablation table and
-paragraph of Appendix D (`analyze_generic_writer_ablation.py`) print with
-`f"{x:.2f}"`, and nine of their values are ties (0.125, 1.125, 5.625, 16.125,
-18.625, −11.375, −11.625, 88.625, 96.375 points), which appear there as 0.12,
-1.12, 5.62, 16.12, 18.62, −11.37, −11.62, 88.62, 96.37. Under the half-up rule
-each would end in 3 or 8; the exact values are in
-`GENERIC_WRITER_ABLATION.json`.
+`render_appendix_tables.py`, `analyze_panel_power.py`, `plot_manuscript_evidence.py`,
+`analyze_generic_writer_ablation.py` and `reproduce_all_tables.py`). Ten-panel
+means of 80-row accuracies are multiples of 1/800, so exact ties occur: the
+Granite-3.3-8B gain is 137/160 = 0.85625 and is reported as 85.63; the A100
+semantic-holdout 3B mean 645/8 = 80.625 as 80.63; its second increment 3.625 as
+3.63; the official-16K 3B Foundation accuracy 0.16125 as .1613 in Table 2 and
+16.13 in Appendix D. Python's `f"{x:.2f}"` rounds the binary double half to
+even and prints 85.62 for the first of these; it is not used for any reported
+number.
 
 ## 3. The 13,824 row checks are a design property, not an empirical finding
 
@@ -227,7 +223,7 @@ cross-architecture extension of these 60 cells is summarized in §5.
 `artifacts_revision/schema_blind_2026-09/GENERIC_WRITER_ABLATION.json` and
 Appendix D of the manuscript. Result: all three schema-free writers collapse under the pre-registered
 rule. Ten-panel gains (points, 0.5B/1.5B/3B): sentence window
-−5.25/−17.50/−16.00; lexical BM25 chain −5.00/−16.38/−11.62; BGE-M3 hybrid +
+−5.25/−17.50/−16.00; lexical BM25 chain −5.00/−16.38/−11.63; BGE-M3 hybrid +
 reranker −5.50/−11.00/−5.38 — negative at every scale, i.e. at a
 one-to-three-slot budget the generic state is worse than no state, and no
 adjacent-increment family passes Holm with increasing gains. The

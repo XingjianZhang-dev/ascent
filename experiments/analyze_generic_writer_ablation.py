@@ -27,6 +27,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
 from typing import Any
 
@@ -141,14 +142,23 @@ def analyze(config_path: Path, results_root: Path, canonical_root: Path) -> dict
     }
 
 
+def fmt(value: float, places: int = 2) -> str:
+    """Manuscript rounding rule: round half up on the decimal value (same as the table renderers).
+
+    Ten-panel means of 80-row accuracies are multiples of 1/800, so ties such as 16.125 occur;
+    ``f"{value:.2f}"`` rounds the binary double and would print 16.12 where Table 2 prints .1613.
+    """
+    return str(Decimal(f"{value:.12f}").quantize(Decimal(1).scaleb(-places), rounding=ROUND_HALF_UP))
+
+
 def num(value: float, places: int = 2) -> str:
     """Signed number with a math minus sign for LaTeX text."""
-    text = f"{abs(value):.{places}f}"
+    text = fmt(abs(value), places)
     return f"$-{text}$" if value < 0 else text
 
 
 def pval(p: float) -> str:
-    return f"{p:.3f}" if p >= 0.001 else f"{p:.2e}"
+    return fmt(p, 3) if p >= 0.001 else f"{p:.2e}"
 
 
 def latex_table(result: dict[str, Any], endpoints: list[str]) -> str:
@@ -182,12 +192,12 @@ def latex_text(result: dict[str, Any], endpoints: list[str]) -> str:
         )
         p1, p2 = (pval(r["one_sided_p_holm"]) for r in c["adjacent_scale_contrasts"])
         inc1, inc2 = (num(100 * r["gain_increment"]["mean"]) for r in c["adjacent_scale_contrasts"])
-        asc = ", ".join(f"{100 * c['schema_advantage_same_instance'][e]['generic_ascent_accuracy']['mean']:.2f}" for e in endpoints)
-        fnd = ", ".join(f"{100 * c['endpoint_results'][e]['primary']['foundation']['mean']:.2f}" for e in endpoints)
+        asc = ", ".join(fmt(100 * c['schema_advantage_same_instance'][e]['generic_ascent_accuracy']['mean']) for e in endpoints)
+        fnd = ", ".join(fmt(100 * c['endpoint_results'][e]['primary']['foundation']['mean']) for e in endpoints)
         adv = "; ".join(
-            f"{labels[e]}: {100 * c['schema_advantage_same_instance'][e]['canonical_minus_generic']['mean']:.2f} "
-            f"[{100 * c['schema_advantage_same_instance'][e]['canonical_minus_generic']['ci95_low']:.2f}, "
-            f"{100 * c['schema_advantage_same_instance'][e]['canonical_minus_generic']['ci95_high']:.2f}]"
+            f"{labels[e]}: {fmt(100 * c['schema_advantage_same_instance'][e]['canonical_minus_generic']['mean'])} "
+            f"[{fmt(100 * c['schema_advantage_same_instance'][e]['canonical_minus_generic']['ci95_low'])}, "
+            f"{fmt(100 * c['schema_advantage_same_instance'][e]['canonical_minus_generic']['ci95_high'])}]"
             for e in endpoints
         )
         fdiff = sum(c["foundation_output_rows_differing_from_same_instance_canonical"].values())

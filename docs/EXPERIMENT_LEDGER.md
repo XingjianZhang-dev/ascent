@@ -2700,6 +2700,10 @@
   digits); SmolLM2 certified-factorial appendix cells .44375/.69375/.94375/
   .40625/.65625/.90625, previously .4437/.6937/.9437/.4062/.6562/.9062, now
   .4438/.6938/.9438/.4063/.6563/.9063; Fig. 2 labels 77.25 and 26.25,
-  previously 77.2 and 26.2, now 77.3 and 26.3. No underlying value changed.
-  Appendix D (`analyze_generic_writer_ablation.py`) was left as generated;
-  its nine tie values are listed in `VERIFICATION.md` §2.
+  previously 77.2 and 26.2, now 77.3 and 26.3; Appendix D
+  (`analyze_generic_writer_ablation.py`, applied the same evening) ties
+  0.125/1.125/5.625/16.125/18.625/−11.375/−11.625/88.625/96.375, previously
+  0.12/1.12/5.62/16.12/18.62/−11.37/−11.62/88.62/96.37, now 0.13/1.13/5.63/
+  16.13/18.63/−11.38/−11.63/88.63/96.38 (the 2C entry above keeps the earlier
+  digits; `GENERIC_WRITER_ABLATION.json` is unchanged). No underlying value
+  changed.
