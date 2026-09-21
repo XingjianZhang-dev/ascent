@@ -378,7 +378,7 @@ def audit(root: Path) -> dict:
     # published in the repository's AI_ASSISTANCE.md (release_docs/ in the
     # development tree, repository root in the public tree).
     def _normal(text: str) -> str:
-        text = text.replace("\\texttt{make reproduce}", "`make reproduce`").replace("\\texttt{AI\\_ASSISTANCE.md}", "AI_ASSISTANCE.md")
+        text = text.replace("\\texttt{make reproduce}", "`make reproduce`").replace("\\texttt{AI\\_ASSISTANCE.md}", "AI_ASSISTANCE.md").replace("\\path{PREREGISTRATION_TIMELINE.md}", "PREREGISTRATION_TIMELINE.md")
         return re.sub(r"\s+", " ", text).strip()
     declaration_match = re.search(r"manuscript preparation process\}\s*(.*?)\s*\\bibliographystyle", tex, re.S)
     repo_file = next((c for c in (root / "release_docs/AI_ASSISTANCE.md", root / "AI_ASSISTANCE.md") if c.is_file()), None)
