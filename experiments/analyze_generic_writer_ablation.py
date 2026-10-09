@@ -146,7 +146,7 @@ def fmt(value: float, places: int = 2) -> str:
     """Manuscript rounding rule: round half up on the decimal value (same as the table renderers).
 
     Ten-panel means of 80-row accuracies are multiples of 1/800, so ties such as 16.125 occur;
-    ``f"{value:.2f}"`` rounds the binary double and would print 16.12 where Table 2 prints .1613.
+    ``f"{value:.2f}"`` rounds the binary double and would print 16.12 where Table 3 prints .1613.
     """
     return str(Decimal(f"{value:.12f}").quantize(Decimal(1).scaleb(-places), rounding=ROUND_HALF_UP))
 

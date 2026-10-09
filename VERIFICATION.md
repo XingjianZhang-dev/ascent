@@ -5,7 +5,9 @@ How every number in the manuscript can be traced to a retained record, what
 what happened, and what this repository does not cover.
 
 Manuscript: *ASCENT: Scale-Complementary External State for Frozen
-Long-Context Language Models* (Array, ARRAY-D-26-05300, revision 1).
+Long-Context Language Models* (Array, ARRAY-D-26-05300; second revision).
+Table and section numbers below refer to the second-revision manuscript, in
+which the writer-structure table is Table 1.
 Public repository: <https://github.com/XingjianZhang-dev/ascent>.
 Archive: Zenodo version DOI `10.5281/zenodo.22865847`
 (<https://doi.org/10.5281/zenodo.22865847>, release `v1.0-array-revision-1`). The private development repository (276 commits; hash/date/subject
@@ -52,7 +54,7 @@ The transcript of this command from a fresh clone is
 
 | Reported value (manuscript) | Authoritative analysis record | Per-row records | Recompute command |
 |---|---|---|---|
-| Official 16K accuracy curve 10.50 → 78.88 → 82.63 pts; increments 68.38 (p_Holm = 3.43e-11) and 3.75 (p_Holm = 0.0255); Table 2 intervals | `artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/analysis.json` | `…/canonical/{0p5b,1p5b,3b}/canonical_16k_confirmation_panel_{1..10}.json` (+ `raw/3b/` control); manifest `…/SHA256SUMS.txt` (41 files) | `analyze_babilong_canonical_coscale_16k_confirmation` |
+| Official 16K accuracy curve 10.50 → 78.88 → 82.63 pts; increments 68.38 (p_Holm = 3.43e-11) and 3.75 (p_Holm = 0.0255); Table 3 intervals | `artifacts/remote_results/babilong_qwen_canonical_16k_confirmation_4fd25e9/analysis.json` | `…/canonical/{0p5b,1p5b,3b}/canonical_16k_confirmation_panel_{1..10}.json` (+ `raw/3b/` control); manifest `…/SHA256SUMS.txt` (41 files) | `analyze_babilong_canonical_coscale_16k_confirmation` |
 | Semantic holdout 3.50 → 77.25 → 80.75 pts; increments 73.75 (1.65e-13) and 3.50 (0.02897) | `artifacts/remote_results/babilong_qwen_canonical_semantic_holdout_b7480e6/analysis.json` | `…/{0p5b,1p5b,3b}/canonical_train_8k_semantic_panel_{1..10}.json`; manifest `…/SHA256SUMS` (31 files) | `analyze_babilong_canonical_semantic_holdout` |
 | Factorial gains .388 → 2.099 → 7.406 nats; increments 1.711 [1.540, 1.882], 5.307 [5.053, 5.561]; interactions .781 [.539, 1.023], .968 [.671, 1.264]; 13,824 row checks | `artifacts/sum_numeric_candidate/confirmation_analysis.json` | `artifacts/sum_numeric_candidate/confirmation/{node1,node2}/rounds_{2,3,5}_sum_numeric_candidate_panel_{2..10}_<endpoint>.json` (81 files) | `analyze_noisy_composition_candidate --phase confirmation` |
 | Around-7B gains: Qwen2.5-7B 66.75, Mistral-7B 80.75, Falcon3-7B 80.88, Granite-3.3-8B 85.63, Qwen3-8B 72.00 [67.7, 76.3]; 3B→7B increment −15.88 [−20.55, −11.20] | `artifacts/around7b_formal/analysis.json` | `artifacts/around7b_formal/<model>/canonical_slots_4/…` (70 files) plus the frozen 3B root `artifacts/frozen_qwen2p5_3b_16k/`; manifests `artifacts/around7b_formal/*.sha256` | `analyze_babilong_around7b_extension` |
@@ -64,6 +66,9 @@ The transcript of this command from a fresh clone is
 | Cross-architecture sensitivity (this revision) | `artifacts_revision/crossnode_2026-09/CROSSARCH_COMPARISON.json` | `artifacts_revision/crossnode_2026-09/{factorial,official16k}/` | `compare_crossarch_reproduction.py` |
 | Per-row target-blindness records (this revision) | `artifacts_revision/target_blindness_2026-09/TARGET_BLINDNESS_AUDIT.json` | `artifacts_revision/target_blindness_2026-09/{official16k,semantic_holdout}/` | see §6 |
 | Schema-blind writer ablation (this revision, Appendix D) | `artifacts_revision/schema_blind_2026-09/GENERIC_WRITER_ABLATION.json` | `artifacts_revision/schema_blind_2026-09/<condition>/` | `analyze_generic_writer_ablation.py` |
+| 7B accuracy mechanism (abstract, §7): Foundation accuracy 33.25% (.3325); four-slot ASCENT 1.000 on every panel (800 of 800 rows); gain 66.75 = 100 − 33.25 points | `artifacts/around7b_formal/analysis.json` (`endpoint_results.qwen2p5-7b-instruct.primary.{foundation,ascent,gain}`, `failure_accounting`) | `artifacts/around7b_formal/qwen2p5-7b/canonical_slots_4/canonical_16k_confirmation_panel_{1..10}.json` | `analyze_babilong_around7b_extension` |
+| Table 1 (writer structure): recogniser patterns, state bounds, budgets | configuration values, not results | `ascent/{babilong_memory,ruler_memory,ruler_aggregation_memory}.py`; `configs/babilong_qwen2p5_canonical_coscale_16k_confirmatory.json` (1/2/3, `history_slots` 256), `configs/babilong_around7b_16k_extension_confirmatory.json` (4), `configs/babilong_qa78_certified_factorial_smollm2_8k_frozen.json` (1/2/8), `configs/ruler_niah_qwen2p5_full_context_16k_multiquery_width_linear_confirmatory.json` (40/69/91, `memory_slots` 256), member `ruler_niah_smollm2_full_context_4k_multiquery_width075_confirmatory.json` of `artifacts/remote_results/smollm2_4k_multiquery_width075_confirm_376101_376202_376303.tar.gz` (37/55/97), `configs/ruler_cwe_qwen2p5_16k_certified_confirmatory.json` (3/7/10, 1,024), `configs/ruler_cwe_smollm2_8k_certified_confirmatory.json` (3/5/10, 512) | — |
+| §8 "Determinism": same-hardware identity without `torch.use_deterministic_algorithms` | §4 (matched Blackwell instances); `artifacts_revision/crossnode_2026-09/SAME_GPU_RUN1_VS_RUN2_CONTROL.json` (five A100 cells, two executions); `artifacts_revision/target_blindness_2026-09/TARGET_BLINDNESS_AUDIT.json` (`same_instance_controls`, six A100 cells) | as listed | `compare_crossarch_reproduction.py`; see `reproduction/DETERMINISM_POLICY.md` |
 
 **Rounding convention.** Every reported number is the exact decimal value of
 the panel statistic rounded half up at the printed precision
@@ -73,7 +78,7 @@ the panel statistic rounded half up at the printed precision
 means of 80-row accuracies are multiples of 1/800, so exact ties occur: the
 Granite-3.3-8B gain is 137/160 = 0.85625 and is reported as 85.63; the A100
 semantic-holdout 3B mean 645/8 = 80.625 as 80.63; its second increment 3.625 as
-3.63; the official-16K 3B Foundation accuracy 0.16125 as .1613 in Table 2 and
+3.63; the official-16K 3B Foundation accuracy 0.16125 as .1613 in Table 3 and
 16.13 in Appendix D. Python's `f"{x:.2f}"` rounds the binary double half to
 even and prints 85.62 for the first of these; it is not used for any reported
 number.
@@ -192,6 +197,13 @@ every difference from the reference is attributable to the architecture
 change. No hardware was substituted to obtain agreement. Bit-identical
 reproduction is claimed only for the matched-architecture instance pair where
 it was observed.
+
+**Determinism setting.** `torch.use_deterministic_algorithms` was not set. The
+flag defines determinism for the same software and hardware, a property every
+same-hardware comparison above already shows; it does not make different GPU
+architectures agree, so it would not have removed the 124 changed outputs.
+`reproduction/DETERMINISM_POLICY.md` gives the records and the cuBLAS and
+PyTorch documentation statements (manuscript §8, "Determinism").
 
 Two deviations from the pre-registration are recorded in
 `artifacts_revision/crossnode_2026-09/DEVIATIONS.md`: the first execution

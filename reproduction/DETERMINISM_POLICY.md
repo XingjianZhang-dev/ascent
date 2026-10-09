@@ -58,3 +58,36 @@ cross-architecture rerun satisfies none of the three row-for-row; it is
 reported at the level of panel statistics with the row-level differences
 enumerated. The manuscript uses "exact" only for level 3 on matched hardware
 and names the panel and node pair each time.
+
+## What `torch.use_deterministic_algorithms` would and would not have changed (second revision, 2026-10)
+
+The flag asks PyTorch for algorithms that, "given the same input, and when run
+on the same software and hardware, always produce the same output"
+(PyTorch 2.8 documentation, `torch.use_deterministic_algorithms`). The
+retained runs already have that property without the flag:
+
+| Same-hardware comparison | Result | Record |
+|---|---|---|
+| Matched-architecture Blackwell instances: factorial development panel 1 (node 1 vs node 2), official-16K panel 1 for Qwen2.5-7B (node 1 vs node 2), all ten official-16K panels for Qwen3-8B (formal vs third instance) | identical at the prediction level; binary64-identical where floats are stored | `reports/FACTORIAL_CROSS_NODE_EXACT_AUDIT_2026-09-20.json`, `artifacts/around7b_crossnode/qwen7b-panel1-exact-audit.json`, `reports/THIRD_NODE_AUDIT_ROW_DIFF_2026-09-20.json` |
+| Two complete executions of the five pre-registered A100 cells | identical at every level, including all 8,448 stored floats per factorial cell | `artifacts_revision/crossnode_2026-09/SAME_GPU_RUN1_VS_RUN2_CONTROL.json` |
+| Six A100 cells run with and without the target-blindness instrumentation | identical at every level, including binary64 | `artifacts_revision/target_blindness_2026-09/TARGET_BLINDNESS_AUDIT.json` (`same_instance_controls`) |
+
+Same-hardware determinism was therefore obtained with PyTorch's default
+kernels, at the throughput of the runs as executed. No run with the flag
+enabled was timed; this repository contains no throughput measurement of that
+configuration.
+
+The flag defines determinism relative to fixed hardware and does not make
+different GPU architectures agree. cuBLAS guarantees bit-wise identical
+results only on GPUs with the same architecture and the same number of SMs
+(cuBLAS Library User Guide, release 12.8, §2.1.4 "Results Reproducibility"),
+and PyTorch states that completely reproducible results are not guaranteed
+across platforms (PyTorch 2.8 documentation, "Reproducibility"). The RTX PRO
+6000 Blackwell (compute capability 12.0) and the A100 (compute capability 8.0)
+execute architecture-specific matrix-multiplication and attention kernels
+whose floating-point reductions need not round identically. The 124 scored
+outputs that changed between the Blackwell records and the A100 rerun arise
+from this difference; enabling the flag would not have removed them. The
+manuscript (§8, "Determinism") therefore assesses agreement across
+architectures at the level of panel means and registered contrasts, all of
+which hold on both architectures.

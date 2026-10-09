@@ -85,7 +85,7 @@ EVIDENCE = (
     "- **Manuscript.** The manuscript submitted on 2026-08-23 (source recorded in git commit `0b99b3d`; 4,681 body words) is the author's "
     "text; the revision's latexdiff against it adds 1,305 words and deletes 355 (Section 8, Appendices A–E, the "
     "scope statements), so about three quarters of the revised text is the submitted text unchanged. The added "
-    "passages were specified by the author and worded with Claude Code, then reviewed and edited by the author.\n"
+    "passages were specified by the author and worded with Claude Code, then reviewed and edited by the author. The second revision (October 2026) changes the first-revision text in three places (the abstract's 7B sentence, Section 4.2 with a new Table 1, and a Section 8 \"Determinism\" paragraph); its latexdiff against the first-revision manuscript adds 686 words and deletes 66 (alphanumeric tokens inside the markup, bibliography excluded). These passages were specified by the author and worded with Claude Code.\n"
 )
 
 AUTHOR_CODE = "author-written"
