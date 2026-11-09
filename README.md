@@ -3,9 +3,9 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22865846.svg)](https://doi.org/10.5281/zenodo.22865846)
 
 Code, frozen configurations, per-row experimental records, and audit
-documents for the manuscript *ASCENT: Scale-Complementary External State for
-Frozen Long-Context Language Models* (Xingjian Zhang; Array, Elsevier,
-manuscript ARRAY-D-26-05300 — under revision). ASCENT writes a bounded,
+documents for the article *ASCENT: Scale-Complementary External State for
+Frozen Long-Context Language Models* (Xingjian Zhang; *Array* 32:101399, 2026,
+[doi:10.1016/j.array.2026.101399](https://doi.org/10.1016/j.array.2026.101399)). ASCENT writes a bounded,
 target-blind, query-conditioned external state from a long input before the
 question is revealed and lets a frozen reader answer from that state; the
 paper asks whether the benefit of such state grows with reader scale and
